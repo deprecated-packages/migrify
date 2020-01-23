@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":184:{a:2:{s:7:"defects";a:1:{s:56:"Migrify\VendorPatches\Tests\Differ\PatchDifferTest::test";i:3;}s:5:"times";a:1:{s:56:"Migrify\VendorPatches\Tests\Differ\PatchDifferTest::test";d:0.021;}}}
