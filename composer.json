@@ -1,0 +1,44 @@
+{
+    "name": "migrify/migrify",
+    "require": {
+        "php": "^7.2",
+        "symfony/console": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symplify/autowire-array-parameter": "^7.2",
+        "symplify/package-builder": "^7.2",
+        "symplify/smart-file-system": "^7.2"
+    },
+    "require-dev": {
+        "php": "^7.2",
+        "phpstan/phpstan": "^0.12.7",
+        "rector/rector": "^0.6.13",
+        "symplify/easy-coding-standard": "^7.2",
+        "symplify/monorepo-builder": "^7.2",
+        "symplify/phpstan-extensions": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
+        }
+    },
+    "replace": {
+        "migrify/vendor-patches": "self.version"
+    },
+    "scripts": {
+        "check-cs": "vendor/bin/ecs check packages --ansi",
+        "fix-cs": "vendor/bin/ecs check packages --fix --ansi",
+        "phpstan": "vendor/bin/phpstan analyse packages --error-format symplify --ansi",
+        "merge": "vendor/bin/monorepo-builder merge --ansi",
+        "propagate": "vendor/bin/monorepo-builder propagate --ansi",
+        "rector": "vendor/bin/rector process packages --config rector-ci.yaml --dry-run --ansi"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
