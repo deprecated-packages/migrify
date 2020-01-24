@@ -12,13 +12,10 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
-
             -   uses: shivammathur/setup-php@v1
                 with:
                     php-version: 7.3
                     coverage: none
 
             -   run: composer install --no-progress
-            -   run: |
-                    # test run bin files
-                    packages/vendor-patches/bin/vendor-patches
+            -   run: packages/vendor-patches/bin/vendor-patches
