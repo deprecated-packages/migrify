@@ -7,6 +7,10 @@ parameters:
             rector/rector: '^0.6.13'
             tracy/tracy: '^2.7'
             composer/composer: 'dev-master as 1.9'
+            symplify/monorepo-builder: '^7.2'
+            symplify/easy-coding-standard: '^7.2'
+            symplify/phpstan-extensions: '^7.2'
+            phpstan/phpstan-symfony: '^0.12'
 
     # remove these to merge of packages' composer.json
     data_to_remove:
@@ -16,3 +20,5 @@ parameters:
 
     directories_to_repositories:
         packages/vendor-patches: 'git@github.com:migrify/vendor-patches.git'
+        packages/latte-to-twig: 'git@github.com:migrify/latte-to-twig.git'
+        packages/neon-to-yaml: 'git@github.com:migrify/neon-to-yaml.git'

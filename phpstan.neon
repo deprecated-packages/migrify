@@ -10,7 +10,11 @@ parameters:
     ignoreErrors:
          - '#(.*?) return type has no value type specified in iterable type array#'
          - '#Cannot cast array<string\>\|string\|null to string#'
-         - '#no value type specified in iterable type array#'
+
+        # mixed
+         - '#no value type specified in iterable type#'
+         - '#with no typehint specified#'
+         - '#has no return typehint specified#'
 
     excludes_analyse:
         # tests
