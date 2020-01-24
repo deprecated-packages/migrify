@@ -11,3 +11,7 @@ parameters:
          - '#(.*?) return type has no value type specified in iterable type array#'
          - '#Cannot cast array<string\>\|string\|null to string#'
          - '#no value type specified in iterable type array#'
+
+    excludes_analyse:
+        # tests
+        - 'packages/vendor-patches/tests/Finder/*'
