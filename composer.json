@@ -1,5 +1,6 @@
 {
     "name": "migrify/migrify",
+    "license": "MIT",
     "require": {
         "php": "^7.2",
         "nette/utils": "^3.1",
