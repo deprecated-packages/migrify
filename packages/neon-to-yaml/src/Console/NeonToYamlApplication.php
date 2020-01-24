@@ -7,7 +7,7 @@ namespace Migrify\NeonToYaml\Console;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
-final class NeonToYamlConverterApplication extends Application
+final class NeonToYamlApplication extends Application
 {
     /**
      * @param Command[] $commands

@@ -7,7 +7,7 @@ namespace Migrify\LatteToTwig\Console;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
-final class LatteToTwigConverterApplication extends Application
+final class LatteToTwigApplication extends Application
 {
     /**
      * @param Command[] $commands

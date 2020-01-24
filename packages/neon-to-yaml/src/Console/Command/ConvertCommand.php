@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\NeonToYaml\Command;
+namespace Migrify\NeonToYaml\Console\Command;
 
 use Migrify\NeonToYaml\ArrayParameterCollector;
 use Migrify\NeonToYaml\Finder\NeonAndYamlFinder;

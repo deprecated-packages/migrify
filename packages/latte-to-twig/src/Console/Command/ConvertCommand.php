@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\LatteToTwig\Command;
+namespace Migrify\LatteToTwig\Console\Command;
 
 use Migrify\LatteToTwig\Finder\LatteAndTwigFinder;
 use Migrify\LatteToTwig\LatteToTwigConverter;
