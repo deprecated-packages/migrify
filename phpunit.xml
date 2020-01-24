@@ -1,13 +1,20 @@
 <phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-        bootstrap="vendor/autoload.php"
-        colors="true"
-        verbose="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    verbose="true"
 >
+
     <testsuites>
         <testsuite name="main">
             <directory>packages/*/tests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">packages/*/src</directory>
+        </whitelist>
+    </filter>
 </phpunit>
