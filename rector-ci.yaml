@@ -10,6 +10,5 @@ parameters:
         - 'php-72'
 
     exclude_paths:
-        - '/Init/'
-        - '/Source/'
-        - '/ChangedFilesDetectorSource/'
+        # tests
+        - 'packages/vendor-patches/tests/Finder/*'
