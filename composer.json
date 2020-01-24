@@ -1,21 +1,24 @@
 {
     "name": "migrify/migrify",
+    "description": "It's Migration Time, Baby!",
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "nette/neon": "^3.0",
         "nette/utils": "^3.1",
         "symfony/console": "^5.0",
         "symfony/dependency-injection": "^5.0",
+        "symfony/finder": "^5.0",
         "symfony/http-kernel": "^5.0",
+        "symfony/yaml": "^5.0",
         "symplify/autowire-array-parameter": "^7.2",
         "symplify/package-builder": "^7.2",
         "symplify/smart-file-system": "^7.2"
     },
     "require-dev": {
-        "php": "^7.2",
         "composer/composer": "dev-master as 1.9",
         "phpstan/phpstan": "^0.12.7",
-        "phpstan/phpstan-symfony": "^0.12.4",
+        "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5",
         "rector/rector": "^0.6.13",
         "symplify/easy-coding-standard": "^7.2",
@@ -25,16 +28,22 @@
     },
     "autoload": {
         "psr-4": {
+            "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
+            "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
+            "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         }
     },
     "replace": {
-        "migrify/vendor-patches": "self.version"
+        "migrify/vendor-patches": "self.version",
+        "migrify/latte-to-twig": "self.version",
+        "migrify/neon-to-yaml": "self.version"
     },
     "scripts": {
         "check-cs": "vendor/bin/ecs check packages --ansi",
