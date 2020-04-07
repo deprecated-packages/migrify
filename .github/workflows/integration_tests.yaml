@@ -1,4 +1,4 @@
-name: Test Coverage
+name: Integration Tests
 
 on:
     pull_request: null
@@ -7,7 +7,7 @@ on:
             - master
 
 jobs:
-    test_coverage:
+    integration_tests:
         runs-on: ubuntu-latest
 
         services:
@@ -21,17 +21,13 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
+
+            # see https://github.com/shivammathur/setup-php
             -   uses: shivammathur/setup-php@v1
                 with:
-                    php-version: 7.2
-                    coverage: pcov
+                    php-version: '7.4'
+                    coverage: none
 
             -   run: composer install --no-progress
-            -   run : |
-                    vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
-                    # coveralls.io
-                    wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
-                    php php-coveralls.phar --verbose
-                env:
-                    COVERALLS_REPO_TOKEN: "yuE0Da8W6ycw1cHoVqepQgdpb7LjA2nCb"
+            -   run: vendor/bin/phpunit --testsuite integration

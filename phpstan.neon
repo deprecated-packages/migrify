@@ -16,6 +16,9 @@ parameters:
          - '#with no typehint specified#'
          - '#has no return typehint specified#'
 
+         - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:fetchAll\(\) should return array<Migrify\\SymfonyRouteUsage\\ValueObject\\RouteUsageStat\> but returns array<object\>#'
+         - '#Call to an undefined method Psr\\Container\\ContainerInterface\:\:getParameter\(\)#'
+
     excludes_analyse:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'

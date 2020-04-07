@@ -9,6 +9,9 @@ parameters:
         - 'php-71'
         - 'php-72'
 
+    paths:
+        - packages
+
     exclude_paths:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
