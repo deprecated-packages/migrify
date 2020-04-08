@@ -24,4 +24,4 @@ jobs:
                     coverage: none
 
             -   run: composer install --no-progress
-            -   run: vendor/bin/phpunit
+            -   run: vendor/bin/phpunit --testsuite unit

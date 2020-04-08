@@ -9,6 +9,13 @@ parameters:
         - 'php-71'
         - 'php-72'
 
+    paths:
+        - packages
+
     exclude_paths:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
+
+    exclude_rectors:
+        # buggy in prefixed, fix WIP
+        - 'Rector\Php70\Rector\MethodCall\ThisCallOnStaticMethodToStaticCallRector'

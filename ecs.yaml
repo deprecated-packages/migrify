@@ -22,5 +22,12 @@ parameters:
         SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff.MissingTraversableTypeHintSpecification: null
         SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff.MissingAnyTypeHint: null
 
+        # forcing PHP 7.4 typehint
+        SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff.MissingNativeTypeHint: null
+
         Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
             - "packages/latte-to-twig/src/CaseConverter/*"
+
+        # monorepo naming
+        Symplify\CodingStandard\Sniffs\Architecture\DuplicatedClassShortNameSniff:
+            - 'packages/neon-to-yaml/src/Console/Command/ConvertCommand.php'

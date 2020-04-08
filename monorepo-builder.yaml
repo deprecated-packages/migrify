@@ -2,14 +2,14 @@ parameters:
     # add these to merge of packages' composer.json
     data_to_append:
         require-dev:
-            phpstan/phpstan: '^0.12.7'
-            phpunit/phpunit: '^8.5'
-            rector/rector: '^0.6.13'
+            phpstan/phpstan: '^0.12.14'
+            phpunit/phpunit: '^8.5|^9.0'
+            rector/rector: '^0.7.8'
             tracy/tracy: '^2.7'
-            composer/composer: 'dev-master as 1.9'
-            symplify/monorepo-builder: '^7.2'
-            symplify/easy-coding-standard: '^7.2'
-            symplify/phpstan-extensions: '^7.2'
+            composer/composer: '^1.10'
+            symplify/monorepo-builder: '^7.3'
+            symplify/easy-coding-standard: '^7.3'
+            symplify/phpstan-extensions: '^7.3'
             phpstan/phpstan-symfony: '^0.12'
 
     # remove these to merge of packages' composer.json
@@ -22,3 +22,4 @@ parameters:
         packages/vendor-patches: 'git@github.com:migrify/vendor-patches.git'
         packages/latte-to-twig: 'git@github.com:migrify/latte-to-twig.git'
         packages/neon-to-yaml: 'git@github.com:migrify/neon-to-yaml.git'
+        packages/symfony-route-usage: 'git@github.com:migrify/symfony-route-usage.git'

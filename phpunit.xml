@@ -5,10 +5,14 @@
     colors="true"
     verbose="true"
 >
-
     <testsuites>
-        <testsuite name="main">
+        <testsuite name="unit">
             <directory>packages/*/tests</directory>
+            <exclude>packages/symfony-route-usage/tests</exclude>
+        </testsuite>
+
+        <testsuite name="integration">
+            <directory>packages/symfony-route-usage/tests</directory>
         </testsuite>
     </testsuites>
 
@@ -17,4 +21,8 @@
             <directory suffix=".php">packages/*/src</directory>
         </whitelist>
     </filter>
+
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+    </extensions>
 </phpunit>
