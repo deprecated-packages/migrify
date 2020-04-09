@@ -5,6 +5,7 @@
     "require": {
         "php": "^7.2",
         "ext-pdo": "*",
+        "knplabs/doctrine-behaviors": "^2.0.3",
         "nette/neon": "^3.0",
         "nette/utils": "^3.1",
         "symfony/console": "^5.0",
@@ -13,7 +14,6 @@
         "symfony/http-kernel": "^5.0",
         "symfony/yaml": "^5.0",
         "symplify/autowire-array-parameter": "^7.2",
-        "symplify/easy-hydrator": "^7.2",
         "symplify/package-builder": "^7.2",
         "symplify/smart-file-system": "^7.2"
     },
@@ -28,7 +28,9 @@
         "phpstan/phpstan": "^0.12.14",
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5|^9.0",
-        "rector/rector-prefixed": "^0.7.8",
+        "rector/rector": "^0.7.8",
+        "symfony/security-core": "^5.0",
+        "symfony/security-bundle": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symplify/easy-coding-standard": "^7.2",
         "symplify/monorepo-builder": "^7.2",

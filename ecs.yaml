@@ -22,6 +22,10 @@ parameters:
         SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff.MissingTraversableTypeHintSpecification: null
         SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff.MissingAnyTypeHint: null
 
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.WriteOnlyProperty:
+            # is used for uniqueness
+            - 'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+
         # forcing PHP 7.4 typehint
         SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff.MissingNativeTypeHint: null
 

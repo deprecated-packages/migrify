@@ -18,6 +18,7 @@ parameters:
 
          - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:fetchAll\(\) should return array<Migrify\\SymfonyRouteUsage\\ValueObject\\RouteUsageStat\> but returns array<object\>#'
          - '#Call to an undefined method Psr\\Container\\ContainerInterface\:\:getParameter\(\)#'
+         - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:findByRouteHash\(\) should return Migrify\\SymfonyRouteUsage\\Entity\\RouteVisit\|null but returns object\|null#'
 
     excludes_analyse:
         # tests
