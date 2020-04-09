@@ -8,6 +8,8 @@ parameters:
         - 'php-70'
         - 'php-71'
         - 'php-72'
+        - 'privatization'
+        - 'solid'
 
     paths:
         - packages
@@ -17,5 +19,7 @@ parameters:
         - 'packages/vendor-patches/tests/Finder/*'
 
     exclude_rectors:
-        # buggy in prefixed, fix WIP
-        - 'Rector\Php70\Rector\MethodCall\ThisCallOnStaticMethodToStaticCallRector'
+        # false positive on packages/symfony-route-usage/src/Database/TableInitiator.php
+        - 'Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector'
+        # buggy - removes @ORM\ID
+        - 'Rector\DeadCode\Rector\Class_\RemoveUnusedDoctrineEntityMethodAndPropertyRector'
