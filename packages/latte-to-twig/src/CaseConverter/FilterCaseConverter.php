@@ -12,7 +12,7 @@ final class FilterCaseConverter implements CaseConverterInterface
     /**
      * @var string[]
      */
-    private $filterRenames = [
+    private const FILTER_RENAMES = [
         // latte name → twig name
         'number' => 'number_format',
     ];
@@ -43,7 +43,7 @@ final class FilterCaseConverter implements CaseConverterInterface
                 array $subMatch
             ): string {
                 // filter renames
-                $filterName = $this->filterRenames[$subMatch['filter']] ?? $subMatch['filter'];
+                $filterName = self::FILTER_RENAMES[$subMatch['filter']] ?? $subMatch['filter'];
                 $arguments = $this->replaceSeparator($subMatch['args']);
 
                 $value = $subMatch['value'];

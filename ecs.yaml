@@ -35,3 +35,7 @@ parameters:
         # monorepo naming
         Symplify\CodingStandard\Sniffs\Architecture\DuplicatedClassShortNameSniff:
             - 'packages/neon-to-yaml/src/Console/Command/ConvertCommand.php'
+
+        SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.UnusedProperty:
+            # is @ORM\Id, needed for Doctrine
+            - 'packages/symfony-route-usage/src/Entity/RouteVisit.php'
