@@ -71,29 +71,11 @@ final class DefaultValueChangesExtractor
             }
 
             $methodName = $matches['method_name'];
-            $value = $matches['value'];
+            // $value = $matches['value'];
 
             $parameters = Strings::split($match['parameters'], '#,\s+#');
             foreach ($parameters as $position => $parameterContent) {
-                $match = Strings::match($parameterContent, '#=\s+(?<default_value>.*?)$#');
-                if ($match === null) {
-                    dump($lineContent);
-                    dump($parameterContent);
-                    continue;
-                }
-
-                $value = $match['default_value'];
-                if ($value === 'null') {
-                    $value = null;
-                }
-
-                if ($value === 'false') {
-                    $value = false;
-                }
-
-                if ($value === 'true') {
-                    $value = true;
-                }
+                $value = $this->resolveValue($parameterContent, $lineContent);
 
                 $this->collectedChanges[$this->currentClass][$methodName][$position] = $value;
             }
@@ -131,5 +113,28 @@ final class DefaultValueChangesExtractor
     {
         $fileContent = FileSystem::read($diffFilepath);
         return explode(PHP_EOL, $fileContent);
+    }
+
+    private function resolveValue(string $parameterContent, string $lineContent)
+    {
+        $match = Strings::match($parameterContent, '#=\s+(?<default_value>.*?)$#');
+        if ($match === null) {
+            throw new ShouldNotHappenException(sprintf('Line: %d , content: %s', $lineContent, $parameterContent));
+        }
+
+        $value = $match['default_value'];
+        if ($value === 'null') {
+            return null;
+        }
+
+        if ($value === 'false') {
+            return false;
+        }
+
+        if ($value === 'true') {
+            return true;
+        }
+
+        return $value;
     }
 }

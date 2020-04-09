@@ -7,15 +7,17 @@
         "ext-pdo": "*",
         "knplabs/doctrine-behaviors": "^2.0.3",
         "nette/neon": "^3.0",
+        "nette/robot-loader": "^3.2",
         "nette/utils": "^3.1",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
         "symfony/finder": "^4.4|^5.0",
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
-        "symplify/autowire-array-parameter": "^7.2",
-        "symplify/package-builder": "^7.2",
-        "symplify/smart-file-system": "^7.2"
+        "symplify/autowire-array-parameter": "^7.3.10",
+        "symplify/composer-json-manipulator": "^7.3.10",
+        "symplify/package-builder": "^7.3.10",
+        "symplify/smart-file-system": "^7.3.10"
     },
     "require-dev": {
         "composer/composer": "^1.10",
@@ -29,14 +31,14 @@
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5|^9.0",
         "rector/rector": "^0.7.16",
-        "symfony/framework-bundle": "^4.4|^5.0",
         "symfony/routing": "^4.4|^5.0",
+        "symplify/changelog-linker": "^7.3.10",
+        "symfony/framework-bundle": "^4.4|^5.0",
         "symfony/security-bundle": "^4.4|^5.0",
         "symfony/security-core": "^4.4|^5.0",
-        "symplify/changelog-linker": "^7.2",
-        "symplify/easy-coding-standard": "^7.2",
-        "symplify/monorepo-builder": "^7.2",
-        "symplify/phpstan-extensions": "^7.2",
+        "symplify/easy-coding-standard": "^7.3.10",
+        "symplify/monorepo-builder": "^7.3.10",
+        "symplify/phpstan-extensions": "^7.3.10",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
@@ -45,6 +47,7 @@
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
             "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
+            "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
@@ -55,6 +58,7 @@
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
+            "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         }
@@ -64,6 +68,7 @@
         "migrify/fatal-error-scanner": "self.version",
         "migrify/latte-to-twig": "self.version",
         "migrify/neon-to-yaml": "self.version",
+        "migrify/psr4-switcher": "self.version",
         "migrify/symfony-route-usage": "self.version",
         "migrify/vendor-patches": "self.version"
     },
@@ -73,12 +78,13 @@
         "phpstan": "vendor/bin/phpstan analyse packages --error-format symplify --ansi",
         "merge": "vendor/bin/monorepo-builder merge --ansi",
         "propagate": "vendor/bin/monorepo-builder propagate --ansi",
-        "rector": "vendor/bin/rector process packages --config rector-ci.yaml --dry-run --ansi",
         "changelog": [
             "vendor/bin/changelog-linker dump-merges --in-categories --in-packages --ansi",
             "vendor/bin/changelog-linker link --ansi",
             "vendor/bin/changelog-linker cleanup --ansi"
-        ]
+        ],
+        "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
+        "rector": "vendor/bin/rector process packages --config rector-ci.yaml --dry-run --ansi"
     },
     "config": {
         "sort-packages": true

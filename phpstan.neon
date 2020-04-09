@@ -1,11 +1,16 @@
 includes:
-    - 'vendor/symplify/phpstan-extensions/config/config.neon'
-    - 'vendor/phpstan/phpstan-symfony/extension.neon'
+    - vendor/symplify/phpstan-extensions/config/config.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/symplify/coding-standard/config/symplify-rules.neon
 
 parameters:
     level: max
     checkGenericClassInNonGenericObjectType: false
-    reportUnmatchedIgnoredErrors: false
+#    reportUnmatchedIgnoredErrors: false
+
+    excludes_analyse:
+        # tests
+        - 'packages/vendor-patches/tests/Finder/*'
 
     ignoreErrors:
          - '#(.*?) return type has no value type specified in iterable type array#'
@@ -19,7 +24,4 @@ parameters:
          - '#Call to an undefined method Psr\\Container\\ContainerInterface\:\:getParameter\(\)#'
          - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:findByRouteHash\(\) should return Migrify\\SymfonyRouteUsage\\Entity\\RouteVisit\|null but returns object\|null#'
          - '#Parameter \#1 \$error_handler of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
-
-    excludes_analyse:
-        # tests
-        - 'packages/vendor-patches/tests/Finder/*'
+         - '#Cannot cast array<string\>\|bool\|string\|null to string#'
