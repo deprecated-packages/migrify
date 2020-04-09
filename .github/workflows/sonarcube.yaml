@@ -2,7 +2,10 @@
 # .github/workflows/sonarcube.yaml
 name: Sonar
 
-on: push
+on:
+    push:
+        branches:
+            - master
 
 jobs:
     sonar_cloud:
