@@ -15,7 +15,7 @@ parameters:
     skip:
 #        # run form time to time, very slow and making many changes
 #        Symplify\CodingStandard\Fixer\Order\PrivateMethodOrderByUseFixer: ~
-#
+
         # types: allow mixed
         SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff.MissingAnyTypeHint: null
         SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff.MissingTraversableTypeHintSpecification: null
