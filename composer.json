@@ -28,7 +28,7 @@
         "phpstan/phpstan": "^0.12.14",
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5|^9.0",
-        "rector/rector": "^0.7.11",
+        "rector/rector": "^0.7.16",
         "symfony/security-core": "^4.4|^5.0",
         "symfony/security-bundle": "^4.4|^5.0",
         "symfony/framework-bundle": "^4.4|^5.0",

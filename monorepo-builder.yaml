@@ -4,12 +4,12 @@ parameters:
         require-dev:
             phpstan/phpstan: '^0.12.14'
             phpunit/phpunit: '^8.5|^9.0'
-            rector/rector: '^0.7.11'
+            rector/rector: '^0.7.16'
             tracy/tracy: '^2.7'
             composer/composer: '^1.10'
-            symplify/monorepo-builder: '^7.3'
-            symplify/easy-coding-standard: '^7.3'
-            symplify/phpstan-extensions: '^7.3'
+            symplify/monorepo-builder: '^7.2'
+            symplify/easy-coding-standard: '^7.2'
+            symplify/phpstan-extensions: '^7.2'
             phpstan/phpstan-symfony: '^0.12'
 
     # remove these to merge of packages' composer.json
