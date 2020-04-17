@@ -23,3 +23,5 @@ parameters:
         - 'Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector'
         # buggy - removes @ORM\ID
         - 'Rector\DeadCode\Rector\Class_\RemoveUnusedDoctrineEntityMethodAndPropertyRector'
+        # temporary - must skip entities, already in Rector master
+        - 'Rector\Privatization\Rector\ClassMethod\PrivatizeLocalOnlyMethodRector'

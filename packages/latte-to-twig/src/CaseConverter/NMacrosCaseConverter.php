@@ -81,7 +81,7 @@ final class NMacrosCaseConverter implements CaseConverterInterface
         );
 
         // n:inner-foreach
-        $content = Strings::replace(
+        return Strings::replace(
             $content,
             $this->createPattern('inner-foreach'),
             function (array $match): string {
@@ -98,8 +98,6 @@ final class NMacrosCaseConverter implements CaseConverterInterface
                 );
             }
         );
-
-        return $content;
     }
 
     private function createPattern(string $macro): string
