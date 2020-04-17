@@ -2,6 +2,7 @@
     "name": "migrify/migrify",
     "description": "It's Migration Time, Baby!",
     "license": "MIT",
+    "type": "symfony-bundle",
     "require": {
         "php": "^7.2",
         "ext-pdo": "*",
