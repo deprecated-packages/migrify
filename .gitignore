@@ -2,3 +2,6 @@
 composer.lock
 
 .phpunit.result.cache
+
+# for fatal-error-scanner
+fatal-types.yaml
