@@ -41,6 +41,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
             "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
@@ -50,6 +51,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
@@ -58,6 +60,7 @@
         }
     },
     "replace": {
+        "migrify/diff-data-miner": "self.version",
         "migrify/fatal-error-scanner": "self.version",
         "migrify/latte-to-twig": "self.version",
         "migrify/neon-to-yaml": "self.version",

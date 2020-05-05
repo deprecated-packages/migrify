@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Migrify\FatalErrorScanner;
 
+use Migrify\FatalErrorScanner\ValueObject\Argument;
+use Migrify\FatalErrorScanner\ValueObject\ClassMethodWithArguments;
 use Nette\Utils\Strings;
 use Rector\Core\Exception\NotImplementedException;
 use Rector\Core\Rector\ClassMethod\AddReturnTypeDeclarationRector;
-use Rector\Core\ValueObject\Scan\Argument;
-use Rector\Core\ValueObject\Scan\ClassMethodWithArguments;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 
 final class ScannedErrorToRectorResolver

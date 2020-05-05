@@ -11,7 +11,6 @@ use Nette\Neon\Entity;
 use Nette\Neon\Neon;
 use Nette\Utils\Strings;
 use Symfony\Component\Yaml\Yaml;
-use Symplify\PackageBuilder\Configuration\EolConfiguration;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
@@ -157,16 +156,15 @@ final class NeonToYamlConverter
 
     private function replaceTilda(string $content): string
     {
-        $eolChar = EolConfiguration::getEolChar();
-        $content = Strings::replace($content, "#: '~'\n#", ': ~' . $eolChar);
+        $content = Strings::replace($content, "#: '~'\n#", ': ~' . PHP_EOL);
 
-        return Strings::replace($content, "#: null\n#", ': ~' . $eolChar);
+        return Strings::replace($content, "#: null\n#", ': ~' . PHP_EOL);
     }
 
     private function replaceOldToNewParameters(string $content): string
     {
-        foreach ($this->arrayParameterCollector->getParametersToReplace() as $oldParameter => $newParamter) {
-            $content = Strings::replace($content, '#' . preg_quote($oldParameter, '#') . '#', $newParamter);
+        foreach ($this->arrayParameterCollector->getParametersToReplace() as $oldParameter => $newParameter) {
+            $content = Strings::replace($content, '#' . preg_quote($oldParameter, '#') . '#', $newParameter);
         }
 
         return $content;

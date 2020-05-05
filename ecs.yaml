@@ -6,35 +6,18 @@ parameters:
         - 'symplify'
         - 'common'
         - 'psr12'
-        - 'types'
         - 'dead-code'
 
     paths:
         - 'packages'
 
     skip:
-#        # run form time to time, very slow and making many changes
-#        Symplify\CodingStandard\Fixer\Order\PrivateMethodOrderByUseFixer: ~
-
-        # types: allow mixed
-        SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff.MissingAnyTypeHint: null
-        SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff.MissingTraversableTypeHintSpecification: null
-        SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff.MissingTraversableTypeHintSpecification: null
-        SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff.MissingAnyTypeHint: null
-
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.WriteOnlyProperty:
             # is used for uniqueness
             - 'packages/symfony-route-usage/src/Entity/RouteVisit.php'
 
-        # forcing PHP 7.4 typehint
-        SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff.MissingNativeTypeHint: null
-
         Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
             - "packages/latte-to-twig/src/CaseConverter/*"
-
-        # monorepo naming
-        Symplify\CodingStandard\Sniffs\Architecture\DuplicatedClassShortNameSniff:
-            - 'packages/neon-to-yaml/src/Console/Command/ConvertCommand.php'
 
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.UnusedProperty:
             # is @ORM\Id, needed for Doctrine

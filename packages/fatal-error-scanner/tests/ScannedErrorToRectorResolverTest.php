@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Migrify\FatalErrorScanner\Tests;
 
-use Rector\Core\HttpKernel\RectorKernel;
+use Migrify\FatalErrorScanner\HttpKernel\FatalErrorScannerKernel;
+use Migrify\FatalErrorScanner\ScannedErrorToRectorResolver;
 use Rector\Core\Rector\ClassMethod\AddReturnTypeDeclarationRector;
-use Rector\Core\Scan\ScannedErrorToRectorResolver;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 
@@ -19,8 +19,7 @@ final class ScannedErrorToRectorResolverTest extends AbstractKernelTestCase
 
     protected function setUp(): void
     {
-        $this->bootKernel(RectorKernel::class);
-
+        $this->bootKernel(FatalErrorScannerKernel::class);
         $this->scannedErrorToRectorResolver = self::$container->get(ScannedErrorToRectorResolver::class);
     }
 
