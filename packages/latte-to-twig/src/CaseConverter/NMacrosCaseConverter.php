@@ -6,7 +6,6 @@ namespace Migrify\LatteToTwig\CaseConverter;
 
 use Migrify\LatteToTwig\Contract\CaseConverter\CaseConverterInterface;
 use Nette\Utils\Strings;
-use Symplify\PackageBuilder\Configuration\EolConfiguration;
 
 /**
  * This needs to be run first, since it only move n:sytax to {syntax}...{/syntax} - all in Latte
@@ -28,16 +27,15 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             $content,
             $this->createPattern('if'),
             function (array $match): string {
-                $eolChar = EolConfiguration::getEolChar();
                 return sprintf(
                     '{if %s}%s%s%s%s%s%s{/if}',
                     $match['expression'],
-                    $eolChar,
+                    PHP_EOL,
                     $match['openTagStart'],
                     $match['openTagEnd'],
                     $match['inner'],
                     $match['closeTag'],
-                    $eolChar
+                    PHP_EOL
                 );
             }
         );
@@ -47,16 +45,15 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             $content,
             $this->createPattern('ifset'),
             function (array $match): string {
-                $eolChar = EolConfiguration::getEolChar();
                 return sprintf(
                     '{ifset %s}%s%s%s%s%s%s{/ifset}',
                     $match['expression'],
-                    $eolChar,
+                    PHP_EOL,
                     $match['openTagStart'],
                     $match['openTagEnd'],
                     $match['inner'],
                     $match['closeTag'],
-                    $eolChar
+                    PHP_EOL
                 );
             }
         );
@@ -66,16 +63,15 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             $content,
             $this->createPattern('foreach'),
             function (array $match): string {
-                $eolChar = EolConfiguration::getEolChar();
                 return sprintf(
                     '{foreach %s}%s%s%s%s%s%s{/foreach}',
                     $match['expression'],
-                    $eolChar,
+                    PHP_EOL,
                     $match['openTagStart'],
                     $match['openTagEnd'],
                     $match['inner'],
                     $match['closeTag'],
-                    $eolChar
+                    PHP_EOL
                 );
             }
         );
@@ -85,15 +81,14 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             $content,
             $this->createPattern('inner-foreach'),
             function (array $match): string {
-                $eolChar = EolConfiguration::getEolChar();
                 return sprintf(
                     '%s%s%s{foreach %s}%s{/foreach}%s%s',
                     $match['openTagStart'],
                     $match['openTagEnd'],
-                    $eolChar,
+                    PHP_EOL,
                     $match['expression'],
                     $match['inner'],
-                    $eolChar,
+                    PHP_EOL,
                     $match['closeTag']
                 );
             }

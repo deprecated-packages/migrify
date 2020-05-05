@@ -24,3 +24,4 @@ parameters:
         packages/neon-to-yaml: 'git@github.com:migrify/neon-to-yaml.git'
         packages/symfony-route-usage: 'git@github.com:migrify/symfony-route-usage.git'
         packages/fatal-error-scanner: 'git@github.com:migrify/fatal-error-scanner.git'
+        packages/diff-data-miner: 'git@github.com:migrify/diff-data-miner.git'
