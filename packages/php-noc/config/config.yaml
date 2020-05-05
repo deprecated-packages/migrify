@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    Migrify\PhpNoc\:
+        resource: '../src'
+        exclude:
+            - '../src/HttpKernel/*'
+
+    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
+    Symfony\Component\Console\Style\SymfonyStyle:
+        factory: ['@Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory', 'create']
+
+    PhpParser\Parser:
+        factory: ['@Migrify\PhpNoc\PhpParser\PhpParserFactory', 'create']
+
+    Symplify\SmartFileSystem\Finder\FinderSanitizer: null

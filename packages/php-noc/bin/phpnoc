@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Migrify\PhpNoc\Console\PhpNocApplication;
+use Migrify\PhpNoc\HttpKernel\PhpNocKernel;
+use Symplify\PackageBuilder\Console\Input\InputDetector;
+
+$possibleAutoloadPaths = [
+    // after split package
+    __DIR__ . '/../vendor/autoload.php',
+    // dependency
+    __DIR__ . '/../../../autoload.php',
+    // monorepo
+    __DIR__ . '/../../../vendor/autoload.php',
+];
+
+foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
+    if (file_exists($possibleAutoloadPath)) {
+        require_once $possibleAutoloadPath;
+
+        break;
+    }
+}
+
+// random has is needed, so cache is invalidated and changes from config are loaded
+$environment = 'prod' . random_int(1, 100000);
+$latteToTwigConverterKernel = new PhpNocKernel($environment, InputDetector::isDebug());
+$latteToTwigConverterKernel->boot();
+
+$container = $latteToTwigConverterKernel->getContainer();
+
+$application = $container->get(PhpNocApplication::class);
+exit($application->run());

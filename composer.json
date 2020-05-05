@@ -8,6 +8,8 @@
         "knplabs/doctrine-behaviors": "^2.0.3",
         "nette/neon": "^3.0",
         "nette/utils": "^3.1",
+        "nikic/php-parser": "^4.4",
+        "phploc/phploc": "^6.0",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
         "symfony/finder": "^4.4|^5.0",
@@ -45,6 +47,7 @@
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
             "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
+            "Migrify\\PhpNoc\\": "packages/php-noc/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
@@ -64,6 +67,7 @@
         "migrify/fatal-error-scanner": "self.version",
         "migrify/latte-to-twig": "self.version",
         "migrify/neon-to-yaml": "self.version",
+        "migrify/php-noc": "self.version",
         "migrify/symfony-route-usage": "self.version",
         "migrify/vendor-patches": "self.version"
     },
