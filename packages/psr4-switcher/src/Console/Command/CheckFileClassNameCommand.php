@@ -16,7 +16,7 @@ use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class CheckShortClassNameToFileCommand extends Command
+final class CheckFileClassNameCommand extends Command
 {
     /**
      * @var SymfonyStyle

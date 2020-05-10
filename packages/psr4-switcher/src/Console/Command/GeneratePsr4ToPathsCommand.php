@@ -11,6 +11,7 @@ use Migrify\Psr4Switcher\ValueObject\Option;
 use Migrify\Psr4Switcher\ValueObject\Psr4NamespaceToPaths;
 use Migrify\Psr4Switcher\ValueObjectFactory\Psr4NamespaceToPathFactory;
 use Nette\Utils\Json;
+use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -79,9 +80,11 @@ final class GeneratePsr4ToPathsCommand extends Command
         $classesToFiles = $this->phpClassLoader->load($this->psr4SwitcherConfiguration->getSource());
 
         $psr4NamespacesToPaths = [];
+        $classesToFilesWithMissedCommonNamespace = [];
         foreach ($classesToFiles as $class => $file) {
             $psr4NamespaceToPath = $this->psr4NamespaceToPathFactory->createFromClassAndFile($class, $file);
             if ($psr4NamespaceToPath === null) {
+                $classesToFilesWithMissedCommonNamespace[$class] = $file;
                 continue;
             }
 
@@ -89,19 +92,17 @@ final class GeneratePsr4ToPathsCommand extends Command
         }
 
         $psr4NamespaceToPaths = $this->psr4Filter->filter($psr4NamespacesToPaths);
-
-        $normalizedJsonArray = $this->normalizePsr4NamespaceToPathsToJsonsArray($psr4NamespaceToPaths);
-
-        $composerData = [
-            'autoload' => [
-                'psr-4' => $normalizedJsonArray,
-            ],
-        ];
-
-        $json = Json::encode($composerData, Json::PRETTY);
-        $this->symfonyStyle->writeln($json);
+        $this->printJsonAutoload($psr4NamespaceToPaths);
 
         $this->symfonyStyle->success('Done');
+
+        if ($classesToFilesWithMissedCommonNamespace !== []) {
+            foreach ($classesToFilesWithMissedCommonNamespace as $class => $file) {
+                $this->symfonyStyle->warning(
+                    sprintf('Class "%s" and file "%s" have no match in PSR-4 namespace', $class, $file)
+                );
+            }
+        }
 
         return ShellCode::SUCCESS;
     }
@@ -112,15 +113,49 @@ final class GeneratePsr4ToPathsCommand extends Command
     private function normalizePsr4NamespaceToPathsToJsonsArray(array $psr4NamespacesToPaths): array
     {
         $data = [];
+
         foreach ($psr4NamespacesToPaths as $psr4NamespaceToPaths) {
-            $paths = $psr4NamespaceToPaths->getPaths();
-            if (count($paths) === 1) {
-                $data[$psr4NamespaceToPaths->getNamespace() . '\\'] = $paths[0];
-            } else {
-                $data[$psr4NamespaceToPaths->getNamespace() . '\\'] = $paths;
-            }
+            $namespaceRoot = $this->normalizeNamespaceRoot($psr4NamespaceToPaths->getNamespace());
+            $data[$namespaceRoot] = $this->resolvePaths($psr4NamespaceToPaths);
         }
 
+        ksort($data);
+
         return $data;
+    }
+
+    /**
+     * @param Psr4NamespaceToPaths[] $psr4NamespaceToPaths
+     */
+    private function printJsonAutoload(array $psr4NamespaceToPaths): void
+    {
+        $normalizedJsonArray = $this->normalizePsr4NamespaceToPathsToJsonsArray($psr4NamespaceToPaths);
+        $composerData = [
+            'autoload' => [
+                'psr-4' => $normalizedJsonArray,
+            ],
+        ];
+        $json = Json::encode($composerData, Json::PRETTY);
+
+        $this->symfonyStyle->writeln($json);
+    }
+
+    private function normalizeNamespaceRoot(string $namespace): string
+    {
+        return Strings::trim($namespace, '\\') . '\\';
+    }
+
+    /**
+     * @return string|string[]
+     */
+    private function resolvePaths(Psr4NamespaceToPaths $psr4NamespaceToPaths)
+    {
+        if (count($psr4NamespaceToPaths->getPaths()) > 1) {
+            $paths = $psr4NamespaceToPaths->getPaths();
+            sort($paths);
+            return $paths;
+        }
+
+        return $psr4NamespaceToPaths->getPaths()[0];
     }
 }

@@ -16,9 +16,9 @@ parameters:
             # is used for uniqueness
             - 'packages/symfony-route-usage/src/Entity/RouteVisit.php'
 
-        Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
-            - "packages/latte-to-twig/src/CaseConverter/*"
-
         SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff.UnusedProperty:
             # is @ORM\Id, needed for Doctrine
             - 'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+
+        Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
+            - "packages/latte-to-twig/src/CaseConverter/*"

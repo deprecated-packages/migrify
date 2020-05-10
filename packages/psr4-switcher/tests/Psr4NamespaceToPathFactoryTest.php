@@ -47,5 +47,11 @@ final class Psr4NamespaceToPathFactoryTest extends AbstractKernelTestCase
             // expected
             'App\Utils', '../project/project-nested/libs/My',
         ];
+
+        yield [
+            'App\Utils\CustomMacros', '../project/project-nested/libs/App/Utils/CustomMacros.php',
+            // expected
+            'App', '../project/project-nested/libs/App',
+        ];
     }
 }

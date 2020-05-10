@@ -34,9 +34,19 @@ final class Psr4NamespaceToPathFactory
         $uniqueFilePath = $this->migrifyStrings->subtractFromRight($file, $sharedSuffix);
         $uniqueNamespace = $this->migrifyStrings->subtractFromRight($class . '.php', $sharedSuffix);
 
+        // fallback for identical namespace + file directory
+        if ($uniqueNamespace === '') {
+            // shorten shared suffix by "Element/"
+            $sharedSuffix = '/' . Strings::after($sharedSuffix, '/');
+
+            $uniqueFilePath = $this->migrifyStrings->subtractFromRight($file, $sharedSuffix);
+            $uniqueNamespace = $this->migrifyStrings->subtractFromRight($class . '.php', $sharedSuffix);
+        }
+
         $commonFilePathPrefix = Strings::findPrefix(
             [$uniqueFilePath, $this->psr4SwitcherConfiguration->getComposerJsonPath()]
         );
+
         $relativeDirectory = $this->migrifyStrings->subtractFromLeft($uniqueFilePath, $commonFilePathPrefix);
 
         if ($uniqueNamespace === '' || $relativeDirectory === '') {
