@@ -1,4 +1,4 @@
-name: Monorepo Validate
+name: Validate Monorepo
 
 on:
     pull_request: null
@@ -7,7 +7,7 @@ on:
             - master
 
 jobs:
-    monorepo_validate:
+    validate_monorepo:
         runs-on: ubuntu-latest
 
         steps:
@@ -18,4 +18,4 @@ jobs:
                     coverage: none
 
             -   run: composer install --no-progress
-            -   run: vendor/bin/monorepo-builder validate
+            -   run: composer validate-monorepo
