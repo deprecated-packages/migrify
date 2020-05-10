@@ -11,7 +11,6 @@ use Migrify\Psr4Switcher\ValueObject\Option;
 use Migrify\Psr4Switcher\ValueObject\Psr4NamespaceToPaths;
 use Migrify\Psr4Switcher\ValueObjectFactory\Psr4NamespaceToPathFactory;
 use Nette\Utils\Json;
-use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -142,7 +141,7 @@ final class GeneratePsr4ToPathsCommand extends Command
 
     private function normalizeNamespaceRoot(string $namespace): string
     {
-        return Strings::trim($namespace, '\\') . '\\';
+        return rtrim($namespace, '\\') . '\\';
     }
 
     /**

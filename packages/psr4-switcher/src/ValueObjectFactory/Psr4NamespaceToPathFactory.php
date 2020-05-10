@@ -29,7 +29,7 @@ final class Psr4NamespaceToPathFactory
 
     public function createFromClassAndFile(string $class, string $file): ?Psr4NamespaceToPath
     {
-        $sharedSuffix = $this->migrifyStrings->findSharedSuffix($class . '.php', $file);
+        $sharedSuffix = $this->migrifyStrings->findSharedSlashedSuffix([$class . '.php', $file]);
 
         $uniqueFilePath = $this->migrifyStrings->subtractFromRight($file, $sharedSuffix);
         $uniqueNamespace = $this->migrifyStrings->subtractFromRight($class . '.php', $sharedSuffix);
@@ -47,7 +47,11 @@ final class Psr4NamespaceToPathFactory
             [$uniqueFilePath, $this->psr4SwitcherConfiguration->getComposerJsonPath()]
         );
 
+        $uniqueNamespace = rtrim($uniqueNamespace, '\\');
+
         $relativeDirectory = $this->migrifyStrings->subtractFromLeft($uniqueFilePath, $commonFilePathPrefix);
+
+        $relativeDirectory = rtrim($relativeDirectory, '/');
 
         if ($uniqueNamespace === '' || $relativeDirectory === '') {
             // skip

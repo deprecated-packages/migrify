@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\Psr4Switcher\Tests;
+namespace Migrify\Psr4Switcher\Tests\ValueObjectFactory\Psr4NamespaceToPathFactory;
 
 use Iterator;
 use Migrify\Psr4Switcher\Configuration\Psr4SwitcherConfiguration;
