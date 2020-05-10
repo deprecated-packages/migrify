@@ -20,7 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class CheckCommand extends Command
+final class GeneratePsr4ToPathsCommand extends Command
 {
     /**
      * @var SymfonyStyle
