@@ -20,7 +20,6 @@ final class ClassExtractorTest extends AbstractKernelTestCase
     protected function setUp(): void
     {
         $this->bootKernel(ConfigClassPresenceKernel::class);
-
         $this->classExtractor = self::$container->get(ClassExtractor::class);
     }
 
@@ -39,5 +38,6 @@ final class ClassExtractorTest extends AbstractKernelTestCase
     {
         yield [__DIR__ . '/Source/some_config.neon', 1];
         yield [__DIR__ . '/Source/static_call.neon', 1];
+        yield [__DIR__ . '/Source/mapping_only.neon', 0];
     }
 }

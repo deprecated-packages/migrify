@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigClassPresence\Regex;
 
+use Nette\Neon\Neon;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -25,11 +26,27 @@ final class ClassExtractor
     {
         $classNames = [];
 
-        $matches = Strings::matchAll($fileInfo->getContents(), self::CLASS_NAME_PATTERN);
+        $fileContent = $this->getFileContent($fileInfo);
+
+        $matches = Strings::matchAll($fileContent, self::CLASS_NAME_PATTERN);
         foreach ($matches as $match) {
             $classNames[] = $match['class_name'];
         }
 
         return $classNames;
+    }
+
+    private function getFileContent(SmartFileInfo $fileInfo): string
+    {
+        if (Strings::match($fileInfo->getRealPath(), '#\.neon$#')) {
+            $neon = Neon::decode($fileInfo->getContents());
+
+            // section with no classes that resemble classes
+            unset($neon['mapping']);
+
+            return Neon::encode($neon);
+        }
+
+        return $fileInfo->getContents();
     }
 }
