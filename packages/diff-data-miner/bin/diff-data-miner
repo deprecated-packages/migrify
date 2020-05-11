@@ -26,10 +26,10 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 
 // random has is needed, so cache is invalidated and changes from config are loaded
 $environment = 'prod' . random_int(1, 100000);
-$latteToTwigConverterKernel = new DiffDataMinerKernel($environment, InputDetector::isDebug());
-$latteToTwigConverterKernel->boot();
+$kernel = new DiffDataMinerKernel($environment, InputDetector::isDebug());
+$kernel->boot();
 
-$container = $latteToTwigConverterKernel->getContainer();
+$container = $kernel->getContainer();
 
 $application = $container->get(DiffDataMinerApplication::class);
 exit($application->run());

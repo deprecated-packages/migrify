@@ -26,3 +26,4 @@ parameters:
         packages/fatal-error-scanner: 'git@github.com:migrify/fatal-error-scanner.git'
         packages/diff-data-miner: 'git@github.com:migrify/diff-data-miner.git'
         packages/psr4-switcher: 'git@github.com:migrify/psr4-switcher.git'
+        packages/config-class-presence: 'git@github.com:migrify/config-class-presence.git'
