@@ -55,6 +55,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Migrify\\ConfigClassPresence\\Tests\\": "packages/config-class-presence/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",

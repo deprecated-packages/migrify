@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigClassPresence\Regex;
 
-use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class NonExistingClassExtractor
 {
     /**
-     * @var string
-     * @see https://regex101.com/r/1VKOxi/2/
+     * @var ClassExtractor
      */
-    private const CLASS_NAME_PATTERN = '#\b(?<class_name>[A-Z](\w+\\\\)[\w\\\\]+)\b#';
+    private $classExtractor;
+
+    public function __construct(ClassExtractor $classExtractor)
+    {
+        $this->classExtractor = $classExtractor;
+    }
 
     /**
      * @param SmartFileInfo[] $fileInfos
@@ -23,7 +26,7 @@ final class NonExistingClassExtractor
     {
         $nonExistingClassesByFile = [];
         foreach ($fileInfos as $fileInfo) {
-            $classes = $this->extractFromFileInfo($fileInfo);
+            $classes = $this->classExtractor->extractFromFileInfo($fileInfo);
 
             $nonExistingClasses = $this->filterNonExistingClasses($classes);
             if ($nonExistingClasses === []) {
@@ -35,21 +38,6 @@ final class NonExistingClassExtractor
         }
 
         return $nonExistingClassesByFile;
-    }
-
-    /**
-     * @return string[]
-     */
-    private function extractFromFileInfo(SmartFileInfo $smartFileInfo): array
-    {
-        $classNames = [];
-
-        $matches = Strings::matchAll($smartFileInfo->getContents(), self::CLASS_NAME_PATTERN);
-        foreach ($matches as $match) {
-            $classNames[] = $match['class_name'];
-        }
-
-        return $classNames;
     }
 
     /**
