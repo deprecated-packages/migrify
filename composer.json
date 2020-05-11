@@ -31,11 +31,11 @@
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5|^9.0",
         "rector/rector": "^0.7.16",
-        "symfony/routing": "^4.4|^5.0",
-        "symplify/changelog-linker": "^7.3.10",
         "symfony/framework-bundle": "^4.4|^5.0",
+        "symfony/routing": "^4.4|^5.0",
         "symfony/security-bundle": "^4.4|^5.0",
         "symfony/security-core": "^4.4|^5.0",
+        "symplify/changelog-linker": "^7.3.10",
         "symplify/easy-coding-standard": "^7.3.10",
         "symplify/monorepo-builder": "^7.3.10",
         "symplify/phpstan-extensions": "^7.3.10",
@@ -43,6 +43,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Migrify\\ConfigClassPresence\\": "packages/config-class-presence/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
             "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
@@ -64,6 +65,7 @@
         }
     },
     "replace": {
+        "migrify/config-class-presence": "self.version",
         "migrify/diff-data-miner": "self.version",
         "migrify/fatal-error-scanner": "self.version",
         "migrify/latte-to-twig": "self.version",

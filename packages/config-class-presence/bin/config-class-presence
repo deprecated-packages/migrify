@@ -3,8 +3,8 @@
 
 declare(strict_types=1);
 
-use Migrify\LatteToTwig\Console\LatteToTwigApplication;
-use Migrify\LatteToTwig\HttpKernel\LatteToTwigKernel;
+use Migrify\ConfigClassPresence\Console\ConfigClassPresenceApplication;
+use Migrify\ConfigClassPresence\HttpKernel\ConfigClassPresenceKernel;
 use Symplify\PackageBuilder\Console\Input\InputDetector;
 
 $possibleAutoloadPaths = [
@@ -26,10 +26,10 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 
 // random has is needed, so cache is invalidated and changes from config are loaded
 $environment = 'prod' . random_int(1, 100000);
-$kernel = new LatteToTwigKernel($environment, InputDetector::isDebug());
+$kernel = new ConfigClassPresenceKernel($environment, InputDetector::isDebug());
 $kernel->boot();
 
 $container = $kernel->getContainer();
 
-$application = $container->get(LatteToTwigApplication::class);
+$application = $container->get(ConfigClassPresenceApplication::class);
 exit($application->run());
