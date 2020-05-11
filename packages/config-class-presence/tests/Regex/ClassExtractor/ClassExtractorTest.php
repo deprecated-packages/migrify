@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigClassPresence\Tests\Regex\ClassExtractor;
 
+use Iterator;
 use Migrify\ConfigClassPresence\HttpKernel\ConfigClassPresenceKernel;
 use Migrify\ConfigClassPresence\Regex\ClassExtractor;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
@@ -23,11 +24,19 @@ final class ClassExtractorTest extends AbstractKernelTestCase
         $this->classExtractor = self::$container->get(ClassExtractor::class);
     }
 
-    public function test(): void
+    /**
+     * @dataProvider provideData()
+     */
+    public function test(string $filePath, int $expectedClassCount): void
     {
-        $fileInfo = new SmartFileInfo(__DIR__ . '/Source/some_config.neon');
+        $fileInfo = new SmartFileInfo($filePath);
 
         $classes = $this->classExtractor->extractFromFileInfo($fileInfo);
-        $this->assertCount(1, $classes);
+        $this->assertCount($expectedClassCount, $classes);
+    }
+
+    public function provideData(): Iterator
+    {
+        yield [__DIR__ . '/Source/some_config.neon', 1];
     }
 }
