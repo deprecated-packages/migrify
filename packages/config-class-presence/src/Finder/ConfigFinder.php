@@ -33,6 +33,7 @@ final class ConfigFinder
             ->in($directories)
             ->files()
             ->notPath('vendor')
+            ->notPath('tests')
             ->name('*.neon')
             ->name('*.yaml');
 
