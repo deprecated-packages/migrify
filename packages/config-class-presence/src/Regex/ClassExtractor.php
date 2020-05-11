@@ -7,6 +7,9 @@ namespace Migrify\ConfigClassPresence\Regex;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
+/**
+ * @see \Migrify\ConfigClassPresence\Tests\Regex\ClassExtractor\ClassExtractorTest
+ */
 final class ClassExtractor
 {
     /**

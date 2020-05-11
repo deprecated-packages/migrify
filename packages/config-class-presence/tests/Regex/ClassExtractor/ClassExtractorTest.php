@@ -38,5 +38,6 @@ final class ClassExtractorTest extends AbstractKernelTestCase
     public function provideData(): Iterator
     {
         yield [__DIR__ . '/Source/some_config.neon', 1];
+        yield [__DIR__ . '/Source/static_call.neon', 1];
     }
 }
