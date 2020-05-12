@@ -15,9 +15,9 @@ final class ClassExtractor
 {
     /**
      * @var string
-     * @see https://regex101.com/r/1VKOxi/2/
+     * @see https://regex101.com/r/1VKOxi/3/
      */
-    private const CLASS_NAME_PATTERN = '#\b(?<class_name>[A-Z](\w+\\\\)[\w\\\\]+)\b#';
+    private const CLASS_NAME_PATTERN = '#\b(?<class_name>[A-Z](\w+\\\\)+(\w+))\b(?<next_char>\\\\)?#';
 
     /**
      * @return string[]
@@ -30,6 +30,11 @@ final class ClassExtractor
 
         $matches = Strings::matchAll($fileContent, self::CLASS_NAME_PATTERN);
         foreach ($matches as $match) {
+            if (isset($match['next_char']) && $match['next_char'] === '\\') {
+                // is Symfony autodiscovery → skip
+                continue;
+            }
+
             $classNames[] = $match['class_name'];
         }
 

@@ -38,6 +38,8 @@ final class ClassExtractorTest extends AbstractKernelTestCase
     {
         yield [__DIR__ . '/Source/some_config.neon', 1];
         yield [__DIR__ . '/Source/static_call.neon', 1];
+
         yield [__DIR__ . '/Source/mapping_only.neon', 0];
+        yield [__DIR__ . '/Source/skip_psr4_autodiscovery.yaml', 0];
     }
 }
