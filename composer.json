@@ -14,10 +14,10 @@
         "symfony/finder": "^4.4|^5.0",
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
-        "symplify/autowire-array-parameter": "^7.3.10",
-        "symplify/composer-json-manipulator": "^7.3.10",
-        "symplify/package-builder": "^7.3.10",
-        "symplify/smart-file-system": "^7.3.10"
+        "symplify/autowire-array-parameter": "^7.3.10|^8.0",
+        "symplify/composer-json-manipulator": "^7.3.10|^8.0",
+        "symplify/package-builder": "^7.3.10|^8.0",
+        "symplify/smart-file-system": "^7.3.10|^8.0"
     },
     "require-dev": {
         "composer/composer": "^1.10",
@@ -35,10 +35,10 @@
         "symfony/routing": "^4.4|^5.0",
         "symfony/security-bundle": "^4.4|^5.0",
         "symfony/security-core": "^4.4|^5.0",
-        "symplify/changelog-linker": "^7.3.10",
-        "symplify/easy-coding-standard": "^7.3.10",
-        "symplify/monorepo-builder": "^7.3.10",
-        "symplify/phpstan-extensions": "^7.3.10",
+        "symplify/changelog-linker": "^7.3.10|^8.0",
+        "symplify/easy-coding-standard": "^7.3.10|^8.0",
+        "symplify/monorepo-builder": "^7.3.10|^8.0",
+        "symplify/phpstan-extensions": "^7.3.10|^8.0",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
@@ -91,5 +91,7 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
