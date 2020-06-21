@@ -1,14 +1,19 @@
+# inspired by https://github.com/rectorphp/rector/blob/master/.travis.yml
 language: php
 
-php: 7.3
+dist: bionic
 
-if: branch = master AND type = push
+php: 7.4
 
-script:
-    # disable xdebug to speed up
+before_install:
     - phpenv config-rm xdebug.ini
-    - composer update
-    - vendor/bin/monorepo-builder split
 
-notifications:
-    email: false
+jobs:
+    include:
+        -
+            name: "Split Monorepo"
+            if: (branch = master OR tag IS present) && type = push
+            script:
+                - composer update
+                # travis_retry to prevent fails
+                - travis_retry packages/monorepo-builder/bin/monorepo-builder split --max-processes 6 --ansi
