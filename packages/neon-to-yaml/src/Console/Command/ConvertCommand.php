@@ -68,7 +68,7 @@ final class ConvertCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $source = (string) $input->getArgument(self::ARGUMENT_SOURCE);
-        $fileInfos = $this->neonAndYamlFinder->findYamlAndNeonFilesInfSource($source);
+        $fileInfos = $this->neonAndYamlFinder->findYamlAndNeonFilesInSource($source);
 
         $this->arrayParameterCollector->collectFromFiles($fileInfos);
 

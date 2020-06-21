@@ -5,6 +5,7 @@
     "require": {
         "php": "^7.2",
         "ext-pdo": "*",
+        "knplabs/doctrine-behaviors": "^2.0.5",
         "nette/neon": "^3.0",
         "nette/robot-loader": "^3.2",
         "nette/utils": "^3.1",
@@ -19,7 +20,6 @@
         "symplify/smart-file-system": "^8.0"
     },
     "require-dev": {
-        "knplabs/doctrine-behaviors": "^2.0.5",
         "composer/composer": "^1.10",
         "dama/doctrine-test-bundle": "^6.3",
         "doctrine/annotations": "^1.10",
@@ -27,6 +27,7 @@
         "doctrine/dbal": "^2.10",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
+        "knplabs/doctrine-behaviors": "^2.0.5",
         "phpstan/phpstan": "^0.12.25",
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^8.5|^9.0",
@@ -43,6 +44,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Migrify\\ConfigClarity\\": "packages/clarify-config/src",
             "Migrify\\ConfigClassPresence\\": "packages/config-class-presence/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
@@ -55,6 +57,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Migrify\\ConfigClarity\\Tests\\": "packages/clarify-config/tests",
             "Migrify\\ConfigClassPresence\\Tests\\": "packages/config-class-presence/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
@@ -66,6 +69,7 @@
         }
     },
     "replace": {
+        "migrify/config-clarity": "self.version",
         "migrify/config-class-presence": "self.version",
         "migrify/diff-data-miner": "self.version",
         "migrify/fatal-error-scanner": "self.version",
