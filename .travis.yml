@@ -16,4 +16,4 @@ jobs:
             script:
                 - composer update
                 # travis_retry to prevent fails
-                - travis_retry packages/monorepo-builder/bin/monorepo-builder split --max-processes 6 --ansi
+                - travis_retry vendor/bin/monorepo-builder split --max-processes 6 --ansi

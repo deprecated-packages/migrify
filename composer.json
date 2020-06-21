@@ -44,7 +44,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Migrify\\ConfigClarity\\": "packages/clarify-config/src",
+            "Migrify\\ConfigClarity\\": "packages/config-clarify/src",
             "Migrify\\ConfigClassPresence\\": "packages/config-class-presence/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
@@ -57,7 +57,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Migrify\\ConfigClarity\\Tests\\": "packages/clarify-config/tests",
+            "Migrify\\ConfigClarity\\Tests\\": "packages/config-clarify/tests",
             "Migrify\\ConfigClassPresence\\Tests\\": "packages/config-class-presence/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
