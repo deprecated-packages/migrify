@@ -19,7 +19,7 @@
         "symplify/smart-file-system": "^8.0"
     },
     "require-dev": {
-        "knplabs/doctrine-behaviors": "dev-master",
+        "knplabs/doctrine-behaviors": "^2.0.5",
         "composer/composer": "^1.10",
         "dama/doctrine-test-bundle": "^6.3",
         "doctrine/annotations": "^1.10",

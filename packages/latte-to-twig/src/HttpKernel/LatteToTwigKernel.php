@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use Symplify\PackageBuilder\DependencyInjection\CompilerPass\AutoReturnFactoryCompilerPass;
 
 final class LatteToTwigKernel extends Kernel
 {
@@ -42,7 +41,6 @@ final class LatteToTwigKernel extends Kernel
     protected function build(ContainerBuilder $containerBuilder): void
     {
         // needs to be first, since it's adding new service definitions
-        $containerBuilder->addCompilerPass(new AutoReturnFactoryCompilerPass());
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
 }
