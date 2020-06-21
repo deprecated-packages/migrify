@@ -30,7 +30,8 @@ final class ServiceConverterWorker
                 }
 
                 $service = $this->convertStringService($service);
-            } elseif (is_array($service)) { // named service
+            } elseif (is_array($service)) {
+                // named service
                 $service = $this->convertNamedService($service);
             }
 
@@ -173,7 +174,8 @@ final class ServiceConverterWorker
             'arguments' => $entity->attributes,
         ];
 
-        if (is_int($name)) { // class-named service
+        // class-named service
+        if (is_int($name)) {
             // is namespaced class?
             if (Strings::contains($serviceData['class'], '\\')) {
                 unset($serviceData['class']);
