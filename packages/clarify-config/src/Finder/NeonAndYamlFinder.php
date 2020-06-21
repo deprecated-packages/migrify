@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\NeonToYaml\Finder;
+namespace Migrify\ConfigClarity\Finder;
 
 use Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
@@ -32,7 +32,7 @@ final class NeonAndYamlFinder
         $finder = Finder::create()
             ->files()
             ->in($source)
-            ->name('#\.(yml|yaml|neon)$#')
+            ->name('#\.(yml|yaml|neon)$#i')
             ->sortByName();
 
         return $this->finderSanitizer->sanitize($finder);
