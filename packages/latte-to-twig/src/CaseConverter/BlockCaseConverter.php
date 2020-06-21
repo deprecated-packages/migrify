@@ -46,7 +46,8 @@ final class BlockCaseConverter implements CaseConverterInterface
                 ] = explode('=>', $variable);
                 $key = trim($key);
                 $value = trim($value);
-                $value = ltrim($value, '$'); // variables do not start with
+                // variables do not start with
+                $value = ltrim($value, '$');
 
                 $twigDataInString .= $key . ': ' . $value;
 

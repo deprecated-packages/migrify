@@ -51,6 +51,7 @@ final class ConvertCommand extends Command
         ArrayParameterCollector $arrayParameterCollector
     ) {
         parent::__construct();
+
         $this->symfonyStyle = $symfonyStyle;
         $this->neonToYamlConverter = $neonToYamlConverter;
         $this->neonAndYamlFinder = $neonAndYamlFinder;
