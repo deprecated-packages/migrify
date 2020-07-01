@@ -1,17 +1,17 @@
 # Config Class Presence
 
-[![Downloads total](https://img.shields.io/packagist/dt/migrify/config-class-presence.svg?style=flat-square)](https://packagist.org/packages/migrify/config-class-presence/stats)
+[![Downloads total](https://img.shields.io/packagist/dt/migrify/class-presence.svg?style=flat-square)](https://packagist.org/packages/migrify/class-presence/stats)
 
-Check NEON/YAML configs for existing classes
+Check NEON/YAML/TWIG/LATTE files for existing classes and class constants
 
 ## Install
 
 ```bash
-composer require migrify/config-class-presence --dev
+composer require migrify/class-presence --dev
 ```
 
 ## Usage
 
 ```bash
-vendor/bin/config-class-presence check src
+vendor/bin/class-presence check src
 ```

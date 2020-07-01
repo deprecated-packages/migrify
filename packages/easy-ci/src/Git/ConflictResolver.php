@@ -13,25 +13,6 @@ use Symplify\SmartFileSystem\SmartFileInfo;
  */
 final class ConflictResolver
 {
-    /**
-     * @var FileFinder
-     */
-    private $fileFinder;
-
-    public function __construct(FileFinder $fileFinder)
-    {
-        $this->fileFinder = $fileFinder;
-    }
-
-    /**
-     * @param string[] $source
-     */
-    public function extractFromSource(array $source): array
-    {
-        $fileInfos = $this->fileFinder->findInDirectories($source);
-        return $this->extractFromFileInfos($fileInfos);
-    }
-
     public function extractFromFileInfo(SmartFileInfo $fileInfo): int
     {
         $conflictsMatch = Strings::matchAll($fileInfo->getContents(), '#^<<<<<<<<#');
@@ -43,7 +24,7 @@ final class ConflictResolver
      * @param SmartFileInfo[] $fileInfos
      * @return int[]
      */
-    private function extractFromFileInfos(array $fileInfos)
+    public function extractFromFileInfos(array $fileInfos)
     {
         $conflictCountsByFilePath = [];
 
