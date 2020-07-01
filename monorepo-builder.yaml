@@ -20,7 +20,7 @@ parameters:
 
     directories_to_repositories:
         'packages/config-clarity': 'git@github.com:migrify/config-clarity.git'
-        'packages/config-class-presence': 'git@github.com:migrify/config-class-presence.git'
+        'packages/class-presence': 'git@github.com:migrify/class-presence.git'
         'packages/diff-data-miner': 'git@github.com:migrify/diff-data-miner.git'
         'packages/fatal-error-scanner': 'git@github.com:migrify/fatal-error-scanner.git'
         'packages/latte-to-twig': 'git@github.com:migrify/latte-to-twig.git'
