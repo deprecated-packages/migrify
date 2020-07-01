@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Migrify\ClassPresence\Regex;
 
-use Migrify\ClassPresence\Finder\FileFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
@@ -17,25 +16,9 @@ final class NonExistingClassExtractor
      */
     private $classExtractor;
 
-    /**
-     * @var FileFinder
-     */
-    private $fileFinder;
-
-    public function __construct(FileFinder $configFinder, ClassExtractor $classExtractor)
+    public function __construct(ClassExtractor $classExtractor)
     {
-        $this->fileFinder = $configFinder;
         $this->classExtractor = $classExtractor;
-    }
-
-    /**
-     * @param string[] $source
-     * @return string[][]
-     */
-    public function extractFromSource(array $source): array
-    {
-        $fileInfos = $this->fileFinder->findIn($source);
-        return $this->extractFromFileInfos($fileInfos);
     }
 
     /**
@@ -58,7 +41,7 @@ final class NonExistingClassExtractor
      * @param SmartFileInfo[] $fileInfos
      * @return string[][]
      */
-    private function extractFromFileInfos(array $fileInfos): array
+    public function extractFromFileInfos(array $fileInfos): array
     {
         $nonExistingClassesByFile = [];
         foreach ($fileInfos as $fileInfo) {

@@ -28,7 +28,7 @@ final class FileFinder
      * @param string[] $directories
      * @return SmartFileInfo[]
      */
-    public function findIn(array $directories): array
+    public function findInDirectories(array $directories): array
     {
         $finder = (new Finder())
             ->in($directories)

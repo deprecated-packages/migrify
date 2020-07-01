@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\ClassPresence\Command;
 
+use Migrify\ClassPresence\Finder\FileFinder;
 use Migrify\ClassPresence\Regex\NonExistingClassConstantExtractor;
 use Migrify\ClassPresence\Regex\NonExistingClassExtractor;
 use Migrify\ClassPresence\ValueObject\Option;
@@ -33,8 +34,14 @@ final class CheckCommand extends Command
      */
     private $nonExistingClassConstantExtractor;
 
+    /**
+     * @var FileFinder
+     */
+    private $fileFinder;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
+        FileFinder $fileFinder,
         NonExistingClassExtractor $classNameExtractor,
         NonExistingClassConstantExtractor $nonExistingClassConstantExtractor
     ) {
@@ -43,6 +50,8 @@ final class CheckCommand extends Command
         $this->nonExistingClassConstantExtractor = $nonExistingClassConstantExtractor;
 
         parent::__construct();
+
+        $this->fileFinder = $fileFinder;
     }
 
     protected function configure(): void
@@ -57,14 +66,16 @@ final class CheckCommand extends Command
         /** @var string[] $source */
         $source = (array) $input->getArgument(Option::SOURCE);
 
-        $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromSource($source);
+        $fileInfos = $this->fileFinder->findInDirectories($source);
+
+        $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromFileInfos($fileInfos);
         if ($nonExistingClassesByFile === []) {
             $suffixes = implode(', ', StaticCheckedFileSuffix::SUFFIXES);
             $message = sprintf('All classes in all %s files exist', $suffixes);
             $this->symfonyStyle->success($message);
         }
 
-        $nonExistingClassConstantsByFile = $this->nonExistingClassConstantExtractor->extractFromSource($source);
+        $nonExistingClassConstantsByFile = $this->nonExistingClassConstantExtractor->extractFromFileInfos($fileInfos);
         if ($nonExistingClassConstantsByFile === []) {
             $suffixes = implode(', ', StaticCheckedFileSuffix::SUFFIXES);
             $message = sprintf('All class constants in all %s files exist', $suffixes);

@@ -23,7 +23,7 @@ final class ConfigFinderTest extends AbstractKernelTestCase
 
     public function test(): void
     {
-        $configFileInfos = $this->configFinder->findIn([__DIR__ . '/Source/']);
+        $configFileInfos = $this->configFinder->findInDirectories([__DIR__ . '/Source/']);
         $this->assertCount(2, $configFileInfos);
     }
 }
