@@ -25,3 +25,4 @@ parameters:
          - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:findByRouteHash\(\) should return Migrify\\SymfonyRouteUsage\\Entity\\RouteVisit\|null but returns object\|null#'
          - '#Parameter \#1 \$error_handler of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
          - '#Cannot cast array<string\>\|bool\|string\|null to string#'
+         - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'

@@ -44,8 +44,8 @@
     },
     "autoload": {
         "psr-4": {
+            "Migrify\\ClassPresence\\": "packages/class-presence/src",
             "Migrify\\ConfigClarity\\": "packages/config-clarity/src",
-            "Migrify\\ConfigClassPresence\\": "packages/config-class-presence/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
             "Migrify\\LatteToTwig\\": "packages/latte-to-twig/src",
@@ -57,8 +57,8 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigClarity\\Tests\\": "packages/config-clarity/tests",
-            "Migrify\\ConfigClassPresence\\Tests\\": "packages/config-class-presence/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
@@ -69,8 +69,8 @@
         }
     },
     "replace": {
+        "migrify/class-presence": "self.version",
         "migrify/config-clarity": "self.version",
-        "migrify/config-class-presence": "self.version",
         "migrify/diff-data-miner": "self.version",
         "migrify/fatal-error-scanner": "self.version",
         "migrify/latte-to-twig": "self.version",
