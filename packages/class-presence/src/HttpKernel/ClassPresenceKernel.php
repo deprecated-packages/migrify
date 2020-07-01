@@ -37,7 +37,6 @@ final class ClassPresenceKernel extends Kernel
 
     protected function build(ContainerBuilder $containerBuilder): void
     {
-        // needs to be first, since it's adding new service definitions
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
 }

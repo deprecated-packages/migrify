@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Migrify\EasyCI\Git;
 
-use Migrify\EasyCI\Finder\FileFinder;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

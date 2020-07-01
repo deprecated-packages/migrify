@@ -38,7 +38,6 @@ final class Psr4SwitcherKernel extends Kernel
 
     protected function build(ContainerBuilder $containerBuilder): void
     {
-        // needs to be first, since it's adding new service definitions
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
 }

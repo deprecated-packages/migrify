@@ -26,6 +26,7 @@ final class CheckConflictsCommand extends Command
      * @var ConflictResolver
      */
     private $conflictResolver;
+
     /**
      * @var FileFinder
      */
