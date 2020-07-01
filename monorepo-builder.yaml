@@ -29,3 +29,14 @@ parameters:
         'packages/symfony-route-usage': 'git@github.com:migrify/symfony-route-usage.git'
         'packages/vendor-patches': 'git@github.com:migrify/vendor-patches.git'
         'packages/easy-ci': 'git@github.com:migrify/easy-ci.git'
+
+
+services:
+    # needed for "release" command, see https://github.com/symplify/monorepo-builder#7-set-your-own-release-flow
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\AddTagToChangelogReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker: null
+    Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker: null
