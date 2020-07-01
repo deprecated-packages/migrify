@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    Migrify\ClassPresence\:
+        resource: '../src'
+        exclude:
+            - '../src/HttpKernel/*'
+            - '../src/ValueObject/*'
+
+    Symplify\SmartFileSystem\Finder\FinderSanitizer: null
+
+    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
+    Symfony\Component\Console\Style\SymfonyStyle:
+        factory: ['@Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory', 'create']
