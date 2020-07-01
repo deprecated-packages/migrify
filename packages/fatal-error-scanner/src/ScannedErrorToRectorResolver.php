@@ -38,6 +38,11 @@ final class ScannedErrorToRectorResolver
     private const ARGUMENTS_PATTERN = '#(\b(?<type>\w.*?)?\b )?\$(?<name>\w+)#sm';
 
     /**
+     * @var string
+     */
+    private const CURRENT = 'current';
+
+    /**
      * @var mixed[]
      */
     private $paramChanges = [];
@@ -82,12 +87,12 @@ final class ScannedErrorToRectorResolver
 
     private function processIncompatibleParamTypeMatch(array $match): void
     {
-        if (! Strings::contains($match['current'], '::')) {
+        if (! Strings::contains($match[self::CURRENT], '::')) {
             // probably a function?
             throw new NotImplementedException();
         }
 
-        $scannedMethod = $this->createScannedMethod($match['current']);
+        $scannedMethod = $this->createScannedMethod($match[self::CURRENT]);
         $shouldBeMethod = $this->createScannedMethod($match['should_be']);
 
         $this->collectClassMethodParamDifferences($scannedMethod, $shouldBeMethod);
@@ -95,12 +100,12 @@ final class ScannedErrorToRectorResolver
 
     private function processIncompatibleReturnTypeMatch(array $match): void
     {
-        if (! Strings::contains($match['current'], '::')) {
+        if (! Strings::contains($match[self::CURRENT], '::')) {
             // probably a function?
             throw new NotImplementedException();
         }
 
-        $scannedMethod = $this->createScannedMethod($match['current']);
+        $scannedMethod = $this->createScannedMethod($match[self::CURRENT]);
         $shouldBeMethod = $this->createScannedMethod($match['should_be']);
 
         $this->collectClassMethodReturnDifferences($scannedMethod, $shouldBeMethod);

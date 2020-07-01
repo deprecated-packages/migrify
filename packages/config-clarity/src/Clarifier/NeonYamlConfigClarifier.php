@@ -14,12 +14,7 @@ final class NeonYamlConfigClarifier
     /**
      * @var string
      */
-    public const NEON_SUFFIX = 'neon';
-
-    /**
-     * @var string
-     */
-    public const YAML_SUFFIX = 'yaml';
+    private const NEON_SUFFIX = 'neon';
 
     public function clarify(string $content, string $suffix): ?string
     {
@@ -51,9 +46,7 @@ final class NeonYamlConfigClarifier
 
             if ($entity->attributes) {
                 $data['arguments'] = [];
-                foreach ($entity->attributes as $attribute) {
-                    $data['arguments'][] = $attribute;
-                }
+                $data['arguments'] = $entity->attributes;
             }
         }
 
