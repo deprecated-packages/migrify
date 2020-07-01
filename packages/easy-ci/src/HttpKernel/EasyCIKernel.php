@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\LatteToTwig\HttpKernel;
+namespace Migrify\EasyCI\HttpKernel;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 
-final class LatteToTwigKernel extends Kernel
+final class EasyCIKernel extends Kernel
 {
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
@@ -19,12 +19,12 @@ final class LatteToTwigKernel extends Kernel
 
     public function getCacheDir(): string
     {
-        return sys_get_temp_dir() . '/latte_to_twig';
+        return sys_get_temp_dir() . '/_migrify_easy_ci';
     }
 
     public function getLogDir(): string
     {
-        return sys_get_temp_dir() . '/latte_to_twig_log';
+        return sys_get_temp_dir() . '/_migrify_easy_ci_log';
     }
 
     /**
@@ -37,7 +37,6 @@ final class LatteToTwigKernel extends Kernel
 
     protected function build(ContainerBuilder $containerBuilder): void
     {
-        // needs to be first, since it's adding new service definitions
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
 }

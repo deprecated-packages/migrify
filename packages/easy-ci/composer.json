@@ -1,8 +1,8 @@
 {
-    "name": "migrify/class-presence",
-    "description": "Check NEON/YAML/TWIG/LATTE files for existing classes",
+    "name": "migrify/easy-ci",
+    "description": "Tools that you use in any CI",
     "license": "MIT",
-    "bin": "bin/class-presence",
+    "bin": "bin/easy-ci",
     "require": {
         "php": "^7.2",
         "symfony/dependency-injection": "^4.4|^5.0",
@@ -10,19 +10,18 @@
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
         "nette/utils": "^3.1",
-        "nette/neon": "^3.0",
         "symplify/package-builder": "^8.0",
         "symplify/autowire-array-parameter": "^8.0",
         "symplify/smart-file-system": "^8.0"
     },
     "autoload": {
         "psr-4": {
-            "Migrify\\ClassPresence\\": "src"
+            "Migrify\\EasyCI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Migrify\\ClassPresence\\Tests\\": "tests"
+            "Migrify\\EasyCI\\Tests\\": "tests"
         }
     }
 }

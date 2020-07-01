@@ -18,6 +18,9 @@ jobs:
                     coverage: none
 
             -   run: composer install --no-progress
+
             -   run: packages/vendor-patches/bin/vendor-patches
             -   run: packages/latte-to-twig/bin/latte-to-twig
             -   run: packages/neon-to-yaml/bin/neon-to-yaml
+            -   run: packages/class-presence/bin/class-presence
+            -   run: packages/easy-ci/bin/easy-ci
