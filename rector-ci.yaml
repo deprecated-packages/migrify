@@ -17,6 +17,10 @@ parameters:
     exclude_paths:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
+        # part of tests
+        - 'packages/**/Source/**'
+        # unknown purpose
+        - 'packages/diff-data-miner/src/Extractor/DefaultValueChangesExtractor.php'
 
     exclude_rectors:
         # false positive on packages/symfony-route-usage/src/Database/TableInitiator.php

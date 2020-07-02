@@ -14,6 +14,16 @@ use Symfony\Component\Yaml\Yaml;
 final class ServiceConverterWorker
 {
     /**
+     * @var string
+     */
+    private const ARGUMENTS = 'arguments';
+
+    /**
+     * @var string
+     */
+    private const SETUP = 'setup';
+
+    /**
      * @param mixed[] $servicesData
      * @return mixed[]
      */
@@ -105,7 +115,7 @@ final class ServiceConverterWorker
         }
 
         if ($service['class']->attributes !== []) {
-            $service['arguments'] = $service['class']->attributes;
+            $service[self::ARGUMENTS] = $service['class']->attributes;
         }
         $service['class'] = $service['class']->value;
 
@@ -118,20 +128,20 @@ final class ServiceConverterWorker
             return $service;
         }
 
-        if (! isset($service['setup'])) {
+        if (! isset($service[self::SETUP])) {
             return $service;
         }
 
-        foreach ((array) $service['setup'] as $key => $value) {
+        foreach ((array) $service[self::SETUP] as $key => $value) {
             if ($value instanceof Entity) {
-                $service['setup'][$key] = [$value->value, $value->attributes];
+                $service[self::SETUP][$key] = [$value->value, $value->attributes];
             }
         }
 
         // inline calls - requires fixup in YamlOutputFormatter
-        $setupYamlContent = Yaml::dump($service['setup'], 1, 4, Yaml::DUMP_OBJECT);
+        $setupYamlContent = Yaml::dump($service[self::SETUP], 1, 4, Yaml::DUMP_OBJECT);
         $service['calls'] = $setupYamlContent;
-        unset($service['setup']);
+        unset($service[self::SETUP]);
 
         return $service;
     }
@@ -142,11 +152,11 @@ final class ServiceConverterWorker
             return $service;
         }
 
-        if (! isset($service['arguments'])) {
+        if (! isset($service[self::ARGUMENTS])) {
             return $service;
         }
 
-        foreach ((array) $service['arguments'] as $key => $value) {
+        foreach ((array) $service[self::ARGUMENTS] as $key => $value) {
             if (! $value instanceof Entity) {
                 continue;
             }
@@ -154,7 +164,7 @@ final class ServiceConverterWorker
             // environment value! @see https://symfony.com/blog/new-in-symfony-3-4-advanced-environment-variables
             if ($value->value === '@env::get') {
                 $environmentVariable = $value->attributes[0];
-                $service['arguments'][$key] = sprintf('%%env(%s)%%', $environmentVariable);
+                $service[self::ARGUMENTS][$key] = sprintf('%%env(%s)%%', $environmentVariable);
             }
         }
 
@@ -171,7 +181,7 @@ final class ServiceConverterWorker
 
         $serviceData = [
             'class' => $class,
-            'arguments' => $entity->attributes,
+            self::ARGUMENTS => $entity->attributes,
         ];
 
         // class-named service

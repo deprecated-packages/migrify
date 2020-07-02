@@ -15,6 +15,31 @@ use Nette\Utils\Strings;
  */
 final class NMacrosCaseConverter implements CaseConverterInterface
 {
+    /**
+     * @var string
+     */
+    private const EXPRESSION = 'expression';
+
+    /**
+     * @var string
+     */
+    private const OPEN_TAG_START = 'openTagStart';
+
+    /**
+     * @var string
+     */
+    private const OPEN_TAG_END = 'openTagEnd';
+
+    /**
+     * @var string
+     */
+    private const INNER = 'inner';
+
+    /**
+     * @var string
+     */
+    private const CLOSE_TAG = 'closeTag';
+
     public function getPriority(): int
     {
         return 1500;
@@ -29,12 +54,12 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             function (array $match): string {
                 return sprintf(
                     '{if %s}%s%s%s%s%s%s{/if}',
-                    $match['expression'],
+                    $match[self::EXPRESSION],
                     PHP_EOL,
-                    $match['openTagStart'],
-                    $match['openTagEnd'],
-                    $match['inner'],
-                    $match['closeTag'],
+                    $match[self::OPEN_TAG_START],
+                    $match[self::OPEN_TAG_END],
+                    $match[self::INNER],
+                    $match[self::CLOSE_TAG],
                     PHP_EOL
                 );
             }
@@ -47,12 +72,12 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             function (array $match): string {
                 return sprintf(
                     '{ifset %s}%s%s%s%s%s%s{/ifset}',
-                    $match['expression'],
+                    $match[self::EXPRESSION],
                     PHP_EOL,
-                    $match['openTagStart'],
-                    $match['openTagEnd'],
-                    $match['inner'],
-                    $match['closeTag'],
+                    $match[self::OPEN_TAG_START],
+                    $match[self::OPEN_TAG_END],
+                    $match[self::INNER],
+                    $match[self::CLOSE_TAG],
                     PHP_EOL
                 );
             }
@@ -65,12 +90,12 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             function (array $match): string {
                 return sprintf(
                     '{foreach %s}%s%s%s%s%s%s{/foreach}',
-                    $match['expression'],
+                    $match[self::EXPRESSION],
                     PHP_EOL,
-                    $match['openTagStart'],
-                    $match['openTagEnd'],
-                    $match['inner'],
-                    $match['closeTag'],
+                    $match[self::OPEN_TAG_START],
+                    $match[self::OPEN_TAG_END],
+                    $match[self::INNER],
+                    $match[self::CLOSE_TAG],
                     PHP_EOL
                 );
             }
@@ -83,13 +108,13 @@ final class NMacrosCaseConverter implements CaseConverterInterface
             function (array $match): string {
                 return sprintf(
                     '%s%s%s{foreach %s}%s{/foreach}%s%s',
-                    $match['openTagStart'],
-                    $match['openTagEnd'],
+                    $match[self::OPEN_TAG_START],
+                    $match[self::OPEN_TAG_END],
                     PHP_EOL,
-                    $match['expression'],
-                    $match['inner'],
+                    $match[self::EXPRESSION],
+                    $match[self::INNER],
                     PHP_EOL,
-                    $match['closeTag']
+                    $match[self::CLOSE_TAG]
                 );
             }
         );
