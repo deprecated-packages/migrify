@@ -5,6 +5,7 @@
     "require": {
         "php": "^7.2",
         "ext-pdo": "*",
+        "cweagans/composer-patches": "^1.6",
         "knplabs/doctrine-behaviors": "^2.0.5",
         "nette/neon": "^3.0",
         "nette/robot-loader": "^3.2",
@@ -14,6 +15,7 @@
         "symfony/finder": "^4.4|^5.0",
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
+        "nikic/php-parser": "4.5",
         "symplify/autowire-array-parameter": "^8.0",
         "symplify/composer-json-manipulator": "^8.0",
         "symplify/package-builder": "^8.0",
@@ -100,5 +102,12 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "patches": {
+            "symfony/console": [
+                "patches/symfony-console-command-command-php.patch"
+            ]
+        }
+    }
 }
