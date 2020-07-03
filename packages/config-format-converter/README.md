@@ -1,10 +1,8 @@
-# Config Clarity
+# Config Format Converter
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/config-format-converter.svg?style=flat-square)](https://packagist.org/packages/migrify/config-format-converter/stats)
 
-Take NEON/YAML magic *pro* short syntax and reveal it to clear syntax readable by any developer
-
-From Nette, unpopular ["entities"](https://ne-on.org/) to clear arrays:
+Convert 
 
 ```diff
  services:
