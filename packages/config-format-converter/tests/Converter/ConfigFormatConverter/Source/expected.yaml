@@ -1,0 +1,3 @@
+services:
+    helpmee.agent.handler.verify.anecdote:
+        class: Helpmee\AgentDashboardBundle\CommandBus\Handler\Verification\VerifyAnecdoteHandler

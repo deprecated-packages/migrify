@@ -10,12 +10,12 @@
         "nette/neon": "^3.0",
         "nette/robot-loader": "^3.2",
         "nette/utils": "^3.1",
+        "nikic/php-parser": "4.5",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
         "symfony/finder": "^4.4|^5.0",
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
-        "nikic/php-parser": "4.5",
         "symplify/autowire-array-parameter": "^8.0",
         "symplify/composer-json-manipulator": "^8.0",
         "symplify/package-builder": "^8.0",
@@ -40,6 +40,7 @@
         "symfony/security-core": "^4.4|^5.0",
         "symplify/changelog-linker": "^8.0",
         "symplify/easy-coding-standard": "^8.0",
+        "symplify/easy-testing": "^8.1",
         "symplify/monorepo-builder": "^8.0",
         "symplify/phpstan-extensions": "^8.0",
         "tracy/tracy": "^2.7"
@@ -48,6 +49,7 @@
         "psr-4": {
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
             "Migrify\\ConfigClarity\\": "packages/config-clarity/src",
+            "Migrify\\ConfigFormatConverter\\": "packages/config-format-converter/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\EasyCI\\": "packages/easy-ci/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
@@ -62,6 +64,7 @@
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigClarity\\Tests\\": "packages/config-clarity/tests",
+            "Migrify\\ConfigFormatConverter\\Tests\\": "packages/config-format-converter/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\EasyCI\\Tests\\": "packages/easy-ci/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
@@ -75,6 +78,7 @@
     "replace": {
         "migrify/class-presence": "self.version",
         "migrify/config-clarity": "self.version",
+        "migrify/config-format-converter": "self.version",
         "migrify/diff-data-miner": "self.version",
         "migrify/easy-ci": "self.version",
         "migrify/fatal-error-scanner": "self.version",
@@ -101,13 +105,13 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "patches": {
             "symfony/console": [
                 "patches/symfony-console-command-command-php.patch"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

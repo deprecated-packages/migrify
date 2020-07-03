@@ -24,3 +24,4 @@ jobs:
             -   run: packages/neon-to-yaml/bin/neon-to-yaml
             -   run: packages/class-presence/bin/class-presence
             -   run: packages/easy-ci/bin/easy-ci
+            -   run: packages/config-format-converter/bin/config-format-converter
