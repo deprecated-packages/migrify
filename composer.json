@@ -107,9 +107,9 @@
     },
     "extra": {
         "patches": {
-            "symfony/console": [
-                "patches/symfony-console-command-command-php.patch"
-            ]
+            "symfony/console": {
+                "testing_composer_patches": "patches/symfony-console-command-command-php.patch"
+            }
         }
     },
     "minimum-stability": "dev",
