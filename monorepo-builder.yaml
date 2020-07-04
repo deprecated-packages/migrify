@@ -7,9 +7,9 @@ parameters:
             rector/rector: 'dev-master'
             tracy/tracy: '^2.7'
             composer/composer: '^1.10'
-            symplify/monorepo-builder: '^8.0'
-            symplify/easy-coding-standard: '^8.0'
-            symplify/phpstan-extensions: '^8.0'
+            symplify/monorepo-builder: '^8.1'
+            symplify/easy-coding-standard: '^8.1'
+            symplify/phpstan-extensions: '^8.1'
             phpstan/phpstan-symfony: '^0.12'
 
     # remove these to merge of packages' composer.json

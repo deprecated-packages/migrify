@@ -7,8 +7,8 @@ namespace Migrify\ConfigClarity\Tests\Clarifier\NeonYamlConfigClarifier;
 use Iterator;
 use Migrify\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
 use Migrify\ConfigClarity\HttpKernel\ConfigClarityKernel;
-use Migrify\ConfigClarity\Tests\StaticFixtureProvider;
 use Nette\Utils\Strings;
+use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -28,10 +28,8 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
     /**
      * @dataProvider provideData()
      */
-    public function test(string $filePath): void
+    public function test(SmartFileInfo $fileInfo): void
     {
-        $fileInfo = new SmartFileInfo($filePath);
-
         [$inputContent, $expectedContent] = Strings::split($fileInfo->getContents(), "#-----\n#");
 
         $changedContent = $this->neonYamlConfigClarifier->clarify($inputContent, $fileInfo->getSuffix());
@@ -40,6 +38,6 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
 
     public function provideData(): Iterator
     {
-        return StaticFixtureProvider::yieldFilesFromDirectory(__DIR__ . '/Source');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.neon');
     }
 }
