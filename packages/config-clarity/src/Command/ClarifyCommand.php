@@ -59,14 +59,16 @@ final class ClarifyCommand extends Command
         $fileInfos = $this->neonAndYamlFinder->findYamlAndNeonFilesInSource($source);
 
         foreach ($fileInfos as $fileInfo) {
-            $this->symfonyStyle->title(sprintf('Processing "%s"', $fileInfo->getRelativeFilePathFromCwd()));
+            $message = sprintf('Processing "%s"', $fileInfo->getRelativeFilePathFromCwd());
+            $this->symfonyStyle->title($message);
 
             $newContent = $this->neonYamlConfigClarifier->clarify($fileInfo->getContents(), $fileInfo->getSuffix());
             if ($newContent === null) {
                 continue;
             }
+            $message = sprintf('File "%s" was updated', $fileInfo->getRelativeFilePathFromCwd());
 
-            $this->symfonyStyle->writeln(sprintf('File "%s" was updated', $fileInfo->getRelativeFilePathFromCwd()));
+            $this->symfonyStyle->writeln($message);
         }
 
         $this->symfonyStyle->success('OK');

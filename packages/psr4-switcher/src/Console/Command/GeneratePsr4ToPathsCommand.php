@@ -96,9 +96,8 @@ final class GeneratePsr4ToPathsCommand extends Command
         $this->symfonyStyle->success('Done');
 
         foreach ($classesToFilesWithMissedCommonNamespace as $class => $file) {
-            $this->symfonyStyle->warning(
-                sprintf('Class "%s" and file "%s" have no match in PSR-4 namespace', $class, $file)
-            );
+            $message = sprintf('Class "%s" and file "%s" have no match in PSR-4 namespace', $class, $file);
+            $this->symfonyStyle->warning($message);
         }
 
         return ShellCode::SUCCESS;

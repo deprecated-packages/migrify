@@ -33,7 +33,8 @@ final class ProjectVendorAutoloadRequirer
 
         $projectAutoloadFile = realpath($projectAutoloadFile);
         require_once $projectAutoloadFile;
-        $this->symfonyStyle->note(sprintf('File "%s" was required', $projectAutoloadFile));
+        $message = sprintf('File "%s" was required', $projectAutoloadFile);
+        $this->symfonyStyle->note($message);
     }
 
     private function resolveProjectAutoloadFile(ComposerJson $composerJson, string $composerJsonPath): string

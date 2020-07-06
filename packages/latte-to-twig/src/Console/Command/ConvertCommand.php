@@ -74,12 +74,9 @@ final class ConvertCommand extends Command
             if ($oldFilePath !== $newFilePath) {
                 FileSystem::delete($oldFilePath);
             }
+            $message = sprintf('File "%s" was converted to Twig to "%s"', $oldFilePath, $newFilePath);
 
-            $this->symfonyStyle->note(sprintf(
-                'File "%s" was converted to Twig to "%s"',
-                $oldFilePath,
-                $newFilePath
-            ));
+            $this->symfonyStyle->note($message);
         }
 
         $this->symfonyStyle->success('Done');

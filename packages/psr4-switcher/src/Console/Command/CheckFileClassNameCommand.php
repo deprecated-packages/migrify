@@ -68,12 +68,13 @@ final class CheckFileClassNameCommand extends Command
 
         foreach ($missMatchingClassNamesByFiles as $file => $class) {
             $fileInfo = new SmartFileInfo($file);
-
-            $this->symfonyStyle->warning(sprintf(
+            $message = sprintf(
                 'Check "%s" file to match class name "%s"',
                 $fileInfo->getRelativeFilePathFromCwd(),
                 $class
-            ));
+            );
+
+            $this->symfonyStyle->warning($message);
         }
 
         return ShellCode::ERROR;

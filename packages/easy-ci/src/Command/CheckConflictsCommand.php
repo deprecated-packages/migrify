@@ -63,7 +63,8 @@ final class CheckConflictsCommand extends Command
         }
 
         foreach ($conflictsCountByFilePath as $file => $conflictCount) {
-            $this->symfonyStyle->error(sprintf('File "%s" contains %d unresolved conflict', $file, $conflictCount));
+            $message = sprintf('File "%s" contains %d unresolved conflict', $file, $conflictCount);
+            $this->symfonyStyle->error($message);
             $this->symfonyStyle->newLine();
         }
 

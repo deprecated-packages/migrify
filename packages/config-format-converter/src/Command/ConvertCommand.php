@@ -72,7 +72,8 @@ final class ConvertCommand extends Command
             FileSystem::write($fileName, $convertedContent);
 
             $newFileInfo = new SmartFileInfo($fileName);
-            $this->symfonyStyle->writeln(sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd()));
+            $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
+            $this->symfonyStyle->writeln($message);
         }
 
         $this->symfonyStyle->success('OK');

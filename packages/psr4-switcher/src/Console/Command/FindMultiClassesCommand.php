@@ -62,7 +62,8 @@ final class FindMultiClassesCommand extends Command
         }
 
         foreach ($multipleClassesByFile as $file => $classes) {
-            $this->symfonyStyle->section(sprintf('File "%s" has %d classes', $file, count($classes)));
+            $message = sprintf('File "%s" has %d classes', $file, count($classes));
+            $this->symfonyStyle->section($message);
             $this->symfonyStyle->listing($classes);
         }
 

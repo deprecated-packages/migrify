@@ -13,17 +13,17 @@ final class ConfigFinderTest extends AbstractKernelTestCase
     /**
      * @var FileFinder
      */
-    private $configFinder;
+    private $fileFinder;
 
     protected function setUp(): void
     {
         $this->bootKernel(ClassPresenceKernel::class);
-        $this->configFinder = self::$container->get(FileFinder::class);
+        $this->fileFinder = self::$container->get(FileFinder::class);
     }
 
     public function test(): void
     {
-        $configFileInfos = $this->configFinder->findInDirectories([__DIR__ . '/Source/']);
+        $configFileInfos = $this->fileFinder->findInDirectories([__DIR__ . '/Source/']);
         $this->assertCount(2, $configFileInfos);
     }
 }

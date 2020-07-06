@@ -10,6 +10,7 @@ parameters:
         - 'php-72'
         - 'privatization'
         - 'solid'
+        - 'naming'
 
     paths:
         - packages
@@ -29,3 +30,6 @@ parameters:
         - 'Rector\DeadCode\Rector\Class_\RemoveUnusedDoctrineEntityMethodAndPropertyRector'
         # temporary - must skip entities, already in Rector master
         - 'Rector\Privatization\Rector\ClassMethod\PrivatizeLocalOnlyMethodRector'
+
+services:
+    Rector\Decomplex\Rector\MethodCall\UseMessageVariableForSprintfInSymfonyStyleRector: null

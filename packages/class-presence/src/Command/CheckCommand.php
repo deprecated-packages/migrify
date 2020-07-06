@@ -42,11 +42,11 @@ final class CheckCommand extends Command
     public function __construct(
         SymfonyStyle $symfonyStyle,
         FileFinder $fileFinder,
-        NonExistingClassExtractor $classNameExtractor,
+        NonExistingClassExtractor $nonExistingClassExtractor,
         NonExistingClassConstantExtractor $nonExistingClassConstantExtractor
     ) {
         $this->symfonyStyle = $symfonyStyle;
-        $this->nonExistingClassExtractor = $classNameExtractor;
+        $this->nonExistingClassExtractor = $nonExistingClassExtractor;
         $this->nonExistingClassConstantExtractor = $nonExistingClassConstantExtractor;
 
         parent::__construct();
@@ -98,13 +98,15 @@ final class CheckCommand extends Command
         array $nonExistingClassConstantsByFile
     ): int {
         foreach ($nonExistingClassesByFile as $file => $nonExistingClasses) {
-            $this->symfonyStyle->title(sprintf('File "%s" contains non-existing classes', $file));
+            $message = sprintf('File "%s" contains non-existing classes', $file);
+            $this->symfonyStyle->title($message);
             $this->symfonyStyle->listing($nonExistingClasses);
             $this->symfonyStyle->newLine();
         }
 
         foreach ($nonExistingClassConstantsByFile as $file => $nonExistingClassConstants) {
-            $this->symfonyStyle->title(sprintf('File "%s" contains non-existing class constants', $file));
+            $message = sprintf('File "%s" contains non-existing class constants', $file);
+            $this->symfonyStyle->title($message);
             $this->symfonyStyle->listing($nonExistingClassConstants);
             $this->symfonyStyle->newLine();
         }

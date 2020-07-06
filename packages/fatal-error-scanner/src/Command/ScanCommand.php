@@ -80,8 +80,9 @@ final class ScanCommand extends Command
             $this->symfonyStyle->success('No fatal errors found');
             return ShellCode::SUCCESS;
         }
+        $message = sprintf('Found %d Errors', count($errors));
 
-        $this->symfonyStyle->section(sprintf('Found %d Errors', count($errors)));
+        $this->symfonyStyle->section($message);
         foreach ($errors as $error) {
             $this->symfonyStyle->note($error);
         }
@@ -93,15 +94,17 @@ final class ScanCommand extends Command
         }
 
         $this->yamlPrinter->printYamlToFile($rectorConfiguration, self::RECTOR_TYPES_YAML);
+        $message = sprintf('New config with types was created in "%s"', self::RECTOR_TYPES_YAML);
 
-        $this->symfonyStyle->note(sprintf('New config with types was created in "%s"', self::RECTOR_TYPES_YAML));
-
-        $this->symfonyStyle->success(sprintf(
+        $this->symfonyStyle->note($message);
+        $message = sprintf(
             'Now run Rector to refactor your code:%svendor/bin/rector p %s --config %s',
             PHP_EOL . PHP_EOL,
             implode(' ', $source),
             self::RECTOR_TYPES_YAML
-        ));
+        );
+
+        $this->symfonyStyle->success($message);
 
         return ShellCode::SUCCESS;
     }
