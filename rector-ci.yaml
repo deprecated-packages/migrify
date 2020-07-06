@@ -31,5 +31,6 @@ parameters:
         # temporary - must skip entities, already in Rector master
         - 'Rector\Privatization\Rector\ClassMethod\PrivatizeLocalOnlyMethodRector'
 
+
 services:
     Rector\Decomplex\Rector\MethodCall\UseMessageVariableForSprintfInSymfonyStyleRector: null

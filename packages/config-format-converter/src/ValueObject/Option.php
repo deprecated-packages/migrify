@@ -14,5 +14,15 @@ final class Option
     /**
      * @var string
      */
-    public const FORMAT = 'format';
+    public const OUTPUT_FORMAT = 'output-format';
+
+    /**
+     * @var string
+     */
+    public const DELETE = 'delete';
+
+    /**
+     * @var string
+     */
+    public const TARGET_SYMFONY_VERSION = 'target-symfony-version';
 }

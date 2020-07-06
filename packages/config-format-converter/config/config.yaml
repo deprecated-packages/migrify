@@ -8,8 +8,11 @@ services:
         resource: '../src'
         exclude:
             - '../src/HttpKernel/*'
+            - '../src/DependencyInjection/Loader/*'
 
     Symplify\SmartFileSystem\Finder\FinderSanitizer: null
+
+    Symplify\PackageBuilder\Reflection\PrivatesAccessor: null
 
     Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
     Symfony\Component\Console\Style\SymfonyStyle:

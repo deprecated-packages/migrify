@@ -20,6 +20,6 @@ final class DumperFactory
             return new YamlDumper($containerBuilder);
         }
 
-        throw new NotImplementedYetException();
+        throw new NotImplementedYetException($outputFormat);
     }
 }

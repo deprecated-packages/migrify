@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigFormatConverter;
 
+use Migrify\ConfigFormatConverter\DependencyInjection\Loader\IdAwareXmlFileLoader;
 use Migrify\ConfigFormatConverter\Exception\NotImplementedYetException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ConfigLoader
@@ -26,9 +26,9 @@ final class ConfigLoader
     private function createLoaderBySuffix(ContainerBuilder $containerBuilder, string $suffix): FileLoader
     {
         if ($suffix === 'xml') {
-            return new XmlFileLoader($containerBuilder, new FileLocator());
+            return new IdAwareXmlFileLoader($containerBuilder, new FileLocator());
         }
 
-        throw new NotImplementedYetException();
+        throw new NotImplementedYetException($suffix);
     }
 }
