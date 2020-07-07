@@ -33,7 +33,7 @@ final class Configuration
     /**
      * @var bool
      */
-    private $shouldDeleteOldFiles;
+    private $shouldDeleteOldFiles = false;
 
     public function populateFromInput(InputInterface $input): void
     {
