@@ -50,6 +50,7 @@
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
             "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
             "Migrify\\ConfigTransformer\\Clarifier\\": "packages/config-transformer/packages/clarifier/src",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\": "packages/config-transformer/packages/format-switcher/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\EasyCI\\": "packages/easy-ci/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
@@ -64,6 +65,7 @@
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/config-transformer/packages/clarifier/tests",
+            "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/config-transformer/packages/format-switcher/tests",
             "Migrify\\ConfigTransformer\\Tests\\": "packages/config-transformer/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\EasyCI\\Tests\\": "packages/easy-ci/tests",

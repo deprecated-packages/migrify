@@ -4,6 +4,9 @@ includes:
     - vendor/symplify/coding-standard/config/symplify-rules.neon
 
 parameters:
+    paths:
+        - packages
+
     level: max
     checkGenericClassInNonGenericObjectType: false
     reportUnmatchedIgnoredErrors: false
