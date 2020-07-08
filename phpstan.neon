@@ -12,7 +12,7 @@ parameters:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
         # 3rd party file
-        - 'packages/config-format-converter/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php'
+        - 'packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php'
 
     ignoreErrors:
          - '#(.*?) return type has no value type specified in iterable type array#'

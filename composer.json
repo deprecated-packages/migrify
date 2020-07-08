@@ -48,8 +48,8 @@
     "autoload": {
         "psr-4": {
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
-            "Migrify\\ConfigFormatConverter\\": "packages/config-format-converter/src",
-            "Migrify\\ConfigFormatConverter\\ConfigClarity\\": "packages/config-format-converter/packages/clarifier/src",
+            "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
+            "Migrify\\ConfigTransformer\\ConfigClarity\\": "packages/config-transformer/packages/clarifier/src",
             "Migrify\\DiffDataMiner\\": "packages/diff-data-miner/src",
             "Migrify\\EasyCI\\": "packages/easy-ci/src",
             "Migrify\\FatalErrorScanner\\": "packages/fatal-error-scanner/src",
@@ -63,8 +63,8 @@
     "autoload-dev": {
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
-            "Migrify\\ConfigFormatConverter\\ConfigClarity\\Tests\\": "packages/config-format-converter/packages/clarifier/tests",
-            "Migrify\\ConfigFormatConverter\\Tests\\": "packages/config-format-converter/tests",
+            "Migrify\\ConfigTransformer\\ConfigClarity\\Tests\\": "packages/config-transformer/packages/clarifier/tests",
+            "Migrify\\ConfigTransformer\\Tests\\": "packages/config-transformer/tests",
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\EasyCI\\Tests\\": "packages/easy-ci/tests",
             "Migrify\\FatalErrorScanner\\Tests\\": "packages/fatal-error-scanner/tests",
@@ -77,7 +77,7 @@
     },
     "replace": {
         "migrify/class-presence": "self.version",
-        "migrify/config-format-converter": "self.version",
+        "migrify/config-transformer": "self.version",
         "migrify/diff-data-miner": "self.version",
         "migrify/easy-ci": "self.version",
         "migrify/fatal-error-scanner": "self.version",

@@ -20,7 +20,7 @@ parameters:
     directories_to_repositories:
         'packages/class-presence': 'git@github.com:migrify/class-presence.git'
         'packages/diff-data-miner': 'git@github.com:migrify/diff-data-miner.git'
-        'packages/config-format-converter': 'git@github.com:migrify/config-format-converter.git'
+        'packages/config-transformer': 'git@github.com:migrify/config-transformer.git'
         'packages/easy-ci': 'git@github.com:migrify/easy-ci.git'
         'packages/fatal-error-scanner': 'git@github.com:migrify/fatal-error-scanner.git'
         'packages/latte-to-twig': 'git@github.com:migrify/latte-to-twig.git'

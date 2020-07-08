@@ -44,7 +44,7 @@ jobs:
                             packages/neon-to-yaml/bin/neon-to-yaml
                             packages/class-presence/bin/class-presence
                             packages/easy-ci/bin/easy-ci
-                            packages/config-format-converter/bin/config-format-converter
+                            packages/config-transformer/bin/config-transformer
 
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
