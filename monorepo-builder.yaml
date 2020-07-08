@@ -2,14 +2,12 @@ parameters:
     # add these to merge of packages' composer.json
     data_to_append:
         require-dev:
-            phpstan/phpstan: '^0.12.25'
             phpunit/phpunit: '^8.5|^9.0'
             tracy/tracy: '^2.7'
             composer/composer: '^1.10'
             symplify/monorepo-builder: '^8.1'
             symplify/easy-coding-standard: '^8.1'
             symplify/phpstan-extensions: '^8.1'
-            phpstan/phpstan-symfony: '^0.12'
 
     # remove these to merge of packages' composer.json
     data_to_remove:
