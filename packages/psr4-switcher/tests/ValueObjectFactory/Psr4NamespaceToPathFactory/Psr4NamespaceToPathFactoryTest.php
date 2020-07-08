@@ -23,6 +23,7 @@ final class Psr4NamespaceToPathFactoryTest extends AbstractKernelTestCase
         $this->bootKernel(Psr4SwitcherKernel::class);
         $this->psr4NamespaceToPathFactory = self::$container->get(Psr4NamespaceToPathFactory::class);
 
+        /** @var Psr4SwitcherConfiguration $psr4SwitcherConfiguration */
         $psr4SwitcherConfiguration = self::$container->get(Psr4SwitcherConfiguration::class);
         $psr4SwitcherConfiguration->loadForTest(__DIR__ . '/Source/some_composer.json');
     }

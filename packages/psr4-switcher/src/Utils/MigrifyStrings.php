@@ -49,11 +49,6 @@ final class MigrifyStrings
         return $first;
     }
 
-    public function normalizePath(string $firstString): string
-    {
-        return Strings::replace($firstString, '#\\\\#', '/');
-    }
-
     public function subtractFromRight(string $mainString, string $stringToSubtract): string
     {
         return Strings::substring($mainString, 0, -strlen($stringToSubtract));
@@ -62,6 +57,11 @@ final class MigrifyStrings
     public function subtractFromLeft(string $mainString, string $stringToSubtract): string
     {
         return Strings::substring($mainString, strlen($stringToSubtract));
+    }
+
+    private function normalizePath(string $firstString): string
+    {
+        return Strings::replace($firstString, '#\\\\#', '/');
     }
 
     private function shouldIncludeChar(
