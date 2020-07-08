@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigFormatConverter\Command;
 
+use Migrify\ConfigFormatConverter\Configuration\Configuration;
 use Migrify\ConfigFormatConverter\Converter\ConfigFormatConverter;
 use Migrify\ConfigFormatConverter\Finder\ConfigFileFinder;
 use Migrify\ConfigFormatConverter\ValueObject\Option;
 use Nette\Utils\FileSystem;
+use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,49 +37,96 @@ final class ConvertCommand extends Command
      */
     private $configFormatConverter;
 
+    /**
+     * @var Configuration
+     */
+    private $configuration;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         ConfigFileFinder $configFileFinder,
-        ConfigFormatConverter $configFormatConverter
+        ConfigFormatConverter $configFormatConverter,
+        Configuration $configuration
     ) {
         parent::__construct();
 
         $this->symfonyStyle = $symfonyStyle;
         $this->configFileFinder = $configFileFinder;
         $this->configFormatConverter = $configFormatConverter;
+        $this->configuration = $configuration;
     }
 
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->setDescription('Converts all XML files to YAML format');
+        $this->setDescription('Converts all XML files to provided format');
+
         $this->addArgument(Option::SOURCE, InputArgument::REQUIRED, 'Path to directory with configs');
-        $this->addOption(Option::FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output', 'yaml');
+        $this->addOption(Option::OUTPUT_FORMAT, null, InputOption::VALUE_REQUIRED, 'Config format to output');
+        $this->addOption(Option::DELETE, null, InputOption::VALUE_NONE, 'Delete original files');
+        $this->addOption(
+            Option::TARGET_SYMFONY_VERSION,
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Symfony version to migrate config to'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var string $source */
-        $source = (string) $input->getArgument(Option::SOURCE);
+        $this->configuration->populateFromInput($input);
 
-        /** @var string $outputFormat */
-        $outputFormat = (string) $input->getArgument(Option::FORMAT);
+        $fileInfos = $this->configFileFinder->findInDirectory($this->configuration->getSource());
 
-        $fileInfos = $this->configFileFinder->findInDirectory($source);
+        $convertedFileInfos = [];
+
         foreach ($fileInfos as $fileInfo) {
-            $convertedContent = $this->configFormatConverter->convert($fileInfo, $outputFormat);
+            $convertedContent = $this->configFormatConverter->convert(
+                $fileInfo,
+                $this->configuration->getOutputFormat()
+            );
 
             // dump the file
-            $fileName = $fileInfo->getFilenameWithoutExtension() . '.' . $outputFormat;
-            FileSystem::write($fileName, $convertedContent);
+            $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
+            $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
+            FileSystem::write($newFilePath, $convertedContent);
 
-            $newFileInfo = new SmartFileInfo($fileName);
+            $newFileInfo = new SmartFileInfo($newFilePath);
             $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
             $this->symfonyStyle->writeln($message);
+
+            $convertedFileInfos[] = $newFileInfo;
         }
 
-        $this->symfonyStyle->success('OK');
+        $this->deleteOldFiles($fileInfos);
+
+        $successMessage = sprintf(
+            '%d files were converted to YAML, while keeping original XML files.',
+            count($convertedFileInfos)
+        );
+        $this->symfonyStyle->success($successMessage);
 
         return ShellCode::SUCCESS;
+    }
+
+    /**
+     * @param SmartFileInfo[] $fileInfos
+     */
+    private function deleteOldFiles(array $fileInfos): void
+    {
+        if (count($fileInfos) === 0) {
+            return;
+        }
+
+        if (! $this->configuration->shouldDeleteOldFiles()) {
+            return;
+        }
+
+        foreach ($fileInfos as $fileInfo) {
+            FileSystem::delete($fileInfo->getRealPath());
+        }
+
+        $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
+        $this->symfonyStyle->warning($deletedFilesMessage);
     }
 }

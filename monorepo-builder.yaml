@@ -4,7 +4,6 @@ parameters:
         require-dev:
             phpstan/phpstan: '^0.12.25'
             phpunit/phpunit: '^8.5|^9.0'
-            rector/rector: '^0.7.44'
             tracy/tracy: '^2.7'
             composer/composer: '^1.10'
             symplify/monorepo-builder: '^8.1'

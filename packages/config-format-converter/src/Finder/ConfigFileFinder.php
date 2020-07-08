@@ -25,10 +25,14 @@ final class ConfigFileFinder
      */
     public function findInDirectory(string $directory): array
     {
+        if (is_file($directory)) {
+            return [new SmartFileInfo($directory)];
+        }
+
         $finder = Finder::create()
             ->files()
             ->in($directory)
-            ->name('#\.(xml|yml|yaml)$#i')
+            ->name('#\.xml$#i')
             ->sortByName();
 
         return $this->finderSanitizer->sanitize($finder);
