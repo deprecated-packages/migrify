@@ -23,6 +23,9 @@ parameters:
         # unknown purpose
         - 'packages/diff-data-miner/src/Extractor/DefaultValueChangesExtractor.php'
 
+        # 3rd party files
+        - 'packages/config-transformer/packages/format-switcher/src/Converter/YamlToPhpConverter.php'
+
     exclude_rectors:
         # false positive on packages/symfony-route-usage/src/Database/TableInitiator.php
         - 'Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector'

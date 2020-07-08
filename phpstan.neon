@@ -15,8 +15,10 @@ parameters:
     excludes_analyse:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
-        # 3rd party file
+
+        # 3rd party files
         - 'packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php'
+        - 'packages/config-transformer/packages/format-switcher/src/Converter/YamlToPhpConverter.php'
 
     ignoreErrors:
          - '#(.*?) return type has no value type specified in iterable type array#'
