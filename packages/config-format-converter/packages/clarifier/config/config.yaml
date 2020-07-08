@@ -4,7 +4,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    Migrify\ConfigClarity\:
+    Migrify\ConfigFormatConverter\ConfigClarity\:
         resource: '../src'
         exclude:
             - '../src/HttpKernel/*'

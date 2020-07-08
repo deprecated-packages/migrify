@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigClarity\Command;
+namespace Migrify\ConfigFormatConverter\ConfigClarity\Command;
 
-use Migrify\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
-use Migrify\ConfigClarity\Finder\NeonAndYamlFinder;
-use Migrify\ConfigClarity\ValueObject\Option;
+use Migrify\ConfigFormatConverter\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
+use Migrify\ConfigFormatConverter\ConfigClarity\Finder\NeonAndYamlFinder;
+use Migrify\ConfigFormatConverter\ConfigClarity\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

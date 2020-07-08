@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigClarity\Clarifier;
+namespace Migrify\ConfigFormatConverter\ConfigClarity\Clarifier;
 
 use Migrify\NeonToYaml\Exception\NotImplementedYetException;
 use Nette\Neon\Entity;
