@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigClarity\ValueObject;
+namespace Migrify\ConfigFormatConverter\ConfigClarity\ValueObject;
 
 final class Option
 {

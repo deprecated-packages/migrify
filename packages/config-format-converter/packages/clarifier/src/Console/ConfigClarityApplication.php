@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigClarity\Console;
+namespace Migrify\ConfigFormatConverter\ConfigClarity\Console;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;

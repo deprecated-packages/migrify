@@ -87,14 +87,7 @@ final class ConvertCommand extends Command
             );
 
             // dump the file
-            $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
-            $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
-            FileSystem::write($newFilePath, $convertedContent);
-
-            $newFileInfo = new SmartFileInfo($newFilePath);
-            $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
-            $this->symfonyStyle->writeln($message);
-
+            $newFileInfo = $this->dumpFile($fileInfo, $convertedContent);
             $convertedFileInfos[] = $newFileInfo;
         }
 
@@ -128,5 +121,18 @@ final class ConvertCommand extends Command
 
         $deletedFilesMessage = sprintf('Deleted %d original files', count($fileInfos));
         $this->symfonyStyle->warning($deletedFilesMessage);
+    }
+
+    private function dumpFile(SmartFileInfo $fileInfo, string $convertedContent): SmartFileInfo
+    {
+        $fileRealPathWithoutSuffix = Strings::replace($fileInfo->getRealPath(), '#\.[^.]+$#');
+        $newFilePath = $fileRealPathWithoutSuffix . '.' . $this->configuration->getOutputFormat();
+        FileSystem::write($newFilePath, $convertedContent);
+
+        $newFileInfo = new SmartFileInfo($newFilePath);
+        $message = sprintf('File "%s" was dumped', $newFileInfo->getRelativeFilePathFromCwd());
+        $this->symfonyStyle->writeln($message);
+
+        return $newFileInfo;
     }
 }

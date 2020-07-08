@@ -2,17 +2,7 @@
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/config-format-converter.svg?style=flat-square)](https://packagist.org/packages/migrify/config-format-converter/stats)
 
-Convert 
-
-```diff
- services:
--    - SomeClass(1, 2)
-+    -
-+        class: SomeClass
-+        arguments:
- +           - 1
-+            - 2
-```
+Convert Symfony XML format to YAML or clarify Symfony/Nette syntax to readable one - all the useful utils around configs.
 
 ## Install
 
@@ -22,10 +12,37 @@ composer require migrify/config-format-converter --dev
 
 ## Usage
 
+### 1. Convert Config Formats From XML
+
 ```bash
-vendor/bin/config-format-converter clarify /config/sinle_file.neon
+vendor/bin/config-format-converter convert app/config --output-format yaml
+```
 
-vendor/bin/config-format-converter clarify /config
+You can also add `target-symfony-version` to specify, what Symfony features should be used.
 
-vendor/bin/config-format-converter clarify /config/sinle_file.yaml
+```bash
+vendor/bin/config-format-converter convert app/config --output-format yaml --target-symfony-version 3.3
+```
+
+### 2. Make Configs Explicit
+
+Take NEON/YAML magic *pro* short syntax and reveal it to clear syntax readable by any developer.
+
+Do you use [Nette](https://nette.org/)? You can convert unpopular ["entities"](https://ne-on.org/) to clear arrays:
+
+```diff
+ services:
+-    - SomeClass(1, 2)
++    -
++        class: SomeClass
++        arguments:
++            - 1
++            - 2
+```
+
+Just run `clarify` command:
+
+```bash
+vendor/bin/config-clarity clarify /config/sinle_file.neon
+vendor/bin/config-clarity clarify /config
 ```

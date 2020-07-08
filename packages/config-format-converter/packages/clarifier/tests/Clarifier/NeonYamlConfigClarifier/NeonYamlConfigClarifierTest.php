@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigClarity\Tests\Clarifier\NeonYamlConfigClarifier;
+namespace Migrify\ConfigFormatConverter\ConfigClarity\Tests\Clarifier\NeonYamlConfigClarifier;
 
 use Iterator;
-use Migrify\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
-use Migrify\ConfigClarity\HttpKernel\ConfigClarityKernel;
+use Migrify\ConfigFormatConverter\ConfigClarity\Clarifier\NeonYamlConfigClarifier;
+use Migrify\ConfigFormatConverter\ConfigClarity\HttpKernel\ConfigClarityKernel;
 use Nette\Utils\Strings;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
