@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Migrify\VendorPatches\Tests\Json;
 
-use Migrify\VendorPatches\HttpKernel\VendorPatchesKernel;
 use Migrify\VendorPatches\Json\JsonFileSystem;
 use Nette\Utils\FileSystem;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\SmartFileSystem\FileSystemGuard;
 
 final class JsonFileSystemTest extends AbstractKernelTestCase
 {
@@ -18,8 +18,7 @@ final class JsonFileSystemTest extends AbstractKernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel(VendorPatchesKernel::class);
-        $this->jsonFileSystem = self::$container->get(JsonFileSystem::class);
+        $this->jsonFileSystem = new JsonFileSystem(new FileSystemGuard());
     }
 
     public function testLoadFilePathToJson(): void

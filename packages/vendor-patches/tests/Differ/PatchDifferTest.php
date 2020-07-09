@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Migrify\VendorPatches\Tests\Differ;
 
 use Migrify\VendorPatches\Differ\PatchDiffer;
-use Migrify\VendorPatches\HttpKernel\VendorPatchesKernel;
 use Migrify\VendorPatches\ValueObject\OldAndNewFileInfo;
+use SebastianBergmann\Diff\Differ;
+use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -19,9 +20,9 @@ final class PatchDifferTest extends AbstractKernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel(VendorPatchesKernel::class);
-
-        $this->patchDiffer = self::$container->get(PatchDiffer::class);
+        $this->patchDiffer = new PatchDiffer(
+            new Differ(new UnifiedDiffOutputBuilder("--- Original\n+++ New\n", true))
+        );
     }
 
     public function test(): void
@@ -31,7 +32,7 @@ final class PatchDifferTest extends AbstractKernelTestCase
 
         $oldAndNewFileInfo = new OldAndNewFileInfo($oldFileInfo, $newFileInfo, 'some/package');
 
-        $diff = $this->patchDiffer->diff($oldAndNewFileInfo);
+        $diff = $this->patchDiffer->diff($oldAndNewFileInfo, $oldFileInfo->getRelativeFilePath());
         $this->assertStringEqualsFile(__DIR__ . '/PatchDifferFixture/expected_diff.php', $diff);
     }
 }

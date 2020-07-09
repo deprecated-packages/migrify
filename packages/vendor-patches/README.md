@@ -38,10 +38,10 @@ vendor/nette/di/src/DI/Extensions/InjectExtension.php.old
 
 Only `*.php` file is loaded, not the `*.php.old` one. This way you can **be sure the new code** is working before you generate patches.
 
-### 3. Run `generate` command ~~for every single file changed this way~~ once for all files 🎆
+### 3. Run `vendor-patches-generate` command ~~for every single file changed this way~~ once for all files 🎆
 
 ```bash
-vendor/bin/vendor-patches generate
+composer vendor-patches-generate
 ```
 
 This tool will generate patch files for all files created this way in `/patches` directory:

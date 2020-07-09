@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\VendorPatches\Finder;
 
-use Migrify\VendorPatches\Composer\PackageNameResolver;
+use Migrify\VendorPatches\ValueObject\InstalledPackageInfo;
 use Migrify\VendorPatches\ValueObject\OldAndNewFileInfo;
 use Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
@@ -17,24 +17,18 @@ final class OldToNewFilesFinder
      */
     private $finderSanitizer;
 
-    /**
-     * @var PackageNameResolver
-     */
-    private $packageNameResolver;
-
-    public function __construct(FinderSanitizer $finderSanitizer, PackageNameResolver $packageNameResolver)
+    public function __construct(FinderSanitizer $finderSanitizer)
     {
         $this->finderSanitizer = $finderSanitizer;
-        $this->packageNameResolver = $packageNameResolver;
     }
 
     /**
      * @return OldAndNewFileInfo[]
      */
-    public function find(string $directory): array
+    public function find(InstalledPackageInfo $packageInfo): array
     {
         $oldAndNewFileInfos = [];
-        $oldFileInfos = $this->findSmartFileInfosInDirectory($directory);
+        $oldFileInfos = $this->findSmartFileInfosInDirectory($packageInfo->getInstallationDirectory());
 
         foreach ($oldFileInfos as $oldFileInfo) {
             $newFilePath = rtrim($oldFileInfo->getRealPath(), '.old');
@@ -43,9 +37,8 @@ final class OldToNewFilesFinder
             }
 
             $newFileInfo = new SmartFileInfo($newFilePath);
-            $packageName = $this->packageNameResolver->resolveFromFileInfo($newFileInfo);
 
-            $oldAndNewFileInfos[] = new OldAndNewFileInfo($oldFileInfo, $newFileInfo, $packageName);
+            $oldAndNewFileInfos[] = new OldAndNewFileInfo($oldFileInfo, $newFileInfo, $packageInfo->getPackageName());
         }
 
         return $oldAndNewFileInfos;
