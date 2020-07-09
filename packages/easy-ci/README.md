@@ -2,7 +2,7 @@
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/easy-ci.svg?style=flat-square)](https://packagist.org/packages/migrify/easy-ci/stats)
 
-Check NEON/YAML configs for existing classes
+Tools that make easy to setup CI.
 
 ## Install
 
