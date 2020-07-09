@@ -38,17 +38,17 @@ jobs:
 
                     -
                         name: 'Format Switcher'
-                        run: packages/config-transformer/bin/config-transformer switch-format packages/config-transformer/packages/format-switcher/tests/Fixture --output-format yaml --input-format xml
+                        run: packages/config-transformer/bin/config-transformer switch-format packages/config-transformer/packages/format-switcher/tests/Fixture --input-format xml --output-format yaml --dry-run --ansi
 
                     -
                         name: 'Binary Files'
                         run: |
-                            packages/vendor-patches/bin/vendor-patches
+                            packages/easy-ci/bin/easy-ci
+                            packages/class-presence/bin/class-presence
+                            packages/config-transformer/bin/config-transformer
                             packages/latte-to-twig/bin/latte-to-twig
                             packages/neon-to-yaml/bin/neon-to-yaml
-                            packages/class-presence/bin/class-presence
-                            packages/easy-ci/bin/easy-ci
-                            packages/config-transformer/bin/config-transformer
+                            packages/vendor-patches/bin/vendor-patches
 
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
@@ -63,6 +63,4 @@ jobs:
 
             -   run: composer install --no-progress
 
-            -
-                name: ${{ matrix.actions.name }}
-                run: ${{ matrix.actions.run }}
+            -   run: ${{ matrix.actions.run }}
