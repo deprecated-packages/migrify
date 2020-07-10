@@ -29,6 +29,8 @@ parameters:
     exclude_rectors:
         # false positive on packages/symfony-route-usage/src/Database/TableInitiator.php
         - 'Rector\SOLID\Rector\ClassMethod\UseInterfaceOverImplementationInConstructorRector'
+        # false positive on class naming
+        - 'Rector\Privatization\Rector\ClassMethod\PrivatizeLocalOnlyMethodRector'
 
 services:
     Rector\Decomplex\Rector\MethodCall\UseMessageVariableForSprintfInSymfonyStyleRector: null
