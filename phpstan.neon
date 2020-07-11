@@ -35,3 +35,4 @@ parameters:
          - '#Cannot cast array<string\>\|bool\|string\|null to string#'
          - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
          - '#Cannot cast array<string\>\|bool\|string\|null to int#'
+         - '#Property PhpParser\\Node\\Stmt\\Namespace_\:\:\$stmts \(array<PhpParser\\Node\\Stmt\>\) does not accept array<int\|string, PhpParser\\Node\>#'

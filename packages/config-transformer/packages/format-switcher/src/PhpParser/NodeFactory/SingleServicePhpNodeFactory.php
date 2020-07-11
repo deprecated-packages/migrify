@@ -8,25 +8,23 @@ use Migrify\ConfigTransformer\FormatSwitcher\ValueObject\VariableName;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Stmt\Expression;
 
 final class SingleServicePhpNodeFactory
 {
     /**
-     * @var CommonFactory
+     * @var CommonNodeFactory
      */
-    private $commonFactory;
+    private $commonNodeFactory;
 
-    public function __construct(CommonFactory $commonFactory)
+    public function __construct(CommonNodeFactory $commonNodeFactory)
     {
-        $this->commonFactory = $commonFactory;
+        $this->commonNodeFactory = $commonNodeFactory;
     }
 
-    public function createSetService(string $serviceKey): Expression
+    public function createSetService(string $serviceKey): MethodCall
     {
-        $classReference = $this->commonFactory->createShortClassReference($serviceKey);
-        $setMethodCall = new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
+        $classReference = $this->commonNodeFactory->createClassReference($serviceKey);
 
-        return new Expression($setMethodCall);
+        return new MethodCall(new Variable(VariableName::SERVICES), 'set', [new Arg($classReference)]);
     }
 }
