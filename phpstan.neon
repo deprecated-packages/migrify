@@ -38,3 +38,5 @@ parameters:
          - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\FluentClosureNamespaceNodeFactory\:\:(convertServiceOptionsToNodes|addServicesNodes)\(\)" is \d+, keep it under \d+#'
          - '#Class cognitive complexity for "FluentClosureNamespaceNodeFactory" is \d+, keep it under 50#'
          - '#Variable \$methodCall might not be defined#'
+         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\FluentClosureNamespaceNodeFactory\:\:createClosureStmts\(\)" is 9, keep it under 8#'
+         - '#Parameter \#1 \$parameterName of method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\PhpNodeFactory\:\:createParameterSetMethodCall\(\) expects string, int\|string given#'
