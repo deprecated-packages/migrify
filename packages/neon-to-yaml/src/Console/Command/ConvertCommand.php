@@ -7,7 +7,6 @@ namespace Migrify\NeonToYaml\Console\Command;
 use Migrify\NeonToYaml\ArrayParameterCollector;
 use Migrify\NeonToYaml\Finder\NeonAndYamlFinder;
 use Migrify\NeonToYaml\NeonToYamlConverter;
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConvertCommand extends Command
 {
@@ -44,11 +44,17 @@ final class ConvertCommand extends Command
      */
     private $arrayParameterCollector;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     public function __construct(
         NeonToYamlConverter $neonToYamlConverter,
         SymfonyStyle $symfonyStyle,
         NeonAndYamlFinder $neonAndYamlFinder,
-        ArrayParameterCollector $arrayParameterCollector
+        ArrayParameterCollector $arrayParameterCollector,
+        SmartFileSystem $smartFileSystem
     ) {
         parent::__construct();
 
@@ -56,6 +62,7 @@ final class ConvertCommand extends Command
         $this->neonToYamlConverter = $neonToYamlConverter;
         $this->neonAndYamlFinder = $neonAndYamlFinder;
         $this->arrayParameterCollector = $arrayParameterCollector;
+        $this->smartFileSystem = $smartFileSystem;
     }
 
     protected function configure(): void
@@ -78,11 +85,11 @@ final class ConvertCommand extends Command
             $newFilePath = Strings::replace($oldFilePath, '#\.neon$#', '.yaml');
 
             // save
-            FileSystem::write($newFilePath, $convertedContent);
+            $this->smartFileSystem->dumpFile($newFilePath, $convertedContent);
 
             // remove old path
             if ($oldFilePath !== $newFilePath) {
-                FileSystem::delete($oldFilePath);
+                $this->smartFileSystem->remove($oldFilePath);
             }
             $message = sprintf('File "%s" was converted to YAML to "%s" path', $oldFilePath, $newFilePath);
 

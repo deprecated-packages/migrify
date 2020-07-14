@@ -6,7 +6,6 @@ namespace Migrify\LatteToTwig\Console\Command;
 
 use Migrify\LatteToTwig\Finder\LatteAndTwigFinder;
 use Migrify\LatteToTwig\LatteToTwigConverter;
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConvertCommand extends Command
 {
@@ -38,14 +38,21 @@ final class ConvertCommand extends Command
      */
     private $latteAndTwigFinder;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     public function __construct(
         LatteToTwigConverter $latteToTwigConverter,
         SymfonyStyle $symfonyStyle,
-        LatteAndTwigFinder $latteAndTwigFinder
+        LatteAndTwigFinder $latteAndTwigFinder,
+        SmartFileSystem $smartFileSystem
     ) {
         $this->latteToTwigConverter = $latteToTwigConverter;
         $this->symfonyStyle = $symfonyStyle;
         $this->latteAndTwigFinder = $latteAndTwigFinder;
+        $this->smartFileSystem = $smartFileSystem;
 
         parent::__construct();
     }
@@ -68,11 +75,11 @@ final class ConvertCommand extends Command
             $newFilePath = Strings::replace($fileInfo->getPathname(), '#\.latte$#', '.twig');
 
             // save
-            FileSystem::write($newFilePath, $convertedContent);
+            $this->smartFileSystem->dumpFile($newFilePath, $convertedContent);
 
             // remove old path
             if ($oldFilePath !== $newFilePath) {
-                FileSystem::delete($oldFilePath);
+                $this->smartFileSystem->remove($oldFilePath);
             }
             $message = sprintf('File "%s" was converted to Twig to "%s"', $oldFilePath, $newFilePath);
 

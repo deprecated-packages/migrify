@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\DiffDataMiner\Extractor;
 
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ClassChangesExtractor
 {
@@ -28,11 +28,21 @@ final class ClassChangesExtractor
     private const CLASS_NAME_PATTERN = '#(?<class_name>' . self::CLASS_NAME_PREFIX . '\\\\[\w|\\\\]+)#';
 
     /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
+    public function __construct(SmartFileSystem $smartFileSystem)
+    {
+        $this->smartFileSystem = $smartFileSystem;
+    }
+
+    /**
      * @return string[]
      */
     public function extract(string $diffFilePath): array
     {
-        $diff = FileSystem::read($diffFilePath);
+        $diff = $this->smartFileSystem->readFile($diffFilePath);
         $beforeAfterMatches = Strings::matchAll($diff, self::BEFORE_AFTER_PATTERN);
 
         $classesBeforeAfter = [];

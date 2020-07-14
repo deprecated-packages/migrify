@@ -8,11 +8,11 @@ services:
         exclude:
             - '../src/HttpKernel/NeonToYamlKernel.php'
 
-    Symfony\Component\Filesystem\Filesystem: ~
+    Symplify\SmartFileSystem\SmartFileSystem: null
 
-    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: ~
+    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
     Symfony\Component\Console\Style\SymfonyStyle:
         factory: ['@Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory', 'create']
 
-    Symplify\SmartFileSystem\Finder\FinderSanitizer: ~
-    Symplify\PackageBuilder\Strings\StringFormatConverter: ~
+    Symplify\SmartFileSystem\Finder\FinderSanitizer: null
+    Symplify\PackageBuilder\Strings\StringFormatConverter: null

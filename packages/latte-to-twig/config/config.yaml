@@ -10,9 +10,9 @@ services:
             - '../src/Exception'
             - '../src/HttpKernel/LatteToTwigKernel.php'
 
-    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: ~
+    Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory: null
     Symfony\Component\Console\Style\SymfonyStyle:
         factory: ['@Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory', 'create']
 
-    Symplify\SmartFileSystem\Finder\FinderSanitizer: ~
-    Symfony\Component\Filesystem\Filesystem: ~
+    Symplify\SmartFileSystem\Finder\FinderSanitizer: null
+    Symplify\SmartFileSystem\SmartFileSystem: null
