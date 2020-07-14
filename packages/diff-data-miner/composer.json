@@ -2,7 +2,7 @@
     "name": "migrify/diff-data-miner",
     "description": "Get hidden valuable data from GitHub pull-request diff and feed it to Rector",
     "license": "MIT",
-    "bin": "bin/diff-data-miner",
+    "bin": ["bin/diff-data-miner"],
     "require": {
         "php": "^7.2",
         "symfony/dependency-injection": "^4.4|^5.0",
