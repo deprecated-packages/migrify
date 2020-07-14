@@ -2,7 +2,7 @@
     "name": "migrify/class-presence",
     "description": "Check NEON/YAML/TWIG/LATTE files for existing classes",
     "license": "MIT",
-    "bin": "bin/class-presence",
+    "bin": ["bin/class-presence"],
     "require": {
         "php": "^7.2",
         "symfony/dependency-injection": "^4.4|^5.0",
