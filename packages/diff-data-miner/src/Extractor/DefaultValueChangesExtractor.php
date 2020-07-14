@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Migrify\DiffDataMiner\Extractor;
 
 use Migrify\DiffDataMiner\Exception\ShouldNotHappenException;
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class DefaultValueChangesExtractor
 {
@@ -44,6 +44,16 @@ final class DefaultValueChangesExtractor
      * @var string[]
      */
     private $newToOldClasses = [];
+
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
+    public function __construct(SmartFileSystem $smartFileSystem)
+    {
+        $this->smartFileSystem = $smartFileSystem;
+    }
 
     /**
      * @return string[]
@@ -111,7 +121,7 @@ final class DefaultValueChangesExtractor
      */
     private function readFileToLines(string $diffFilepath): array
     {
-        $fileContent = FileSystem::read($diffFilepath);
+        $fileContent = $this->smartFileSystem->readFile($diffFilepath);
         return explode(PHP_EOL, $fileContent);
     }
 
