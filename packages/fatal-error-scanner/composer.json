@@ -2,7 +2,9 @@
     "name": "migrify/fatal-error-scanner",
     "description": "Scans fatal error in code, useful for type conflicts analysis",
     "license": "MIT",
-    "bin": ["bin/fatal-error-scanner"],
+    "bin": [
+        "bin/fatal-error-scanner"
+    ],
     "require": {
         "php": "^7.2",
         "symfony/dependency-injection": "^4.4|^5.0",

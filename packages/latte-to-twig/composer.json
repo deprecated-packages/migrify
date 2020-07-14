@@ -2,7 +2,9 @@
     "name": "migrify/latte-to-twig",
     "description": "Latte to Twig converter converts Latte to Twig",
     "license": "MIT",
-    "bin": ["bin/latte-to-twig"],
+    "bin": [
+        "bin/latte-to-twig"
+    ],
     "require": {
         "php": "^7.2",
         "nette/utils": "^3.1",
