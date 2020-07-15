@@ -2,6 +2,8 @@ services:
     TomasVotruba\Blog\Tests\:
         autowire: false
         resource: 'another_dir/*'
+        bind:
+            $key: 'value'
 -----
 <?php
 
@@ -11,5 +13,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->load('TomasVotruba\Blog\Tests\\', __DIR__ . '/another_dir/*')
-        ->autowire(false);
+        ->autowire(false)
+        ->bind('$key', 'value');
 };
