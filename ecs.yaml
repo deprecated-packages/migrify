@@ -22,3 +22,6 @@ parameters:
 
         Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff:
             - "packages/latte-to-twig/src/CaseConverter/*"
+
+services:
+    Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: null

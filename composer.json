@@ -13,9 +13,11 @@
         "nikic/php-parser": "4.5",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
+        "symfony/expression-language": "^4.4|^5.0",
         "symfony/finder": "^4.4|^5.0",
         "symfony/http-kernel": "^4.4|^5.0",
         "symfony/yaml": "^4.4|^5.0",
+        "symplify/auto-bind-parameter": "^8.1",
         "symplify/autowire-array-parameter": "^8.1",
         "symplify/composer-json-manipulator": "^8.1",
         "symplify/package-builder": "^8.1",
@@ -60,6 +62,7 @@
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
             "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
+            "Migrify\\TemplateChecker\\": "packages/template-checker/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
     },
@@ -77,6 +80,7 @@
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
+            "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         }
     },
@@ -90,6 +94,7 @@
         "migrify/neon-to-yaml": "self.version",
         "migrify/psr4-switcher": "self.version",
         "migrify/symfony-route-usage": "self.version",
+        "migrify/template-checker": "self.version",
         "migrify/vendor-patches": "self.version"
     },
     "scripts": {
