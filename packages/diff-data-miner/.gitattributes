@@ -2,7 +2,3 @@
 .gitignore export-ignore
 *.md export-ignore
 tests export-ignore
-
-
-# from "scan-fatal-errors" command
-fatal-types.yaml
