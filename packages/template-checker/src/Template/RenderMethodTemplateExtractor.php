@@ -13,8 +13,9 @@ final class RenderMethodTemplateExtractor
      * Matches $this->render('<template_name>')
      *
      * @see https://regex101.com/r/eK364x/2/
+     * @var string
      */
-    public const TEMPLATE_PATH_PATTERN = '#\-\>render\([\s|\n]*\'(?<template_name>[@\w\d\/\-\_\.]+[^\/])\'#ms';
+    private const TEMPLATE_PATH_PATTERN = '#\-\>render\([\s|\n]*\'(?<template_name>[@\w\d\/\-\_\.]+[^\/])\'#ms';
 
     /**
      * @param SmartFileInfo[] $controllerFileInfos
