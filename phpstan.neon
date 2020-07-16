@@ -33,3 +33,4 @@ parameters:
          - '#Variable \$methodCall might not be defined#'
          - '#Parameter \#1 \$parameterName of method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\PhpNodeFactory\:\:createParameterSetMethodCall\(\) expects string, int\|string given#'
          - '#Method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
+         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\Converter\\KeyYamlToPhpFactory\\ServicesKeyYamlToPhpFactory\:\:convertYamlToNodes\(\)" is \d+, keep it under 8#'
