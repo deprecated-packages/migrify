@@ -109,7 +109,8 @@
             "vendor/bin/changelog-linker cleanup --ansi"
         ],
         "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
-        "rector": "vendor/bin/rector process packages --config rector-ci.yaml --dry-run --ansi"
+        "rector": "vendor/bin/rector process packages --config rector-ci.yaml --ansi",
+        "rector-ci": "vendor/bin/rector process packages --config rector-ci.yaml --dry-run --ansi"
     },
     "config": {
         "sort-packages": true

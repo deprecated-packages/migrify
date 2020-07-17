@@ -29,8 +29,8 @@ jobs:
                         run: composer phpstan
 
                     -
-                        name: 'Rector'
-                        run: composer rector
+                        name: 'Rector CI'
+                        run: composer rector-ci
 
                     -
                         name: 'Fatal Error Scan'

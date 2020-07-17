@@ -45,3 +45,4 @@ parameters:
          - '#Class cognitive complexity for "ServicesKeyYamlToPhpFactory" is \d+, keep it under 50#'
          - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\Service\\ServiceOptionNodeFactory\:\:convertServiceOptionsToNodes\(\)" is 22, keep it under 8#'
          - '#Unreachable statement \- code above always terminates#'
+         - '#Method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
