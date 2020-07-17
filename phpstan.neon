@@ -16,10 +16,6 @@ parameters:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
 
-        # 3rd party files
-        - 'packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php'
-        - 'packages/config-transformer/packages/format-switcher/src/Converter/YamlToPhpConverter.php'
-
     ignoreErrors:
          - '#(.*?) return type has no value type specified in iterable type array#'
          - '#Cannot cast array<string\>\|string\|null to string#'
@@ -34,14 +30,6 @@ parameters:
          - '#Parameter \#1 \$error_handler of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
          - '#Cannot cast array<string\>\|bool\|string\|null to string#'
          - '#Cannot cast array<string\>\|bool\|string\|null to int#'
-         - '#Property PhpParser\\Node\\Stmt\\Namespace_\:\:\$stmts \(array<PhpParser\\Node\\Stmt\>\) does not accept array<int\|string, PhpParser\\Node\>#'
-         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\FluentClosureNamespaceNodeFactory\:\:(convertServiceOptionsToNodes|addServicesNodes)\(\)" is \d+, keep it under \d+#'
-         - '#Class cognitive complexity for "FluentClosureNamespaceNodeFactory" is \d+, keep it under 50#'
          - '#Variable \$methodCall might not be defined#'
-         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\FluentClosureNamespaceNodeFactory\:\:createClosureStmts\(\)" is 9, keep it under 8#'
          - '#Parameter \#1 \$parameterName of method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\PhpNodeFactory\:\:createParameterSetMethodCall\(\) expects string, int\|string given#'
-         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\Converter\\KeyYamlToPhpFactory\\ServicesKeyYamlToPhpFactory\:\:convertServiceOptionsToNodes\(\)" is \d+, keep it under 8#'
-         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\Converter\\KeyYamlToPhpFactory\\ServicesKeyYamlToPhpFactory\:\:convertYamlToNodes\(\)" is \d+, keep it under 8#'
-         - '#Class cognitive complexity for "ServicesKeyYamlToPhpFactory" is \d+, keep it under 50#'
-         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\Service\\ServiceOptionNodeFactory\:\:convertServiceOptionsToNodes\(\)" is 22, keep it under 8#'
-         - '#Unreachable statement \- code above always terminates#'
+         - '#Method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
