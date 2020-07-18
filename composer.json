@@ -33,6 +33,7 @@
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
         "knplabs/doctrine-behaviors": "^2.0.5",
+        "phalcon/cphalcon": "^4.0",
         "phpstan/phpstan": "^0.12.25",
         "phpstan/phpstan-symfony": "^0.12.6",
         "phpunit/phpunit": "^8.5|^9.0",
@@ -64,7 +65,8 @@
             "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\TemplateChecker\\": "packages/template-checker/src",
-            "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
+            "Migrify\\VendorPatches\\": "packages/vendor-patches/src",
+            "Migrify\\ZephirToPhp\\": "packages/zephir-to-php/src"
         }
     },
     "autoload-dev": {
@@ -82,7 +84,8 @@
             "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
-            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
+            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests",
+            "Migrify\\ZephirToPhp\\Tests\\": "packages/zephir-to-php/tests"
         }
     },
     "replace": {
@@ -96,7 +99,8 @@
         "migrify/psr4-switcher": "self.version",
         "migrify/symfony-route-usage": "self.version",
         "migrify/template-checker": "self.version",
-        "migrify/vendor-patches": "self.version"
+        "migrify/vendor-patches": "self.version",
+        "migrify/zephir-to-php": "self.version"
     },
     "scripts": {
         "check-cs": "vendor/bin/ecs check packages --ansi",
