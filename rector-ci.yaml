@@ -20,7 +20,7 @@ parameters:
         - 'packages/vendor-patches/tests/Finder/*'
         # part of tests
         - 'packages/**/Source/**'
-        - 'packages/config-transformer/packages/format-switcher/tests/Converter/ConfigFormatConverter/FixtureYamlToPhp/nested/*'
+        - 'packages/config-transformer/packages/format-switcher/tests/Converter/ConfigFormatConverter/YamlToPhp/Fixture/nested/*'
         # unknown purpose
         - 'packages/diff-data-miner/src/Extractor/DefaultValueChangesExtractor.php'
         # 3rd party files
