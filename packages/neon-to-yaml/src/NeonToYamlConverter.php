@@ -70,7 +70,7 @@ final class NeonToYamlConverter
         $this->parameterConverterWorker = $parameterConverterWorker;
     }
 
-    public function convertFile(SmartFileInfo $fileInfo): string
+    public function convertFileInfo(SmartFileInfo $fileInfo): string
     {
         $content = $fileInfo->getContents();
 

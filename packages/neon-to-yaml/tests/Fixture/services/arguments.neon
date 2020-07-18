@@ -1,4 +1,7 @@
 services:
+    braintreeGateway: Braintree\Gateway([environment: %braintree.environment%, merchantId: %braintree.merchantId%, publicKey: %braintree.publicKey%, privateKey: %braintree.privateKey%])
+-----
+services:
     braintreeGateway:
         class: Braintree\Gateway
         arguments:

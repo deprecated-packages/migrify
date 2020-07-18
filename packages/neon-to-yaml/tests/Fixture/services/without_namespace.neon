@@ -1,4 +1,7 @@
 services:
+    - SendGrid(@env::get('SENDGRID_API_KEY', ''))
+-----
+services:
     SendGrid:
         class: SendGrid
         arguments:

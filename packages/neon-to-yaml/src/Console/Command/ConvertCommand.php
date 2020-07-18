@@ -80,7 +80,7 @@ final class ConvertCommand extends Command
         $this->arrayParameterCollector->collectFromFiles($fileInfos);
 
         foreach ($fileInfos as $fileInfo) {
-            $convertedContent = $this->neonToYamlConverter->convertFile($fileInfo);
+            $convertedContent = $this->neonToYamlConverter->convertFileInfo($fileInfo);
             $oldFilePath = $fileInfo->getPathname();
             $newFilePath = Strings::replace($oldFilePath, '#\.neon$#', '.yaml');
 
