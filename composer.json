@@ -101,7 +101,7 @@
     "scripts": {
         "check-cs": "vendor/bin/ecs check packages --ansi",
         "fix-cs": "vendor/bin/ecs check packages --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse packages --error-format symplify --ansi",
+        "phpstan": "vendor/bin/phpstan.phar analyse packages --error-format symplify --ansi",
         "merge": "vendor/bin/monorepo-builder merge --ansi",
         "propagate": "vendor/bin/monorepo-builder propagate --ansi",
         "changelog": [
