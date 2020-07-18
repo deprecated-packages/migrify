@@ -43,19 +43,19 @@ final class MultipleFileTest extends AbstractKernelTestCase
 
     public function test(): void
     {
-        $convertedContent = $this->neonToYamlConverter->convertFile($this->parametersFileInfo);
+        $convertedContent = $this->neonToYamlConverter->convertFileInfo($this->parametersFileInfo);
         $this->assertStringEqualsFile(__DIR__ . '/MultipleFileSource/yaml/parameters.yaml', $convertedContent);
 
-        $convertedContent = $this->neonToYamlConverter->convertFile($this->servicesFileInfo);
+        $convertedContent = $this->neonToYamlConverter->convertFileInfo($this->servicesFileInfo);
         $this->assertStringEqualsFile(__DIR__ . '/MultipleFileSource/yaml/services.yaml', $convertedContent);
     }
 
     public function testInversed(): void
     {
-        $convertedContent = $this->neonToYamlConverter->convertFile($this->servicesFileInfo);
+        $convertedContent = $this->neonToYamlConverter->convertFileInfo($this->servicesFileInfo);
         $this->assertStringEqualsFile(__DIR__ . '/MultipleFileSource/yaml/services.yaml', $convertedContent);
 
-        $convertedContent = $this->neonToYamlConverter->convertFile($this->parametersFileInfo);
+        $convertedContent = $this->neonToYamlConverter->convertFileInfo($this->parametersFileInfo);
         $this->assertStringEqualsFile(__DIR__ . '/MultipleFileSource/yaml/parameters.yaml', $convertedContent);
     }
 }
