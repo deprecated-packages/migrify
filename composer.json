@@ -43,7 +43,7 @@
         "symfony/security-bundle": "^4.4|^5.0",
         "symfony/security-core": "^4.4|^5.0",
         "symplify/changelog-linker": "^8.1",
-        "symplify/easy-coding-standard": "^8.1",
+        "symplify/easy-coding-standard": "dev-master",
         "symplify/easy-testing": "^8.1",
         "symplify/monorepo-builder": "^8.1",
         "symplify/phpstan-extensions": "^8.1",
