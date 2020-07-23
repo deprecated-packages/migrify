@@ -92,10 +92,10 @@ final class ScannedErrorToRectorResolver
             throw new NotImplementedException();
         }
 
-        $scannedMethod = $this->createScannedMethod($match[self::CURRENT]);
+        $classMethodWithArguments = $this->createScannedMethod($match[self::CURRENT]);
         $shouldBeMethod = $this->createScannedMethod($match['should_be']);
 
-        $this->collectClassMethodParamDifferences($scannedMethod, $shouldBeMethod);
+        $this->collectClassMethodParamDifferences($classMethodWithArguments, $shouldBeMethod);
     }
 
     private function processIncompatibleReturnTypeMatch(array $match): void
@@ -105,10 +105,10 @@ final class ScannedErrorToRectorResolver
             throw new NotImplementedException();
         }
 
-        $scannedMethod = $this->createScannedMethod($match[self::CURRENT]);
+        $classMethodWithArguments = $this->createScannedMethod($match[self::CURRENT]);
         $shouldBeMethod = $this->createScannedMethod($match['should_be']);
 
-        $this->collectClassMethodReturnDifferences($scannedMethod, $shouldBeMethod);
+        $this->collectClassMethodReturnDifferences($classMethodWithArguments, $shouldBeMethod);
     }
 
     private function createScannedMethod(string $classMethodWithArgumentsDescription): ClassMethodWithArguments
