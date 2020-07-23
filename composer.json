@@ -47,6 +47,7 @@
         "symplify/easy-testing": "^8.1.17",
         "symplify/monorepo-builder": "^8.1.17",
         "symplify/phpstan-extensions": "^8.1.17",
+        "slevomat/coding-standard": "dev-master as 6.3.10",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
@@ -115,14 +116,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "patches": {
-            "symfony/console": {
-                "testing_composer_patches": "patches/symfony-console-command-command-php.patch"
-            }
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
