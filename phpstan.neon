@@ -36,3 +36,4 @@ parameters:
          - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\Converter\\KeyYamlToPhpFactory\\ServicesKeyYamlToPhpFactory\:\:convertYamlToNodes\(\)" is \d+, keep it under 8#'
          - '#Parameter \#5 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addOption\(\) expects (.*?), float given#'
          - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\Service\\ServiceOptionNodeFactory\:\:convertServiceOptionsToNodes\(\)" is \d+, keep it under 8#'
+         - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\ReturnClosureNodesFactory\:\:createNodesFromCaseConverters\(\)" is \d+, keep it under 8#'
