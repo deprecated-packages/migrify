@@ -16,6 +16,9 @@
         "symplify/autowire-array-parameter": "^8.1.17",
         "symplify/smart-file-system": "^8.1.17"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5|^9.0"
+    },
     "autoload": {
         "psr-4": {
             "Migrify\\TemplateChecker\\": "src"

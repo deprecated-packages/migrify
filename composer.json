@@ -116,13 +116,6 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "patches": {
-            "symfony/console": {
-                "testing_composer_patches": "patches/symfony-console-command-command-php.patch"
-            }
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
