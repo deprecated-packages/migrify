@@ -24,8 +24,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::PATHS, [__DIR__ . '/packages']);
 
     $parameters->set(Option::SKIP, [
-        UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_WRITE_ONLY_PROPERTY => ['packages/symfony-route-usage/src/Entity/RouteVisit.php'],
-        UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_UNUSED_PROPERTY => ['packages/symfony-route-usage/src/Entity/RouteVisit.php'],
+        UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_WRITE_ONLY_PROPERTY => [
+            'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+        ],
+        UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_UNUSED_PROPERTY => [
+            'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+        ],
         CommentedOutCodeSniff::class => [
             __DIR__ . '/packages/latte-to-twig/src/CaseConverter/*',
         ]
