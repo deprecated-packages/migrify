@@ -19,3 +19,11 @@ vendor/bin/diff-data-miner extract-class-changes path-to-file.diff
 ```bash
 vendor/bin/diff-data-miner extract-default-value-changes path-to-file.diff
 ```
+
+## Report Issues
+
+In case you are experiencing a bug or want to request a new feature head over to the [migrify monorepo issue tracker](https://github.com/migrify/migrify/issues)
+
+## Contribute
+
+The sources of this package are contained in the migrify monorepo. We welcome contributions for this package on [migrify/migrify](https://github.com/migrify/migrify).
