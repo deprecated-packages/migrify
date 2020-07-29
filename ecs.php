@@ -21,17 +21,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::PSR_12,
     ]);
 
-    $parameters->set(Option::PATHS, [__DIR__ . '/packages']);
+    $parameters->set(Option::PATHS, [__DIR__ . '/packages', __DIR__ . '/ecs.php', __DIR__ . '/rector-ci.php']);
 
     $parameters->set(Option::SKIP, [
         UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_WRITE_ONLY_PROPERTY => [
-            'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+            __DIR__ . '/packages/symfony-route-usage/src/Entity/RouteVisit.php'
         ],
         UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_UNUSED_PROPERTY => [
-            'packages/symfony-route-usage/src/Entity/RouteVisit.php'
+            __DIR__ . '/packages/symfony-route-usage/src/Entity/RouteVisit.php'
         ],
         CommentedOutCodeSniff::class => [
             __DIR__ . '/packages/latte-to-twig/src/CaseConverter/*',
+            __DIR__ . '/packages/zephir-to-php/src/CaseConverter/*',
         ]
     ]);
 
