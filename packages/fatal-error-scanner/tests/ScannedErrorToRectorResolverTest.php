@@ -6,7 +6,7 @@ namespace Migrify\FatalErrorScanner\Tests;
 
 use Migrify\FatalErrorScanner\HttpKernel\FatalErrorScannerKernel;
 use Migrify\FatalErrorScanner\ScannedErrorToRectorResolver;
-use Rector\Core\Rector\ClassMethod\AddReturnTypeDeclarationRector;
+use Rector\Generic\Rector\ClassMethod\AddReturnTypeDeclarationRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 

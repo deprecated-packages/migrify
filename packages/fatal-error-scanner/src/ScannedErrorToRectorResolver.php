@@ -8,7 +8,7 @@ use Migrify\FatalErrorScanner\ValueObject\Argument;
 use Migrify\FatalErrorScanner\ValueObject\ClassMethodWithArguments;
 use Nette\Utils\Strings;
 use Rector\Core\Exception\NotImplementedException;
-use Rector\Core\Rector\ClassMethod\AddReturnTypeDeclarationRector;
+use Rector\Generic\Rector\ClassMethod\AddReturnTypeDeclarationRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 
 final class ScannedErrorToRectorResolver
