@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Migrify\ConfigTransformer\FormatSwitcher\Converter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ReturnClosureNodesFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeFactory\RoutingConfiguratorReturnClosureFactory;
 use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer\PhpConfigurationPrinter;
 use Migrify\ConfigTransformer\FormatSwitcher\Provider\YamlContentProvider;
 use Migrify\ConfigTransformer\FormatSwitcher\Yaml\CheckerServiceParametersShifter;
+use Nette\Utils\Strings;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
@@ -29,9 +32,9 @@ final class YamlToPhpConverter
     private $phpConfigurationPrinter;
 
     /**
-     * @var ReturnClosureNodesFactory
+     * @var ContainerConfiguratorReturnClosureFactory
      */
-    private $returnClosureNodesFactory;
+    private $containerConfiguratorReturnClosureFactory;
 
     /**
      * @var YamlContentProvider
@@ -43,21 +46,28 @@ final class YamlToPhpConverter
      */
     private $checkerServiceParametersShifter;
 
+    /**
+     * @var RoutingConfiguratorReturnClosureFactory
+     */
+    private $routingConfiguratorReturnClosureFactory;
+
     public function __construct(
         Parser $yamlParser,
         PhpConfigurationPrinter $phpConfigurationPrinter,
-        ReturnClosureNodesFactory $returnClosureNodesFactory,
+        ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory,
+        RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory,
         YamlContentProvider $yamlContentProvider,
         CheckerServiceParametersShifter $checkerServiceParametersShifter
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpConfigurationPrinter = $phpConfigurationPrinter;
-        $this->returnClosureNodesFactory = $returnClosureNodesFactory;
+        $this->containerConfiguratorReturnClosureFactory = $returnClosureNodesFactory;
         $this->yamlContentProvider = $yamlContentProvider;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
+        $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
     }
 
-    public function convert(string $yaml): string
+    public function convert(string $yaml, SmartFileInfo $smartFileInfo): string
     {
         $this->yamlContentProvider->setContent($yaml);
 
@@ -67,10 +77,22 @@ final class YamlToPhpConverter
             return '';
         }
 
-        $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
-
-        $return = $this->returnClosureNodesFactory->createFromYamlArray($yamlArray);
+        if ($this->isRouteFilePath($smartFileInfo)) {
+            $return = $this->routingConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
+        } else {
+            $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
+            $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
+        }
 
         return $this->phpConfigurationPrinter->prettyPrintFile([$return]);
+    }
+
+    private function isRouteFilePath(SmartFileInfo $smartFileInfo)
+    {
+        if (Strings::match($smartFileInfo->getRealPath(), '#routes\.(yml|yaml)$#')) {
+            return true;
+        }
+
+        return (bool) Strings::match($smartFileInfo->getRealPath(), '#\/routes\/#');
     }
 }

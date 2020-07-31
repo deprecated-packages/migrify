@@ -15,8 +15,9 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-final class ReturnClosureNodesFactory
+final class ContainerConfiguratorReturnClosureFactory
 {
     /**
      * @var ClosureNodeFactory
@@ -50,7 +51,12 @@ final class ReturnClosureNodesFactory
     public function createFromYamlArray(array $yamlArray): Return_
     {
         $closureStmts = $this->createClosureStmts($yamlArray);
-        $closure = $this->closureNodeFactory->createClosureFromStmts($closureStmts);
+
+        $closure = $this->closureNodeFactory->createClosureFromStmts(
+            $closureStmts,
+            VariableName::CONTAINER_CONFIGURATOR,
+            ContainerConfigurator::class
+        );
 
         return new Return_($closure);
     }
