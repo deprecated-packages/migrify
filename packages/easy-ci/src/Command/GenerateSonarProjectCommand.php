@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Migrify\EasyCI\Command;
 
 use Migrify\EasyCI\Finder\SrcTestsDirectoriesFinder;
+use Migrify\EasyCI\Sonar\PathsFactory;
+use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class GenerateSonarProjectCommand extends Command
@@ -42,14 +43,21 @@ final class GenerateSonarProjectCommand extends Command
      */
     private $srcTestsDirectoriesFinder;
 
+    /**
+     * @var PathsFactory
+     */
+    private $pathsFactory;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
-        SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder
+        SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder,
+        PathsFactory $pathsFactory
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
         $this->srcTestsDirectoriesFinder = $srcTestsDirectoriesFinder;
+        $this->pathsFactory = $pathsFactory;
 
         parent::__construct();
     }
@@ -82,16 +90,7 @@ final class GenerateSonarProjectCommand extends Command
         $fileContent = $this->smartFileSystem->readFile($filePath);
 
         $originalFileContent = $fileContent;
-
-        if ($srcAndTestsDirectories->getSrcDirectories() !== []) {
-            $sonarPathLine = $this->buildSonarPathLine($srcAndTestsDirectories->getSrcDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.sources\=)(.*?)$#', '$1' . $sonarPathLine);
-        }
-
-        if ($srcAndTestsDirectories->getTestsDirectories() !== []) {
-            $sonarPathLine = $this->buildSonarPathLine($srcAndTestsDirectories->getTestsDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.tests\=)(.*?)$#', '$1' . $sonarPathLine);
-        }
+        $fileContent = $this->updateFileContentWithPaths($srcAndTestsDirectories, $fileContent);
 
         if ($originalFileContent === $fileContent) {
             $this->symfonyStyle->success('Nothing to change');
@@ -106,18 +105,20 @@ final class GenerateSonarProjectCommand extends Command
         return ShellCode::SUCCESS;
     }
 
-    /**
-     * @param SmartFileInfo[] $directoryFileInfos
-     */
-    private function buildSonarPathLine(array $directoryFileInfos): string
-    {
-        $relativePaths = [];
-        foreach ($directoryFileInfos as $directoryFileInfo) {
-            $relativePaths[] = $directoryFileInfo->getRelativeFilePathFromCwd();
+    private function updateFileContentWithPaths(
+        SrcAndTestsDirectories $srcAndTestsDirectories,
+        string $fileContent
+    ): string {
+        if ($srcAndTestsDirectories->getTestsDirectories() !== []) {
+            $sonarPathLine = $this->pathsFactory->createFromDirectories($srcAndTestsDirectories->getTestsDirectories());
+            $fileContent = Strings::replace($fileContent, '#(sonar\.tests\=)(.*?)$#', '$1' . $sonarPathLine);
         }
 
-        sort($relativePaths);
+        if ($srcAndTestsDirectories->getSrcDirectories() !== []) {
+            $sonarPathLine = $this->pathsFactory->createFromDirectories($srcAndTestsDirectories->getSrcDirectories());
+            $fileContent = Strings::replace($fileContent, '#(sonar\.sources\=)(.*?)$#', '$1' . $sonarPathLine);
+        }
 
-        return implode(',', $relativePaths);
+        return $fileContent;
     }
 }
