@@ -6,6 +6,7 @@ namespace Migrify\EasyCI\Tests\Finder\SrcTestsDirectoriesFinder;
 
 use Migrify\EasyCI\Finder\SrcTestsDirectoriesFinder;
 use Migrify\EasyCI\HttpKernel\EasyCIKernel;
+use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 
 final class SrcTestsDirectoriesFinderTest extends AbstractKernelTestCase
@@ -29,6 +30,7 @@ final class SrcTestsDirectoriesFinderTest extends AbstractKernelTestCase
 
         $this->assertNotNull($srcAndTestsDirectories);
 
+        /** @var SrcAndTestsDirectories $srcAndTestsDirectories */
         $this->assertCount(0, $srcAndTestsDirectories->getSrcDirectories());
         $this->assertCount(1, $srcAndTestsDirectories->getTestsDirectories());
     }
