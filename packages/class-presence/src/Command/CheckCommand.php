@@ -19,28 +19,22 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class CheckCommand extends Command
 {
-    private $unusedProperty;
-
     /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-
     /**
      * @var NonExistingClassExtractor
      */
     private $nonExistingClassExtractor;
-
     /**
      * @var NonExistingClassConstantExtractor
      */
     private $nonExistingClassConstantExtractor;
-
     /**
      * @var FileFinder
      */
     private $fileFinder;
-
     public function __construct(
         SymfonyStyle $symfonyStyle,
         FileFinder $fileFinder,
@@ -55,14 +49,12 @@ final class CheckCommand extends Command
 
         $this->fileFinder = $fileFinder;
     }
-
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check configs for existing classes');
         $this->addArgument(Option::SOURCE, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to project');
     }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string[] $source */
@@ -90,7 +82,6 @@ final class CheckCommand extends Command
 
         return $this->reportNonExistingElements($nonExistingClassesByFile, $nonExistingClassConstantsByFile);
     }
-
     /**
      * @param string[][] $nonExistingClassesByFile
      * @param string[][] $nonExistingClassConstantsByFile
