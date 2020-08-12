@@ -19,6 +19,8 @@ use Symplify\PackageBuilder\Console\ShellCode;
 
 final class CheckCommand extends Command
 {
+    private $unusedProperty;
+
     /**
      * @var SymfonyStyle
      */
