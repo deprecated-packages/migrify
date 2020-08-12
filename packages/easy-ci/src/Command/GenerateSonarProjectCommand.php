@@ -21,7 +21,7 @@ final class GenerateSonarProjectCommand extends Command
     /**
      * @var string[]
      */
-    private const POSSIBLE_DIRECTORIES = ['src', 'tests', 'packages'];
+    private const POSSIBLE_DIRECTORIES = ['src', 'tests', 'packages', 'rules'];
 
     /**
      * @var string
