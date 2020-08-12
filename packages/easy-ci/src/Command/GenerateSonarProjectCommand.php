@@ -89,6 +89,8 @@ final class GenerateSonarProjectCommand extends Command
         $filePath = getcwd() . '/' . self::SONAR_PROJECT_PROPERTIES;
         $fileContent = $this->smartFileSystem->readFile($filePath);
 
+        $this->reportFoundSrcAndTestsDirectories($srcAndTestsDirectories);
+
         $originalFileContent = $fileContent;
         $fileContent = $this->updateFileContentWithPaths($srcAndTestsDirectories, $fileContent);
 
@@ -120,5 +122,14 @@ final class GenerateSonarProjectCommand extends Command
         }
 
         return $fileContent;
+    }
+
+    private function reportFoundSrcAndTestsDirectories(SrcAndTestsDirectories $srcAndTestsDirectories): void
+    {
+        $this->symfonyStyle->title('Found "src" directories');
+        $this->symfonyStyle->listing($srcAndTestsDirectories->getRelativePathSrcDirectories());
+
+        $this->symfonyStyle->title('Found "tests" directories');
+        $this->symfonyStyle->listing($srcAndTestsDirectories->getRelativePathTestsDirectories());
     }
 }

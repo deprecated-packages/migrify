@@ -37,10 +37,40 @@ final class SrcAndTestsDirectories
     }
 
     /**
+     * @return string[]
+     */
+    public function getRelativePathSrcDirectories(): array
+    {
+        $relativePaths = [];
+        foreach ($this->srcDirectories as $srcDirectoryFileInfo) {
+            $relativePaths[] = $srcDirectoryFileInfo->getRelativeFilePathFromCwd();
+        }
+
+        sort($relativePaths);
+
+        return $relativePaths;
+    }
+
+    /**
      * @return SmartFileInfo[]
      */
     public function getTestsDirectories(): array
     {
         return $this->testsDirectories;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getRelativePathTestsDirectories(): array
+    {
+        $relativePaths = [];
+        foreach ($this->testsDirectories as $testsDirectoryFileInfo) {
+            $relativePaths[] = $testsDirectoryFileInfo->getRelativeFilePathFromCwd();
+        }
+
+        sort($relativePaths);
+
+        return $relativePaths;
     }
 }
