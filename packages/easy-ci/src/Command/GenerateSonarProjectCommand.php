@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Migrify\EasyCI\Command;
 
 use Migrify\EasyCI\Finder\SrcTestsDirectoriesFinder;
-use Migrify\EasyCI\Sonar\PathsFactory;
 use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
@@ -43,21 +42,14 @@ final class GenerateSonarProjectCommand extends Command
      */
     private $srcTestsDirectoriesFinder;
 
-    /**
-     * @var PathsFactory
-     */
-    private $pathsFactory;
-
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
-        SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder,
-        PathsFactory $pathsFactory
+        SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
         $this->srcTestsDirectoriesFinder = $srcTestsDirectoriesFinder;
-        $this->pathsFactory = $pathsFactory;
 
         parent::__construct();
     }
@@ -111,14 +103,14 @@ final class GenerateSonarProjectCommand extends Command
         SrcAndTestsDirectories $srcAndTestsDirectories,
         string $fileContent
     ): string {
-        if ($srcAndTestsDirectories->getTestsDirectories() !== []) {
-            $sonarPathLine = $this->pathsFactory->createFromDirectories($srcAndTestsDirectories->getTestsDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.tests\=)(.*?)$#', '$1' . $sonarPathLine);
+        if ($srcAndTestsDirectories->getRelativePathSrcDirectories() !== []) {
+            $sonarPathLine = implode(',', $srcAndTestsDirectories->getRelativePathSrcDirectories());
+            $fileContent = Strings::replace($fileContent, '#(sonar\.sources\=)(.*?)$#', '$1' . $sonarPathLine);
         }
 
-        if ($srcAndTestsDirectories->getSrcDirectories() !== []) {
-            $sonarPathLine = $this->pathsFactory->createFromDirectories($srcAndTestsDirectories->getSrcDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.sources\=)(.*?)$#', '$1' . $sonarPathLine);
+        if ($srcAndTestsDirectories->getRelativePathTestsDirectories() !== []) {
+            $sonarPathLine = implode(',', $srcAndTestsDirectories->getRelativePathTestsDirectories());
+            $fileContent = Strings::replace($fileContent, '#(sonar\.tests\=)(.*?)$#', '$1' . $sonarPathLine);
         }
 
         return $fileContent;

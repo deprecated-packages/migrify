@@ -29,14 +29,6 @@ final class SrcAndTestsDirectories
     }
 
     /**
-     * @return SmartFileInfo[]
-     */
-    public function getSrcDirectories(): array
-    {
-        return $this->srcDirectories;
-    }
-
-    /**
      * @return string[]
      */
     public function getRelativePathSrcDirectories(): array
@@ -49,14 +41,6 @@ final class SrcAndTestsDirectories
         sort($relativePaths);
 
         return $relativePaths;
-    }
-
-    /**
-     * @return SmartFileInfo[]
-     */
-    public function getTestsDirectories(): array
-    {
-        return $this->testsDirectories;
     }
 
     /**

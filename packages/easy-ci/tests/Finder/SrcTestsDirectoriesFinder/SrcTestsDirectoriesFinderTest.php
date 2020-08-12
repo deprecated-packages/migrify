@@ -31,8 +31,8 @@ final class SrcTestsDirectoriesFinderTest extends AbstractKernelTestCase
         $this->assertNotNull($srcAndTestsDirectories);
 
         /** @var SrcAndTestsDirectories $srcAndTestsDirectories */
-        $this->assertCount(0, $srcAndTestsDirectories->getSrcDirectories());
-        $this->assertCount(1, $srcAndTestsDirectories->getTestsDirectories());
+        $this->assertCount(0, $srcAndTestsDirectories->getRelativePathSrcDirectories());
+        $this->assertCount(1, $srcAndTestsDirectories->getRelativePathTestsDirectories());
     }
 
     public function testNothing(): void
