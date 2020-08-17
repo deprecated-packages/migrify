@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\Printer;
+namespace Migrify\PhpConfigPrinter\Printer;
 
 use Migrify\ConfigTransformer\FormatSwitcher\Exception\ShouldNotHappenException;
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
+use Migrify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;

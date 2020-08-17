@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeTraverser;
+namespace Migrify\PhpConfigPrinter\NodeTraverser;
 
-use Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use Migrify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
 use PhpParser\Node\Name;
