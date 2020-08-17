@@ -10,7 +10,7 @@ use Nette\Utils\Strings;
 final class FilterCaseConverter implements CaseConverterInterface
 {
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     private const FILTER_RENAMES = [
         // latte name → twig name
