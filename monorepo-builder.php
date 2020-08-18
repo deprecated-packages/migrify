@@ -21,7 +21,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // @todo add asteristk support for packages split to symplify
     $parameters->set(Option::DIRECTORIES_TO_REPOSITORIES, [
-        'packages/class-presence' => 'git@github.com:migrify/class-presence.git', 'packages/diff-data-miner' => 'git@github.com:migrify/diff-data-miner.git', 'packages/config-transformer' => 'git@github.com:migrify/config-transformer.git', 'packages/easy-ci' => 'git@github.com:migrify/easy-ci.git', 'packages/fatal-error-scanner' => 'git@github.com:migrify/fatal-error-scanner.git', 'packages/latte-to-twig' => 'git@github.com:migrify/latte-to-twig.git', 'packages/neon-to-yaml' => 'git@github.com:migrify/neon-to-yaml.git', 'packages/psr4-switcher' => 'git@github.com:migrify/psr4-switcher.git', 'packages/symfony-route-usage' => 'git@github.com:migrify/symfony-route-usage.git', 'packages/vendor-patches' => 'git@github.com:migrify/vendor-patches.git', 'packages/php-config-printer' => 'git@github.com:migrify/php-config-printer.git']);
+        'packages/class-presence' => 'git@github.com:migrify/class-presence.git',
+        'packages/diff-data-miner' => 'git@github.com:migrify/diff-data-miner.git',
+        'packages/config-transformer' => 'git@github.com:migrify/config-transformer.git',
+        'packages/easy-ci' => 'git@github.com:migrify/easy-ci.git',
+        'packages/fatal-error-scanner' => 'git@github.com:migrify/fatal-error-scanner.git',
+        'packages/latte-to-twig' => 'git@github.com:migrify/latte-to-twig.git',
+        'packages/neon-to-yaml' => 'git@github.com:migrify/neon-to-yaml.git',
+        'packages/psr4-switcher' => 'git@github.com:migrify/psr4-switcher.git',
+        'packages/symfony-route-usage' => 'git@github.com:migrify/symfony-route-usage.git',
+        'packages/vendor-patches' => 'git@github.com:migrify/vendor-patches.git',
+        'packages/php-config-printer' => 'git@github.com:migrify/php-config-printer.git'
+    ]);
 
     $services = $containerConfigurator->services();
 
