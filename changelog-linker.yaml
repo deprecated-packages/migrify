@@ -1,5 +1,0 @@
-parameters:
-    authors_to_ignore: ['TomasVotruba']
-
-    package_aliases:
-        SRU: 'Symfony Route Usage'

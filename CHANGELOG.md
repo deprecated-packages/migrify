@@ -10,7 +10,125 @@ PRs and issues are linked, so you can find more about it. Thanks to [ChangelogLi
 <!-- changelog-linker -->
 
 <!-- dumped content start -->
-## v0.3.12 - 2020-07-18
+## Unreleased
+
+### Changed
+
+#### PhpConfigPrinter
+
+- [#136] Init new package
+
+## [v0.3.25] - 2020-08-12
+
+### Added
+
+#### EasyCI
+
+- [#135] Add GenerateSonarProjectCommand
+
+## [v0.3.24] - 2020-08-05
+
+#### ConfigTransformer
+
+- [#133] Add support for all args for route import in YAML, Thanks to [@natepage]
+
+## [v0.3.21] - 2020-08-01
+
+- [#130] Add routing support
+
+### Changed
+
+- [#131] Detect routing based on keys
+
+## [v0.3.20] - 2020-07-30
+
+### Fixed
+
+- [#128] Fix keeping template path instead of ref
+
+### Removed
+
+- [#129] Drop comments magic preserving, way too buggy
+
+## [v0.3.19] - 2020-07-29
+
+### Added
+
+#### Unknown Package
+
+- [#124] added notes about contribution/issue reporting, Thanks to [@clxmstaab]
+
+### Changed
+
+#### ZephirToPHP
+
+- [#107] Init
+
+### Fixed
+
+#### ConfigTransformer
+
+- [#125] fix comments in list after item
+
+## [v0.3.18] - 2020-07-26
+
+### Added
+
+#### CI
+
+- [#115] Add split tests + add few fixes of ConfigTransformer
+
+#### ConfigTransformer
+
+- [#120] Add extension support
+- [#116] Add single case converter architecture
+
+### Changed
+
+- [#117] Move _instanceof to case converter"
+
+## [v0.3.17] - 2020-07-23
+
+### Added
+
+- [#112] Fix missing php-parser + add declare(strict_types=1)
+
+### Changed
+
+#### LatteToTwig
+
+- [#108] Simplify fixtures
+
+#### NeonToYaml
+
+- [#109] Simplify fixtures
+
+## [v0.3.16] - 2020-07-18
+
+#### ConfigTransformer
+
+- [#106] Various improvements from Rector set upgrades
+
+### Fixed
+
+- [#104] Fix escaped slashes
+
+## [v0.3.15] - 2020-07-18
+
+### Changed
+
+- [#103] Clean breaking comment lines
+
+## [v0.3.13] - 2020-07-18
+
+### Fixed
+
+- [#102] Fix FQN names of functions
+
+<!-- dumped content end -->
+
+<!-- dumped content start -->
+## [v0.3.12] - 2020-07-18
 
 ### Added
 
@@ -361,3 +479,37 @@ PRs and issues are linked, so you can find more about it. Thanks to [ChangelogLi
 [@ilmiont]: https://github.com/ilmiont
 [@berezuev]: https://github.com/berezuev
 [@TavoNiievez]: https://github.com/TavoNiievez
+[#136]: https://github.com/migrify/migrify/pull/136
+[#135]: https://github.com/migrify/migrify/pull/135
+[#133]: https://github.com/migrify/migrify/pull/133
+[#131]: https://github.com/migrify/migrify/pull/131
+[#130]: https://github.com/migrify/migrify/pull/130
+[#129]: https://github.com/migrify/migrify/pull/129
+[#128]: https://github.com/migrify/migrify/pull/128
+[#125]: https://github.com/migrify/migrify/pull/125
+[#124]: https://github.com/migrify/migrify/pull/124
+[#120]: https://github.com/migrify/migrify/pull/120
+[#117]: https://github.com/migrify/migrify/pull/117
+[#116]: https://github.com/migrify/migrify/pull/116
+[#115]: https://github.com/migrify/migrify/pull/115
+[#112]: https://github.com/migrify/migrify/pull/112
+[#109]: https://github.com/migrify/migrify/pull/109
+[#108]: https://github.com/migrify/migrify/pull/108
+[#107]: https://github.com/migrify/migrify/pull/107
+[#106]: https://github.com/migrify/migrify/pull/106
+[#104]: https://github.com/migrify/migrify/pull/104
+[#103]: https://github.com/migrify/migrify/pull/103
+[#102]: https://github.com/migrify/migrify/pull/102
+[v0.3.25]: https://github.com/migrify/migrify/compare/v0.3.24...v0.3.25
+[v0.3.24]: https://github.com/migrify/migrify/compare/v0.3.21...v0.3.24
+[v0.3.21]: https://github.com/migrify/migrify/compare/v0.3.20...v0.3.21
+[v0.3.20]: https://github.com/migrify/migrify/compare/v0.3.19...v0.3.20
+[v0.3.19]: https://github.com/migrify/migrify/compare/v0.3.18...v0.3.19
+[v0.3.18]: https://github.com/migrify/migrify/compare/v0.3.17...v0.3.18
+[v0.3.17]: https://github.com/migrify/migrify/compare/v0.3.16...v0.3.17
+[v0.3.16]: https://github.com/migrify/migrify/compare/v0.3.15...v0.3.16
+[v0.3.15]: https://github.com/migrify/migrify/compare/v0.3.13...v0.3.15
+[v0.3.13]: https://github.com/migrify/migrify/compare/v0.3.12...v0.3.13
+[v0.3.12]: https://github.com/migrify/migrify/compare/v0.3.11...v0.3.12
+[@natepage]: https://github.com/natepage
+[@clxmstaab]: https://github.com/clxmstaab
