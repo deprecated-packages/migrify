@@ -10,7 +10,7 @@ PRs and issues are linked, so you can find more about it. Thanks to [ChangelogLi
 <!-- changelog-linker -->
 
 <!-- dumped content start -->
-## Unreleased
+## v0.3.27 - 2020-08-18
 
 ### Changed
 
