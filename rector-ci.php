@@ -14,6 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
+    $parameters->set(Option::IMPORT_DOC_BLOCKS, true);
 
     $parameters->set(Option::SETS, [
         SetList::CODE_QUALITY,
