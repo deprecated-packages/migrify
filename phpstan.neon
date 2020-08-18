@@ -31,6 +31,6 @@ parameters:
          - '#Cannot cast array<string\>\|bool\|string\|null to string#'
          - '#Cannot cast array<string\>\|bool\|string\|null to int#'
          - '#Variable \$methodCall might not be defined#'
-         - '#Method Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
+         - '#Method Migrify\\PhpConfigPrinter\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
          - '#Parameter \#5 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addOption\(\) expects (.*?), float given#'
          - '#Cognitive complexity for "Migrify\\ConfigTransformer\\FormatSwitcher\\PhpParser\\NodeFactory\\ContainerConfiguratorReturnClosureFactory\:\:createNodesFromCaseConverters\(\)" is \d+, keep it under 8#'

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\PhpParser\NodeVisitor;
+namespace Migrify\PhpConfigPrinter\NodeVisitor;
 
-use Migrify\ConfigTransformer\Naming\ClassNaming;
+use Migrify\PhpConfigPrinter\Naming\ClassNaming;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Name;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\CodingStandard\Fixer\ArrayNotation\StandaloneLineInMultilineArrayFixer;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff;
 use Symplify\EasyCodingStandard\Configuration\Option;
@@ -21,7 +22,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::PSR_12,
     ]);
 
-    $parameters->set(Option::PATHS, [__DIR__ . '/packages', __DIR__ . '/ecs.php', __DIR__ . '/rector-ci.php']);
+    $parameters->set(Option::PATHS, [
+        __DIR__ . '/packages',
+        __DIR__ . '/ecs.php',
+        __DIR__ . '/rector-ci.php',
+        __DIR__ . '/monorepo-builder.php',
+    ]);
 
     $parameters->set(Option::SKIP, [
         UnusedPrivateElementsSniff::class . '.' . UnusedPrivateElementsSniff::CODE_WRITE_ONLY_PROPERTY => [
@@ -37,6 +43,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     $services = $containerConfigurator->services();
-
     $services->set(LineLengthFixer::class);
+    $services->set(StandaloneLineInMultilineArrayFixer::class);
 };

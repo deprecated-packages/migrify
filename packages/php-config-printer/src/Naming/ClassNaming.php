@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Naming;
+namespace Migrify\PhpConfigPrinter\Naming;
 
 use Nette\Utils\Strings;
 
