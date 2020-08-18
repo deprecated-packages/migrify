@@ -10,7 +10,7 @@
         "nette/neon": "^3.0",
         "nette/robot-loader": "^3.2",
         "nette/utils": "^3.1",
-        "nikic/php-parser": "4.8",
+        "nikic/php-parser": "^4.8",
         "sebastian/diff": "^3.0|^4.0",
         "symfony/console": "^4.4|^5.0",
         "symfony/dependency-injection": "^4.4|^5.0",
@@ -123,5 +123,7 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
