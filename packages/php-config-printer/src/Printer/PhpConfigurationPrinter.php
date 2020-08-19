@@ -15,7 +15,6 @@ use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Stmt\Declare_;
 use PhpParser\Node\Stmt\DeclareDeclare;
 use PhpParser\Node\Stmt\Nop;
-use PhpParser\NodeFinder;
 use PhpParser\PrettyPrinter\Standard;
 
 final class PhpConfigurationPrinter extends Standard
@@ -31,22 +30,15 @@ final class PhpConfigurationPrinter extends Standard
     private $importFullyQualifiedNamesNodeTraverser;
 
     /**
-     * @var NodeFinder
-     */
-    private $nodeFinder;
-
-    /**
      * @var EmptyLineNodeDecorator
      */
     private $emptyLineNodeDecorator;
 
     public function __construct(
         ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser,
-        EmptyLineNodeDecorator $emptyLineNodeDecorator,
-        NodeFinder $nodeFinder
+        EmptyLineNodeDecorator $emptyLineNodeDecorator
     ) {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
-        $this->nodeFinder = $nodeFinder;
         $this->emptyLineNodeDecorator = $emptyLineNodeDecorator;
 
         parent::__construct();
