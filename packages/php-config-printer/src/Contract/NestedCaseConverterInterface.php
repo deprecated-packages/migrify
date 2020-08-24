@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\Contract;
+namespace Migrify\PhpConfigPrinter\Contract;
 
 use PhpParser\Node\Stmt\Expression;
 
