@@ -34,3 +34,32 @@ parameters:
          - '#Method Migrify\\PhpConfigPrinter\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
          - '#Parameter \#5 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addOption\(\) expects (.*?), float given#'
          - '#Cognitive complexity for "Migrify\\PhpConfigPrinter\\NodeFactory\\ContainerConfiguratorReturnClosureFactory\:\:createNodesFromCaseConverters\(\)" is \d+, keep it under 8#'
+
+         -
+             message: '#Array destruct is not allowed\. Use value object to pass data instead#'
+             paths:
+                 # 3rd party code
+                 - packages/config-transformer/packages/feature-shifter/src/Yaml/YamlServiceProcessor.php
+         -
+             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
+             paths:
+                  - packages/vendor-patches/src/Composer/ComposerPatchesConfigurationUpdater.php
+                  # console output
+                  - packages/symfony-route-usage/src/Command/ShowRouteUsageCommand.php
+                  - packages/symfony-route-usage/src/Command/ShowDeadRoutesCommand.php
+                  # json
+                  - packages/psr4-switcher/src/Console/Command/GeneratePsr4ToPathsCommand.php
+
+                  - packages/neon-to-yaml/src/ConverterWorker/ServiceConverterWorker.php
+                  - packages/php-config-printer/src/Printer/SmartPhpConfigPrinter.php
+
+                  # yaml
+                  - packages/neon-to-yaml/src/NeonToYamlConverter.php
+                  - packages/config-transformer/packages/format-switcher/src/Command/SwitchFormatCommand.php
+
+         -
+             message: '#Use value object over return of values#'
+             paths:
+                 # suffixes
+                 - packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php
+                 - packages/config-transformer/packages/feature-shifter/src/Yaml/YamlServiceProcessor.php

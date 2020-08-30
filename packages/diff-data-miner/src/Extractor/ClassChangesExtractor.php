@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\DiffDataMiner\Extractor;
 
+use Migrify\DiffDataMiner\ValueObject\ClassBeforeAndClassAfter;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
@@ -38,43 +39,38 @@ final class ClassChangesExtractor
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      */
     public function extract(string $diffFilePath): array
     {
         $diff = $this->smartFileSystem->readFile($diffFilePath);
         $beforeAfterMatches = Strings::matchAll($diff, self::BEFORE_AFTER_PATTERN);
 
-        $classesBeforeAfter = [];
+        $classesBeforeAndAfterAsString = [];
         foreach ($beforeAfterMatches as $beforeAfterMatch) {
             $classBeforeAndAfter = $this->resolveClassBeforeAndAfter($beforeAfterMatch);
             if ($classBeforeAndAfter === null) {
                 continue;
             }
 
-            [$classBefore, $classAfter] = $classBeforeAndAfter;
-
-            if (Strings::contains($classBefore, 'Tests')) {
+            if (Strings::contains($classBeforeAndAfter->getClassBefore(), 'Tests')) {
                 continue;
             }
 
             // classes are the same, no change in the class name
-            if ($classBefore === $classAfter) {
+            if ($classBeforeAndAfter->areIdentical()) {
                 continue;
             }
 
-            $classesBeforeAfter[$classBefore] = $classAfter;
+            $classesBeforeAndAfterAsString[$classBeforeAndAfter->getClassBefore()] = $classBeforeAndAfter->getClassAfter();
         }
 
-        ksort($classesBeforeAfter);
+        ksort($classesBeforeAndAfterAsString);
 
-        return $classesBeforeAfter;
+        return $classesBeforeAndAfterAsString;
     }
 
-    /**
-     * @return string[]|null
-     */
-    private function resolveClassBeforeAndAfter(array $beforeAfterMatch): ?array
+    private function resolveClassBeforeAndAfter(array $beforeAfterMatch): ?ClassBeforeAndClassAfter
     {
         // file change
         if (Strings::contains($beforeAfterMatch['before'], '//')) {
@@ -91,6 +87,6 @@ final class ClassChangesExtractor
             return null;
         }
 
-        return [$classNameBefore['class_name'], $classNameAfter['class_name']];
+        return new ClassBeforeAndClassAfter($classNameBefore['class_name'], $classNameAfter['class_name']);
     }
 }

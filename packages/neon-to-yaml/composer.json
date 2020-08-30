@@ -6,7 +6,7 @@
         "bin/neon-to-yaml"
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2|^8.0",
         "nette/utils": "^3.1",
         "nette/neon": "^3.0",
         "symplify/package-builder": "^8.1.17",

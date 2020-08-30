@@ -38,16 +38,14 @@ final class NeonToYamlConverterTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
-            $fixtureFileInfo
-        );
+        $inputAndExpected = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos($fixtureFileInfo);
 
-        $this->arrayParameterCollector->collectFromFiles([$inputFileInfo]);
+        $this->arrayParameterCollector->collectFromFiles([$inputAndExpected->getInputFileInfo()]);
 
-        $convertedFileContent = $this->neonToYamlConverter->convertFileInfo($inputFileInfo);
+        $convertedFileContent = $this->neonToYamlConverter->convertFileInfo($inputAndExpected->getInputFileInfo());
 
         $this->assertSame(
-            $expectedFileInfo->getContents(),
+            $inputAndExpected->getExpectedFileInfo()->getContents(),
             $convertedFileContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );
