@@ -30,14 +30,16 @@ final class LatteToTwigConverterTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
+        $inputFileInfoAndExpectedFileInfo = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );
 
-        $convertedContent = $this->latteToTwigConverter->convertFile($inputFileInfo);
+        $convertedContent = $this->latteToTwigConverter->convertFile(
+            $inputFileInfoAndExpectedFileInfo->getInputFileInfo()
+        );
 
         $this->assertSame(
-            $expectedFileInfo->getContents(),
+            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()->getContents(),
             $convertedContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

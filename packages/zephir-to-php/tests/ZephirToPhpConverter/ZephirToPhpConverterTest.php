@@ -30,13 +30,15 @@ final class ZephirToPhpConverterTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        [$inputFileInfo, $expectedFileInfo] = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
+        $inputFileInfoAndExpectedFileInfo = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );
 
-        $convertedFileContent = $this->zephirToPhpConverter->convertFile($inputFileInfo);
+        $convertedFileContent = $this->zephirToPhpConverter->convertFile(
+            $inputFileInfoAndExpectedFileInfo->getInputFileInfo()
+        );
         $this->assertSame(
-            $expectedFileInfo->getContents(),
+            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()->getContents(),
             $convertedFileContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

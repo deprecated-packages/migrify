@@ -19,7 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'require' => ['tracy/tracy' => '*', 'phpunit/phpunit' => '*']
     ]);
 
-    // @todo add asteristk support for packages split to symplify
     $parameters->set(Option::DIRECTORIES_TO_REPOSITORIES, [
         'packages/*' => 'git@github.com:migrify/*.git',
     ]);
