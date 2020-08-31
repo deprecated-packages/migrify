@@ -6,7 +6,7 @@
         "php": "^7.2|^8.0",
         "nette/utils": "^3.1",
         "nikic/php-parser": "^4.9",
-        "symfony/http-kernel": "^4.4|^5.0",
+        "symfony/http-kernel": "^4.4|^5.1",
         "symplify/autowire-array-parameter": "^8.1.17",
         "symplify/package-builder": "^8.1.17",
         "symplify/smart-file-system": "^8.1.17"
