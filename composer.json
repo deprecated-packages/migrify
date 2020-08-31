@@ -38,7 +38,7 @@
         "phpstan/phpstan-symfony": "^0.12.6",
         "phpunit/phpunit": "^8.5|^9.0",
         "rector/rector": "^0.7.55",
-        "slevomat/coding-standard": "dev-master as 6.3.10",
+        "slevomat/coding-standard": "^6.3.11",
         "symfony/expression-language": "^4.4|^5.1",
         "symfony/framework-bundle": "^4.4|^5.1",
         "symfony/routing": "^4.4|^5.1",

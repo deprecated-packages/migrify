@@ -10,7 +10,7 @@ parameters:
 
     level: max
     checkGenericClassInNonGenericObjectType: false
-#    reportUnmatchedIgnoredErrors: false
+    reportUnmatchedIgnoredErrors: false
 
     excludes_analyse:
         # tests
