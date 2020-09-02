@@ -67,8 +67,7 @@
             "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\TemplateChecker\\": "packages/template-checker/src",
-            "Migrify\\VendorPatches\\": "packages/vendor-patches/src",
-            "Migrify\\ZephirToPhp\\": "packages/zephir-to-php/src"
+            "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
     },
     "autoload-dev": {
@@ -87,8 +86,7 @@
             "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
-            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests",
-            "Migrify\\ZephirToPhp\\Tests\\": "packages/zephir-to-php/tests"
+            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         }
     },
     "replace": {
@@ -103,8 +101,7 @@
         "migrify/psr4-switcher": "self.version",
         "migrify/symfony-route-usage": "self.version",
         "migrify/template-checker": "self.version",
-        "migrify/vendor-patches": "self.version",
-        "migrify/zephir-to-php": "self.version"
+        "migrify/vendor-patches": "self.version"
     },
     "scripts": {
         "check-cs": "vendor/bin/ecs check packages --ansi",

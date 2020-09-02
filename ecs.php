@@ -38,7 +38,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         CommentedOutCodeSniff::class => [
             __DIR__ . '/packages/latte-to-twig/src/CaseConverter/*',
-            __DIR__ . '/packages/zephir-to-php/src/CaseConverter/*',
         ]
     ]);
 
