@@ -5,8 +5,9 @@
     "require": {
         "php": "^7.2|^8.0",
         "ext-pdo": "*",
+        "ext-simplexml": "*",
         "cweagans/composer-patches": "^1.6",
-        "knplabs/doctrine-behaviors": "^2.0.5",
+        "knplabs/doctrine-behaviors": "^2.0.7",
         "nette/neon": "^3.0",
         "nette/robot-loader": "^3.2",
         "nette/utils": "^3.1",
@@ -52,6 +53,9 @@
         "tracy/tracy": "^2.7"
     },
     "autoload": {
+        "files": [
+            "packages/sniffer-fixer-to-ecs/stubs/Sniff.php"
+        ],
         "psr-4": {
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
             "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
@@ -65,6 +69,7 @@
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
             "Migrify\\PhpConfigPrinter\\": "packages/php-config-printer/src",
             "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
+            "Migrify\\SnifferFixerToECS\\": "packages/sniffer-fixer-to-ecs/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\TemplateChecker\\": "packages/template-checker/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
@@ -84,6 +89,7 @@
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\PhpConfigPrinter\\Tests\\": "packages/php-config-printer/tests",
             "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
+            "Migrify\\SnifferFixerToECS\\Tests\\": "packages/sniffer-fixer-to-ecs/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
@@ -99,6 +105,7 @@
         "migrify/neon-to-yaml": "self.version",
         "migrify/php-config-printer": "self.version",
         "migrify/psr4-switcher": "self.version",
+        "migrify/sniffer-fixer-to-ecs": "self.version",
         "migrify/symfony-route-usage": "self.version",
         "migrify/template-checker": "self.version",
         "migrify/vendor-patches": "self.version"

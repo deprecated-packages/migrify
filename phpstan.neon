@@ -63,3 +63,10 @@ parameters:
                  # suffixes
                  - packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php
                  - packages/config-transformer/packages/feature-shifter/src/Yaml/YamlServiceProcessor.php
+
+         - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
+
+        # xml
+         -
+             message: '#Use default null value and nullable compare instead of isset on object#'
+             path: 'packages/sniffer-fixer-to-ecs/src/SnifferToECSConverter.php'
