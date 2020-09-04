@@ -18,12 +18,12 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
     /**
      * @var FixerToECSConverter
      */
-    private $snifferToECSConverter;
+    private $fixerToECSConverter;
 
     protected function setUp(): void
     {
         $this->bootKernel(SnifferFixerToECSKernel::class);
-        $this->snifferToECSConverter = self::$container->get(FixerToECSConverter::class);
+        $this->fixerToECSConverter = self::$container->get(FixerToECSConverter::class);
     }
 
     /**
@@ -35,7 +35,7 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
             $fixtureFileInfo
         );
 
-        $convertedContent = $this->snifferToECSConverter->convertFile($inputAndExpectedFileInfo->getInputFileInfo());
+        $convertedContent = $this->fixerToECSConverter->convertFile($inputAndExpectedFileInfo->getInputFileInfo());
 
         StaticFixtureUpdater::updateFixtureContent(
             $inputAndExpectedFileInfo->getInputFileInfo(),

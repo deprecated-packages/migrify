@@ -36,6 +36,14 @@ final class FixerToECSConverter
      * @var PrivatesAccessor
      */
     private $privatesAccessor;
+    /**
+     * @var mixed[]
+     */
+    private const SETS_PARAMETER = [];
+    /**
+     * @var mixed[]
+     */
+    private const SKIP_PARAMETER = [];
 
     public function __construct(
         YamlToPhpConverter $yamlToPhpConverter,
@@ -57,14 +65,12 @@ final class FixerToECSConverter
         $fixerClasses = $this->collectFixerClasses($config);
 
         $pathsParameter = $this->collectPathsParameter($config);
-        $setsParameter = [];
-        $skipParameter = [];
         $excludePathsParameter = $this->collectExcludePathsParameter($config);
 
         $yaml = $this->symfonyConfigFormatFactory->createSymfonyConfigFormat(
             $fixerClasses,
-            $setsParameter,
-            $skipParameter,
+            self::SETS_PARAMETER,
+            self::SKIP_PARAMETER,
             $excludePathsParameter,
             $pathsParameter
         );
@@ -97,6 +103,7 @@ final class FixerToECSConverter
 
         $robotLoader = new RobotLoader();
         $robotLoader->addDirectory(__DIR__ . '/../../../vendor/friendsofphp/php-cs-fixer/src');
+
         $robotLoader->acceptFiles = ['*Fixer.php'];
         $robotLoader->rebuild();
 
@@ -127,13 +134,9 @@ final class FixerToECSConverter
         $rules = $config->getRules();
         foreach ($rules as $ruleName => $ruleConfiguration) {
             $sniffClass = $this->resolveSniffClassFromRuleName($ruleName);
-            if ($ruleConfiguration !== null) {
-                $fixerClasses[$sniffClass] = [
-                    'calls' => [['configure', [$ruleConfiguration]]],
-                ];
-            } else {
-                $fixerClasses[$sniffClass] = null;
-            }
+            $fixerClasses[$sniffClass] = $ruleConfiguration !== null ? [
+                'calls' => [['configure', [$ruleConfiguration]]],
+            ] : null;
         }
         return $fixerClasses;
     }
