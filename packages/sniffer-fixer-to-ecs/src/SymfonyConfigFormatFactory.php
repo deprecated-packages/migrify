@@ -21,12 +21,17 @@ final class SymfonyConfigFormatFactory
         array $sniffClasses,
         array $setsParameter,
         array $skipParameter,
-        array $excludePathsParameter
+        array $excludePathsParameter,
+        array $pathsParameter
     ): array {
         $yaml = [];
 
         if ($sniffClasses !== []) {
             $yaml[YamlKey::SERVICES] = $sniffClasses;
+        }
+
+        if ($pathsParameter !== []) {
+            $yaml[YamlKey::PARAMETERS][Option::class . '::PATHS'] = $pathsParameter;
         }
 
         $setsParameter = array_unique($setsParameter);
