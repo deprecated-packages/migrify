@@ -68,7 +68,8 @@ final class SnifferToECSConverter
             $sniffClasses,
             $setsParameter,
             $skipParameter,
-            $excludePathsParameter
+            $excludePathsParameter,
+            []
         );
 
         return $this->yamlToPhpConverter->convertYamlArray($yaml);
