@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\RoutingCaseConverter;
+namespace Migrify\PhpConfigPrinter\RoutingCaseConverter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\RoutingCaseConverterInterface;
+use Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Migrify\PhpConfigPrinter\ValueObject\VariableName;
 use PhpParser\Node\Arg;
@@ -12,8 +12,6 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Expression;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
-use function explode;
-use function is_string;
 
 final class ImportRoutingCaseConverter implements RoutingCaseConverterInterface
 {

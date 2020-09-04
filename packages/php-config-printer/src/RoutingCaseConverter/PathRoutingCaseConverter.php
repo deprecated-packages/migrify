@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\FormatSwitcher\RoutingCaseConverter;
+namespace Migrify\PhpConfigPrinter\RoutingCaseConverter;
 
-use Migrify\ConfigTransformer\FormatSwitcher\Contract\RoutingCaseConverterInterface;
+use Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Migrify\PhpConfigPrinter\ValueObject\VariableName;
 use PhpParser\Node\Arg;
