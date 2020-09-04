@@ -18,6 +18,16 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class FixerToECSConverter
 {
     /**
+     * @var mixed[]
+     */
+    private const SETS_PARAMETER = [];
+
+    /**
+     * @var mixed[]
+     */
+    private const SKIP_PARAMETER = [];
+
+    /**
      * @var YamlToPhpConverter
      */
     private $yamlToPhpConverter;
@@ -36,14 +46,6 @@ final class FixerToECSConverter
      * @var PrivatesAccessor
      */
     private $privatesAccessor;
-    /**
-     * @var mixed[]
-     */
-    private const SETS_PARAMETER = [];
-    /**
-     * @var mixed[]
-     */
-    private const SKIP_PARAMETER = [];
 
     public function __construct(
         YamlToPhpConverter $yamlToPhpConverter,
