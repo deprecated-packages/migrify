@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\ValueObject;
 
-use Migrify\StaticDetector\Exception\ShouldNotHappenException;
 use PhpParser\Node\Stmt\ClassMethod;
-use Rector\NodeTypeResolver\Node\AttributeKey;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class StaticClassMethod
 {
@@ -45,12 +42,6 @@ final class StaticClassMethod
 
     public function getFileLocationWithLine(): string
     {
-        /** @var SmartFileInfo|null $fileInfo */
-        $fileInfo = $this->classMethod->getAttribute(AttributeKey::FILE_INFO);
-        if ($fileInfo === null) {
-            throw new ShouldNotHappenException();
-        }
-
-        return $fileInfo->getRelativeFilePathFromCwd() . ':' . $this->classMethod->getStartLine();
+        return $this->classMethod->getAttribute(StaticDetectorAttributeKey::FILE_LINE);
     }
 }
