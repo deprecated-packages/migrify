@@ -74,4 +74,7 @@ parameters:
         # yaml
         -
             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
-            path: 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
+            paths:
+                 - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
+                 - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
+
