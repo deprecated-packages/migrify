@@ -31,6 +31,14 @@ final class StaticReport
         $this->staticClassMethodsWithStaticCalls = $staticClassMethodsWithStaticCalls;
     }
 
+    /**
+     * @return StaticClassMethodWithStaticCalls[]
+     */
+    public function getStaticClassMethodsWithStaticCalls(): array
+    {
+        return $this->staticClassMethodsWithStaticCalls;
+    }
+
     public function getStaticCallsCount(): int
     {
         return $this->staticCallsCount;

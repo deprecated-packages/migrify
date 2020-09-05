@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Migrify\StaticDetector\NodeTraverser\StaticCollectNodeTraverser;
+use Migrify\StaticDetector\NodeTraverser\StaticCollectNodeTraverserFactory;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -25,6 +27,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/../src/ValueObject',
             __DIR__ . '/../src/HttpKernel/StaticDetectorKernel.php',
         ]);
+
+    $services->set(StaticCollectNodeTraverser::class)
+        ->factory([ref(StaticCollectNodeTraverserFactory::class), 'create']);
 
     $services->set(SymfonyStyleFactory::class);
     $services->set(SymfonyStyle::class)

@@ -6,6 +6,7 @@ namespace Migrify\StaticDetector\Console\Command;
 
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\StaticScanner;
+use Migrify\StaticDetector\ValueObject\StaticReport;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -77,35 +78,27 @@ final class DetectCommand extends Command
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->addArgument(self::ARGUMENT_SOURCE, InputArgument::REQUIRED, 'Directory to detect static in');
+        $this->addArgument(
+            self::ARGUMENT_SOURCE,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'One or more directories to detect static in'
+        );
         $this->setDescription('Show what static method calls are called where');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $source = $this->resolveSource($input);
-        $fileInfos = $this->findPhpFilesInDirectory($source);
-        $this->scanFileInfos($fileInfos);
+        $fileInfos = $this->findPhpFilesInDirectories($source);
+        $this->staticScanner->scanFileInfos($fileInfos);
 
         // report who is where
         $staticReport = $this->staticNodeCollector->generateStaticReport();
 
         $this->symfonyStyle->title('Static Report');
-        if ($staticReport->getStaticClassMethodCount() === 0) {
-            $this->symfonyStyle->success(
-                'No static class methods and static calls found. Are you sure this tool is working? ;)'
-            );
-        } else {
-            $message = sprintf('* %d static methods', $staticReport->getStaticClassMethodCount());
-            $this->symfonyStyle->writeln($message);
 
-            $this->symfonyStyle->newLine(1);
-
-            $message = sprintf('* %d static calls', $staticReport->getStaticCallsCount());
-            $this->symfonyStyle->writeln($message);
-
-            $this->symfonyStyle->newLine(2);
-        }
+        $this->reportStaticClassMethods($staticReport);
+        $this->reportTotalNumbers($staticReport);
 
         return ShellCode::SUCCESS;
     }
@@ -113,51 +106,80 @@ final class DetectCommand extends Command
     /**
      * @return SmartFileInfo[]
      */
-    private function findPhpFilesInDirectory(string $source): array
+    private function findPhpFilesInDirectories(array $directories): array
     {
         $finder = $this->finder->files()
-            ->in($source)
+            ->in($directories)
             ->name('*.php');
 
         return $this->finderSanitizer->sanitize($finder);
     }
 
     /**
-     * @param SmartFileInfo[] $fileInfos
+     * @return string[]
      */
-    private function scanFileInfos(array $fileInfos): void
+    private function resolveSource(InputInterface $input): array
     {
-        $this->symfonyStyle->note('Looking for static methods and their calls...');
+        $source = (array) $input->getArgument(self::ARGUMENT_SOURCE);
 
-        $stepCount = count($fileInfos);
-        $this->symfonyStyle->progressStart($stepCount);
-
-        foreach ($fileInfos as $fileInfo) {
-            $processingMessage = sprintf('Processing "%s" file', $fileInfo->getRelativeFilePathFromCwd());
-
-            if ($this->symfonyStyle->isDebug()) {
-                $this->symfonyStyle->note($processingMessage);
-            } else {
-                $this->symfonyStyle->progressAdvance();
+        foreach ($source as $singleSource) {
+            if (! $this->smartFileSystem->exists($singleSource)) {
+                throw new FileNotFoundException($singleSource);
             }
-
-            // collect static calls
-            // collect static class methods
-            $this->staticScanner->scanFileInfo($fileInfo);
-        }
-
-        $this->symfonyStyle->newLine(2);
-        $this->symfonyStyle->success('Scanning done');
-        $this->symfonyStyle->newLine(1);
-    }
-
-    private function resolveSource(InputInterface $input): string
-    {
-        $source = (string) $input->getArgument(self::ARGUMENT_SOURCE);
-        if (! $this->smartFileSystem->exists($source)) {
-            throw new FileNotFoundException($source);
         }
 
         return $source;
+    }
+
+    private function reportStaticClassMethods(StaticReport $staticReport): void
+    {
+        $i = 1;
+        foreach ($staticReport->getStaticClassMethodsWithStaticCalls() as $staticClassMethodWithStaticCalls) {
+            // report static call name
+
+            $message = sprintf(
+                '<options=bold>%d) %s</>',
+                $i,
+                $staticClassMethodWithStaticCalls->getStaticClassMethodName()
+            );
+            $this->symfonyStyle->writeln($message);
+
+            // report file location
+            $message = $staticClassMethodWithStaticCalls->getStaticCallFileLocationWithLine();
+            $this->symfonyStyle->writeln($message);
+            ++$i;
+
+            // report usages
+
+            if ($staticClassMethodWithStaticCalls->getStaticCalls() !== []) {
+                $this->symfonyStyle->writeln('Static calls in the code:');
+
+                $this->symfonyStyle->listing($staticClassMethodWithStaticCalls->getStaticCallsFilePathsWithLines());
+            } else {
+                $this->symfonyStyle->warning('No static calls in the code... maybe in templates?');
+            }
+
+            $this->symfonyStyle->newLine(2);
+        }
+    }
+
+    private function reportTotalNumbers(StaticReport $staticReport): void
+    {
+        $this->symfonyStyle->title('Static Overview');
+
+        if ($staticReport->getStaticClassMethodCount() === 0) {
+            $this->symfonyStyle->success(
+                'No static class methods and static calls found. Are you sure this tool is working? ;)'
+            );
+            return;
+        }
+
+        $message = sprintf('* %d static methods', $staticReport->getStaticClassMethodCount());
+        $this->symfonyStyle->writeln($message);
+
+        $message = sprintf('* %d static calls', $staticReport->getStaticCallsCount());
+        $this->symfonyStyle->writeln($message);
+
+        $this->symfonyStyle->newLine();
     }
 }
