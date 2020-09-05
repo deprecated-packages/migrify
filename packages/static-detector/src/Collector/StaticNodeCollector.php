@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\Collector;
 
-use Migrify\StaticDetector\Exception\ShouldNotHappenException;
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\StaticDetector\ValueObject\StaticClassMethod;
 use Migrify\StaticDetector\ValueObject\StaticClassMethodWithStaticCalls;
 use Migrify\StaticDetector\ValueObject\StaticReport;

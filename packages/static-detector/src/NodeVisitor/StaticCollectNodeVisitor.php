@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\NodeVisitor;
 
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
-use Migrify\StaticDetector\Exception\ShouldNotHappenException;
 use Migrify\StaticDetector\Strings\StringsFilter;
 use Migrify\StaticDetector\ValueObject\Option;
 use PhpParser\Node;
