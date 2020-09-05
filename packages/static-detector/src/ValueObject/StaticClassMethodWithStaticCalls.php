@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\ValueObject;
 
-use Migrify\StaticDetector\Exception\ShouldNotHappenException;
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
-use Rector\NodeTypeResolver\Node\AttributeKey;
-use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class StaticClassMethodWithStaticCalls
 {
@@ -64,27 +61,16 @@ final class StaticClassMethodWithStaticCalls
     }
 
     /**
-     * @param Node[] $staticCalls
+     * @param Node[] $nodes
      * @return string[]
      */
-    private function createFilePathsWithLinesFromNodes(array $staticCalls): array
+    private function createFilePathsWithLinesFromNodes(array $nodes): array
     {
-        $nodes = [];
-        foreach ($staticCalls as $node) {
-            $nodes[] = $this->resolveNodeFilePathWithLine($node);
+        $filePathsWithLines = [];
+        foreach ($nodes as $node) {
+            $filePathsWithLines[] = $node->getAttribute(StaticDetectorAttributeKey::FILE_LINE);
         }
 
-        return $nodes;
-    }
-
-    private function resolveNodeFilePathWithLine(Node $node): string
-    {
-        /** @var SmartFileInfo|null $fileInfo */
-        $fileInfo = $node->getAttribute(AttributeKey::FILE_INFO);
-        if ($fileInfo === null) {
-            throw new ShouldNotHappenException();
-        }
-
-        return $fileInfo->getRelativeFilePathFromCwd() . ':' . $node->getStartLine();
+        return $filePathsWithLines;
     }
 }

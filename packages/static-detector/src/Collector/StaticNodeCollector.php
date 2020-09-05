@@ -42,15 +42,13 @@ final class StaticNodeCollector
             return;
         }
 
-        $class = $this->resolveClass($staticCall->class, $classLike);
-
         if ($staticCall->name instanceof Expr) {
             // weird expression, skip
             return;
         }
 
+        $class = $this->resolveClass($staticCall->class, $classLike);
         $method = (string) $staticCall->name;
-
         $this->staticCalls[$class][$method][] = $staticCall;
     }
 

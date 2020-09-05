@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Migrify\StaticDetector\NodeVisitor;
 
 use Migrify\StaticDetector\CurrentProvider\CurrentFileInfoProvider;
+use Migrify\StaticDetector\ValueObject\StaticDetectorAttributeKey;
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 
 final class FilePathNodeVisitor extends NodeVisitorAbstract
 {
@@ -23,7 +23,10 @@ final class FilePathNodeVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
-        $node->setAttribute(AttributeKey::FILE_INFO, $this->currentFileInfoProvider->getSmartFileInfo());
+        $smartFileInfo = $this->currentFileInfoProvider->getSmartFileInfo();
+
+        $fileLine = $smartFileInfo->getRelativeFilePathFromCwd() . ':' . $node->getStartLine();
+        $node->setAttribute(StaticDetectorAttributeKey::FILE_LINE, $fileLine);
 
         return null;
     }
