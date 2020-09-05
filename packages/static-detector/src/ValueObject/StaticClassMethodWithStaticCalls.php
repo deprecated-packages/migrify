@@ -61,16 +61,16 @@ final class StaticClassMethodWithStaticCalls
     }
 
     /**
-     * @param Node[] $staticCalls
+     * @param Node[] $nodes
      * @return string[]
      */
-    private function createFilePathsWithLinesFromNodes(array $staticCalls): array
+    private function createFilePathsWithLinesFromNodes(array $nodes): array
     {
-        $nodes = [];
-        foreach ($staticCalls as $node) {
-            $nodes[] = $node->getAttribute(StaticDetectorAttributeKey::FILE_LINE);
+        $filePathsWithLines = [];
+        foreach ($nodes as $node) {
+            $filePathsWithLines[] = $node->getAttribute(StaticDetectorAttributeKey::FILE_LINE);
         }
 
-        return $nodes;
+        return $filePathsWithLines;
     }
 }

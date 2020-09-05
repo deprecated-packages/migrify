@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Migrify\StaticDetector\Console\Command;
 
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
+use Migrify\StaticDetector\Output\StaticReportReporter;
 use Migrify\StaticDetector\StaticScanner;
-use Migrify\StaticDetector\ValueObject\StaticReport;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,13 +57,19 @@ final class DetectCommand extends Command
      */
     private $staticNodeCollector;
 
+    /**
+     * @var StaticReportReporter
+     */
+    private $staticReportReporter;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
         Finder $finder,
         FinderSanitizer $finderSanitizer,
         StaticScanner $staticScanner,
-        StaticNodeCollector $staticNodeCollector
+        StaticNodeCollector $staticNodeCollector,
+        StaticReportReporter $staticReportReporter
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
@@ -73,6 +79,8 @@ final class DetectCommand extends Command
         $this->staticNodeCollector = $staticNodeCollector;
 
         parent::__construct();
+
+        $this->staticReportReporter = $staticReportReporter;
     }
 
     protected function configure(): void
@@ -92,13 +100,11 @@ final class DetectCommand extends Command
         $fileInfos = $this->findPhpFilesInDirectories($source);
         $this->staticScanner->scanFileInfos($fileInfos);
 
-        // report who is where
+        $this->symfonyStyle->title('Static Report');
         $staticReport = $this->staticNodeCollector->generateStaticReport();
 
-        $this->symfonyStyle->title('Static Report');
-
-        $this->reportStaticClassMethods($staticReport);
-        $this->reportTotalNumbers($staticReport);
+        $this->staticReportReporter->reportStaticClassMethods($staticReport);
+        $this->staticReportReporter->reportTotalNumbers($staticReport);
 
         return ShellCode::SUCCESS;
     }
@@ -129,57 +135,5 @@ final class DetectCommand extends Command
         }
 
         return $source;
-    }
-
-    private function reportStaticClassMethods(StaticReport $staticReport): void
-    {
-        $i = 1;
-        foreach ($staticReport->getStaticClassMethodsWithStaticCalls() as $staticClassMethodWithStaticCalls) {
-            // report static call name
-
-            $message = sprintf(
-                '<options=bold>%d) %s</>',
-                $i,
-                $staticClassMethodWithStaticCalls->getStaticClassMethodName()
-            );
-            $this->symfonyStyle->writeln($message);
-
-            // report file location
-            $message = $staticClassMethodWithStaticCalls->getStaticCallFileLocationWithLine();
-            $this->symfonyStyle->writeln($message);
-            ++$i;
-
-            // report usages
-
-            if ($staticClassMethodWithStaticCalls->getStaticCalls() !== []) {
-                $this->symfonyStyle->writeln('Static calls in the code:');
-
-                $this->symfonyStyle->listing($staticClassMethodWithStaticCalls->getStaticCallsFilePathsWithLines());
-            } else {
-                $this->symfonyStyle->warning('No static calls in the code... maybe in templates?');
-            }
-
-            $this->symfonyStyle->newLine(2);
-        }
-    }
-
-    private function reportTotalNumbers(StaticReport $staticReport): void
-    {
-        $this->symfonyStyle->title('Static Overview');
-
-        if ($staticReport->getStaticClassMethodCount() === 0) {
-            $this->symfonyStyle->success(
-                'No static class methods and static calls found. Are you sure this tool is working? ;)'
-            );
-            return;
-        }
-
-        $message = sprintf('* %d static methods', $staticReport->getStaticClassMethodCount());
-        $this->symfonyStyle->writeln($message);
-
-        $message = sprintf('* %d static calls', $staticReport->getStaticCallsCount());
-        $this->symfonyStyle->writeln($message);
-
-        $this->symfonyStyle->newLine();
     }
 }

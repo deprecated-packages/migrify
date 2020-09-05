@@ -23,9 +23,9 @@ final class FilePathNodeVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
-        $currentFileInfo = $this->currentFileInfoProvider->getSmartFileInfo();
+        $smartFileInfo = $this->currentFileInfoProvider->getSmartFileInfo();
 
-        $fileLine = $currentFileInfo->getRelativeFilePathFromCwd() . ':' . $node->getStartLine();
+        $fileLine = $smartFileInfo->getRelativeFilePathFromCwd() . ':' . $node->getStartLine();
         $node->setAttribute(StaticDetectorAttributeKey::FILE_LINE, $fileLine);
 
         return null;
