@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\HttpKernel;
 
+use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -30,6 +31,6 @@ final class StaticDetectorKernel extends Kernel
      */
     public function registerBundles(): iterable
     {
-        return [];
+        return [new MigrifyKernelBundle()];
     }
 }

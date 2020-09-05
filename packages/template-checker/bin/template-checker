@@ -3,10 +3,9 @@
 
 declare(strict_types=1);
 
-use Migrify\EasyCI\Console\EasyCIApplication;
-use Migrify\EasyCI\HttpKernel\EasyCIKernel;
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 use Migrify\TemplateChecker\Console\TemplateCheckerApplication;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
+use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -25,12 +24,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$kernel = new EasyCIKernel($environment, InputDetector::isDebug());
-$kernel->boot();
-
-$container = $kernel->getContainer();
-
-$application = $container->get(TemplateCheckerApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(TemplateCheckerKernel::class);
+$kernelBootAndApplicationRun->run();

@@ -1,0 +1,22 @@
+{
+    "name": "migrify/migrify-kernel",
+    "description": "Kernel for small CLI applications",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.2",
+        "symfony/console": "^4.4|^5.1",
+        "symfony/dependency-injection": "^4.4|^5.1",
+        "symfony/http-kernel": "^4.4|^5.1",
+        "symplify/smart-file-system": "^8.2",
+        "symplify/package-builder": "^8.2",
+        "symplify/autowire-array-parameter": "^8.2"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\MigrifyKernel\\": "src"
+        }
+    }
+}

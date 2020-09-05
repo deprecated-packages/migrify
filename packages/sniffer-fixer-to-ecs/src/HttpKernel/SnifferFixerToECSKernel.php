@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS\HttpKernel;
 
+use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
 use Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 
 final class SnifferFixerToECSKernel extends Kernel
 {
@@ -33,11 +32,6 @@ final class SnifferFixerToECSKernel extends Kernel
      */
     public function registerBundles(): iterable
     {
-        return [new PhpConfigPrinterBundle()];
-    }
-
-    protected function build(ContainerBuilder $containerBuilder): void
-    {
-        $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
+        return [new PhpConfigPrinterBundle(), new MigrifyKernelBundle()];
     }
 }

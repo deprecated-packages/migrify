@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 use Migrify\NeonToYaml\Console\NeonToYamlApplication;
 use Migrify\NeonToYaml\HttpKernel\NeonToYamlKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
 
 # 1. autoload
 $possibleAutoloadPaths = [
@@ -26,12 +26,8 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 }
 
 # 2. create container
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$neonToYamlConverterKernel = new NeonToYamlKernel($environment, InputDetector::isDebug());
-$neonToYamlConverterKernel->boot();
-$container = $neonToYamlConverterKernel->getContainer();
-
-# 3. run it
-$application = $container->get(NeonToYamlApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(
+    NeonToYamlKernel::class,
+    NeonToYamlApplication::class
+);
+$kernelBootAndApplicationRun->run();

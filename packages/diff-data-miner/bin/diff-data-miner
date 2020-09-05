@@ -3,9 +3,8 @@
 
 declare(strict_types=1);
 
-use Migrify\DiffDataMiner\Console\DiffDataMinerApplication;
 use Migrify\DiffDataMiner\HttpKernel\DiffDataMinerKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -24,12 +23,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$kernel = new DiffDataMinerKernel($environment, InputDetector::isDebug());
-$kernel->boot();
-
-$container = $kernel->getContainer();
-
-$application = $container->get(DiffDataMinerApplication::class);
-exit($application->run());
+$diffDataMinerKernel = new KernelBootAndApplicationRun(DiffDataMinerKernel::class);
+$diffDataMinerKernel->run();

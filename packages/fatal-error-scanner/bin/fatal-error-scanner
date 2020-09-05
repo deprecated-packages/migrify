@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 use Migrify\FatalErrorScanner\Console\FatalErrorScannerApplication;
 use Migrify\FatalErrorScanner\HttpKernel\FatalErrorScannerKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -24,12 +24,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$kernel = new FatalErrorScannerKernel($environment, InputDetector::isDebug());
-$kernel->boot();
-
-$container = $kernel->getContainer();
-
-$application = $container->get(FatalErrorScannerApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(FatalErrorScannerKernel::class);
+$kernelBootAndApplicationRun->run();
