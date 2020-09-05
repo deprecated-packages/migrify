@@ -2,12 +2,7 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
-use Symplify\SmartFileSystem\Finder\FinderSanitizer;
-use Symplify\SmartFileSystem\SmartFileSystem;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
@@ -17,20 +12,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire();
 
     $services->load('Migrify\LatteToTwig\\', __DIR__ . '/../src')
-        ->exclude(
-            [
-                __DIR__ . '/../src/Contract',
-                __DIR__ . '/../src/Exception',
-                __DIR__ . '/../src/HttpKernel/LatteToTwigKernel.php',
-            ]
-        );
-
-    $services->set(SymfonyStyleFactory::class);
-
-    $services->set(SymfonyStyle::class)
-        ->factory([ref(SymfonyStyleFactory::class), 'create']);
-
-    $services->set(FinderSanitizer::class);
-
-    $services->set(SmartFileSystem::class);
+        ->exclude([
+            __DIR__ . '/../src/Contract',
+            __DIR__ . '/../src/Exception',
+            __DIR__ . '/../src/HttpKernel/LatteToTwigKernel.php',
+        ]);
 };

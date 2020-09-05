@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 use Migrify\SnifferFixerToECS\Console\SnifferFixerToECSApplication;
 use Migrify\SnifferFixerToECS\HttpKernel\SnifferFixerToECSKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -24,12 +24,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$kernel = new SnifferFixerToECSKernel($environment, InputDetector::isDebug());
-$kernel->boot();
-
-$container = $kernel->getContainer();
-
-$application = $container->get(SnifferFixerToECSApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(SnifferFixerToECSKernel::class);
+$kernelBootAndApplicationRun->run();

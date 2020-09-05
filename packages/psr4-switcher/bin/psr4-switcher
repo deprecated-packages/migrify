@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
+use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 use Migrify\Psr4Switcher\Console\Psr4SwitcherApplication;
 use Migrify\Psr4Switcher\HttpKernel\Psr4SwitcherKernel;
-use Symplify\PackageBuilder\Console\Input\InputDetector;
 
 $possibleAutoloadPaths = [
     // after split package
@@ -24,12 +24,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-// random has is needed, so cache is invalidated and changes from config are loaded
-$environment = 'prod' . random_int(1, 100000);
-$psr4SwitcherKernel = new Psr4SwitcherKernel($environment, InputDetector::isDebug());
-$psr4SwitcherKernel->boot();
-
-$container = $psr4SwitcherKernel->getContainer();
-
-$application = $container->get(Psr4SwitcherApplication::class);
-exit($application->run());
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(Psr4SwitcherKernel::class);
+$kernelBootAndApplicationRun->run();
