@@ -1,28 +1,31 @@
 {
-    "name": "migrify/php-config-printer",
-    "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
+    "name": "migrify/static-detector",
+    "description": "Detect static calls in your project",
     "license": "MIT",
+    "bin": [
+        "bin/static-detector"
+    ],
     "require": {
         "php": ">=7.2",
         "nette/utils": "^3.1",
+        "symfony/dependency-injection": "^4.4|^5.1",
+        "symfony/console": "^4.4|^5.1",
         "nikic/php-parser": "^4.9",
         "symfony/http-kernel": "^4.4|^5.1",
-        "symplify/autowire-array-parameter": "^8.2",
         "symplify/package-builder": "^8.2",
         "symplify/smart-file-system": "^8.2"
     },
     "require-dev": {
-        "symplify/easy-testing": "^8.2",
         "phpunit/phpunit": "^8.5|^9.0"
     },
     "autoload": {
         "psr-4": {
-            "Migrify\\PhpConfigPrinter\\": "src"
+            "Migrify\\StaticDetector\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Migrify\\PhpConfigPrinter\\Tests\\": "tests"
+            "Migrify\\StaticDetector\\Tests\\": "tests"
         }
     }
 }

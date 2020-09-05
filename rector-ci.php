@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
+use Rector\CodingStyle\Rector\MethodCall\UseMessageVariableForSprintfInSymfonyStyleRector;
 use Rector\Core\Configuration\Option;
-use Rector\Decomplex\Rector\MethodCall\UseMessageVariableForSprintfInSymfonyStyleRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Privatization\Rector\ClassMethod\PrivatizeLocalOnlyMethodRector;
 use Rector\Set\ValueObject\SetList;
@@ -44,7 +44,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services->set(UseMessageVariableForSprintfInSymfonyStyleRector::class);
-
     $services->set(StringClassNameToClassConstantRector::class)
-        ->arg('$classesToSkip', ['Exception']);
+        ->call('configure', [[
+            StringClassNameToClassConstantRector::CLASSES_TO_SKIP => ['Exception']
+        ]]);
 };
