@@ -13,7 +13,7 @@ composer require migrify/static-detector --dev
 ## Usage
 
 ```bash
-vendor/bin/sniffer-fixer-to-ecs detect src
+vendor/bin/static-detector detect src
 ```
 
 That's it :)
