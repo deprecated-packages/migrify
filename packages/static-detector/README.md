@@ -1,7 +1,6 @@
 # Static Detector
 
-[![Downloads total](https://img.shields.io/packagist/dt/migrify/static-detector.svg?style=flat-square)](https://packagist.org/package
-s/migrify/static-detector/stats)
+[![Downloads total](https://img.shields.io/packagist/dt/migrify/static-detector.svg?style=flat-square)](https://packagist.org/packages/migrify/static-detector/stats)
 
 Detect static and its calls in your project!
 
