@@ -3,7 +3,6 @@
 
 declare(strict_types=1);
 
-use Migrify\FatalErrorScanner\Console\FatalErrorScannerApplication;
 use Migrify\FatalErrorScanner\HttpKernel\FatalErrorScannerKernel;
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 

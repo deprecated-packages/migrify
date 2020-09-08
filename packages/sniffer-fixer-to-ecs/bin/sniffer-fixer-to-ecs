@@ -4,7 +4,6 @@
 declare(strict_types=1);
 
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
-use Migrify\SnifferFixerToECS\Console\SnifferFixerToECSApplication;
 use Migrify\SnifferFixerToECS\HttpKernel\SnifferFixerToECSKernel;
 
 $possibleAutoloadPaths = [

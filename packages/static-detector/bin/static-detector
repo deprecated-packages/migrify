@@ -4,7 +4,6 @@
 declare(strict_types=1);
 
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
-use Migrify\StaticDetector\Console\StaticDetectorApplication;
 use Migrify\StaticDetector\HttpKernel\StaticDetectorKernel;
 
 $possibleAutoloadPaths = [
@@ -24,5 +23,11 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(StaticDetectorKernel::class);
+$extraConfigs = [];
+$extraConfig = getcwd() . '/static-detector.php';
+if (file_exists($extraConfig)) {
+    $extraConfigs[] = $extraConfig;
+}
+
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(StaticDetectorKernel::class, $extraConfigs);
 $kernelBootAndApplicationRun->run();

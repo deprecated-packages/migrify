@@ -43,13 +43,14 @@ jobs:
                     -
                         name: 'Binary Files'
                         run: |
-                            packages/easy-ci/bin/easy-ci
-                            packages/class-presence/bin/class-presence
-                            packages/config-transformer/bin/config-transformer
-                            packages/latte-to-twig/bin/latte-to-twig
-                            packages/neon-to-yaml/bin/neon-to-yaml
-                            packages/vendor-patches/bin/vendor-patches
-                            packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs
+                            packages/easy-ci/bin/easy-ci --ansi
+                            packages/class-presence/bin/class-presence --ansi
+                            packages/config-transformer/bin/config-transformer --ansi
+                            packages/static-detector/bin/static-detector --ansi
+                            packages/latte-to-twig/bin/latte-to-twig --ansi
+                            packages/neon-to-yaml/bin/neon-to-yaml --ansi
+                            packages/vendor-patches/bin/vendor-patches --ansi
+                            packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs --ansi
 
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest

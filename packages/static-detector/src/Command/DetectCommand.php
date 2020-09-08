@@ -7,6 +7,7 @@ namespace Migrify\StaticDetector\Command;
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\Output\StaticReportReporter;
 use Migrify\StaticDetector\StaticScanner;
+use Migrify\StaticDetector\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -62,6 +64,11 @@ final class DetectCommand extends Command
      */
     private $staticReportReporter;
 
+    /**
+     * @var ParameterProvider
+     */
+    private $parameterProvider;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
@@ -69,7 +76,8 @@ final class DetectCommand extends Command
         FinderSanitizer $finderSanitizer,
         StaticScanner $staticScanner,
         StaticNodeCollector $staticNodeCollector,
-        StaticReportReporter $staticReportReporter
+        StaticReportReporter $staticReportReporter,
+        ParameterProvider $parameterProvider
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
@@ -80,6 +88,8 @@ final class DetectCommand extends Command
         $this->staticReportReporter = $staticReportReporter;
 
         parent::__construct();
+
+        $this->parameterProvider = $parameterProvider;
     }
 
     protected function configure(): void
@@ -97,6 +107,13 @@ final class DetectCommand extends Command
     {
         $source = $this->resolveSource($input);
         $fileInfos = $this->findPhpFilesInDirectories($source);
+
+        $filterClasses = (array) $this->parameterProvider->provideParameter(Option::FILTER_CLASSES);
+        foreach ($filterClasses as $filterClass) {
+            $message = sprintf('Filtering only "%s" classes', $filterClass);
+            $this->symfonyStyle->note($message);
+        }
+
         $this->staticScanner->scanFileInfos($fileInfos);
 
         $this->symfonyStyle->title('Static Report');
@@ -129,7 +146,8 @@ final class DetectCommand extends Command
 
         foreach ($source as $singleSource) {
             if (! $this->smartFileSystem->exists($singleSource)) {
-                throw new FileNotFoundException($singleSource);
+                $message = sprintf('Path "%s" was not found', $singleSource);
+                throw new FileNotFoundException($message);
             }
         }
 
