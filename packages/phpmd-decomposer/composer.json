@@ -24,5 +24,7 @@
         "psr-4": {
             "Migrify\\PHPMDDecomposer\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

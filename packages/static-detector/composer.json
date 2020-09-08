@@ -25,5 +25,7 @@
         "psr-4": {
             "Migrify\\StaticDetector\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

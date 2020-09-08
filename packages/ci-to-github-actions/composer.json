@@ -24,5 +24,7 @@
         "psr-4": {
             "Migrify\\CIToGithubActions\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

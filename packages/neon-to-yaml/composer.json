@@ -25,5 +25,7 @@
         "psr-4": {
             "Migrify\\NeonToYaml\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

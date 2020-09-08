@@ -26,5 +26,7 @@
         "psr-4": {
             "Migrify\\TemplateChecker\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

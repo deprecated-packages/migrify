@@ -18,5 +18,7 @@
         "psr-4": {
             "Migrify\\MigrifyKernel\\": "src"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -26,5 +26,7 @@
         "psr-4": {
             "Migrify\\FatalErrorScanner\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
