@@ -4,7 +4,6 @@
 declare(strict_types=1);
 
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
-use Migrify\NeonToYaml\Console\NeonToYamlApplication;
 use Migrify\NeonToYaml\HttpKernel\NeonToYamlKernel;
 
 # 1. autoload
@@ -26,8 +25,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 }
 
 # 2. create container
-$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(
-    NeonToYamlKernel::class,
-    NeonToYamlApplication::class
-);
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(NeonToYamlKernel::class);
 $kernelBootAndApplicationRun->run();

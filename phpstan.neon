@@ -78,3 +78,10 @@ parameters:
                  - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
                  - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
 
+        # resolve later
+        - '#Do not use static calls#'
+
+        -
+            message: '#Too many public elements on class \- 11\. Try narrow it down under 10#'
+            paths:
+                - 'packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php'

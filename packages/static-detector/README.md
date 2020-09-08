@@ -16,6 +16,26 @@ composer require migrify/static-detector --dev
 vendor/bin/static-detector detect src
 ```
 
+## Configuration
+
+Do you want to look only on specific classes? Just create `static-detector.php` config in your root and add filter them:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Migrify\StaticDetector\ValueObject\Option;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $parameters = $containerConfigurator->parameters();
+    $parameters->set(Option::FILTER_CLASSES, [
+        '*\\Helpers'
+    ]);
+};
+```
+
 That's it :)
 
 ## Report Issues
