@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\DiffDataMiner\Extractor;
 
-use Migrify\DiffDataMiner\Exception\ShouldNotHappenException;
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileSystem;
 

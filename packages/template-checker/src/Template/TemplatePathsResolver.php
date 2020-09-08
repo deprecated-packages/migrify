@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Template;
 
-use Migrify\TemplateChecker\Exception\ShouldNotHappenException;
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\TemplateChecker\Finder\TwigTemplateFinder;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;

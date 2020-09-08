@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS;
 
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\PhpConfigPrinter\YamlToPhpConverter;
-use Migrify\SnifferFixerToECS\Exception\ShouldNotHappenException;
 use Nette\Loaders\RobotLoader;
 use Nette\Utils\Strings;
 use PhpCsFixer\Config;

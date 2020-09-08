@@ -38,14 +38,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     $parameters->set(Option::EXCLUDE_RECTORS, [
-        UseInterfaceOverImplementationInConstructorRector::class, PrivatizeLocalOnlyMethodRector::class
+        UseInterfaceOverImplementationInConstructorRector::class,
+        PrivatizeLocalOnlyMethodRector::class,
+        StringClassNameToClassConstantRector::class,
     ]);
 
     $services = $containerConfigurator->services();
-
     $services->set(UseMessageVariableForSprintfInSymfonyStyleRector::class);
-    $services->set(StringClassNameToClassConstantRector::class)
-        ->call('configure', [[
-            StringClassNameToClassConstantRector::CLASSES_TO_SKIP => ['Exception']
-        ]]);
 };

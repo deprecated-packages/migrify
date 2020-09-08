@@ -3,6 +3,7 @@ includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/symplify/coding-standard/config/symplify-rules.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
 
 parameters:
     paths:
@@ -26,7 +27,6 @@ parameters:
         - '#has no return typehint specified#'
 
         - '#Call to an undefined method Psr\\Container\\ContainerInterface\:\:getParameter\(\)#'
-        - '#Method Migrify\\SymfonyRouteUsage\\EntityRepository\\RouteVisitRepository\:\:findByRouteHash\(\) should return Migrify\\SymfonyRouteUsage\\Entity\\RouteVisit\|null but returns object\|null#'
         - '#Parameter \#1 \$error_handler of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
         - '#Cannot cast array<string\>\|bool\|string\|null to string#'
         - '#Cannot cast array<string\>\|bool\|string\|null to int#'
@@ -71,12 +71,13 @@ parameters:
              message: '#Use default null value and nullable compare instead of isset on object#'
              path: 'packages/sniffer-fixer-to-ecs/src/SnifferToECSConverter.php'
 
-        # yaml
+        # yaml/neon
         -
             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
             paths:
                  - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
                  - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
+                 - 'packages/phpmd-decomposer/src/Printer/PHPStanPrinter.php'
 
         # resolve later
         - '#Do not use static calls#'
@@ -85,3 +86,9 @@ parameters:
             message: '#Too many public elements on class \- 11\. Try narrow it down under 10#'
             paths:
                 - 'packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php'
+
+        # not null, assert above
+        -
+            message: '#Parameter \#2 \$actualString of method PHPUnit\\Framework\\Assert\:\:assertStringEqualsFile\(\) expects string, string\|null given#'
+            paths:
+                - packages/phpmd-decomposer/tests/PHPMDDecomposer/PHPMDDecomposerTest.php
