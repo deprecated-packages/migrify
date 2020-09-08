@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS\Command;
 
-use Migrify\NeonToYaml\Exception\NotImplementedYetException;
+use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Migrify\SnifferFixerToECS\FixerToECSConverter;
 use Migrify\SnifferFixerToECS\SnifferToECSConverter;
 use Symfony\Component\Console\Command\Command;

@@ -8,6 +8,13 @@ includes:
 parameters:
     paths:
         - packages
+        - packages/easy-ci/bin/easy-ci
+        - packages/class-presence/bin/class-presence
+        - packages/config-transformer/bin/config-transformer
+        - packages/latte-to-twig/bin/latte-to-twig
+        - packages/neon-to-yaml/bin/neon-to-yaml
+        - packages/vendor-patches/bin/vendor-patches
+        - packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs
 
     level: max
     checkGenericClassInNonGenericObjectType: false
@@ -78,6 +85,9 @@ parameters:
                  - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
                  - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
                  - 'packages/phpmd-decomposer/src/Printer/PHPStanPrinter.php'
+                 # YAML
+                 - packages/ci-to-github-actions/src/CIToGithubActionsConverter/TravisToGithubActionsConverter.php
+                 - packages/ci-to-github-actions/src/Printer/GithubActionsToYAMLPrinter.php
 
         # resolve later
         - '#Do not use static calls#'

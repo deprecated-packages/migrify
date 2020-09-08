@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Migrify\TemplateChecker\HttpKernel;
+namespace Migrify\CIToGithubActions\HttpKernel;
 
 use Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-final class TemplateCheckerKernel extends AbstractMigrifyKernel
+final class CIToGithubActionsKernel extends AbstractMigrifyKernel
 {
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
