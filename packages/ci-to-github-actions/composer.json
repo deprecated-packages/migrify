@@ -1,0 +1,28 @@
+{
+    "name": "migrify/ci-to-github-actions",
+    "description": "Converts Travis CI, Gitlab CI... to Github Actions",
+    "license": "MIT",
+    "bin": [
+        "bin/ci-to-github-actions"
+    ],
+    "require": {
+        "php": ">=7.2",
+        "nette/utils": "^3.1",
+        "nette/neon": "^3.0",
+        "symfony/yaml": "^4.4|^5.1",
+        "migrify/migrify-kernel": "^0.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\CIToGithubActions\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\CIToGithubActions\\Tests\\": "tests"
+        }
+    }
+}

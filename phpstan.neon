@@ -8,6 +8,13 @@ includes:
 parameters:
     paths:
         - packages
+        - packages/easy-ci/bin/easy-ci
+        - packages/class-presence/bin/class-presence
+        - packages/config-transformer/bin/config-transformer
+        - packages/latte-to-twig/bin/latte-to-twig
+        - packages/neon-to-yaml/bin/neon-to-yaml
+        - packages/vendor-patches/bin/vendor-patches
+        - packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs
 
     level: max
     checkGenericClassInNonGenericObjectType: false

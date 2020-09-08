@@ -27,6 +27,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/ecs.php',
         __DIR__ . '/rector-ci.php',
         __DIR__ . '/monorepo-builder.php',
+        __DIR__ . '/packages/easy-ci/bin/easy-ci',
+        __DIR__ . '/packages/class-presence/bin/class-presence',
+        __DIR__ . '/packages/config-transformer/bin/config-transformer',
+        __DIR__ . '/packages/latte-to-twig/bin/latte-to-twig',
+        __DIR__ . '/packages/neon-to-yaml/bin/neon-to-yaml',
+        __DIR__ . '/packages/vendor-patches/bin/vendor-patches',
+        __DIR__ . '/packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs',
     ]);
 
     $parameters->set(Option::SKIP, [

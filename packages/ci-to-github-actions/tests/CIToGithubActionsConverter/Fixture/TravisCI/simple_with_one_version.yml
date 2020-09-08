@@ -1,0 +1,15 @@
+language: php
+
+php:
+    - 7.4
+-----
+jobs:
+    default:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@v2
+            -
+                uses: shivammathur/setup-php@v2.5
+                with:
+                    php-version: 7.4
