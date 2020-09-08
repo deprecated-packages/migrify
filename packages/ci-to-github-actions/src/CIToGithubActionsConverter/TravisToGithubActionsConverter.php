@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions;
+namespace Migrify\CIToGithubActions\CIToGithubActionsConverter;
 
 use Migrify\CIToGithubActions\Printer\GithubActionsToYAMLPrinter;
 use Migrify\CIToGithubActions\ValueObject\GithubActions;
@@ -12,7 +12,10 @@ use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class CIToGithubActionsConverter
+/**
+ * @see \Migrify\CIToGithubActions\Tests\CIToGithubActionsConverter\TravisToGithubActionsConverter\TravisToGithubActionsConverterTest
+ */
+final class TravisToGithubActionsConverter
 {
     /**
      * @var GithubActionsToYAMLPrinter
@@ -31,16 +34,30 @@ final class CIToGithubActionsConverter
 
         $this->ensureInputIsPHPTravis($yaml);
 
-        $githubActions = $this->createGithubActions();
+        $githubActions = $this->createGithubActions($yaml);
 
         return $this->githubActionsToYAMLPrinter->print($githubActions);
     }
 
-    private function createGithubActions(): GithubActions
+    /**
+     * @param mixed[] $yaml
+     */
+    private function createGithubActions(array $yaml): GithubActions
     {
         // now we know that checkout + PHP version actions are needed
         $jobs = [];
-        $steps = [new Step('actions/checkout@v2'), new Step('shivammathur/setup-php@v2.5')];
+        $steps = [new Step('actions/checkout@v2')];
+
+        $phpVersions = (array) ($yaml['php'] ?? []);
+        if (count($phpVersions) === 1) {
+            $withs = [
+                'php-version' => $phpVersions[0],
+            ];
+
+            $steps[] = new Step('shivammathur/setup-php@v2.5', $withs);
+        } else {
+            $steps[] = new Step('shivammathur/setup-php@v2.5');
+        }
 
         $jobs[] = new Job('default', $steps);
 

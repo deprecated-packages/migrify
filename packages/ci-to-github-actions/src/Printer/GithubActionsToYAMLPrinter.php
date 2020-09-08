@@ -16,7 +16,15 @@ final class GithubActionsToYAMLPrinter
         foreach ($githubActions->getJobs() as $job) {
             $jobSteps = [];
             foreach ($job->getSteps() as $jobStep) {
-                $jobSteps[]['uses'] = $jobStep->getUses();
+                $singleStep = [
+                    'uses' => $jobStep->getUses(),
+                ];
+
+                if ($jobStep->getWiths() !== []) {
+                    $singleStep['with'] = $jobStep->getWiths();
+                }
+
+                $jobSteps[] = $singleStep;
             }
 
             $data['jobs'][$job->getName()] = [

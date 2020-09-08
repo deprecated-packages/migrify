@@ -1,48 +1,11 @@
-# Neon to Yaml Converter
+# CI To GitHub Actions
 
 [![Downloads total](https://img.shields.io/packagist/dt/migrify/ci-to-github-actions.svg?style=flat-square)](https://packagist.org/packages/migrify/ci-to-github-actions/stats)
 
-Do you want to turn your [Neon](https://ne-on.org/) templates to [Yaml](https://symfony.com/doc/current/components/yaml.html)? There are [many differences](https://www.tomasvotruba.cz/blog/2018/03/12/neon-vs-yaml-and-how-to-migrate-between-them/) you need to watch out for.
+Converts Travis CI, Gitlab CI... to Github Actions
 
-This tool automates it :)
-
-**Before**
-
-```yaml
-includes:
-    - another-config.neon
-
-parameters:
-    perex: '''
-        This is long multiline perex,
-that takes too much space.
-'''
-
-services:
-    - App\SomeService(@anotherService, %perex%)
-```
-
-**After**
-
-```yaml
-imports:
-    - { resource: another-config.yaml }
-
-parameters:
-    perex: |
-        This is long multiline perex,
-        that takes too much space.
-
-services:
-    App\SomeService:
-        arguments:
-            - '@anotherService'
-            - '%perex%'
-```
-
-And much more!
-
-This package won't do it all for you, but **it will help you with 90 % of the boring work**.
+- [Switch Travis to GitHub Actions to Reduce Stress](https://tomasvotruba.com/blog/2020/01/27/switch-travis-to-github-actions-to-reduce-stress/)
+- [Moving from Travis to Github Actions](https://github.com/anapaulagomes/from-travis-to-github-actions) (GitHub repo Guide)
 
 ## Install
 
@@ -52,11 +15,8 @@ composer require migrify/ci-to-github-actions --dev
 
 ## Usage
 
-It scan all the `*.(yml|yaml|neon)` files and converts Neon syntax to Yaml and `*.yaml` file.
-
 ```bash
-vendor/bin/ci-to-github-actions convert file.neon
-vendor/bin/ci-to-github-actions convert /directory
+vendor/bin/ci-to-github-actions convert .travis-ci.yml
 ```
 
 That's it :)

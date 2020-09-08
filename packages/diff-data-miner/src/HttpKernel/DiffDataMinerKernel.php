@@ -4,33 +4,13 @@ declare(strict_types=1);
 
 namespace Migrify\DiffDataMiner\HttpKernel;
 
-use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
+use Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Symfony\Component\HttpKernel\Kernel;
 
-final class DiffDataMinerKernel extends Kernel
+final class DiffDataMinerKernel extends AbstractMigrifyKernel
 {
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
-    }
-
-    public function getCacheDir(): string
-    {
-        return sys_get_temp_dir() . '/diff_data_miner';
-    }
-
-    public function getLogDir(): string
-    {
-        return sys_get_temp_dir() . '/diff_data_miner_log';
-    }
-
-    /**
-     * @return BundleInterface[]
-     */
-    public function registerBundles(): iterable
-    {
-        return [new MigrifyKernelBundle()];
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\CIToGithubActions\Command;
 
-use Migrify\CIToGithubActions\CIToGithubActionsConverter;
+use Migrify\CIToGithubActions\CIToGithubActionsConverter\TravisToGithubActionsConverter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,9 +29,9 @@ final class ConvertCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var CIToGithubActionsConverter
+     * @var TravisToGithubActionsConverter
      */
-    private $ciToGithubActionConverter;
+    private $travisToGithubActionsConverter;
 
     /**
      * @var SmartFileSystem
@@ -44,7 +44,7 @@ final class ConvertCommand extends Command
     private $fileSystemGuard;
 
     public function __construct(
-        CIToGithubActionsConverter $neonToYamlConverter,
+        TravisToGithubActionsConverter $travisToGithubActionsConverter,
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
         FileSystemGuard $fileSystemGuard
@@ -52,7 +52,7 @@ final class ConvertCommand extends Command
         parent::__construct();
 
         $this->symfonyStyle = $symfonyStyle;
-        $this->ciToGithubActionConverter = $neonToYamlConverter;
+        $this->travisToGithubActionsConverter = $travisToGithubActionsConverter;
         $this->smartFileSystem = $smartFileSystem;
         $this->fileSystemGuard = $fileSystemGuard;
     }
@@ -70,11 +70,11 @@ final class ConvertCommand extends Command
         $this->fileSystemGuard->ensureFileExists($source, __METHOD__);
 
         $inputFileInfo = new SmartFileInfo($source);
-        $convertedContent = $this->ciToGithubActionConverter->convert($inputFileInfo);
+        $convertedContent = $this->travisToGithubActionsConverter->convert($inputFileInfo);
 
-        $configDirectory = $inputFileInfo->getPathname();
+        $pathname = $inputFileInfo->getPathname();
 
-        $codeChecksWorkflowFilePath = $configDirectory . '/.github/workflows/code_checks.yaml';
+        $codeChecksWorkflowFilePath = $pathname . '/.github/workflows/code_checks.yaml';
         $this->smartFileSystem->dumpFile($convertedContent, $codeChecksWorkflowFilePath);
 
         $message = sprintf('File %s was created', $codeChecksWorkflowFilePath);

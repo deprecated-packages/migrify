@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\Tests\CIToGithubActionsConverter;
+namespace Migrify\CIToGithubActions\Tests\CIToGithubActionsConverter\TravisToGithubActionsConverter;
 
 use Iterator;
-use Migrify\CIToGithubActions\CIToGithubActionsConverter;
+use Migrify\CIToGithubActions\CIToGithubActionsConverter\TravisToGithubActionsConverter;
 use Migrify\CIToGithubActions\HttpKernel\CIToGithubActionsKernel;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class TravisCIToGithubActionsConverterTest extends AbstractKernelTestCase
+final class TravisToGithubActionsConverterTest extends AbstractKernelTestCase
 {
     /**
-     * @var CIToGithubActionsConverter
+     * @var TravisToGithubActionsConverter
      */
-    private $ciToGithubActionsConverter;
+    private $travisToGithubActionsConverter;
 
     protected function setUp(): void
     {
         $this->bootKernel(CIToGithubActionsKernel::class);
-        $this->ciToGithubActionsConverter = self::$container->get(CIToGithubActionsConverter::class);
+        $this->travisToGithubActionsConverter = self::$container->get(TravisToGithubActionsConverter::class);
     }
 
     /**
@@ -34,7 +34,7 @@ final class TravisCIToGithubActionsConverterTest extends AbstractKernelTestCase
             $fixtureFileInfo
         );
 
-        $convertedFileContent = $this->ciToGithubActionsConverter->convert(
+        $convertedFileContent = $this->travisToGithubActionsConverter->convert(
             $inputAndExpectedFileInfo->getInputFileInfo()
         );
 
@@ -47,6 +47,6 @@ final class TravisCIToGithubActionsConverterTest extends AbstractKernelTestCase
 
     public function provideData(): Iterator
     {
-        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture/TravisCI', '*.yml');
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.yml');
     }
 }

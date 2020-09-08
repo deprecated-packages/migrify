@@ -85,6 +85,9 @@ parameters:
                  - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
                  - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
                  - 'packages/phpmd-decomposer/src/Printer/PHPStanPrinter.php'
+                 # YAML
+                 - packages/ci-to-github-actions/src/CIToGithubActionsConverter/TravisToGithubActionsConverter.php
+                 - packages/ci-to-github-actions/src/Printer/GithubActionsToYAMLPrinter.php
 
         # resolve later
         - '#Do not use static calls#'
