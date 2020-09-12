@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Migrify\TemplateChecker\Template;
 
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
-use Migrify\TemplateChecker\Finder\TwigTemplateFinder;
+use Migrify\TemplateChecker\Finder\GenericFilesFinder;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class TemplatePathsResolver
 {
     /**
-     * @var TwigTemplateFinder
+     * @var GenericFilesFinder
      */
-    private $twigTemplateFinder;
+    private $genericFilesFinder;
 
-    public function __construct(TwigTemplateFinder $twigTemplateFinder)
+    public function __construct(GenericFilesFinder $genericFilesFinder)
     {
-        $this->twigTemplateFinder = $twigTemplateFinder;
+        $this->genericFilesFinder = $genericFilesFinder;
     }
 
     /**
@@ -27,8 +27,7 @@ final class TemplatePathsResolver
      */
     public function resolveFromDirectories(array $directories): array
     {
-        $twigTemplateFileInfos = $this->twigTemplateFinder->findInDirectories($directories);
-
+        $twigTemplateFileInfos = $this->genericFilesFinder->find($directories, '*.twig');
         return $this->resolveTemplatePathsWithBundle($twigTemplateFileInfos);
     }
 

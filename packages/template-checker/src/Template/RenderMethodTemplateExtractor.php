@@ -19,9 +19,9 @@ final class RenderMethodTemplateExtractor
 
     /**
      * @param SmartFileInfo[] $controllerFileInfos
-     * @return string[][]
+     * @return array<string, string[]>
      */
-    public function extractFromFileInfos(array $controllerFileInfos)
+    public function extractFromFileInfos(array $controllerFileInfos): array
     {
         $usedTemplatePathsByControllerPath = [];
         foreach ($controllerFileInfos as $controllerFileInfo) {

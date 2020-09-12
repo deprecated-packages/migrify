@@ -12,8 +12,30 @@ composer require migrify/template-checker --dev
 
 ## Usage
 
+### Check Latte Templates
+
+- for existing classes
+- for existing class constants
+- for existing static calls
+
 ```bash
-vendor/bin/template-checker ...
+vendor/bin/template-checker check-latte-template templates 
+```
+
+### Check Twig Controller Paths
+
+```php
+final class SomeController
+{
+    public function index()
+    {
+        return $this->render('does_path_exist.twig');
+    }
+}
+```
+
+```bash
+vendor/bin/template-checker check-twig-render src/Controller 
 ```
 
 ## Report Issues
