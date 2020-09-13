@@ -25,7 +25,9 @@ final class LatteFilterPersistenceTest extends TestCase
         $this->latteEngine = new Engine();
 
         $plusFilterProvider = new PlusFilterProvider();
+
         $this->latteEngine->addFilter($plusFilterProvider->getName(), $plusFilterProvider);
+        $this->latteEngine->addFunction($plusFilterProvider->getName(), $plusFilterProvider);
     }
 
     /**
@@ -49,7 +51,10 @@ final class LatteFilterPersistenceTest extends TestCase
     public function provideData(): Iterator
     {
         yield [__DIR__ . '/Fixture/latte_filter.latte', __DIR__ . '/Fixture/latte_static_call.latte', '7'];
-
         yield [__DIR__ . '/Fixture/latte_filter_with_bracket.latte', __DIR__ . '/Fixture/latte_static_call.latte', '7'];
+        yield [__DIR__ . '/Fixture/latte_filter_around.latte', __DIR__ . '/Fixture/latte_static_call.latte', '7'];
+
+        // function approach
+        yield [__DIR__ . '/Fixture/latte_function.latte', __DIR__ . '/Fixture/latte_static_call.latte', '7'];
     }
 }
