@@ -57,7 +57,7 @@ final class LatteStaticCallAnalyzer
     private function filterOutAllowedStaticClasses(array $matches): array
     {
         return array_filter($matches, static function (array $match): bool {
-            return ! ($match['class'] === Strings::class);
+            return $match['class'] !== Strings::class;
         });
     }
 }
