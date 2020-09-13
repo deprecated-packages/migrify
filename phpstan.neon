@@ -23,6 +23,7 @@ parameters:
     excludes_analyse:
         # tests
         - 'packages/vendor-patches/tests/Finder/*'
+        - 'packages/template-checker/tests/PhpParser/LatteFilterProviderGenerator/Source/SomeHelper.php'
 
     ignoreErrors:
         - '#(.*?) return type has no value type specified in iterable type array#'
@@ -73,6 +74,8 @@ parameters:
 
         - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
 
+        # tests
+
         # xml
         -
              message: '#Use default null value and nullable compare instead of isset on object#'
@@ -102,3 +105,7 @@ parameters:
             message: '#Parameter \#2 \$actualString of method PHPUnit\\Framework\\Assert\:\:assertStringEqualsFile\(\) expects string, string\|null given#'
             paths:
                 - packages/phpmd-decomposer/tests/PHPMDDecomposer/PHPMDDecomposerTest.php
+
+
+        # false positive
+        - '#Parameter \#1 \$type of method PhpParser\\Builder\\FunctionLike\:\:setReturnType\(\) expects PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|string, PhpParser\\Node\\Identifier\|PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|PhpParser\\Node\\UnionType given#'

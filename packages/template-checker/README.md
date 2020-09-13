@@ -38,6 +38,53 @@ final class SomeController
 vendor/bin/template-checker check-twig-render src/Controller 
 ```
 
+### Extract Static Calls from Latte Templates to FilterProvider
+
+Do you have a static call in your template? It's a hidden filter. Let's decouple it so we can use DI and services as in the rest of project:
+
+```bash
+vendor/bin/template-checker extract-latte-static-call-to-filter templates
+```
+
+But that's just a dry run... how to apply changes?
+
+```bash 
+vendor/bin/template-checker extract-latte-static-call-to-filter templates --fix 
+```
+
+What happens? The static call will be replaced by a Latte filter:
+
+```diff
+ # any latte file
+-{\App\SomeClass::someStaticMethod($value)}
++{$value|someStaticMethod}
+```
+
+The filter will be provided 
+
+```php
+<?php
+
+final class SomeMethodFilterProvider implements \App\Contract\Latte\FilterProviderInterface
+{
+    public const FILTER_NAME = 'someMethod';
+    
+    public function getName() : string
+    {
+        return self::FILTER_NAME;
+    }
+
+    public function __invoke(string $name) : int
+    {
+        return \App\SomeClass::someStaticMethod($name);
+    }
+}
+```
+
+The file will be generated into `/generated` directory. Just rename namespaces and copy it to your workflow.   
+
+Do you want to know more about **clean Latte filters**? Read [How to Get Rid of Magic, Static and Chaos from Latte Filters](https://tomasvotruba.com/blog/2020/08/17/how-to-get-rid-of-magic-static-and-chaos-from-latte-filters/)  
+
 ## Report Issues
 
 In case you are experiencing a bug or want to request a new feature head over to the [migrify monorepo issue tracker](https://github.com/migrify/migrify/issues)
