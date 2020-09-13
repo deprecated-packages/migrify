@@ -4,7 +4,6 @@
 declare(strict_types=1);
 
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
-use Migrify\TemplateChecker\Console\TemplateCheckerApplication;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 
 $possibleAutoloadPaths = [
@@ -22,6 +21,12 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 
         break;
     }
+}
+
+// autoload project
+$projectAutoloadFile = getcwd() . '/vendor/autoload.php';
+if (file_exists($projectAutoloadFile)) {
+    require_once $projectAutoloadFile;
 }
 
 $kernelBootAndApplicationRun = new KernelBootAndApplicationRun(TemplateCheckerKernel::class);

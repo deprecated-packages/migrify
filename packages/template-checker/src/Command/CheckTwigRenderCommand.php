@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Command;
 
-use Migrify\TemplateChecker\Finder\ControllerFinder;
+use Migrify\TemplateChecker\Finder\GenericFilesFinder;
 use Migrify\TemplateChecker\Template\RenderMethodTemplateExtractor;
 use Migrify\TemplateChecker\Template\TemplatePathsResolver;
 use Migrify\TemplateChecker\ValueObject\Option;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class CheckRenderTemplateCommand extends Command
+final class CheckTwigRenderCommand extends Command
 {
     /**
      * @var SymfonyStyle
@@ -34,20 +34,20 @@ final class CheckRenderTemplateCommand extends Command
     private $renderMethodTemplateExtractor;
 
     /**
-     * @var ControllerFinder
+     * @var GenericFilesFinder
      */
-    private $controllerFinder;
+    private $genericFilesFinder;
 
     public function __construct(
         SymfonyStyle $symfonyStyle,
         TemplatePathsResolver $possibleTemplatePathsResolver,
-        ControllerFinder $controllerFinder,
+        GenericFilesFinder $genericFilesFinder,
         RenderMethodTemplateExtractor $renderMethodTemplateExtractor
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->possibleTemplatePathsResolver = $possibleTemplatePathsResolver;
-        $this->controllerFinder = $controllerFinder;
         $this->renderMethodTemplateExtractor = $renderMethodTemplateExtractor;
+        $this->genericFilesFinder = $genericFilesFinder;
 
         parent::__construct();
     }
@@ -57,7 +57,7 @@ final class CheckRenderTemplateCommand extends Command
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Validate template paths in $this->render(...)');
         $this->addArgument(
-            Option::SOURCE,
+            Option::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
             'Path to project directories'
         );
@@ -65,17 +65,17 @@ final class CheckRenderTemplateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var string[] $source */
-        $source = (array) $input->getArgument(Option::SOURCE);
+        /** @var string[] $sources */
+        $sources = (array) $input->getArgument(Option::SOURCES);
 
         $this->symfonyStyle->title('Analysing controllers and templates');
 
         $stats = [];
 
-        $controllerFileInfos = $this->controllerFinder->findInDirectories($source);
+        $controllerFileInfos = $this->genericFilesFinder->find($sources, '#Controller\.php$#');
         $stats[] = sprintf('%d controllers', count($controllerFileInfos));
 
-        $allowedTemplatePaths = $this->possibleTemplatePathsResolver->resolveFromDirectories($source);
+        $allowedTemplatePaths = $this->possibleTemplatePathsResolver->resolveFromDirectories($sources);
         $stats[] = sprintf('%d twig paths', count($allowedTemplatePaths));
 
         $usedTemplatePaths = $this->renderMethodTemplateExtractor->extractFromFileInfos($controllerFileInfos);

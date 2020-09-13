@@ -1,0 +1,5 @@
+{foreach [Migrify\TemplateChecker\Tests\Analyzer\MissingClassConstantLatteAnalyzer\Source\ExistingClass::EXISTING_CONSTANT, \Migrify\TemplateChecker\Tests\Analyzer\MissingClassConstantLatteAnalyzer\Source\ExistingClass::EXISTING_CONSTANT] AS $room_type}
+
+<div n:class="$room_type !== Migrify\TemplateChecker\Tests\Analyzer\MissingClassConstantLatteAnalyzer\Source\ExistingClass::EXISTING_CONSTANT ? 'u-mt-medium'"></div>
+
+{$some::CONSTANT_NAME}
