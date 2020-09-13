@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\TemplateChecker;
 
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
+use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -57,7 +58,7 @@ final class LatteStaticCallAnalyzer
     private function filterOutAllowedStaticClasses(array $matches): array
     {
         return array_filter($matches, static function (array $match): bool {
-            return $match['class'] !== Strings::class;
+            return ! in_array($match['class'], [Strings::class, DateTime::class], true);
         });
     }
 }
