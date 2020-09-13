@@ -14,16 +14,17 @@ final class StaticCallWithFilterReplacer
 {
     /**
      * @var string
-     * @see https://regex101.com/r/mDzFKI/2
+     * @see https://regex101.com/r/7lImz9/3
+     * @see https://stackoverflow.com/a/35271017/1348344 for bracket matching on arguments
      */
-    private const STATIC_CALL_PATTERN = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((.*?)?\)#m';
+    private const STATIC_CALL_PATTERN = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((?<arguments>(?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*)\)#m';
 
     public function processFileInfo(SplFileInfo $fileInfo): string
     {
         $contents = $fileInfo->getContents();
 
         return Strings::replace($contents, self::STATIC_CALL_PATTERN, static function (array $match) {
-            return '(' . $match['3'] . '|' . $match['method'] . ')';
+            return $match['method'] . '(' . $match['arguments'] . ')';
         });
     }
 }
