@@ -29,6 +29,7 @@ final class LatteFilterPersistenceTest extends TestCase
     }
 
     /**
+     * Fixture testing is based on @see https://github.com/symplify/easy-testing
      * @dataProvider provideData()
      */
     public function testFilter(

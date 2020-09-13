@@ -31,11 +31,20 @@ final class LatteFilterProviderGenerator
      */
     private const NAMESPACE_NAME = 'App\Latte\FilterProvider';
 
-    private Standard $printerStandard;
+    /**
+     * @var Standard
+     */
+    private $printerStandard;
 
-    private InvokeClassMethodFactory $invokeClassMethodFactory;
+    /**
+     * @var InvokeClassMethodFactory
+     */
+    private $invokeClassMethodFactory;
 
-    private GetNameClassMethodFactory $getNameClassMethodFactory;
+    /**
+     * @var GetNameClassMethodFactory
+     */
+    private $getNameClassMethodFactory;
 
     public function __construct(
         Standard $printerStandard,
