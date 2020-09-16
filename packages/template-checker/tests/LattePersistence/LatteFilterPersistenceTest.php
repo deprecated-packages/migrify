@@ -7,6 +7,8 @@ namespace Migrify\TemplateChecker\Tests\LattePersistence;
 use Iterator;
 use Latte\Engine;
 use Migrify\TemplateChecker\Tests\LattePersistence\Source\PlusFilterProvider;
+use Migrify\TemplateChecker\Tests\LattePersistence\Source\SomePresenter;
+use Nette\Bridges\ApplicationLatte\UIMacros;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,6 +25,11 @@ final class LatteFilterPersistenceTest extends TestCase
     protected function setUp(): void
     {
         $this->latteEngine = new Engine();
+
+        // install nette/application macros, so we have {link} available
+        UIMacros::install($this->latteEngine->getCompiler());
+        $this->latteEngine->addProvider('uiControl', new SomePresenter());
+        $this->latteEngine->addProvider('uiPresenter', new SomePresenter());
 
         $plusFilterProvider = new PlusFilterProvider();
 
@@ -63,6 +70,16 @@ final class LatteFilterPersistenceTest extends TestCase
 
     public function provideDataInArray(): Iterator
     {
-        yield [__DIR__ . '/Fixture/latte_function_in_array.latte', __DIR__ . '/Fixture/latte_static_call_in_array.latte', '100:7'];
+        yield [
+            __DIR__ . '/Fixture/latte_function_in_array.latte',
+            __DIR__ . '/Fixture/latte_static_call_in_array.latte',
+            '100:7',
+        ];
+
+        yield [
+            __DIR__ . '/Fixture/latte_link_function_in_array.latte',
+            __DIR__ . '/Fixture/latte_link_static_call_in_array.latte',
+            'article/7',
+        ];
     }
 }

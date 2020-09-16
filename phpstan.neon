@@ -119,5 +119,4 @@ parameters:
             paths:
                 # false positive
                 - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
-                - packages/vendor-patches/src/FileSystem/PathResolver.php # 16
 

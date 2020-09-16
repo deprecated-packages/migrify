@@ -46,7 +46,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         CommentedOutCodeSniff::class => [
             __DIR__ . '/packages/latte-to-twig/src/CaseConverter/*',
         ],
-        \PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer::class => null,
     ]);
 
     $services = $containerConfigurator->services();
