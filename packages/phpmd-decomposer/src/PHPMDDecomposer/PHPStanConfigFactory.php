@@ -14,7 +14,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Migrify\PHPMDDecomposer\Tests\PHPMDDecomposer\PHPStanPHPMDDecomposer\PHPStanPHPMDDecomposerTest
  */
-final class PHPStanPHPMDDecomposer extends AbstractPHPMDDecomposer
+final class PHPStanConfigFactory extends AbstractConfigFactory
 {
     /**
      * @var string

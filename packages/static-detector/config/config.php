@@ -19,11 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire();
 
     $services->load('Migrify\StaticDetector\\', __DIR__ . '/../src')
-        ->exclude([
-            __DIR__ . '/../src/Exception',
-            __DIR__ . '/../src/ValueObject',
-            __DIR__ . '/../src/HttpKernel/StaticDetectorKernel.php',
-        ]);
+        ->exclude([__DIR__ . '/../src/ValueObject', __DIR__ . '/../src/HttpKernel/StaticDetectorKernel.php']);
 
     $services->set(StaticCollectNodeTraverser::class)
         ->factory([ref(StaticCollectNodeTraverserFactory::class), 'create']);
