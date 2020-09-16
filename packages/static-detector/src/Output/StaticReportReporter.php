@@ -40,6 +40,7 @@ final class StaticReportReporter
             // report usages
 
             if ($staticClassMethodWithStaticCalls->getStaticCalls() !== []) {
+                $this->symfonyStyle->newLine();
                 $this->symfonyStyle->writeln('Static calls in the code:');
 
                 $this->symfonyStyle->listing($staticClassMethodWithStaticCalls->getStaticCallsFilePathsWithLines());
