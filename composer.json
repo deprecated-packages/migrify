@@ -38,6 +38,7 @@
         "doctrine/orm": "^2.7",
         "latte/latte": "^2.8",
         "nette/application": "^3.0",
+        "nette/php-generator": "^3.4",
         "phalcon/cphalcon": "^4.0",
         "phpstan/phpstan": "^0.12.38",
         "phpstan/phpstan-phpunit": "^0.12.16",

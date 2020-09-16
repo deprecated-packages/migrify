@@ -33,6 +33,7 @@ final class LatteFilterPersistenceTest extends TestCase
     /**
      * Fixture testing is based on @see https://github.com/symplify/easy-testing
      * @dataProvider provideData()
+     * @dataProvider provideDataInArray()
      */
     public function testFilter(
         string $inputFilterFilePath,
@@ -41,10 +42,12 @@ final class LatteFilterPersistenceTest extends TestCase
     ): void {
         $result = $this->latteEngine->renderToString($inputFilterFilePath);
         $contentWithoutSpaces = trim($result);
+
         $this->assertSame($expectedContent, $contentWithoutSpaces);
 
         $result = $this->latteEngine->renderToString($inputStaticCallFilePath);
         $contentWithoutSpaces = trim($result);
+
         $this->assertSame($expectedContent, $contentWithoutSpaces);
     }
 
@@ -56,5 +59,10 @@ final class LatteFilterPersistenceTest extends TestCase
 
         // function approach
         yield [__DIR__ . '/Fixture/latte_function.latte', __DIR__ . '/Fixture/latte_static_call.latte', '7'];
+    }
+
+    public function provideDataInArray(): Iterator
+    {
+        yield [__DIR__ . '/Fixture/latte_function_in_array.latte', __DIR__ . '/Fixture/latte_static_call_in_array.latte', '100:7'];
     }
 }
