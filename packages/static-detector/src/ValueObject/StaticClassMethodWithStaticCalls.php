@@ -60,6 +60,11 @@ final class StaticClassMethodWithStaticCalls
         return $this->staticCallsFilePathsWithLines;
     }
 
+    public function getStaticCallsCount(): int
+    {
+        return count($this->staticCallsFilePathsWithLines);
+    }
+
     /**
      * @param Node[] $nodes
      * @return string[]
