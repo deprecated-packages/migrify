@@ -27,7 +27,7 @@ final class MigrifyStrings
 
         $this->lastSlashPosition = null;
 
-        for ($i = 0; $i < strlen($first); $i++) {
+        for ($i = 0; $i < strlen($first); ++$i) {
             foreach ($strings as $string) {
                 $string = $this->normalizePath($string);
 

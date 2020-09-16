@@ -109,3 +109,14 @@ parameters:
 
         # false positive
         - '#Parameter \#1 \$type of method PhpParser\\Builder\\FunctionLike\:\:setReturnType\(\) expects PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|string, PhpParser\\Node\\Identifier\|PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|PhpParser\\Node\\UnionType given#'
+
+
+        # total mess
+        - '#Use local named constant instead of inline string for regex to explain meaning by constant name#'
+
+        -
+            message: '#Add regex101\.org link to that shows the regex in practise, so it will be easier to maintain in case of bug/extension in the future#'
+            paths:
+                # false positive
+                - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
+

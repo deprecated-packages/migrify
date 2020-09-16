@@ -14,7 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure();
 
     $services->load('Migrify\DiffDataMiner\\', __DIR__ . '/../src')
-        ->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/Exception']);
+        ->exclude([__DIR__ . '/../src/HttpKernel']);
 
     $services->set(SmartFileSystem::class);
 };

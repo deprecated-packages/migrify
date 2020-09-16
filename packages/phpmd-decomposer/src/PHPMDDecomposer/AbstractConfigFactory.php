@@ -7,7 +7,7 @@ namespace Migrify\PHPMDDecomposer\PHPMDDecomposer;
 use DOMDocument;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-abstract class AbstractPHPMDDecomposer
+abstract class AbstractConfigFactory
 {
     protected function createDOMDocumentFromXmlFileInfo(SmartFileInfo $smartFileInfo): DOMDocument
     {

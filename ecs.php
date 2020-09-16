@@ -45,7 +45,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         CommentedOutCodeSniff::class => [
             __DIR__ . '/packages/latte-to-twig/src/CaseConverter/*',
-        ]
+        ],
     ]);
 
     $services = $containerConfigurator->services();

@@ -6,7 +6,7 @@ namespace Migrify\PHPMDDecomposer\Tests\PHPMDDecomposer\PHPStanPHPMDDecomposer;
 
 use Iterator;
 use Migrify\PHPMDDecomposer\HttpKernel\PHPMDDecomposerKernel;
-use Migrify\PHPMDDecomposer\PHPMDDecomposer\PHPStanPHPMDDecomposer;
+use Migrify\PHPMDDecomposer\PHPMDDecomposer\PHPStanConfigFactory;
 use Migrify\PHPMDDecomposer\Printer\PHPStanPrinter;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\DataProvider\StaticFixtureUpdater;
@@ -17,9 +17,9 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class PHPStanPHPMDDecomposerTest extends AbstractKernelTestCase
 {
     /**
-     * @var PHPStanPHPMDDecomposer
+     * @var PHPStanConfigFactory
      */
-    private $phpStanPHPMDDecomposer;
+    private $phpStanConfigFactory;
 
     /**
      * @var PHPStanPrinter
@@ -29,7 +29,7 @@ final class PHPStanPHPMDDecomposerTest extends AbstractKernelTestCase
     protected function setUp(): void
     {
         self::bootKernel(PHPMDDecomposerKernel::class);
-        $this->phpStanPHPMDDecomposer = self::$container->get(PHPStanPHPMDDecomposer::class);
+        $this->phpStanConfigFactory = self::$container->get(PHPStanConfigFactory::class);
         $this->phpStanPrinter = self::$container->get(PHPStanPrinter::class);
     }
 
@@ -44,7 +44,7 @@ final class PHPStanPHPMDDecomposerTest extends AbstractKernelTestCase
             $fixtureFileInfo
         );
 
-        $phpStanConfig = $this->phpStanPHPMDDecomposer->decompose(
+        $phpStanConfig = $this->phpStanConfigFactory->decompose(
             $inputFileInfoAndExpectedFileInfo->getInputFileInfo()
         );
 
