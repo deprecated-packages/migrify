@@ -11,9 +11,13 @@ use PhpParser\Builder\Class_ as ClassBuilder;
 use PhpParser\Builder\Namespace_;
 use PhpParser\Node\Const_;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassConst;
+use PhpParser\Node\Stmt\Declare_;
+use PhpParser\Node\Stmt\DeclareDeclare;
+use PhpParser\Node\Stmt\Nop;
 use PhpParser\PrettyPrinter\Standard;
 
 /**
@@ -61,10 +65,13 @@ final class LatteFilterProviderGenerator
         $namespaceBuilder = new Namespace_(self::NAMESPACE_NAME);
 
         $filterProviderClass = $this->createFilterProviderClass($classMethodName);
+
+        $declare = new Declare_([new DeclareDeclare('strict_types', new LNumber(1))]);
         $namespaceBuilder->addStmt($filterProviderClass);
         $namespace = $namespaceBuilder->getNode();
 
-        return $this->printerStandard->prettyPrintFile([$namespace]) . PHP_EOL;
+        $stmts = [$declare, new Nop(), $namespace];
+        return $this->printerStandard->prettyPrintFile($stmts) . PHP_EOL;
     }
 
     private function createFilterNameConst(ClassMethodName $classMethodName): ClassConst
