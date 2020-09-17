@@ -63,6 +63,7 @@
         ],
         "psr-4": {
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
+            "Migrify\\ConfigFeatureBumper\\": "packages/config-feature-bumper/src",
             "Migrify\\ConfigPretifier\\": "packages/config-pretifier/src",
             "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
             "Migrify\\ConfigTransformer\\Clarifier\\": "packages/config-transformer/packages/clarifier/src",
@@ -88,6 +89,7 @@
     "autoload-dev": {
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
+            "Migrify\\ConfigFeatureBumper\\Tests\\": "packages/config-feature-bumper/tests",
             "Migrify\\ConfigPretifier\\Tests\\": "packages/config-pretifier/tests",
             "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/config-transformer/packages/clarifier/tests",
             "Migrify\\ConfigTransformer\\FeatureShifter\\Tests\\": "packages/config-transformer/packages/feature-shifter/tests",
@@ -111,6 +113,7 @@
     },
     "replace": {
         "migrify/class-presence": "0.3.31",
+        "migrify/config-feature-bumper": "self.version",
         "migrify/config-pretifier": "self.version",
         "migrify/config-transformer": "0.3.31",
         "migrify/diff-data-miner": "0.3.31",

@@ -1,0 +1,34 @@
+{
+    "name": "migrify/config-feature-bumper",
+    "description": "Pretify Symfony/Nette syntax to more readable one",
+    "license": "MIT",
+    "bin": [
+        "bin/config-feature-bumper"
+    ],
+    "require": {
+        "php": ">=7.2",
+        "symfony/dependency-injection": "^4.4|^5.1",
+        "symfony/console": "^4.4|^5.1",
+        "symfony/http-kernel": "^4.4|^5.1",
+        "symfony/yaml": "^4.4|^5.1",
+        "nette/neon": "^3.0",
+        "nette/utils": "^3.1",
+        "migrify/migrify-kernel": "^0.4"
+    },
+    "require-dev": {
+        "symplify/easy-testing": "^8.2",
+        "phpunit/phpunit": "^8.5|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Migrify\\ConfigFeatureBumper\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\ConfigFeatureBumper\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

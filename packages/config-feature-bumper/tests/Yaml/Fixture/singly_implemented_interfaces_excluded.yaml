@@ -1,0 +1,13 @@
+services:
+    Migrify\ConfigFeatureBumper\Tests\Yaml\Source\SomeClass: null
+
+    Migrify\ConfigFeatureBumper\Tests\Yaml\Source\SomeInterface:
+        alias: 'Migrify\ConfigFeatureBumper\Tests\Yaml\Source\AnotherClass'
+-----
+services:
+    _defaults:
+        autowire: true
+    Migrify\ConfigFeatureBumper\Tests\Yaml\Source\SomeInterface:
+        alias: 'Migrify\ConfigFeatureBumper\Tests\Yaml\Source\AnotherClass'
+    Migrify\ConfigFeatureBumper\:
+        resource: '../Source'
