@@ -1,8 +1,8 @@
 # CI To GitHub Actions
 
-[![Downloads total](https://img.shields.io/packagist/dt/migrify/ci-to-github-actions.svg?style=flat-square)](https://packagist.org/packages/migrify/ci-to-github-actions/stats)
+[![Downloads total](https://img.shields.io/packagist/dt/migrify/travis-to-github-actions.svg?style=flat-square)](https://packagist.org/packages/migrify/travis-to-github-actions/stats)
 
-Converts Travis CI, Gitlab CI... to Github Actions
+Converts Travis CI config to to Github Actions
 
 - [Switch Travis to GitHub Actions to Reduce Stress](https://tomasvotruba.com/blog/2020/01/27/switch-travis-to-github-actions-to-reduce-stress/)
 - [Moving from Travis to Github Actions](https://github.com/anapaulagomes/from-travis-to-github-actions) (GitHub repo Guide)
@@ -10,13 +10,13 @@ Converts Travis CI, Gitlab CI... to Github Actions
 ## Install
 
 ```bash
-composer require migrify/ci-to-github-actions --dev
+composer require migrify/travis-to-github-actions --dev
 ```
 
 ## Usage
 
 ```bash
-vendor/bin/ci-to-github-actions convert .travis-ci.yml
+vendor/bin/travis-to-github-actions convert .travis-ci.yml
 ```
 
 That's it :)

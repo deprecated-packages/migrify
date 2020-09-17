@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\ValueObject;
+namespace Migrify\TravisToGithubActions\ValueObject;
 
 final class Step
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\HttpKernel;
+namespace Migrify\TravisToGithubActions\HttpKernel;
 
 use Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-final class CIToGithubActionsKernel extends AbstractMigrifyKernel
+final class TravisToGithubActionsKernel extends AbstractMigrifyKernel
 {
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {

@@ -62,7 +62,6 @@
             "vendor/tracy/tracy/src/Tracy/shortcuts.php"
         ],
         "psr-4": {
-            "Migrify\\CIToGithubActions\\": "packages/ci-to-github-actions/src",
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
             "Migrify\\ConfigPretifier\\": "packages/config-pretifier/src",
             "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
@@ -82,12 +81,12 @@
             "Migrify\\StaticDetector\\": "packages/static-detector/src",
             "Migrify\\SymfonyRouteUsage\\": "packages/symfony-route-usage/src",
             "Migrify\\TemplateChecker\\": "packages/template-checker/src",
+            "Migrify\\TravisToGithubActions\\": "packages/travis-to-github-actions/src",
             "Migrify\\VendorPatches\\": "packages/vendor-patches/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Migrify\\CIToGithubActions\\Tests\\": "packages/ci-to-github-actions/tests",
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigPretifier\\Tests\\": "packages/config-pretifier/tests",
             "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/config-transformer/packages/clarifier/tests",
@@ -106,11 +105,11 @@
             "Migrify\\StaticDetector\\Tests\\": "packages/static-detector/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
+            "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         }
     },
     "replace": {
-        "migrify/ci-to-github-actions": "self.version",
         "migrify/class-presence": "0.3.31",
         "migrify/config-pretifier": "self.version",
         "migrify/config-transformer": "0.3.31",
@@ -127,6 +126,7 @@
         "migrify/static-detector": "0.3.31",
         "migrify/symfony-route-usage": "0.3.31",
         "migrify/template-checker": "0.3.31",
+        "migrify/travis-to-github-actions": "self.version",
         "migrify/vendor-patches": "0.3.31"
     },
     "scripts": {
