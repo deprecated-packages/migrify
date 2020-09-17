@@ -11,6 +11,7 @@ use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 use Symplify\SmartFileSystem\FileSystemFilter;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
+use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
@@ -34,6 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // filesystem
     $services->set(FinderSanitizer::class);
     $services->set(SmartFileSystem::class);
+    $services->set(SmartFinder::class);
     $services->set(FileSystemGuard::class);
     $services->set(FileSystemFilter::class);
 

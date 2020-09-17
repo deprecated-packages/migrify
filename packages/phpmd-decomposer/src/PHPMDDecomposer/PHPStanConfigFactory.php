@@ -61,29 +61,28 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
 
     private function decorateWithExcludedPaths(DOMDocument $domDocument, PHPStanConfig $phpStanConfig): void
     {
-        foreach ($domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_PATTERN) as $excludePattern) {
+        foreach ($domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_PATTERN) as $domNodeList) {
             $currentPHPStanConfig = new PHPStanConfig([], [
-                self::PHPSTAN_KEY_EXCLUDES_ANALYSE => [$excludePattern->nodeValue],
+                self::PHPSTAN_KEY_EXCLUDES_ANALYSE => [$domNodeList->nodeValue],
             ]);
 
-            /** @var DOMElement $excludePattern */
             $phpStanConfig->merge($currentPHPStanConfig);
         }
     }
 
     private function decorateWithRules(DOMDocument $domDocument, PHPStanConfig $phpStanConfig): void
     {
-        foreach ($domDocument->getElementsByTagName('rule') as $rule) {
-            foreach ($this->phpMDToPHPStanBluerprint->provide() as $matchToConfig) {
-                /** @var DOMElement $rule */
-                if (! $matchToConfig->isMatch($rule)) {
+        foreach ($domDocument->getElementsByTagName('rule') as $domNodeList) {
+            foreach ($this->phpMDToPHPStanBluerprint->provide() as $matchToPHPStanConfig) {
+                /** @var DOMElement $domNodeList */
+                if (! $matchToPHPStanConfig->isMatch($domNodeList)) {
                     continue;
                 }
 
-                $this->mergeWithMatchingParameters($matchToConfig->getConfig(), $rule, $phpStanConfig);
+                $this->mergeWithMatchingParameters($matchToPHPStanConfig->getConfig(), $domNodeList, $phpStanConfig);
 
                 // covered by PHPStan native
-                $phpStanConfig->merge($matchToConfig->getConfig());
+                $phpStanConfig->merge($matchToPHPStanConfig->getConfig());
 
                 // this rule is matched, jump to another one
                 continue 2;
@@ -117,13 +116,13 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
         PHPStanConfig $phpStanConfig
     ): void {
         foreach ($phpmdToPHPStanConfig->getMatchingParameters() as $phpMDParameterName => $phpStanParameterName) {
-            foreach ($domElement->getElementsByTagName('property') as $property) {
-                /** @var DOMElement $property */
-                if ($property->getAttribute('name') !== $phpMDParameterName) {
+            foreach ($domElement->getElementsByTagName('property') as $domNodeList) {
+                /** @var DOMElement $domNodeList */
+                if ($domNodeList->getAttribute('name') !== $phpMDParameterName) {
                     continue;
                 }
 
-                $resolvedValue = $property->getAttribute('value');
+                $resolvedValue = $domNodeList->getAttribute('value');
 
                 if (Strings::match($resolvedValue, self::SPLIT_BY_COMMA_REGEX)) {
                     $resolvedValue = Strings::split($resolvedValue, self::SPLIT_BY_COMMA_REGEX);

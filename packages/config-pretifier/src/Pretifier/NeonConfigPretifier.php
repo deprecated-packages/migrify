@@ -2,30 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Clarifier\Clarifier;
+namespace Migrify\ConfigPretifier\Pretifier;
 
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
 use Nette\Neon\Entity;
 use Nette\Neon\Neon;
 use Nette\Utils\Strings;
 
-final class NeonYamlConfigClarifier
+final class NeonConfigPretifier
 {
     /**
      * @var string
      */
-    private const NEON_SUFFIX = 'neon';
+    public const NEON_SUFFIX = 'neon';
 
-    public function clarify(string $content, string $suffix): ?string
+    public function pretify(string $content): ?string
     {
         $oldContent = $content;
 
-        if ($suffix === self::NEON_SUFFIX) {
-            $newContent = $this->clarifyNeon($content);
-        } else {
-            throw new NotImplementedYetException($suffix);
-        }
-
+        $newContent = $this->clarifyNeon($content);
         if ($oldContent !== $newContent) {
             return $newContent;
         }

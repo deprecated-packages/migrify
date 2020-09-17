@@ -64,6 +64,7 @@
         "psr-4": {
             "Migrify\\CIToGithubActions\\": "packages/ci-to-github-actions/src",
             "Migrify\\ClassPresence\\": "packages/class-presence/src",
+            "Migrify\\ConfigPretifier\\": "packages/config-pretifier/src",
             "Migrify\\ConfigTransformer\\": "packages/config-transformer/src",
             "Migrify\\ConfigTransformer\\Clarifier\\": "packages/config-transformer/packages/clarifier/src",
             "Migrify\\ConfigTransformer\\FeatureShifter\\": "packages/config-transformer/packages/feature-shifter/src",
@@ -88,6 +89,7 @@
         "psr-4": {
             "Migrify\\CIToGithubActions\\Tests\\": "packages/ci-to-github-actions/tests",
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
+            "Migrify\\ConfigPretifier\\Tests\\": "packages/config-pretifier/tests",
             "Migrify\\ConfigTransformer\\Clarifier\\Tests\\": "packages/config-transformer/packages/clarifier/tests",
             "Migrify\\ConfigTransformer\\FeatureShifter\\Tests\\": "packages/config-transformer/packages/feature-shifter/tests",
             "Migrify\\ConfigTransformer\\FormatSwitcher\\Tests\\": "packages/config-transformer/packages/format-switcher/tests",
@@ -110,6 +112,7 @@
     "replace": {
         "migrify/ci-to-github-actions": "self.version",
         "migrify/class-presence": "0.3.31",
+        "migrify/config-pretifier": "self.version",
         "migrify/config-transformer": "0.3.31",
         "migrify/diff-data-miner": "0.3.31",
         "migrify/easy-ci": "0.3.31",
