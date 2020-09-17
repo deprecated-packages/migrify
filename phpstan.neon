@@ -48,7 +48,7 @@ parameters:
              message: '#Array destruct is not allowed\. Use value object to pass data instead#'
              paths:
                  # 3rd party code
-                - packages/config-transformer/packages/feature-shifter/src/Yaml/YamlServiceProcessor.php
+                - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
         -
              message: '#Array with keys is not allowed\. Use value object to pass data instead#'
              paths:
@@ -64,15 +64,15 @@ parameters:
 
                   # yaml
                  - packages/neon-to-yaml/src/NeonToYamlConverter.php
-                 - packages/config-transformer/packages/format-switcher/src/Command/SwitchFormatCommand.php
+                 - packages/config-transformer/src/Command/SwitchFormatCommand.php
                  - packages/travis-to-github-actions/src/TravisToGithubActionsConverter.php
 
         -
              message: '#Use value object over return of values#'
              paths:
                  # suffixes
-                - packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php
-                - packages/config-transformer/packages/feature-shifter/src/Yaml/YamlServiceProcessor.php
+                - packages/config-transformer/src/Configuration/Configuration.php
+                - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
 
         - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
 
@@ -100,7 +100,7 @@ parameters:
         -
             message: '#Too many public elements on class \- 11\. Try narrow it down under 10#'
             paths:
-                - 'packages/config-transformer/packages/format-switcher/src/Configuration/Configuration.php'
+                - 'packages/config-transformer/src/Configuration/Configuration.php'
 
         # not null, assert above
         -

@@ -31,9 +31,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::PATHS, [__DIR__ . '/packages']);
 
     $parameters->set(Option::EXCLUDE_PATHS, [
-        __DIR__ . '/packages/vendor-patches/tests/Finder/*',
+        __DIR__ . '/packages/vendor-patches/tests/Finder',
         __DIR__ . '/packages/**/Source/**',
-        __DIR__ . '/packages/config-transformer/packages/format-switcher/tests/Converter/ConfigFormatConverter/YamlToPhp/Fixture/nested/*',
+        __DIR__ . '/packages/config-transformer/tests/Converter/ConfigFormatConverter/YamlToPhp/Fixture/nested',
         __DIR__ . '/packages/diff-data-miner/src/Extractor/DefaultValueChangesExtractor.php',
     ]);
 

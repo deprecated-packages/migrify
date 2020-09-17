@@ -38,7 +38,7 @@ jobs:
 
                     -
                         name: 'Format Switcher'
-                        run: packages/config-transformer/bin/config-transformer switch-format packages/config-transformer/packages/format-switcher/tests/Fixture --input-format xml --output-format yaml --dry-run --ansi
+                        run: packages/config-transformer/bin/config-transformer switch-format packages/config-transformer/tests/Fixture --input-format xml --output-format yaml --dry-run --ansi
 
                     # @todo automated somehow in easy-ci
                     -
