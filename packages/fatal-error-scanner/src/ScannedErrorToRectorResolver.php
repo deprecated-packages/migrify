@@ -17,25 +17,25 @@ final class ScannedErrorToRectorResolver
      * @see https://regex101.com/r/RbJy9h/1/
      * @var string
      */
-    private const INCOMPATIBLE_PARAM_TYPE_PATTERN = '#Declaration of (?<current>\w.*?) should be compatible with (?<should_be>\w.*?)$#';
+    private const INCOMPATIBLE_PARAM_TYPE_REGEX = '#Declaration of (?<current>\w.*?) should be compatible with (?<should_be>\w.*?)$#';
 
     /**
      * @see https://regex101.com/r/D6Z5Uq/1/
      * @var string
      */
-    private const INCOMPATIBLE_RETURN_TYPE_PATTERN = '#Declaration of (?<current>\w.*?) must be compatible with (?<should_be>\w.*?)$#';
+    private const INCOMPATIBLE_RETURN_TYPE_REGEX = '#Declaration of (?<current>\w.*?) must be compatible with (?<should_be>\w.*?)$#';
 
     /**
      * @see https://regex101.com/r/RbJy9h/8/
      * @var string
      */
-    private const CLASS_METHOD_ARGUMENTS_PATTERN = '#(?<class>.*?)::(?<method>.*?)\((?<arguments>.*?)\)(:\s?(?<return_type>\w+))?#';
+    private const CLASS_METHOD_ARGUMENTS_REGEX = '#(?<class>.*?)::(?<method>.*?)\((?<arguments>.*?)\)(:\s?(?<return_type>\w+))?#';
 
     /**
      * @see https://regex101.com/r/RbJy9h/5
      * @var string
      */
-    private const ARGUMENTS_PATTERN = '#(\b(?<type>\w.*?)?\b )?\$(?<name>\w+)#sm';
+    private const ARGUMENTS_REGEX = '#(\b(?<type>\w.*?)?\b )?\$(?<name>\w+)#sm';
 
     /**
      * @var string
@@ -61,13 +61,13 @@ final class ScannedErrorToRectorResolver
         $this->paramChanges = [];
 
         foreach ($errors as $fatalError) {
-            $match = Strings::match($fatalError, self::INCOMPATIBLE_PARAM_TYPE_PATTERN);
+            $match = Strings::match($fatalError, self::INCOMPATIBLE_PARAM_TYPE_REGEX);
             if ($match) {
                 $this->processIncompatibleParamTypeMatch($match);
                 continue;
             }
 
-            $match = Strings::match($fatalError, self::INCOMPATIBLE_RETURN_TYPE_PATTERN);
+            $match = Strings::match($fatalError, self::INCOMPATIBLE_RETURN_TYPE_REGEX);
             if ($match) {
                 $this->processIncompatibleReturnTypeMatch($match);
             }
@@ -113,7 +113,7 @@ final class ScannedErrorToRectorResolver
 
     private function createScannedMethod(string $classMethodWithArgumentsDescription): ClassMethodWithArguments
     {
-        $match = Strings::match($classMethodWithArgumentsDescription, self::CLASS_METHOD_ARGUMENTS_PATTERN);
+        $match = Strings::match($classMethodWithArgumentsDescription, self::CLASS_METHOD_ARGUMENTS_REGEX);
         if (! $match) {
             throw new NotImplementedException();
         }
@@ -172,7 +172,7 @@ final class ScannedErrorToRectorResolver
         $arguments = [];
         $argumentDescriptions = Strings::split($argumentsDescription, '#\b,\b#');
         foreach ($argumentDescriptions as $position => $argumentDescription) {
-            $match = Strings::match((string) $argumentDescription, self::ARGUMENTS_PATTERN);
+            $match = Strings::match((string) $argumentDescription, self::ARGUMENTS_REGEX);
             if (! $match) {
                 throw new NotImplementedException();
             }

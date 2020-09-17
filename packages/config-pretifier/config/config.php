@@ -12,5 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('Migrify\ConfigTransformer\Clarifier\\', __DIR__ . '/../src');
+    $services->load('Migrify\ConfigPretifier\\', __DIR__ . '/../src')
+        ->exclude([__DIR__ . '/../src/HttpKernel']);
 };

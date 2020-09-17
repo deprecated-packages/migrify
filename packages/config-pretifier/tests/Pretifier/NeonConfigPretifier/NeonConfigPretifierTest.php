@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Migrify\ConfigTransformer\Clarifier\Tests\Clarifier\NeonYamlConfigClarifier;
+namespace Migrify\ConfigPretifier\Tests\Pretifier\NeonConfigPretifier;
 
 use Iterator;
-use Migrify\ConfigTransformer\Clarifier\Clarifier\NeonYamlConfigClarifier;
-use Migrify\ConfigTransformer\HttpKernel\ConfigTransformerKernel;
+use Migrify\ConfigPretifier\HttpKernel\ConfigPretifierKernel;
+use Migrify\ConfigPretifier\Pretifier\NeonConfigPretifier;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
+final class NeonConfigPretifierTest extends AbstractKernelTestCase
 {
     /**
-     * @var NeonYamlConfigClarifier
+     * @var NeonConfigPretifier
      */
-    private $neonYamlConfigClarifier;
+    private $neonConfigPretifier;
 
     protected function setUp(): void
     {
-        $this->bootKernel(ConfigTransformerKernel::class);
-        $this->neonYamlConfigClarifier = self::$container->get(NeonYamlConfigClarifier::class);
+        $this->bootKernel(ConfigPretifierKernel::class);
+        $this->neonConfigPretifier = self::$container->get(NeonConfigPretifier::class);
     }
 
     /**
@@ -32,10 +32,7 @@ final class NeonYamlConfigClarifierTest extends AbstractKernelTestCase
     {
         $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($fileInfo);
 
-        $changedContent = $this->neonYamlConfigClarifier->clarify(
-            $inputAndExpected->getInput(),
-            $fileInfo->getSuffix()
-        );
+        $changedContent = $this->neonConfigPretifier->pretify($inputAndExpected->getInput());
         $this->assertSame($inputAndExpected->getExpected() . PHP_EOL, $changedContent);
     }
 

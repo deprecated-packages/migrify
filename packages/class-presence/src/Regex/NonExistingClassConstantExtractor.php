@@ -16,14 +16,14 @@ final class NonExistingClassConstantExtractor
      * @var string
      * @see https://regex101.com/r/Wrfff2/1
      */
-    private const CLASS_CONSTANT_NAME_PATTERN = '#\b(?<class_constant_name>[A-Z](\w+\\\\(\\\\)?)+(\w+)::[A-Z_]+)#';
+    private const CLASS_CONSTANT_NAME_REGEX = '#\b(?<class_constant_name>[A-Z](\w+\\\\(\\\\)?)+(\w+)::[A-Z_]+)#';
 
     /**
      * @return string[]
      */
     public function extractFromFileInfo(SmartFileInfo $fileInfo): array
     {
-        $foundMatches = Strings::matchAll($fileInfo->getContents(), self::CLASS_CONSTANT_NAME_PATTERN);
+        $foundMatches = Strings::matchAll($fileInfo->getContents(), self::CLASS_CONSTANT_NAME_REGEX);
         if ($foundMatches === []) {
             return [];
         }

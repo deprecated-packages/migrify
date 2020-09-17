@@ -19,7 +19,7 @@ final class MissingClassesLatteAnalyzer
      * @see https://regex101.com/r/Wrfff2/7
      * @var string
      */
-    private const CLASS_PATTERN = '#\b(?<class>[A-Z][\w\\\\]+)::#m';
+    private const CLASS_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::#m';
 
     /**
      * @param SmartFileInfo[] $fileInfos
@@ -30,7 +30,7 @@ final class MissingClassesLatteAnalyzer
         $errors = [];
 
         foreach ($fileInfos as $fileInfo) {
-            $matches = Strings::matchAll($fileInfo->getContents(), self::CLASS_PATTERN);
+            $matches = Strings::matchAll($fileInfo->getContents(), self::CLASS_REGEX);
             if ($matches === []) {
                 continue;
             }

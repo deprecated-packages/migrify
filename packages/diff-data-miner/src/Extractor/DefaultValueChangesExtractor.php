@@ -14,13 +14,13 @@ final class DefaultValueChangesExtractor
      * @see https://regex101.com/r/pe3DNc/1/
      * @var string
      */
-    private const FILE_PATTERN = '#^--- a\/src\/(?<file_name>(.*?))\.php$#ms';
+    private const FILE_REGEX = '#^--- a\/src\/(?<file_name>(.*?))\.php$#ms';
 
     /**
      * @see https://regex101.com/r/pe3DNc/1/
      * @var string
      */
-    private const REMOVED_DEFAULT_VALUE_PATTERN = '#^-(.*?)function\s(?<method_name>\w+)(.*?)=\s?(?<value>.*?)\)$#ms';
+    private const REMOVED_DEFAULT_VALUE_REGEX = '#^-(.*?)function\s(?<method_name>\w+)(.*?)=\s?(?<value>.*?)\)$#ms';
 
     /**
      * @var string[]
@@ -69,7 +69,7 @@ final class DefaultValueChangesExtractor
                 continue;
             }
 
-            $matches = Strings::match($lineContent, self::REMOVED_DEFAULT_VALUE_PATTERN);
+            $matches = Strings::match($lineContent, self::REMOVED_DEFAULT_VALUE_REGEX);
             if (! $matches) {
                 continue;
             }
@@ -98,7 +98,7 @@ final class DefaultValueChangesExtractor
 
     private function detectCurrentClass(string $fileContent): void
     {
-        $matches = Strings::match($fileContent, self::FILE_PATTERN);
+        $matches = Strings::match($fileContent, self::FILE_REGEX);
         if (! $matches) {
             return;
         }

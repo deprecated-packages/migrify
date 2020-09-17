@@ -18,7 +18,7 @@ final class LatteStaticCallAnalyzer
      * @var string
      * @see https://regex101.com/r/mDzFKI/2
      */
-    private const STATIC_CALL_PATTERN = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((.*?)?\)#m';
+    private const STATIC_CALL_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((.*?)?\)#m';
 
     /**
      * @param SmartFileInfo[] $fileInfos
@@ -40,7 +40,7 @@ final class LatteStaticCallAnalyzer
      */
     private function analyzeFileInfo(SmartFileInfo $fileInfo): array
     {
-        $matches = Strings::matchAll($fileInfo->getContents(), self::STATIC_CALL_PATTERN);
+        $matches = Strings::matchAll($fileInfo->getContents(), self::STATIC_CALL_REGEX);
         $matches = $this->filterOutAllowedStaticClasses($matches);
 
         $classMethodNames = [];
