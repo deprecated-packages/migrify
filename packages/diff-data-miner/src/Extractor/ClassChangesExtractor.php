@@ -20,13 +20,13 @@ final class ClassChangesExtractor
      * @see https://regex101.com/r/tyABnc/1/
      * @var string
      */
-    private const BEFORE_AFTER_PATTERN = '#^\-(?<before>[^-].*?)$\n\+(?<after>.*?)$#ms';
+    private const BEFORE_AFTER_REGEX = '#^\-(?<before>[^-].*?)$\n\+(?<after>.*?)$#ms';
 
     /**
      * @see https://regex101.com/r/tyABnc/2/
      * @var string
      */
-    private const CLASS_NAME_PATTERN = '#(?<class_name>' . self::CLASS_NAME_PREFIX . '\\\\[\w|\\\\]+)#';
+    private const CLASS_NAME_REGEX = '#(?<class_name>' . self::CLASS_NAME_PREFIX . '\\\\[\w|\\\\]+)#';
 
     /**
      * @var SmartFileSystem
@@ -44,7 +44,7 @@ final class ClassChangesExtractor
     public function extract(string $diffFilePath): array
     {
         $diff = $this->smartFileSystem->readFile($diffFilePath);
-        $beforeAfterMatches = Strings::matchAll($diff, self::BEFORE_AFTER_PATTERN);
+        $beforeAfterMatches = Strings::matchAll($diff, self::BEFORE_AFTER_REGEX);
 
         $classesBeforeAndAfterAsString = [];
         foreach ($beforeAfterMatches as $beforeAfterMatch) {
@@ -77,12 +77,12 @@ final class ClassChangesExtractor
             return null;
         }
 
-        $classNameBefore = Strings::match($beforeAfterMatch['before'], self::CLASS_NAME_PATTERN);
+        $classNameBefore = Strings::match($beforeAfterMatch['before'], self::CLASS_NAME_REGEX);
         if ($classNameBefore === null) {
             return null;
         }
 
-        $classNameAfter = Strings::match($beforeAfterMatch['after'], self::CLASS_NAME_PATTERN);
+        $classNameAfter = Strings::match($beforeAfterMatch['after'], self::CLASS_NAME_REGEX);
         if ($classNameAfter === null) {
             return null;
         }

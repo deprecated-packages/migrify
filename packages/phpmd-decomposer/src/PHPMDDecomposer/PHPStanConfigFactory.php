@@ -19,7 +19,7 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
     /**
      * @var string
      */
-    private const PHPMD_KEY_EXCLUDE_PATTERN = 'exclude-pattern';
+    private const PHPMD_KEY_EXCLUDE_REGEX = 'exclude-pattern';
 
     /**
      * @var string
@@ -61,7 +61,7 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
 
     private function decorateWithExcludedPaths(DOMDocument $domDocument, PHPStanConfig $phpStanConfig): void
     {
-        foreach ($domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_PATTERN) as $domNodeList) {
+        foreach ($domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_REGEX) as $domNodeList) {
             $currentPHPStanConfig = new PHPStanConfig([], [
                 self::PHPSTAN_KEY_EXCLUDES_ANALYSE => [$domNodeList->nodeValue],
             ]);

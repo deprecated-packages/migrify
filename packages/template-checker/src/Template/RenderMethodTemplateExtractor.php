@@ -15,7 +15,7 @@ final class RenderMethodTemplateExtractor
      * @see https://regex101.com/r/eK364x/2/
      * @var string
      */
-    private const TEMPLATE_PATH_PATTERN = '#\-\>render\([\s|\n]*\'(?<template_name>[@\w\d\/\-\_\.]+[^\/])\'#ms';
+    private const TEMPLATE_PATH_REGEX = '#\-\>render\([\s|\n]*\'(?<template_name>[@\w\d\/\-\_\.]+[^\/])\'#ms';
 
     /**
      * @param SmartFileInfo[] $controllerFileInfos
@@ -25,7 +25,7 @@ final class RenderMethodTemplateExtractor
     {
         $usedTemplatePathsByControllerPath = [];
         foreach ($controllerFileInfos as $controllerFileInfo) {
-            $match = Strings::match($controllerFileInfo->getContents(), self::TEMPLATE_PATH_PATTERN);
+            $match = Strings::match($controllerFileInfo->getContents(), self::TEMPLATE_PATH_REGEX);
             if ($match === null) {
                 continue;
             }
