@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\EasyCI\Command;
 
-use Migrify\EasyCI\Finder\FileFinder;
 use Migrify\EasyCI\Git\ConflictResolver;
-use Migrify\EasyCI\ValueObject\Option;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\Finder\SmartFinder;
 
 final class CheckConflictsCommand extends Command
 {
@@ -28,15 +28,18 @@ final class CheckConflictsCommand extends Command
     private $conflictResolver;
 
     /**
-     * @var FileFinder
+     * @var SmartFinder
      */
-    private $fileFinder;
+    private $smartFinder;
 
-    public function __construct(SymfonyStyle $symfonyStyle, ConflictResolver $conflictResolver, FileFinder $fileFinder)
-    {
+    public function __construct(
+        SymfonyStyle $symfonyStyle,
+        ConflictResolver $conflictResolver,
+        SmartFinder $smartFinder
+    ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->conflictResolver = $conflictResolver;
-        $this->fileFinder = $fileFinder;
+        $this->smartFinder = $smartFinder;
 
         parent::__construct();
     }
@@ -45,15 +48,20 @@ final class CheckConflictsCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check files for missed git conflicts');
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to project');
+        $this->addArgument(
+            MigrifyOption::SOURCES,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'Path to project'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string[] $source */
-        $source = (array) $input->getArgument(Option::SOURCE);
+        $source = (array) $input->getArgument(MigrifyOption::SOURCES);
 
-        $fileInfos = $this->fileFinder->findInDirectories($source);
+        $fileInfos = $this->smartFinder->find($source, '*');
+
         $conflictsCountByFilePath = $this->conflictResolver->extractFromFileInfos($fileInfos);
         if ($conflictsCountByFilePath === []) {
             $message = sprintf('No conflicts found in %d files', count($fileInfos));

@@ -9,10 +9,5 @@ final class Option
     /**
      * @var string
      */
-    public const SOURCE = 'source';
-
-    /**
-     * @var string
-     */
     public const COMPOSER_JSON = 'composer-json';
 }

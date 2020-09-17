@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\SnifferFixerToECS\Command;
 
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\SnifferFixerToECS\FixerToECSConverter;
 use Migrify\SnifferFixerToECS\SnifferToECSConverter;
 use Symfony\Component\Console\Command\Command;
@@ -20,11 +21,6 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ConvertCommand extends Command
 {
-    /**
-     * @var string
-     */
-    private const ARGUMENT_SOURCE = 'source';
-
     /**
      * @var SnifferToECSConverter
      */
@@ -63,7 +59,7 @@ final class ConvertCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(
-            self::ARGUMENT_SOURCE,
+            MigrifyOption::SOURCES,
             InputArgument::REQUIRED,
             'File to convert, usually "phpcs.xml" or ".php_cs.dist"'
         );
@@ -72,7 +68,7 @@ final class ConvertCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $source = (string) $input->getArgument(self::ARGUMENT_SOURCE);
+        $source = (string) $input->getArgument(MigrifyOption::SOURCES);
         if (! $this->smartFileSystem->exists($source)) {
             throw new FileNotFoundException($source);
         }

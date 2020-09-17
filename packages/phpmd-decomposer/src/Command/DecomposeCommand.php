@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Migrify\PHPMDDecomposer\Command;
 
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\PHPMDDecomposer\PHPMDDecomposer;
 use Migrify\PHPMDDecomposer\Printer\PHPStanPrinter;
 use Migrify\PHPMDDecomposer\ValueObject\DecomposedFileConfigs;
@@ -21,11 +22,6 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class DecomposeCommand extends Command
 {
-    /**
-     * @var string
-     */
-    private const ARGUMENT_SOURCE = 'source';
-
     /**
      * @var SymfonyStyle
      */
@@ -70,13 +66,13 @@ final class DecomposeCommand extends Command
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->addArgument(self::ARGUMENT_SOURCE, InputArgument::REQUIRED, 'File path to phpmd.xml to convert');
+        $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED, 'File path to phpmd.xml to convert');
         $this->setDescription('Converts phpmd.xml to phpstan.neon, ecs.php and rector.php');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $source = (string) $input->getArgument(self::ARGUMENT_SOURCE);
+        $source = (string) $input->getArgument(MigrifyOption::SOURCES);
         $this->fileSystemGuard->ensureFileExists($source, __METHOD__);
 
         $phpmdXmlFileInfo = new SmartFileInfo($source);

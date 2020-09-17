@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Migrify\DiffDataMiner\Command;
 
 use Migrify\DiffDataMiner\Extractor\ClassChangesExtractor;
-use Migrify\DiffDataMiner\ValueObject\Option;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -39,13 +39,13 @@ final class ExtractClassChangesCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Scan for changes class names');
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED, 'Path to diff file on GitHub');
+        $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED, 'Path to diff file on GitHub');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string $source */
-        $source = (string) $input->getArgument(Option::SOURCE);
+        $source = (string) $input->getArgument(MigrifyOption::SOURCES);
         $changedClasses = $this->classChangesExtractor->extract($source);
 
         $yaml = Yaml::dump($changedClasses);

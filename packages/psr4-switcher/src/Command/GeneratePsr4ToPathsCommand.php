@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\Psr4Switcher\Command;
 
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\Psr4Switcher\Configuration\Psr4SwitcherConfiguration;
 use Migrify\Psr4Switcher\Psr4Filter;
 use Migrify\Psr4Switcher\RobotLoader\PhpClassLoader;
@@ -68,7 +69,7 @@ final class GeneratePsr4ToPathsCommand extends Command
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check if application is PSR-4 ready');
 
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');
+        $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');
         $this->addOption(Option::COMPOSER_JSON, null, InputOption::VALUE_REQUIRED, 'Path to composer.json');
     }
 
