@@ -15,7 +15,7 @@ use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class GenerateSonarProjectCommand extends Command
+final class GenerateSonarCommand extends Command
 {
     /**
      * @var string[]

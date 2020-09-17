@@ -144,7 +144,8 @@
         ],
         "validate-monorepo": "vendor/bin/monorepo-builder validate --ansi",
         "rector": "vendor/bin/rector process packages --config rector-ci.php --ansi",
-        "rector-ci": "vendor/bin/rector process packages --config rector-ci.php --dry-run --ansi"
+        "rector-ci": "vendor/bin/rector process packages --config rector-ci.php --dry-run --ansi",
+        "sonar": "packages/easy-ci/bin/easy-ci generate-sonar"
     },
     "config": {
         "sort-packages": true
