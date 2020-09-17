@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\Psr4Switcher\Command;
 
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\Psr4Switcher\RobotLoader\PhpClassLoader;
-use Migrify\Psr4Switcher\ValueObject\Option;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,13 +41,14 @@ final class CheckFileClassNameCommand extends Command
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check if short file name is same as class name');
 
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');
+        $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $source = $this->getSource($input);
-        $classesToFiles = $this->phpClassLoader->load($source);
+        /** @var string[] $sources */
+        $sources = (array) $input->getArgument(MigrifyOption::SOURCES);
+        $classesToFiles = $this->phpClassLoader->load($sources);
 
         $missMatchingClassNamesByFiles = [];
         foreach ($classesToFiles as $class => $file) {
@@ -78,13 +79,5 @@ final class CheckFileClassNameCommand extends Command
         }
 
         return ShellCode::ERROR;
-    }
-
-    /**
-     * @return string[]
-     */
-    private function getSource(InputInterface $input): array
-    {
-        return (array) $input->getArgument(Option::SOURCE);
     }
 }

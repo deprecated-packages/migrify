@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\Command;
 
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\Output\StaticReportReporter;
 use Migrify\StaticDetector\StaticScanner;
@@ -24,11 +25,6 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class DetectCommand extends Command
 {
-    /**
-     * @var string
-     */
-    private const ARGUMENT_SOURCE = 'source';
-
     /**
      * @var SymfonyStyle
      */
@@ -96,7 +92,7 @@ final class DetectCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(
-            self::ARGUMENT_SOURCE,
+            MigrifyOption::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
             'One or more directories to detect static in'
         );
@@ -142,7 +138,7 @@ final class DetectCommand extends Command
      */
     private function resolveSource(InputInterface $input): array
     {
-        $source = (array) $input->getArgument(self::ARGUMENT_SOURCE);
+        $source = (array) $input->getArgument(MigrifyOption::SOURCES);
 
         foreach ($source as $singleSource) {
             if (! $this->smartFileSystem->exists($singleSource)) {

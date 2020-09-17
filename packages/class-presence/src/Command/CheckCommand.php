@@ -7,8 +7,8 @@ namespace Migrify\ClassPresence\Command;
 use Migrify\ClassPresence\Finder\FileFinder;
 use Migrify\ClassPresence\Regex\NonExistingClassConstantExtractor;
 use Migrify\ClassPresence\Regex\NonExistingClassExtractor;
-use Migrify\ClassPresence\ValueObject\Option;
 use Migrify\ClassPresence\ValueObject\StaticCheckedFileSuffix;
+use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,14 +58,17 @@ final class CheckCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check configs for existing classes');
-        $this->addArgument(Option::SOURCE, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to project');
+        $this->addArgument(
+            MigrifyOption::SOURCES,
+            InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+            'Path to project'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string[] $source */
-        $source = (array) $input->getArgument(Option::SOURCE);
-
+        $source = (array) $input->getArgument(MigrifyOption::SOURCES);
         $fileInfos = $this->fileFinder->findInDirectories($source);
 
         $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromFileInfos($fileInfos);
