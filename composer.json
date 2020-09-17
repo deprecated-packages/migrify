@@ -58,8 +58,7 @@
     },
     "autoload": {
         "files": [
-            "packages/sniffer-fixer-to-ecs/stubs/Sniff.php",
-            "vendor/tracy/tracy/src/Tracy/shortcuts.php"
+            "packages/sniffer-fixer-to-ecs/stubs/Sniff.php"
         ],
         "psr-4": {
             "Migrify\\ClassPresence\\": "packages/class-presence/src",

@@ -28,6 +28,5 @@ if (file_exists($projectVendorAutoload)) {
     require_once $projectVendorAutoload;
 }
 
-$kernelBootAndApplicationRun = new KernelBootAndApplicationRun
-(ConfigFeatureBumperKernel::class);
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(ConfigFeatureBumperKernel::class);
 $kernelBootAndApplicationRun->run();
