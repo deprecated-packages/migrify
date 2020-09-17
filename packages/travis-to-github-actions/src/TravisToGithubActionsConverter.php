@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\CIToGithubActionsConverter;
+namespace Migrify\TravisToGithubActions;
 
-use Migrify\CIToGithubActions\Printer\GithubActionsToYAMLPrinter;
-use Migrify\CIToGithubActions\ValueObject\GithubActions;
-use Migrify\CIToGithubActions\ValueObject\Job;
-use Migrify\CIToGithubActions\ValueObject\Step;
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
+use Migrify\TravisToGithubActions\Printer\GithubActionsToYAMLPrinter;
+use Migrify\TravisToGithubActions\ValueObject\GithubActions;
+use Migrify\TravisToGithubActions\ValueObject\Job;
+use Migrify\TravisToGithubActions\ValueObject\Step;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
- * @see \Migrify\CIToGithubActions\Tests\CIToGithubActionsConverter\TravisToGithubActionsConverter\TravisToGithubActionsConverterTest
+ * @see \Migrify\TravisToGithubActions\Tests\TravisToGithubActionsConverter\TravisToGithubActionsConverterTest
  */
 final class TravisToGithubActionsConverter
 {

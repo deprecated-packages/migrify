@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\Printer;
+namespace Migrify\TravisToGithubActions\Printer;
 
-use Migrify\CIToGithubActions\ValueObject\GithubActions;
+use Migrify\TravisToGithubActions\ValueObject\GithubActions;
 use Symfony\Component\Yaml\Yaml;
 
 final class GithubActionsToYAMLPrinter

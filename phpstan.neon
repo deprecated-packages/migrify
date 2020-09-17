@@ -15,6 +15,7 @@ parameters:
         - packages/neon-to-yaml/bin/neon-to-yaml
         - packages/vendor-patches/bin/vendor-patches
         - packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs
+        - packages/travis-to-github-actions/bin/travis-to-github-actions
 
     level: max
     checkGenericClassInNonGenericObjectType: false
@@ -64,6 +65,7 @@ parameters:
                   # yaml
                  - packages/neon-to-yaml/src/NeonToYamlConverter.php
                  - packages/config-transformer/packages/format-switcher/src/Command/SwitchFormatCommand.php
+                 - packages/travis-to-github-actions/src/TravisToGithubActionsConverter.php
 
         -
              message: '#Use value object over return of values#'
@@ -89,8 +91,8 @@ parameters:
                  - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
                  - 'packages/phpmd-decomposer/src/Printer/PHPStanPrinter.php'
                  # YAML
-                 - packages/ci-to-github-actions/src/CIToGithubActionsConverter/TravisToGithubActionsConverter.php
-                 - packages/ci-to-github-actions/src/Printer/GithubActionsToYAMLPrinter.php
+                 - packages/travis-to-github-actions/src/TravisToGithubActionsConverter/TravisToGithubActionsConverter.php
+                 - packages/travis-to-github-actions/src/Printer/GithubActionsToYAMLPrinter.php
 
         # resolve later
         - '#Do not use static calls#'

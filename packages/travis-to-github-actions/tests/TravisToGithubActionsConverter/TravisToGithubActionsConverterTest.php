@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Migrify\CIToGithubActions\Tests\CIToGithubActionsConverter\TravisToGithubActionsConverter;
+namespace Migrify\TravisToGithubActions\Tests\TravisToGithubActionsConverter;
 
 use Iterator;
-use Migrify\CIToGithubActions\CIToGithubActionsConverter\TravisToGithubActionsConverter;
-use Migrify\CIToGithubActions\HttpKernel\CIToGithubActionsKernel;
+use Migrify\TravisToGithubActions\HttpKernel\TravisToGithubActionsKernel;
+use Migrify\TravisToGithubActions\TravisToGithubActionsConverter;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
@@ -21,7 +21,7 @@ final class TravisToGithubActionsConverterTest extends AbstractKernelTestCase
 
     protected function setUp(): void
     {
-        $this->bootKernel(CIToGithubActionsKernel::class);
+        $this->bootKernel(TravisToGithubActionsKernel::class);
         $this->travisToGithubActionsConverter = self::$container->get(TravisToGithubActionsConverter::class);
     }
 

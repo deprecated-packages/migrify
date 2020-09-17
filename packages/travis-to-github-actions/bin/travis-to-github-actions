@@ -4,8 +4,8 @@
 declare(strict_types=1);
 
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
-use Migrify\CIToGithubActions\Console\CIToGithubActionsApplication;
-use Migrify\CIToGithubActions\HttpKernel\CIToGithubActionsKernel;
+use Migrify\TravisToGithubActions\Console\TravisToGithubActionsApplication;
+use Migrify\TravisToGithubActions\HttpKernel\TravisToGithubActionsKernel;
 
 # 1. autoload
 $possibleAutoloadPaths = [
@@ -26,5 +26,5 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
 }
 
 # 2. create container
-$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(CIToGithubActionsKernel::class);
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(TravisToGithubActionsKernel::class);
 $kernelBootAndApplicationRun->run();
