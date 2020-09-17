@@ -22,7 +22,6 @@
         "symfony/finder": "^4.4|^5.1",
         "symfony/http-kernel": "^4.4|^5.1",
         "symfony/yaml": "^4.4|^5.1",
-        "symplify/auto-bind-parameter": "^8.2",
         "symplify/autowire-array-parameter": "^8.2",
         "symplify/composer-json-manipulator": "^8.2",
         "symplify/package-builder": "^8.2",

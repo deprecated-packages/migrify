@@ -17,10 +17,6 @@ jobs:
                         run: composer validate-monorepo
 
                     -
-                        name: 'Check Unresolved Conflicts'
-                        run: packages/easy-ci/bin/easy-ci check-conflicts .
-
-                    -
                         name: 'Coding Standard'
                         run: composer check-cs
 
