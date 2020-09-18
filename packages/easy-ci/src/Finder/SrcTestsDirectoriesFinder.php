@@ -7,6 +7,7 @@ namespace Migrify\EasyCI\Finder;
 use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
 use Nette\Utils\Strings;
 use Symfony\Component\Finder\Finder;
+use Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -34,10 +35,14 @@ final class SrcTestsDirectoriesFinder
 
         $srcDirectories = [];
         $testsDirectories = [];
+
         foreach ($fileInfos as $fileInfo) {
             if ($fileInfo->endsWith('tests') && ! Strings::contains($fileInfo->getRealPath(), 'src')) {
                 $testsDirectories[] = $fileInfo;
-            } elseif ($fileInfo->endsWith('src') && ! Strings::contains($fileInfo->getRealPath(), 'tests')) {
+            } elseif ($fileInfo->endsWith('src') && (! Strings::contains(
+                $fileInfo->getRealPath(),
+                'tests'
+            ) || StaticPHPUnitEnvironment::isPHPUnitRun())) {
                 $srcDirectories[] = $fileInfo;
             }
         }

@@ -23,5 +23,11 @@ foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
     }
 }
 
-$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(EasyCIKernel::class);
+$extraConfigs = [];
+$extraConfig = getcwd() . '/easy-ci.php';
+if (file_exists($extraConfig)) {
+    $extraConfigs[] = $extraConfig;
+}
+
+$kernelBootAndApplicationRun = new KernelBootAndApplicationRun(EasyCIKernel::class, $extraConfigs);
 $kernelBootAndApplicationRun->run();
