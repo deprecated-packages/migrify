@@ -34,8 +34,9 @@ final class SonarConfigGenerator
 
     /**
      * @param string[] $projectDirectories
+     * @param array<string, mixed|mixed[]> $extraParameters
      */
-    public function generate(array $projectDirectories, array $extraParameters = []): string
+    public function generate(array $projectDirectories, array $extraParameters): string
     {
         $srcAndTestsDirectories = $this->srcTestsDirectoriesFinder->findSrcAndTestsDirectories($projectDirectories);
         if ($srcAndTestsDirectories === null) {

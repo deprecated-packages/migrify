@@ -30,7 +30,7 @@ final class SonarConfigGeneratorTest extends AbstractKernelTestCase
     }
 
     /**
-     * @param string[] $extraParameters
+     * @param array<string, mixed|mixed[]> $extraParameters
      * @dataProvider provideData()
      */
     public function test(array $extraParameters, string $expectedSonartConfig): void
