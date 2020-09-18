@@ -43,6 +43,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/tests',
         __DIR__ . '/packages',
     ]);
+    
+    // optional - for extra parameters
+    $parameters->set(Option::SONAR_OTHER_PARAMETERS, [
+        'sonar.extra' => 'extra_values',
+    ]);
 };
 ```
 

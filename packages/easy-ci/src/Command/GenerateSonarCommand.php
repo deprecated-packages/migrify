@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
+use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class GenerateSonarCommand extends Command
@@ -47,6 +48,11 @@ final class GenerateSonarCommand extends Command
      */
     private $sonarConfigFilePath;
 
+    /**
+     * @var array<string, mixed|mixed[]>
+     */
+    private $sonarOtherParameters = [];
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
@@ -55,7 +61,8 @@ final class GenerateSonarCommand extends Command
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
-        $this->sonarDirectories = $parameterProvider->provideParameter(Option::SONAR_DIRECTORIES);
+        $this->sonarDirectories = (array) $parameterProvider->provideParameter(Option::SONAR_DIRECTORIES);
+        $this->sonarOtherParameters = (array) $parameterProvider->provideParameter(Option::SONAR_OTHER_PARAMETERS);
         $this->sonarConfigGenerator = $sonarConfigGenerator;
 
         $this->sonarConfigFilePath = getcwd() . '/' . self::SONAR_CONFIG_FILE_NAME;
@@ -73,23 +80,14 @@ final class GenerateSonarCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $generatedSonarFileContent = $this->sonarConfigGenerator->generate($this->sonarDirectories);
-
-        if ($this->smartFileSystem->exists($this->sonarConfigFilePath)) {
-            $currentSonarConfigSmartFileInfo = $this->smartFileSystem->readFileToSmartFileInfo(
-                $this->sonarConfigFilePath
-            );
-
-            if ($currentSonarConfigSmartFileInfo->getContents() === $generatedSonarFileContent) {
-                $message = sprintf('Your "%s" config is up to date. Nothing to change', $this->sonarConfigFilePath);
-                $this->symfonyStyle->success($message);
-                return ShellCode::SUCCESS;
-            }
-        }
-
+        $generatedSonarFileContent = $this->sonarConfigGenerator->generate(
+            $this->sonarDirectories,
+            $this->sonarOtherParameters
+        );
         $this->smartFileSystem->dumpFile($this->sonarConfigFilePath, $generatedSonarFileContent);
 
-        $message = sprintf('File "%s" dumped updated with new paths', $this->sonarConfigFilePath);
+        $sonarConfigFileInfo = new SmartFileInfo($this->sonarConfigFilePath);
+        $message = sprintf('File "%s" was generated', $sonarConfigFileInfo->getRelativeFilePathFromCwd());
         $this->symfonyStyle->success($message);
 
         return ShellCode::SUCCESS;

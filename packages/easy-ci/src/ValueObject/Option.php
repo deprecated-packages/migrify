@@ -23,4 +23,10 @@ final class Option
      * @var string
      */
     public const SONAR_DIRECTORIES = 'sonar_directories';
+
+    /**
+     * @api
+     * @var string
+     */
+    public const SONAR_OTHER_PARAMETERS = 'sonar_other_parameters';
 }
