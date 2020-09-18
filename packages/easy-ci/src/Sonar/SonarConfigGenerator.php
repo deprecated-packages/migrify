@@ -53,7 +53,7 @@ final class SonarConfigGenerator
         $sonarKeyValues = $this->resolveSonarKeyValues($originalFileInfo);
         foreach ($sonarKeyValues as $key => $value) {
             // prevent overriding generated keys
-            $keyPattern = '#^' . preg_quote($key) . '=(.*?)$#ms';
+            $keyPattern = '#^' . preg_quote($key, '#') . '=(.*?)$#ms';
             if (Strings::match($fileContent, $keyPattern)) {
                 continue;
             }
