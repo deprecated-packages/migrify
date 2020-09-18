@@ -1,0 +1,5 @@
+sonar.sources=another/paths
+
+sonar.php.file.suffixes=php
+
+sonar.php.exclusions=**/Fixture/**,**/Source/**,**/vendor/**

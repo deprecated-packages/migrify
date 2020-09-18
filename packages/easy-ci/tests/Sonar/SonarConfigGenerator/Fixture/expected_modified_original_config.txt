@@ -1,0 +1,9 @@
+sonar.organization=some_organization
+
+sonar.projectKey=some_project
+
+sonar.sources=packages/easy-ci/tests/Sonar/SonarConfigGenerator/Fixture/src
+
+sonar.php.file.suffixes=php
+
+sonar.php.exclusions=**/Fixture/**,**/Source/**,**/vendor/**

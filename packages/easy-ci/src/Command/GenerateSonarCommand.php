@@ -4,28 +4,23 @@ declare(strict_types=1);
 
 namespace Migrify\EasyCI\Command;
 
-use Migrify\EasyCI\Finder\SrcTestsDirectoriesFinder;
-use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
-use Nette\Utils\Strings;
+use Migrify\EasyCI\Sonar\SonarConfigGenerator;
+use Migrify\EasyCI\ValueObject\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class GenerateSonarCommand extends Command
 {
     /**
-     * @var string[]
-     */
-    private const POSSIBLE_DIRECTORIES = ['src', 'tests', 'packages', 'rules'];
-
-    /**
      * @var string
      */
-    private const SONAR_PROJECT_PROPERTIES = 'sonar-project.properties';
+    private const SONAR_CONFIG_FILE_NAME = 'sonar-project.properties';
 
     /**
      * @var SmartFileSystem
@@ -38,18 +33,32 @@ final class GenerateSonarCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var SrcTestsDirectoriesFinder
+     * @var string[]
      */
-    private $srcTestsDirectoriesFinder;
+    private $sonarDirectories = [];
+
+    /**
+     * @var SonarConfigGenerator
+     */
+    private $sonarConfigGenerator;
+
+    /**
+     * @var string
+     */
+    private $sonarConfigFilePath;
 
     public function __construct(
         SymfonyStyle $symfonyStyle,
         SmartFileSystem $smartFileSystem,
-        SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder
+        ParameterProvider $parameterProvider,
+        SonarConfigGenerator $sonarConfigGenerator
     ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;
-        $this->srcTestsDirectoriesFinder = $srcTestsDirectoriesFinder;
+        $this->sonarDirectories = $parameterProvider->provideParameter(Option::SONAR_DIRECTORIES);
+        $this->sonarConfigGenerator = $sonarConfigGenerator;
+
+        $this->sonarConfigFilePath = getcwd() . '/' . self::SONAR_CONFIG_FILE_NAME;
 
         parent::__construct();
     }
@@ -58,70 +67,31 @@ final class GenerateSonarCommand extends Command
     {
         $this->setName(CommandNaming::classToName(self::class));
 
-        $description = sprintf('Generate "%s" path', self::SONAR_PROJECT_PROPERTIES);
+        $description = sprintf('Generate "%s" path', self::SONAR_CONFIG_FILE_NAME);
         $this->setDescription($description);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $srcAndTestsDirectories = $this->srcTestsDirectoriesFinder->findSrcAndTestsDirectories(
-            self::POSSIBLE_DIRECTORIES
-        );
+        $generatedSonarFileContent = $this->sonarConfigGenerator->generate($this->sonarDirectories);
 
-        if ($srcAndTestsDirectories === null) {
-            $warning = sprintf(
-                'No "src"/"tests" directories found in "%s" paths',
-                implode('", ', self::POSSIBLE_DIRECTORIES)
+        if ($this->smartFileSystem->exists($this->sonarConfigFilePath)) {
+            $currentSonarConfigSmartFileInfo = $this->smartFileSystem->readFileToSmartFileInfo(
+                $this->sonarConfigFilePath
             );
-            $this->symfonyStyle->warning($warning);
 
-            return ShellCode::SUCCESS;
+            if ($currentSonarConfigSmartFileInfo->getContents() === $generatedSonarFileContent) {
+                $message = sprintf('Your "%s" config is up to date. Nothing to change', $this->sonarConfigFilePath);
+                $this->symfonyStyle->success($message);
+                return ShellCode::SUCCESS;
+            }
         }
 
-        $filePath = getcwd() . '/' . self::SONAR_PROJECT_PROPERTIES;
-        $fileContent = $this->smartFileSystem->readFile($filePath);
+        $this->smartFileSystem->dumpFile($this->sonarConfigFilePath, $generatedSonarFileContent);
 
-        $this->reportFoundSrcAndTestsDirectories($srcAndTestsDirectories);
-
-        $originalFileContent = $fileContent;
-        $fileContent = $this->updateFileContentWithPaths($srcAndTestsDirectories, $fileContent);
-
-        if ($originalFileContent === $fileContent) {
-            $this->symfonyStyle->success('Nothing to change');
-            return ShellCode::SUCCESS;
-        }
-
-        $this->smartFileSystem->dumpFile($filePath, $fileContent);
-
-        $message = sprintf('File "%s" was updated with new paths', $filePath);
+        $message = sprintf('File "%s" dumped updated with new paths', $this->sonarConfigFilePath);
         $this->symfonyStyle->success($message);
 
         return ShellCode::SUCCESS;
-    }
-
-    private function updateFileContentWithPaths(
-        SrcAndTestsDirectories $srcAndTestsDirectories,
-        string $fileContent
-    ): string {
-        if ($srcAndTestsDirectories->getRelativePathSrcDirectories() !== []) {
-            $sonarPathLine = implode(',', $srcAndTestsDirectories->getRelativePathSrcDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.sources\=)(.*?)$#', '$1' . $sonarPathLine);
-        }
-
-        if ($srcAndTestsDirectories->getRelativePathTestsDirectories() !== []) {
-            $sonarPathLine = implode(',', $srcAndTestsDirectories->getRelativePathTestsDirectories());
-            $fileContent = Strings::replace($fileContent, '#(sonar\.tests\=)(.*?)$#', '$1' . $sonarPathLine);
-        }
-
-        return $fileContent;
-    }
-
-    private function reportFoundSrcAndTestsDirectories(SrcAndTestsDirectories $srcAndTestsDirectories): void
-    {
-        $this->symfonyStyle->title('Found "src" directories');
-        $this->symfonyStyle->listing($srcAndTestsDirectories->getRelativePathSrcDirectories());
-
-        $this->symfonyStyle->title('Found "tests" directories');
-        $this->symfonyStyle->listing($srcAndTestsDirectories->getRelativePathTestsDirectories());
     }
 }
