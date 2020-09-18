@@ -11,7 +11,7 @@
         "symfony/console": "^4.4|^5.1",
         "nikic/php-parser": "^4.9",
         "symfony/http-kernel": "^4.4|^5.1",
-        "migrify/static-detector": "^0.3.40"
+        "migrify/static-detector": "^0.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5|^9.0"
