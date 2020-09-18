@@ -1,0 +1,3 @@
+sonar.php.file.suffixes=php
+
+sonar.php.exclusions=**/Fixture/**,**/Source/**,**/vendor/**
