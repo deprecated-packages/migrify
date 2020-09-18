@@ -88,13 +88,19 @@ final class SonarConfigGenerator
         }
 
         if ($srcAndTestsDirectories->getRelativePathSrcDirectories() !== []) {
-            $line = implode(',', $srcAndTestsDirectories->getRelativePathSrcDirectories());
-            $fileContent = $this->appendKeyLine($fileContent, SonarConfigKey::SOURCES, $line);
+            $fileContent = $this->appendKeyLineArray(
+                $fileContent,
+                SonarConfigKey::SOURCES,
+                $srcAndTestsDirectories->getRelativePathSrcDirectories()
+            );
         }
 
         if ($srcAndTestsDirectories->getRelativePathTestsDirectories() !== []) {
-            $line = implode(',', $srcAndTestsDirectories->getRelativePathTestsDirectories());
-            $fileContent = $this->appendKeyLine($fileContent, SonarConfigKey::TESTS, $line);
+            $fileContent = $this->appendKeyLineArray(
+                $fileContent,
+                SonarConfigKey::TESTS,
+                $srcAndTestsDirectories->getRelativePathTestsDirectories()
+            );
         }
 
         return rtrim($fileContent) . PHP_EOL;
@@ -106,6 +112,15 @@ final class SonarConfigGenerator
         $fileContent .= PHP_EOL . PHP_EOL;
 
         return $fileContent;
+    }
+
+    /**
+     * @param string[] $data
+     */
+    private function appendKeyLineArray(string $fileContent, string $key, array $data): string
+    {
+        $line = implode(',', $data);
+        return $this->appendKeyLine($fileContent, $key, $line);
     }
 
     /**
