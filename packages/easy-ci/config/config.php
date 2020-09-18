@@ -12,6 +12,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::SONAR_ORGANIZATION, null);
     $parameters->set(Option::SONAR_PROJECT_KEY, null);
     $parameters->set(Option::SONAR_DIRECTORIES, []);
+    $parameters->set(Option::SONAR_OTHER_PARAMETERS, []);
 
     $services = $containerConfigurator->services();
 
