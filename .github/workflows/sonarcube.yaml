@@ -16,6 +16,10 @@ jobs:
                     # sonar needs non-shallow clone
                     fetch-depth: 10000
 
+            # generate the required configuration file
+            -
+                run: packages/easy-ci/bin/easy-ci generate-sonar --ansi
+
             -   uses: sonarsource/sonarcloud-github-action@master
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
