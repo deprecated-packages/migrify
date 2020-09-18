@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Migrify\EasyCI\Sonar;
 
 use Migrify\EasyCI\Finder\SrcTestsDirectoriesFinder;
+use Migrify\EasyCI\Printer\SonarConfigDataPrinter;
 use Migrify\EasyCI\ValueObject\Option;
 use Migrify\EasyCI\ValueObject\SonarConfigKey;
+use Migrify\EasyCI\ValueObject\SrcAndTestsDirectories;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 /**
@@ -24,12 +26,19 @@ final class SonarConfigGenerator
      */
     private $parameterProvider;
 
+    /**
+     * @var SonarConfigDataPrinter
+     */
+    private $sonarConfigDataPrinter;
+
     public function __construct(
         SrcTestsDirectoriesFinder $srcTestsDirectoriesFinder,
-        ParameterProvider $parameterProvider
+        ParameterProvider $parameterProvider,
+        SonarConfigDataPrinter $sonarConfigDataPrinter
     ) {
         $this->srcTestsDirectoriesFinder = $srcTestsDirectoriesFinder;
         $this->parameterProvider = $parameterProvider;
+        $this->sonarConfigDataPrinter = $sonarConfigDataPrinter;
     }
 
     /**
@@ -43,55 +52,26 @@ final class SonarConfigGenerator
             return '';
         }
 
-        $fileContent = '';
-
-        $sonarOrganization = $this->parameterProvider->provideParameter(Option::SONAR_ORGANIZATION);
-        if ($sonarOrganization !== '') {
-            $fileContent = $this->appendKeyLine($fileContent, SonarConfigKey::ORGANIZATION, $sonarOrganization);
-        }
-
-        $sonarProjectKey = $this->parameterProvider->provideParameter(Option::SONAR_PROJECT_KEY);
-        if ($sonarProjectKey !== '') {
-            $fileContent = $this->appendKeyLine($fileContent, SonarConfigKey::PROJECT_KEY, $sonarProjectKey);
-        }
-
-        if ($srcAndTestsDirectories->getRelativePathSrcDirectories() !== []) {
-            $fileContent = $this->appendKeyLineArray(
-                $fileContent,
-                SonarConfigKey::SOURCES,
-                $srcAndTestsDirectories->getRelativePathSrcDirectories()
-            );
-        }
-
-        if ($srcAndTestsDirectories->getRelativePathTestsDirectories() !== []) {
-            $fileContent = $this->appendKeyLineArray(
-                $fileContent,
-                SonarConfigKey::TESTS,
-                $srcAndTestsDirectories->getRelativePathTestsDirectories()
-            );
-        }
-
-        foreach ($extraParameters as $key => $value) {
-            $fileContent = $this->appendKeyLine($fileContent, $key, $value);
-        }
-
-        return rtrim($fileContent) . PHP_EOL;
-    }
-
-    private function appendKeyLine(string $fileContent, string $key, string $line): string
-    {
-        $fileContent .= sprintf('%s=%s', $key, $line);
-        $fileContent .= PHP_EOL . PHP_EOL;
-
-        return $fileContent;
+        $sonarFileData = $this->createSonarFileData($srcAndTestsDirectories, $extraParameters);
+        return $this->sonarConfigDataPrinter->print($sonarFileData);
     }
 
     /**
-     * @param string[] $data
+     * @param array<string, mixed|mixed[]> $extraParameters
      */
-    private function appendKeyLineArray(string $fileContent, string $key, array $data): string
+    private function createSonarFileData(SrcAndTestsDirectories $srcAndTestsDirectories, array $extraParameters): array
     {
-        $line = implode(',', $data);
-        return $this->appendKeyLine($fileContent, $key, $line);
+        $sonarData = [
+            SonarConfigKey::ORGANIZATION => $this->parameterProvider->provideParameter(Option::SONAR_ORGANIZATION),
+            SonarConfigKey::PROJECT_KEY => $this->parameterProvider->provideParameter(Option::SONAR_PROJECT_KEY),
+            SonarConfigKey::SOURCES => $srcAndTestsDirectories->getRelativePathSrcDirectories(),
+            SonarConfigKey::TESTS => $srcAndTestsDirectories->getRelativePathTestsDirectories(),
+        ];
+
+        foreach ($extraParameters as $key => $value) {
+            $sonarData[$key] = $value;
+        }
+
+        return $sonarData;
     }
 }
