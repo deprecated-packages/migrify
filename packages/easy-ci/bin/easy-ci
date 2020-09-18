@@ -7,10 +7,10 @@ use Migrify\EasyCI\HttpKernel\EasyCIKernel;
 use Migrify\MigrifyKernel\Bootstrap\KernelBootAndApplicationRun;
 
 $possibleAutoloadPaths = [
-    // after split package
-    __DIR__ . '/../vendor/autoload.php',
     // dependency
     __DIR__ . '/../../../autoload.php',
+    // after split package
+    __DIR__ . '/../vendor/autoload.php',
     // monorepo
     __DIR__ . '/../../../vendor/autoload.php',
 ];
