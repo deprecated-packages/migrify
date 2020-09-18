@@ -16,6 +16,9 @@ jobs:
                     # sonar needs non-shallow clone
                     fetch-depth: 10000
 
+            -
+                run: composer install --no-progress
+
             # generate the required configuration file
             -
                 run: packages/easy-ci/bin/easy-ci generate-sonar --ansi
