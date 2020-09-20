@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\PhpConfigPrinter;
 
+use Migrify\ConfigTransformer\Collector\XmlImportCollector;
 use Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Migrify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
@@ -53,6 +54,11 @@ final class YamlToPhpConverter
      * @var RoutingConfiguratorReturnClosureFactory
      */
     private $routingConfiguratorReturnClosureFactory;
+    
+    /**
+     * @var XmlImportCollector
+     */
+    private $xmlImportCollector;
 
     public function __construct(
         Parser $yamlParser,
@@ -60,7 +66,8 @@ final class YamlToPhpConverter
         ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory,
         RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory,
         YamlFileContentProviderInterface $yamlFileContentProvider,
-        CheckerServiceParametersShifter $checkerServiceParametersShifter
+        CheckerServiceParametersShifter $checkerServiceParametersShifter,
+        XmlImportCollector $xmlImportCollector
     ) {
         $this->yamlParser = $yamlParser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
@@ -68,6 +75,7 @@ final class YamlToPhpConverter
         $this->yamlFileContentProvider = $yamlFileContentProvider;
         $this->checkerServiceParametersShifter = $checkerServiceParametersShifter;
         $this->routingConfiguratorReturnClosureFactory = $routingConfiguratorReturnClosureFactory;
+        $this->xmlImportCollector = $xmlImportCollector;
     }
 
     public function convert(string $yaml): string
@@ -89,6 +97,12 @@ final class YamlToPhpConverter
             $return = $this->routingConfiguratorReturnClosureFactory->createFromArrayData($yamlArray);
         } else {
             $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
+            
+            $yamlArray['imports'] = array_merge(
+                $yamlArray['imports'] ?? [],
+                $this->xmlImportCollector->provide()
+            );
+            
             $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         }
 

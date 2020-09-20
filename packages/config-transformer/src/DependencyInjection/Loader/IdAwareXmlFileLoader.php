@@ -8,6 +8,7 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
+use Migrify\ConfigTransformer\Collector\XmlImportCollector;
 use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Naming\UniqueNaming;
 use Migrify\ConfigTransformer\ValueObject\SymfonyVersionFeature;
@@ -47,18 +48,30 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
      * @var UniqueNaming
      */
     private $uniqueNaming;
+    
+    /**
+     * @var XmlImportCollector
+     */
+    private $xmlImportCollector;
 
     public function __construct(
         ContainerBuilder $containerBuilder,
         FileLocatorInterface $fileLocator,
         Configuration $configuration,
-        UniqueNaming $uniqueNaming
+        UniqueNaming $uniqueNaming,
+        XmlImportCollector $xmlImportCollector
     ) {
         parent::__construct($containerBuilder, $fileLocator);
 
         $this->privatesCaller = new PrivatesCaller();
         $this->configuration = $configuration;
         $this->uniqueNaming = $uniqueNaming;
+        $this->xmlImportCollector = $xmlImportCollector;
+    }
+    
+    public function import($resource, $type = null, $ignoreErrors = false, $sourceResource = null, $exclude = null)
+    {
+        $this->xmlImportCollector->addImport($resource, $ignoreErrors);
     }
 
     public function load($resource, ?string $type = null): void
