@@ -6,6 +6,7 @@ namespace Migrify\TemplateChecker\Analyzer;
 
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Webmozart\Assert\Assert;
 
 /**
  * @see \Migrify\TemplateChecker\Tests\Analyzer\MissingClassStaticCallLatteAnalyzer\MissingClassStaticCallLatteAnalyzerTest
@@ -24,6 +25,8 @@ final class MissingClassStaticCallLatteAnalyzer
      */
     public function analyze(array $fileInfos): array
     {
+        Assert::allIsInstanceOf($fileInfos, SmartFileInfo::class);
+
         $errors = [];
 
         foreach ($fileInfos as $fileInfo) {

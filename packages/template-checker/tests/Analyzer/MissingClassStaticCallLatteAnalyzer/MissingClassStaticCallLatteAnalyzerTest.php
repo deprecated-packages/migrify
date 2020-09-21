@@ -7,6 +7,8 @@ namespace Migrify\TemplateChecker\Tests\Analyzer\MissingClassStaticCallLatteAnal
 use Iterator;
 use Migrify\TemplateChecker\Analyzer\MissingClassStaticCallLatteAnalyzer;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
+use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
+use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -26,17 +28,20 @@ final class MissingClassStaticCallLatteAnalyzerTest extends AbstractKernelTestCa
     /**
      * @dataProvider provideData()
      */
-    public function test(SmartFileInfo $inputFileInfo, int $expectedErrorCount): void
+    public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        $errorMessages = $this->missingClassStaticCallLatteAnalyzer->analyze([$inputFileInfo]);
-        $this->assertCount($expectedErrorCount, $errorMessages);
+        $inputFileInfoAndExpected = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpected($fixtureFileInfo);
+        $expectedErrorCount = (int) $inputFileInfoAndExpected->getExpected();
+
+        $errorMessages = $this->missingClassStaticCallLatteAnalyzer->analyze(
+            [$inputFileInfoAndExpected->getInputFileInfo()]
+        );
+
+        $this->assertCount($expectedErrorCount, $errorMessages, $fixtureFileInfo->getRelativeFilePathFromCwd());
     }
 
     public function provideData(): Iterator
     {
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_class_static_call.latte'), 4];
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/existing_class_static_call.latte'), 0];
-
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/non_call.latte'), 0];
+        return StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.latte');
     }
 }
