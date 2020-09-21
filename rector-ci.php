@@ -35,6 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/packages/**/Source/**',
         __DIR__ . '/packages/config-transformer/tests/Converter/ConfigFormatConverter/YamlToPhp/Fixture/nested',
         __DIR__ . '/packages/diff-data-miner/src/Extractor/DefaultValueChangesExtractor.php',
+        __DIR__ . '/packages/sniffer-fixer-to-ecs/stubs/Sniff.php',
     ]);
 
     $parameters->set(Option::EXCLUDE_RECTORS, [

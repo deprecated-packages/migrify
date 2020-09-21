@@ -128,7 +128,11 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
             $this->symfonyStyle->title($classMethodMessage);
 
             $this->symfonyStyle->writeln('Template call located at: ' . $classMethodName->getLatteFilePath());
-            $this->symfonyStyle->writeln('Method located at: ' . $classMethodName->getFileLine());
+
+            if (! $classMethodName->isOnVariableStaticCall()) {
+                $this->symfonyStyle->writeln('Method located at: ' . $classMethodName->getFileLine());
+            }
+
             $this->symfonyStyle->newLine(2);
 
             $this->classMethodNames[$classMethodName->getClassMethodName()] = $classMethodName;
