@@ -80,6 +80,6 @@ final class ClassMethodName
 
     public function getLatteFilePath(): string
     {
-        return $this->latteFileInfo->getPathname();
+        return $this->latteFileInfo->getRelativeFilePathFromCwd();
     }
 }
