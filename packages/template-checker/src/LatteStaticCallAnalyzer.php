@@ -16,9 +16,9 @@ final class LatteStaticCallAnalyzer
 {
     /**
      * @var string
-     * @see https://regex101.com/r/mDzFKI/2
+     * @see https://regex101.com/r/mDzFKI/4
      */
-    private const STATIC_CALL_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((.*?)?\)#m';
+    private const STATIC_CALL_REGEX = '#(?<class>(\$|\b[A-Z])[\w\\\\]+)::(?<method>[\w]+)\((.*?)?\)#m';
 
     /**
      * @param SmartFileInfo[] $fileInfos

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\ValueObject;
 
+use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
+use Nette\Utils\Strings;
 use ReflectionMethod;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use function ucfirst;
@@ -39,6 +41,10 @@ final class ClassMethodName
 
     public function getFileLine(): string
     {
+        if ($this->isOnVariableStaticCall()) {
+            throw new ShouldNotHappenException();
+        }
+
         $reflectionMethod = $this->getReflectionMethod();
         return $reflectionMethod->getFileName() . ':' . $reflectionMethod->getStartLine();
     }
@@ -58,13 +64,22 @@ final class ClassMethodName
         return ucfirst($this->method) . 'FilterProvider';
     }
 
+    public function isOnVariableStaticCall(): bool
+    {
+        return Strings::startsWith($this->class, '$');
+    }
+
     public function getReflectionMethod(): ReflectionMethod
     {
+        if ($this->isOnVariableStaticCall()) {
+            throw new ShouldNotHappenException();
+        }
+
         return new ReflectionMethod($this->class, $this->method);
     }
 
     public function getLatteFilePath(): string
     {
-        return $this->latteFileInfo->getPathname();
+        return $this->latteFileInfo->getRelativeFilePathFromCwd();
     }
 }

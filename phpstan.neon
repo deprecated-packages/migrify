@@ -122,3 +122,13 @@ parameters:
                 # false positive
                 - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
 
+        -
+             message: '#Do not use scalar or array as constructor parameter\. Use ParameterProvider service instead#'
+             paths:
+                 - packages/config-transformer/src/DependencyInjection/Extension/AliasConfigurableExtension.php # 19
+                 - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 34
+                 - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 35
+                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 58
+                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 59
+                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 60
+                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 62

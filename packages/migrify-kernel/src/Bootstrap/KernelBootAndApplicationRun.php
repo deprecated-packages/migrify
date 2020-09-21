@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Migrify\MigrifyKernel\Bootstrap;
 
 use Migrify\MigrifyKernel\Exception\BootException;
-use Rector\Core\Console\Style\SymfonyStyleFactory;
 use Symfony\Component\Console\Application;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\Console\Input\InputDetector;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Throwable;
 
 final class KernelBootAndApplicationRun
@@ -41,7 +40,7 @@ final class KernelBootAndApplicationRun
         try {
             $this->booKernelAndRunApplication();
         } catch (Throwable $throwable) {
-            $symfonyStyleFactory = new SymfonyStyleFactory(new PrivatesCaller());
+            $symfonyStyleFactory = new SymfonyStyleFactory();
             $symfonyStyle = $symfonyStyleFactory->create();
             $symfonyStyle->error($throwable->getMessage());
             exit(ShellCode::ERROR);

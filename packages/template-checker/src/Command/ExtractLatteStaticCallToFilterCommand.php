@@ -128,7 +128,11 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
             $this->symfonyStyle->title($classMethodMessage);
 
             $this->symfonyStyle->writeln('Template call located at: ' . $classMethodName->getLatteFilePath());
-            $this->symfonyStyle->writeln('Method located at: ' . $classMethodName->getFileLine());
+
+            if (! $classMethodName->isOnVariableStaticCall()) {
+                $this->symfonyStyle->writeln('Method located at: ' . $classMethodName->getFileLine());
+            }
+
             $this->symfonyStyle->newLine(2);
 
             $this->classMethodNames[$classMethodName->getClassMethodName()] = $classMethodName;
@@ -142,6 +146,11 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
         }
 
         foreach ($this->classMethodNames as $classMethodName) {
+            if ($classMethodName->isOnVariableStaticCall()) {
+                $this->reportOnVariableStaticCall($classMethodName);
+                continue;
+            }
+
             $this->generateFilterProviderFile($classMethodName);
         }
     }
@@ -171,5 +180,15 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
             $changedContent = $this->staticCallWithFilterReplacer->processFileInfo($fileInfo);
             FileSystem::write($fileInfo->getPathname(), $changedContent);
         }
+    }
+
+    private function reportOnVariableStaticCall(ClassMethodName $classMethodName): void
+    {
+        $message = sprintf(
+            'Method "%s()" has unknown class, so it cannot be generated. Handle this case manually by replacing variable by the known class first, then re-running this command.',
+            $classMethodName->getClassMethodName()
+        );
+
+        $this->symfonyStyle->warning($message);
     }
 }

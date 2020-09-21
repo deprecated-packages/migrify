@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Tests\LatteStaticCallAnalyzer;
 
+use Iterator;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 use Migrify\TemplateChecker\LatteStaticCallAnalyzer;
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
@@ -23,16 +24,32 @@ final class LatteStaticCallAnalyzerTest extends AbstractKernelTestCase
         $this->latteStaticCallAnalyzer = self::$container->get(LatteStaticCallAnalyzer::class);
     }
 
-    public function test(): void
+    /**
+     * @dataProvider provideData()
+     */
+    public function test(SmartFileInfo $fileInfo, int $expectedClassMethodCount, string $expectedClassMethodName): void
     {
-        $fileInfo = new SmartFileInfo(__DIR__ . '/Fixture/some.latte');
         $classMethodNames = $this->latteStaticCallAnalyzer->analyzeFileInfos([$fileInfo]);
 
-        $this->assertCount(1, $classMethodNames);
+        $this->assertCount($expectedClassMethodCount, $classMethodNames);
 
         $classMethodName = $classMethodNames[0];
         $this->assertInstanceOf(ClassMethodName::class, $classMethodName);
 
-        $this->assertSame('Project\MailHelper::getUnsubscribeHash', $classMethodName->getClassMethodName());
+        $this->assertSame($expectedClassMethodName, $classMethodName->getClassMethodName());
+    }
+
+    public function provideData(): Iterator
+    {
+        yield [
+            new SmartFileInfo(__DIR__ . '/Fixture/simple_static_call.latte'),
+            1,
+            'Project\MailHelper::getUnsubscribeHash',
+        ];
+        yield [
+            new SmartFileInfo(__DIR__ . '/Fixture/on_variable_static_call.latte'),
+            1,
+            '$mailHelper::getUnsubscribeHash',
+        ];
     }
 }
