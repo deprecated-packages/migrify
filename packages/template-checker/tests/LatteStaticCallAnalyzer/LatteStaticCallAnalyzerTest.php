@@ -41,7 +41,15 @@ final class LatteStaticCallAnalyzerTest extends AbstractKernelTestCase
 
     public function provideData(): Iterator
     {
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/simple_static_call.latte'), 1, 'Project\MailHelper::getUnsubscribeHash'];
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/on_variable_static_call.latte'), 1, '$mailHelper::getUnsubscribeHash'];
+        yield [
+            new SmartFileInfo(__DIR__ . '/Fixture/simple_static_call.latte'),
+            1,
+            'Project\MailHelper::getUnsubscribeHash',
+        ];
+        yield [
+            new SmartFileInfo(__DIR__ . '/Fixture/on_variable_static_call.latte'),
+            1,
+            '$mailHelper::getUnsubscribeHash',
+        ];
     }
 }
