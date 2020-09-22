@@ -48,7 +48,7 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
      * @var UniqueNaming
      */
     private $uniqueNaming;
-    
+
     /**
      * @var XmlImportCollector
      */
@@ -68,9 +68,14 @@ final class IdAwareXmlFileLoader extends XmlFileLoader
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;
     }
-    
-    public function import($resource, $type = null, $ignoreErrors = false, $sourceResource = null, $exclude = null)
-    {
+
+    public function import(
+        $resource,
+        $type = null,
+        $ignoreErrors = false,
+        $sourceResource = null,
+        $exclude = null
+    ): void {
         $this->xmlImportCollector->addImport($resource, $ignoreErrors);
     }
 

@@ -54,7 +54,7 @@ final class YamlToPhpConverter
      * @var RoutingConfiguratorReturnClosureFactory
      */
     private $routingConfiguratorReturnClosureFactory;
-    
+
     /**
      * @var XmlImportCollector
      */
@@ -97,12 +97,9 @@ final class YamlToPhpConverter
             $return = $this->routingConfiguratorReturnClosureFactory->createFromArrayData($yamlArray);
         } else {
             $yamlArray = $this->checkerServiceParametersShifter->process($yamlArray);
-            
-            $yamlArray['imports'] = array_merge(
-                $yamlArray['imports'] ?? [],
-                $this->xmlImportCollector->provide()
-            );
-            
+
+            $yamlArray['imports'] = array_merge($yamlArray['imports'] ?? [], $this->xmlImportCollector->provide());
+
             $return = $this->containerConfiguratorReturnClosureFactory->createFromYamlArray($yamlArray);
         }
 
