@@ -22,14 +22,17 @@ final class IdAwareXmlFileLoaderFactory
      * @var UniqueNaming
      */
     private $uniqueNaming;
-    
+
     /**
      * @var XmlImportCollector
      */
     private $xmlImportCollector;
 
-    public function __construct(Configuration $configuration, UniqueNaming $uniqueNaming, XmlImportCollector $xmlImportCollector)
-    {
+    public function __construct(
+        Configuration $configuration,
+        UniqueNaming $uniqueNaming,
+        XmlImportCollector $xmlImportCollector
+    ) {
         $this->configuration = $configuration;
         $this->uniqueNaming = $uniqueNaming;
         $this->xmlImportCollector = $xmlImportCollector;

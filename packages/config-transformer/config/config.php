@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Migrify\ConfigTransformer\Collector\XmlImportCollector;
 use Migrify\ConfigTransformer\Configuration\Configuration;
 use Migrify\ConfigTransformer\Provider\YamlContentProvider;
 use Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
@@ -44,7 +43,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NodeFinder::class);
     $services->set(Parser::class);
     $services->set(FileSystemFilter::class);
-    
+
     $services->alias(SymfonyVersionFeatureGuardInterface::class, Configuration::class);
     $services->alias(YamlFileContentProviderInterface::class, YamlContentProvider::class);
 };
