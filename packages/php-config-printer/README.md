@@ -38,7 +38,6 @@ final class AppKernel
 <?php
 
 /** @var \Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartConfigPrinter */
-
 $config = [
     'SomeService' => [
         'key' => 'value'
