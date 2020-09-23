@@ -43,7 +43,7 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
     {
         // for imports
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
-        $this->smartFileSystem->copy(__DIR__ . '/Fixture/normal', $temporaryPath);
+        $this->smartFileSystem->mirror(__DIR__ . '/Fixture/normal', $temporaryPath);
         require_once $temporaryPath . '/another_dir/SomeClass.php.inc';
 
         $this->doTestOutput($fixtureFileInfo, Format::YAML, Format::PHP);
@@ -106,7 +106,9 @@ final class YamlToPhpTest extends AbstractConfigFormatConverterTest
         $temporaryPath = StaticFixtureSplitter::getTemporaryPath();
 
         // copy /src to temp directory, so Symfony FileLocator knows about it
-        $this->smartFileSystem->copy($extraDirectory, $temporaryPath, true);
+        $this->smartFileSystem->mirror($extraDirectory, $temporaryPath, null, [
+            'override' => true,
+        ]);
 
         $fileTemporaryPath = $temporaryPath . '/' . $fixtureFileInfo->getRelativeFilePathFromDirectory($extraDirectory);
         $this->smartFileSystem->dumpFile($fileTemporaryPath, $inputAndExpected->getInput());
