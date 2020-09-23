@@ -107,7 +107,10 @@
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
-        }
+        },
+        "files": [
+            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_function.php"
+        ]
     },
     "replace": {
         "migrify/class-presence": "0.3.31",

@@ -132,3 +132,5 @@ parameters:
                  - packages/symfony-route-usage/src/Entity/RouteVisit.php # 59
                  - packages/symfony-route-usage/src/Entity/RouteVisit.php # 60
                  - packages/symfony-route-usage/src/Entity/RouteVisit.php # 62
+
+        - '#Parameter \#1 \$argument of class ReflectionClass constructor expects class\-string<T of object\>\|T of object, string given#'

@@ -4,15 +4,25 @@ declare(strict_types=1);
 
 namespace Migrify\FatalErrorScanner\Yaml;
 
-use Nette\Utils\FileSystem;
 use Symfony\Component\Yaml\Yaml;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class YamlPrinter
 {
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
+    public function __construct(SmartFileSystem $smartFileSystem)
+    {
+        $this->smartFileSystem = $smartFileSystem;
+    }
+
     public function printYamlToFile(array $yaml, string $targetFile): void
     {
         $yamlContent = $this->printYamlToString($yaml);
-        FileSystem::write($targetFile, $yamlContent);
+        $this->smartFileSystem->dumpFile($targetFile, $yamlContent);
     }
 
     private function printYamlToString(array $yaml): string
