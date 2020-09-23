@@ -10,16 +10,16 @@ use Migrify\TemplateChecker\PhpParser\LatteFilterProviderGenerator;
 use Migrify\TemplateChecker\StaticCallWithFilterReplacer;
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
 use Migrify\TemplateChecker\ValueObject\Option;
-use Nette\Utils\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\SplFileInfo;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class ExtractLatteStaticCallToFilterCommand extends Command
 {
@@ -53,18 +53,25 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
      */
     private $symfonyStyle;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     public function __construct(
         GenericFilesFinder $genericFilesFinder,
         SymfonyStyle $symfonyStyle,
         LatteFilterProviderGenerator $latteFilterProviderGenerator,
         LatteStaticCallAnalyzer $latteStaticCallAnalyzer,
-        StaticCallWithFilterReplacer $staticCallWithFilterReplacer
+        StaticCallWithFilterReplacer $staticCallWithFilterReplacer,
+        SmartFileSystem $smartFileSystem
     ) {
         $this->genericFilesFinder = $genericFilesFinder;
         $this->symfonyStyle = $symfonyStyle;
         $this->latteFilterProviderGenerator = $latteFilterProviderGenerator;
         $this->latteStaticCallAnalyzer = $latteStaticCallAnalyzer;
         $this->staticCallWithFilterReplacer = $staticCallWithFilterReplacer;
+        $this->smartFileSystem = $smartFileSystem;
 
         parent::__construct();
     }
@@ -161,14 +168,15 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
 
         $filterProviderClassName = $classMethodName->getFilterProviderClassName();
         $shortFilePath = 'generated/' . $filterProviderClassName . '.php';
-        FileSystem::write(getcwd() . '/' . $shortFilePath, $generatedContent);
+
+        $this->smartFileSystem->dumpFile(getcwd() . '/' . $shortFilePath, $generatedContent);
 
         $generateMessage = sprintf('File "%s" was generated', $shortFilePath);
         $this->symfonyStyle->note($generateMessage);
     }
 
     /**
-     * @param SplFileInfo[] $fileInfos
+     * @param SmartFileInfo[] $fileInfos
      */
     private function updatePathsInTemplates(array $fileInfos, bool $isFix): void
     {
@@ -178,7 +186,7 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
 
         foreach ($fileInfos as $fileInfo) {
             $changedContent = $this->staticCallWithFilterReplacer->processFileInfo($fileInfo);
-            FileSystem::write($fileInfo->getPathname(), $changedContent);
+            $this->smartFileSystem->dumpFile($fileInfo->getPathname(), $changedContent);
         }
     }
 

@@ -6,7 +6,7 @@ namespace Migrify\TemplateChecker;
 
 use Nette\Utils\DateTime;
 use Nette\Utils\Strings;
-use Symfony\Component\Finder\SplFileInfo;
+use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
  * @see \Migrify\TemplateChecker\Tests\StaticCallWithFilterReplacer\StaticCallWithFilterReplacerTest
@@ -20,7 +20,7 @@ final class StaticCallWithFilterReplacer
      */
     private const STATIC_CALL_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::(?<method>[\w]+)\((?<arguments>(?:[^)(]+|\((?:[^)(]+|\([^)(]*\))*\))*)\)#m';
 
-    public function processFileInfo(SplFileInfo $fileInfo): string
+    public function processFileInfo(SmartFileInfo $fileInfo): string
     {
         $contents = $fileInfo->getContents();
 
