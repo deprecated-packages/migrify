@@ -10,6 +10,9 @@ use Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\Source\ClassWithConstants;
 use Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\Source\FirstClass;
 use Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\Source\SecondClass;
+use Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\Source\ValueObject\SimpleValueObject;
+use Migrify\PhpConfigPrinter\ValueObject\Option;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
 
 final class SmartPhpConfigPrinterTest extends AbstractKernelTestCase
@@ -23,6 +26,13 @@ final class SmartPhpConfigPrinterTest extends AbstractKernelTestCase
     {
         $this->bootKernel(PhpConfigPrinterKernel::class);
         $this->smartPhpConfigPrinter = self::$container->get(SmartPhpConfigPrinter::class);
+
+        /** @var ParameterProvider $parameterProvider */
+        $parameterProvider = self::$container->get(ParameterProvider::class);
+        $parameterProvider->changeParameter(
+            Option::INLINE_VALUE_OBJECT_FUNC_CALL_NAME,
+            'Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\Source\custom_inline_function'
+        );
     }
 
     /**
@@ -49,5 +59,11 @@ final class SmartPhpConfigPrinterTest extends AbstractKernelTestCase
                 ClassWithConstants::NUMERIC_CONFIG_KEY => 'a lot of numbers',
             ],
         ], __DIR__ . '/Fixture/expected_constant_file.php.inc'];
+
+        yield [[
+            SecondClass::class => [
+                'some_key' => [new SimpleValueObject('Steve')],
+            ],
+        ], __DIR__ . '/Fixture/expected_value_object_file.php.inc'];
     }
 }
