@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Migrify\PhpConfigPrinter\Printer;
 
 use Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use Migrify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
+use Migrify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
 
 /**
  * @see \Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\SmartPhpConfigPrinterTest
@@ -23,18 +23,18 @@ final class SmartPhpConfigPrinter
     private $phpParserPhpConfigPrinter;
 
     /**
-     * @var ConstantNameFromValueResolver
+     * @var ServiceConfigurationDecorator
      */
-    private $constantNameFromValueResolver;
+    private $serviceConfigurationDecorator;
 
     public function __construct(
         ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory,
         PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter,
-        ConstantNameFromValueResolver $constantNameFromValueResolver
+        ServiceConfigurationDecorator $serviceConfigurationDecorator
     ) {
         $this->configuratorReturnClosureFactory = $configuratorReturnClosureFactory;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
-        $this->constantNameFromValueResolver = $constantNameFromValueResolver;
+        $this->serviceConfigurationDecorator = $serviceConfigurationDecorator;
     }
 
     /**
@@ -63,34 +63,10 @@ final class SmartPhpConfigPrinter
             return null;
         }
 
-        $configuration = $this->replaceKeyValuesInConfigurationWithConstants($configuration, $class);
+        $configuration = $this->serviceConfigurationDecorator->decorate($configuration, $class);
 
         return [
             'calls' => [['configure', [$configuration]]],
         ];
-    }
-
-    /**
-     * @return mixed|mixed[]
-     */
-    private function replaceKeyValuesInConfigurationWithConstants($configuration, string $class)
-    {
-        if (! is_array($configuration)) {
-            return $configuration;
-        }
-
-        foreach ($configuration as $key => $subValue) {
-            $constantName = $this->constantNameFromValueResolver->resolveFromValueAndClass($key, $class);
-            if ($constantName === null) {
-                continue;
-            }
-
-            unset($configuration[$key]);
-
-            $classConstantReference = $class . '::' . $constantName;
-            $configuration[$classConstantReference] = $subValue;
-        }
-
-        return $configuration;
     }
 }
