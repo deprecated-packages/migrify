@@ -109,7 +109,8 @@
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
         },
         "files": [
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_function.php"
+            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php",
+            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php"
         ]
     },
     "replace": {
