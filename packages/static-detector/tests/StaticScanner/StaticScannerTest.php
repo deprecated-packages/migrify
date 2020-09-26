@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\Tests\StaticScanner;
 
+use Iterator;
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\HttpKernel\StaticDetectorKernel;
 use Migrify\StaticDetector\StaticScanner;
@@ -42,22 +43,26 @@ final class StaticScannerTest extends AbstractKernelTestCase
         );
     }
 
-    public function testSelf(): void
-    {
-        $fileInfo = new SmartFileInfo(__DIR__ . '/Fixture/StaticSelfFile.php.inc');
+    /**
+     * @dataProvider provideData()
+     */
+    public function testClassMethodAndStaticCallCount(
+        string $filePath,
+        int $expectedClassMethodCount,
+        int $expectedStaticCallCount
+    ): void {
+        $fileInfo = new SmartFileInfo($filePath);
         $staticReport = $this->createStaticReportFromFileInfo($fileInfo);
 
-        $this->assertSame(1, $staticReport->getStaticClassMethodCount());
-        $this->assertSame(1, $staticReport->getStaticCallsCount());
+        $this->assertSame($expectedClassMethodCount, $staticReport->getStaticClassMethodCount());
+        $this->assertSame($expectedStaticCallCount, $staticReport->getStaticCallsCount());
     }
 
-    public function testParent(): void
+    public function provideData(): Iterator
     {
-        $fileInfo = new SmartFileInfo(__DIR__ . '/Fixture/StaticParentFile.php.inc');
-        $staticReport = $this->createStaticReportFromFileInfo($fileInfo);
-
-        $this->assertSame(1, $staticReport->getStaticClassMethodCount());
-        $this->assertSame(1, $staticReport->getStaticCallsCount());
+        yield [__DIR__ . '/Fixture/StaticSelfFile.php.inc', 1, 1];
+        yield [__DIR__ . '/Fixture/StaticParentFile.php.inc', 1, 1];
+        yield [__DIR__ . '/Fixture/SomeEventSubscriber.php.inc', 0, 0];
     }
 
     private function createStaticReportFromFileInfo(SmartFileInfo $fileInfo): StaticReport

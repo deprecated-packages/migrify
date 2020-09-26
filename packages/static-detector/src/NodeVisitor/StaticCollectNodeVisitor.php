@@ -18,6 +18,11 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class StaticCollectNodeVisitor extends NodeVisitorAbstract
 {
     /**
+     * @var string[]
+     */
+    private const ALLOWED_METHOD_NAMES = ['getSubscribedEvents'];
+
+    /**
      * @var StaticNodeCollector
      */
     private $staticNodeCollector;
@@ -59,6 +64,11 @@ final class StaticCollectNodeVisitor extends NodeVisitorAbstract
 
         if ($node instanceof ClassMethod) {
             if (! $node->isStatic()) {
+                return null;
+            }
+
+            $classMethodName = (string) $node->name;
+            if (in_array($classMethodName, self::ALLOWED_METHOD_NAMES, true)) {
                 return null;
             }
 
