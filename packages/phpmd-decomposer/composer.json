@@ -8,8 +8,8 @@
         "nette/neon": "^3.0",
         "symfony/http-kernel": "^4.4|^5.1",
         "symplify/package-builder": "^8.3.15",
-        "migrify/php-config-printer": "^0.4",
-        "migrify/migrify-kernel": "^0.4"
+        "migrify/php-config-printer": "^0.3.48",
+        "migrify/migrify-kernel": "^0.3.48"
     },
     "require-dev": {
         "symplify/easy-testing": "^8.3.15",
