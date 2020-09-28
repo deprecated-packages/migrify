@@ -22,10 +22,10 @@ final class MissingClassesLatteAnalyzer
     private const CLASS_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::#m';
 
     /**
-     * @see https://regex101.com/r/Wrfff2/10
+     * @see https://regex101.com/r/Wrfff2/11
      * @var string
      */
-    private const INSTANCEOF_CLASS_REGEX = '#instanceof\s+(\\\\)?(?<class>[A-Z][\w\\\\]+)#msi';
+    private const VARTYPE_INSTANCEOF_CLASS_REGEX = '#(vartype|instanceof)\s+(\\\\)?(?<class>[A-Z][\w\\\\]+)#msi';
 
     /**
      * @param SmartFileInfo[] $fileInfos
@@ -37,9 +37,12 @@ final class MissingClassesLatteAnalyzer
 
         foreach ($fileInfos as $fileInfo) {
             $classMatches = Strings::matchAll($fileInfo->getContents(), self::CLASS_REGEX);
-            $instanceOfClassMatches = Strings::matchAll($fileInfo->getContents(), self::INSTANCEOF_CLASS_REGEX);
+            $varTypeInstanceOfClassMatches = Strings::matchAll(
+                $fileInfo->getContents(),
+                self::VARTYPE_INSTANCEOF_CLASS_REGEX
+            );
 
-            $matches = array_merge($classMatches, $instanceOfClassMatches);
+            $matches = array_merge($classMatches, $varTypeInstanceOfClassMatches);
             if ($matches === []) {
                 continue;
             }
