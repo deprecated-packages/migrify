@@ -6,7 +6,6 @@ namespace Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\XmlToP
 
 use Iterator;
 use Migrify\ConfigTransformer\Tests\Converter\ConfigFormatConverter\AbstractConfigFormatConverterTest;
-use Nette\Utils\FileSystem;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -17,7 +16,10 @@ final class XmlToPhpTest extends AbstractConfigFormatConverterTest
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
-        FileSystem::copy(__DIR__ . '/Source/some.xml', sys_get_temp_dir() . '/_temp_fixture_easy_testing/some.xml');
+        $this->smartFileSystem->copy(
+            __DIR__ . '/Source/some.xml',
+            sys_get_temp_dir() . '/_temp_fixture_easy_testing/some.xml'
+        );
 
         $this->doTestOutput($fixtureFileInfo, 'xml', 'php');
     }
