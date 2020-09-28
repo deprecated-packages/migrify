@@ -34,8 +34,9 @@ final class MissingClassesLatteAnalyzerTest extends AbstractKernelTestCase
 
     public function provideData(): Iterator
     {
-        yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_classes.latte'), 1];
+        yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_classes.latte'), 2];
         yield [new SmartFileInfo(__DIR__ . '/Fixture/existing_classes.latte'), 0];
         yield [new SmartFileInfo(__DIR__ . '/Fixture/non_classes.latte'), 0];
+        yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_class_instanceof.latte'), 2];
     }
 }
