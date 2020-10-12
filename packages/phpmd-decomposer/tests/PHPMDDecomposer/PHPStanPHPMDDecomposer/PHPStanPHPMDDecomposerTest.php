@@ -60,7 +60,8 @@ final class PHPStanPHPMDDecomposerTest extends AbstractKernelTestCase
         );
 
         $this->assertSame(
-            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()->getContents(),
+            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()
+                ->getContents(),
             $phpstanFileContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

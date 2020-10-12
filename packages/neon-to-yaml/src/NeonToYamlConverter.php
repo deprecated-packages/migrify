@@ -121,7 +121,9 @@ final class NeonToYamlConverter
      */
     private function convertNeonEntityToArray(Entity $entity): array
     {
-        return array_merge(['value' => $entity->value], $entity->attributes);
+        return array_merge([
+            'value' => $entity->value,
+        ], $entity->attributes);
     }
 
     /**
@@ -135,7 +137,9 @@ final class NeonToYamlConverter
                 $value = Strings::replace($value, '#\.neon$#', '.yaml');
             }
 
-            $data[$key] = ['resource' => $value];
+            $data[$key] = [
+                'resource' => $value,
+            ];
         }
 
         return $data;

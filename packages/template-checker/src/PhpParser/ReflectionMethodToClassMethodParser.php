@@ -63,7 +63,8 @@ final class ReflectionMethodToClassMethodParser
         });
 
         if ($classMethod === null) {
-            $class = $reflectionMethod->getDeclaringClass()->getName();
+            $class = $reflectionMethod->getDeclaringClass()
+                ->getName();
             $errorMessage = sprintf('Method "%s" could not found in "%s" class', $desiredMethodName, $class);
             throw new ShouldNotHappenException($errorMessage);
         }

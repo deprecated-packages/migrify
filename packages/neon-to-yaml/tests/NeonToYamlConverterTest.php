@@ -45,7 +45,8 @@ final class NeonToYamlConverterTest extends AbstractKernelTestCase
         $convertedFileContent = $this->neonToYamlConverter->convertFileInfo($inputAndExpected->getInputFileInfo());
 
         $this->assertSame(
-            $inputAndExpected->getExpectedFileInfo()->getContents(),
+            $inputAndExpected->getExpectedFileInfo()
+                ->getContents(),
             $convertedFileContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

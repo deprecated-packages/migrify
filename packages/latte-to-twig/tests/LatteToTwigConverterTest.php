@@ -39,7 +39,8 @@ final class LatteToTwigConverterTest extends AbstractKernelTestCase
         );
 
         $this->assertSame(
-            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()->getContents(),
+            $inputFileInfoAndExpectedFileInfo->getExpectedFileInfo()
+                ->getContents(),
             $convertedContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

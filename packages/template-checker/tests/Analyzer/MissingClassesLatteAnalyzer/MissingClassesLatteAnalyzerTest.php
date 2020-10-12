@@ -43,5 +43,7 @@ final class MissingClassesLatteAnalyzerTest extends AbstractKernelTestCase
         yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_class_instanceof.latte'), 2];
         yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_var_type.latte'), 2];
         yield [new SmartFileInfo(__DIR__ . '/Fixture/missing_input.latte'), 2];
+
+        yield [new SmartFileInfo(__DIR__ . '/Fixture/skip_scalar_vartype.latte'), 0];
     }
 }

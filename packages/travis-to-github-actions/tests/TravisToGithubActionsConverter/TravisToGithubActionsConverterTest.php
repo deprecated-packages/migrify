@@ -39,7 +39,8 @@ final class TravisToGithubActionsConverterTest extends AbstractKernelTestCase
         );
 
         $this->assertSame(
-            $inputAndExpectedFileInfo->getExpectedFileInfo()->getContents(),
+            $inputAndExpectedFileInfo->getExpectedFileInfo()
+                ->getContents(),
             $convertedFileContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );
