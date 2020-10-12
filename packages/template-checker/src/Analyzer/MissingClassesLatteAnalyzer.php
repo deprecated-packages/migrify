@@ -22,10 +22,10 @@ final class MissingClassesLatteAnalyzer
     private const CLASS_REGEX = '#\b(?<class>[A-Z][\w\\\\]+)::#m';
 
     /**
-     * @see https://regex101.com/r/Wrfff2/11
+     * @see https://regex101.com/r/Wrfff2/12
      * @var string
      */
-    private const VARTYPE_INSTANCEOF_CLASS_REGEX = '#(vartype|instanceof)\s+(\\\\)?(?<class>[A-Z][\w\\\\]+)#msi';
+    private const VARTYPE_INSTANCEOF_CLASS_REGEX = '#(vartype|varType|instanceof|instanceOf)\s+(\\\\)?(?<class>[A-Z][\w\\\\]+)#ms';
 
     /**
      * @param SmartFileInfo[] $fileInfos

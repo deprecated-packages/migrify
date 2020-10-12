@@ -98,11 +98,15 @@ final class ServiceConverterWorker
         }
 
         if (Strings::startsWith($service, '@')) {
-            return ['alias' => $service];
+            return [
+                'alias' => $service,
+            ];
             // probably service
         }
 
-        return ['class' => $service];
+        return [
+            'class' => $service,
+        ];
     }
 
     private function convertNamedService(array $service): array
