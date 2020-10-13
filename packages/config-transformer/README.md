@@ -24,6 +24,8 @@ Do you need to convert 1 file to PHP? Just add its path as argument:
 vendor/bin/config-transformer switch-format config/packages/ecs.yaml
 ```
 
+The input file will be deleted automatically.
+
 If you need more files or directories, `--input-format`/`-i` must be provided:
 
 ```bash
@@ -35,7 +37,7 @@ vendor/bin/config-transformer switch-format app/config -i xml -o yaml
 # to PHP?  
 vendor/bin/config-transformer switch-format app/config -i xml -o php
 
-# you can skip the -o value, as "php" is default value
+# you can omit the -o argument, as "php" is the default value
 vendor/bin/config-transformer switch-format app/config -i xml
 ```
 
