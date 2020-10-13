@@ -47,7 +47,7 @@ You can also add `--target-symfony-version`/`-s` to specify, what Symfony featur
 vendor/bin/config-transformer switch-format app/config -i yaml -o php -s 3.3
 ```
 
-*Note: Symfony YAML parse removes all comments, so be sure to go through files and add still-relevant comments manually. Often they can be removed, as dead-code.*
+*Note: Symfony YAML parse removes all comments, so be sure to go through files and add still-relevant comments manually.*
 
 ## Report Issues
 
