@@ -74,6 +74,18 @@ parameters:
                  # suffixes
                 - packages/config-transformer/src/Configuration/Configuration.php
                 - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
+        
+        -
+            message: '#Property with protected modifier is not allowed\. Use interface instead#'
+            paths:
+                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 26
+                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 31
+                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 36
+
+        -
+            message: '#Value Object class name "SimpleValueObject" must be withotu "ValueObject" suffix\. The correct class name is "Simple"#'
+            paths:
+                - packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/ValueObject/SimpleValueObject.php
 
         - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
 
