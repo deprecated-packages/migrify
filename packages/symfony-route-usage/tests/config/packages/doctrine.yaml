@@ -4,9 +4,9 @@ doctrine:
         server_version: '11.7'
         host: 'localhost'
         port: 5432
-        user: 'dsnet'
-        password: 'dsnet'
-        dbname: 'migrify'
+        user: 'postgres'
+        password: 'root'
+        dbname: '%database_name%'
         charset: 'utf8'
 
     orm:
