@@ -47,7 +47,7 @@ final class DeadRoutesProvider
         }
 
         ksort($deadRoutes);
-
+        dump($deadRoutes);
         return $deadRoutes;
     }
 

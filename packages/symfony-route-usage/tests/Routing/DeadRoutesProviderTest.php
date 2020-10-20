@@ -33,6 +33,5 @@ final class DeadRoutesProviderTest extends AbstractKernelTestCase
         $this->assertCount(2, $deadRoutes);
 
         $this->assertArrayHasKey('acme_privacy', $deadRoutes);
-        $this->assertArrayHasKey('acme_privacy1', $deadRoutes);
     }
 }
