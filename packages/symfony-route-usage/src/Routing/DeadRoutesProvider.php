@@ -53,8 +53,9 @@ final class DeadRoutesProvider
 
     private function isRouteUsed(string $routeName): bool
     {
+        $locale = preg_split( "/(.[^.]*)$/", $routeName);
         foreach ($this->routeVisitRepository->fetchAll() as $routeVisit) {
-            if ($routeVisit->getRoute() === $routeName) {
+            if ($routeVisit->getRoute() === $routeName || $locale[0] === $routeVisit->getRoute()) {
                 return true;
             }
         }
