@@ -1,11 +1,22 @@
-acme_privacy:
+acme_privacy.en:
     path:          /privacy
     controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template:  'static/privacy.html.twig'
+        _locale: "en"
+    requirements:
+        _locale: "en"
 
-acme_privacy1.en:
+acme_privacy.es:
     path:          /privacy
     controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template:  'static/privacy.html.twig'
+        _locale: "es"
+    requirements:
+        _locale: "es"
+
+
+
+
+
