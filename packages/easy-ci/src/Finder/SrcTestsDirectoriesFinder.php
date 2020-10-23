@@ -37,9 +37,11 @@ final class SrcTestsDirectoriesFinder
     /**
      * @param string[] $directories
      */
-    public function findSrcAndTestsDirectories(array $directories): ?SrcAndTestsDirectories
-    {
-        $fileInfos = $this->findInDirectories($directories);
+    public function findSrcAndTestsDirectories(
+        array $directories,
+        bool $allowTestingDirectory = false
+    ): ?SrcAndTestsDirectories {
+        $fileInfos = $this->findInDirectories($directories, $allowTestingDirectory);
         if ($fileInfos === []) {
             return null;
         }
@@ -64,7 +66,7 @@ final class SrcTestsDirectoriesFinder
     /**
      * @return SmartFileInfo[]
      */
-    private function findInDirectories(array $directories): array
+    private function findInDirectories(array $directories, bool $allowTestingDirectory = false): array
     {
         $existingDirectories = $this->filterExistingDirectories($directories);
         if ($existingDirectories === []) {
@@ -75,9 +77,11 @@ final class SrcTestsDirectoriesFinder
             ->directories()
             ->name('#(src|tests)$#')
             ->exclude('Fixture')
-            ->in($existingDirectories)
+            ->in($existingDirectories);
+
+        if ($allowTestingDirectory === false) {
             // exclude tests/src directory nested in /tests, e.g. real project for testing
-            ->filter(function (SplFileInfo $fileInfo) {
+            $finder->filter(function (SplFileInfo $fileInfo) {
                 $srcCounter = count(Strings::matchAll($fileInfo->getPathname(), self::SRC_ONLY_REGEX));
                 $testsCounter = count(Strings::matchAll($fileInfo->getPathname(), self::TESTS_ONLY_REGEX));
 
@@ -91,6 +95,7 @@ final class SrcTestsDirectoriesFinder
 
                 return true;
             });
+        }
 
         return $this->finderSanitizer->sanitize($finder);
     }
