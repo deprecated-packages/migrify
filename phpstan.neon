@@ -191,3 +191,9 @@ parameters:
             message: '#Instead of container injection, use specific service#'
             paths:
                 - packages/symfony-route-usage/tests/Helper/DatabaseLoaderHelper.php
+
+        # part of Finder api
+        -
+            message: '#Instead of "SplFileInfo" class/interface use "Symplify\\SmartFileSystem\\SmartFileInfo"#'
+            paths:
+                - packages/easy-ci/src/Finder/SrcTestsDirectoriesFinder.php
