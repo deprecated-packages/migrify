@@ -61,7 +61,8 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
 
     private function decorateWithExcludedPaths(DOMDocument $domDocument, PHPStanConfig $phpStanConfig): void
     {
-        foreach ($domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_REGEX) as $domNodeList) {
+        $excludeNodes = $domDocument->getElementsByTagName(self::PHPMD_KEY_EXCLUDE_REGEX);
+        foreach ($excludeNodes as $domNodeList) {
             $currentPHPStanConfig = new PHPStanConfig([], [
                 self::PHPSTAN_KEY_EXCLUDES_ANALYSE => [$domNodeList->nodeValue],
             ]);
@@ -72,7 +73,8 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
 
     private function decorateWithRules(DOMDocument $domDocument, PHPStanConfig $phpStanConfig): void
     {
-        foreach ($domDocument->getElementsByTagName('rule') as $domNodeList) {
+        $ruleNodes = $domDocument->getElementsByTagName('rule');
+        foreach ($ruleNodes as $domNodeList) {
             foreach ($this->phpMDToPHPStanBluerprint->provide() as $matchToPHPStanConfig) {
                 /** @var DOMElement $domNodeList */
                 if (! $matchToPHPStanConfig->isMatch($domNodeList)) {
@@ -116,9 +118,12 @@ final class PHPStanConfigFactory extends AbstractConfigFactory
         PHPStanConfig $phpStanConfig
     ): void {
         foreach ($phpmdToPHPStanConfig->getMatchingParameters() as $phpMDParameterName => $phpStanParameterName) {
-            foreach ($domElement->getElementsByTagName('property') as $domNodeList) {
+            $propertyNodes = $domElement->getElementsByTagName('property');
+
+            foreach ($propertyNodes as $domNodeList) {
                 /** @var DOMElement $domNodeList */
-                if ($domNodeList->getAttribute('name') !== $phpMDParameterName) {
+                $nameAttribute = $domNodeList->getAttribute('name');
+                if ($nameAttribute !== $phpMDParameterName) {
                     continue;
                 }
 

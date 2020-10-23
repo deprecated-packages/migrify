@@ -131,7 +131,7 @@ final class SnifferToECSConverter
         $skipParameter = [];
 
         foreach ($simpleXml->children() as $name => $child) {
-            if ($name === 'rule' && isset($child->exclude)) {
+            if ($name === 'rule' && (property_exists($child, 'exclude') && $child->exclude !== null)) {
                 $id = (string) $child->exclude['name'];
                 $className = $this->resolveClassFromStringName($id);
                 $skipParameter[$className] = null;
@@ -180,7 +180,7 @@ final class SnifferToECSConverter
 
     private function resolveServiceConfiguration(SimpleXMLElement $child): ?array
     {
-        if (! isset($child->properties)) {
+        if (! (property_exists($child, 'properties') && $child->properties !== null)) {
             return null;
         }
 

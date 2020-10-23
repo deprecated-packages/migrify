@@ -21,7 +21,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->defaults()
         ->public()
-        ->autowire();
+        ->autowire()
+        ->autoconfigure();
 
     // console application with commands
     $services->set(CommandAwareConsoleApplication::class)
