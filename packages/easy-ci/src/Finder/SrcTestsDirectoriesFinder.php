@@ -16,11 +16,13 @@ final class SrcTestsDirectoriesFinder
 {
     /**
      * @see https://regex101.com/r/KkSmFS/1
+     * @var string
      */
     private const SRC_ONLY_REGEX = '#\bsrc\b#';
 
     /**
      * @see https://regex101.com/r/wzPJ72/2
+     * @var string
      */
     private const TESTS_ONLY_REGEX = '#\btests\b#';
 
@@ -79,7 +81,7 @@ final class SrcTestsDirectoriesFinder
             ->exclude('Fixture')
             ->in($existingDirectories);
 
-        if ($allowTestingDirectory === false) {
+        if (! $allowTestingDirectory) {
             // exclude tests/src directory nested in /tests, e.g. real project for testing
             $finder->filter(function (SplFileInfo $fileInfo) {
                 $srcCounter = count(Strings::matchAll($fileInfo->getPathname(), self::SRC_ONLY_REGEX));
@@ -88,12 +90,7 @@ final class SrcTestsDirectoriesFinder
                 if ($srcCounter > 1) {
                     return false;
                 }
-
-                if ($testsCounter > 1) {
-                    return false;
-                }
-
-                return true;
+                return $testsCounter <= 1;
             });
         }
 
