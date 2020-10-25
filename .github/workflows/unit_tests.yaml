@@ -22,6 +22,7 @@ jobs:
                 with:
                     php-version: ${{ matrix.php }}
                     coverage: none
+                    tools: composer:v1
 
             -   run: composer install --no-progress
             -   run: vendor/bin/phpunit --testsuite unit

@@ -32,6 +32,7 @@ jobs:
                 with:
                     php-version: 7.3
                     coverage: none
+                    tools: composer:v1
 
             # only install monorepo-builder
             -   run: |
