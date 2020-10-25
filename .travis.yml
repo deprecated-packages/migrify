@@ -5,14 +5,16 @@ dist: bionic
 
 php: 7.4
 
-before_install:
-    - phpenv config-rm xdebug.ini
-
 jobs:
     include:
         -
             name: "Split Monorepo"
             if: (branch = master OR tag IS present) && type = push
+
+            before_install:
+                # autoload has changed on Composer 2 and is broken
+                - composer self-update --1
+
             script:
                 - composer update --ansi
                 # travis_retry to prevent fails
