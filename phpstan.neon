@@ -8,6 +8,7 @@ includes:
 parameters:
     paths:
         - packages
+        # bin files explicitly, because they don't have php suffix
         - packages/easy-ci/bin/easy-ci
         - packages/class-presence/bin/class-presence
         - packages/config-transformer/bin/config-transformer
@@ -74,7 +75,7 @@ parameters:
                  # suffixes
                 - packages/config-transformer/src/Configuration/Configuration.php
                 - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
-        
+
         -
             message: '#Property with protected modifier is not allowed\. Use interface instead#'
             paths:
