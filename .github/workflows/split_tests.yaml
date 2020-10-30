@@ -2,14 +2,12 @@ name: Split Tests
 
 on:
     pull_request: null
-    push:
-        branches:
-            - master
 
 jobs:
-    after_split_testing:
+    split_testing:
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: false
             matrix:
                 package_name:
                     - class-presence
