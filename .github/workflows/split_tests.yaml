@@ -7,9 +7,10 @@ on:
             - master
 
 jobs:
-    after_split_testing:
+    split_testing:
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: false
             matrix:
                 package_name:
                     - class-presence
@@ -18,11 +19,11 @@ jobs:
                     - template-checker
                     - vendor-patches
                     # Github Actions buggy now
-#                    - easy-ci
-#                    - fatal-error-scanner
-#                    - neon-to-yaml
-#                    - psr4-switcher
-#                    - symfony-route-usage
+                    - easy-ci
+                    - fatal-error-scanner
+                    - neon-to-yaml
+                    - psr4-switcher
+                    - symfony-route-usage
 
         name: Split Tests of ${{ matrix.package_name }}
 
