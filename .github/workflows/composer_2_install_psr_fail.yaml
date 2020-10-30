@@ -20,4 +20,4 @@ jobs:
 
             -   run: composer install --ansi
 
-            -   run: vendor/bin/ecs
+            -   run: vendor/bin/ecs --ansi --debug
