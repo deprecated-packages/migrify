@@ -17,7 +17,6 @@ jobs:
                     - vendor-patches
                     # Github Actions buggy now
 #                    - easy-ci
-#                    - fatal-error-scanner
 #                    - neon-to-yaml
 #                    - psr4-switcher
 #                    - symfony-route-usage

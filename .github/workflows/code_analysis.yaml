@@ -21,10 +21,6 @@ jobs:
                         run: composer rector-ci
 
                     -
-                        name: 'Fatal Error Scan'
-                        run: packages/fatal-error-scanner/bin/fatal-error-scanner scan packages/fatal-error-scanner/tests/Source/FatalErrors
-
-                    -
                         name: 'Format Switcher'
                         run: packages/config-transformer/bin/config-transformer switch-format packages/config-transformer/tests/Fixture --input-format xml --output-format yaml --dry-run --ansi
 

@@ -3,8 +3,5 @@ composer.lock
 
 .phpunit.result.cache
 
-# for fatal-error-scanner
-fatal-types.yaml
-
 # for testing of "migrify/vendor-patches" package
 patches
