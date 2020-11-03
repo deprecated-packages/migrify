@@ -1,6 +1,6 @@
 {
     "name": "migrify/class-presence",
-    "description": "Check NEON/YAML/TWIG/LATTE files for existing classes",
+    "description": "Check NEON/YAML/TWIG/LATTE files for existing and missing classes",
     "license": "MIT",
     "bin": [
         "bin/class-presence"
