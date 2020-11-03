@@ -1,0 +1,52 @@
+name: Monorepo Split Packages
+
+on:
+    pull_request: null
+    push:
+        branches:
+            - master
+
+jobs:
+    monorepo_split_packages:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                package_name:
+                    - class-presence
+                    - config-feature-bumper
+#                    - config-pretifier
+#                    - config-transformer
+#                    - diff-data-miner
+#                    - easy-ci
+#                    - fatal-error-scanner
+#                    - latte-to-twig
+#                    - migrify-kernel
+#                    - neon-to-yaml
+#                    - php-config-printer
+#                    - phpmd-decomposer
+#                    - psr4-switcher
+#                    - sniffer-fixer-to-ecs
+#                    - static-detector
+#                    - symfony-route-usage
+#                    - template-checker
+#                    - travis-to-github-actions
+#                    - vendor-patches
+
+        name: Monorepo Split of ${{ matrix.package_name }}
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            # https://github.com/cpina/github-action-push-to-another-repository
+            -
+                uses: cpina/github-action-push-to-another-repository@master
+                env:
+                    API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    source-directory: 'packages/${{ matrix.package_name }}'
+                    destination-github-username: 'migrify'
+                    destination-repository-name: '${{ matrix.package_name }}'
+                    user-email: tomas@getrector.org
+                    target-branch: master
