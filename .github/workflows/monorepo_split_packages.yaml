@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - master
+    pull_request: null
 
 jobs:
     monorepo_split_packages:
@@ -51,4 +52,4 @@ jobs:
 
             # get tag
             -   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-            -   run: $RELEASE_VERSION
+            -   run: echo $RELEASE_VERSION
