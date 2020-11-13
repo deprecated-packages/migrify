@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Migrify\MigrifyKernel\Console\CommandAwareConsoleApplication;
+use Migrify\MigrifyKernel\Console\ConsoleApplicationFactory;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -25,9 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure();
 
     // console application with commands
-    $services->set(CommandAwareConsoleApplication::class)
-        ->public();
-    $services->alias(Application::class, CommandAwareConsoleApplication::class);
+    $services->set(ConsoleApplicationFactory::class);
 
     // symfony style
     $services->set(SymfonyStyleFactory::class);

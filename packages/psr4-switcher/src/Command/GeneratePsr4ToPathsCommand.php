@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\Psr4Switcher\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\Psr4Switcher\Configuration\Psr4SwitcherConfiguration;
 use Migrify\Psr4Switcher\Psr4Filter;
@@ -12,22 +13,14 @@ use Migrify\Psr4Switcher\ValueObject\Option;
 use Migrify\Psr4Switcher\ValueObject\Psr4NamespaceToPaths;
 use Migrify\Psr4Switcher\ValueObjectFactory\Psr4NamespaceToPathFactory;
 use Nette\Utils\Json;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class GeneratePsr4ToPathsCommand extends Command
+final class GeneratePsr4ToPathsCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var Psr4SwitcherConfiguration
      */
@@ -49,13 +42,11 @@ final class GeneratePsr4ToPathsCommand extends Command
     private $psr4Filter;
 
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         Psr4SwitcherConfiguration $psr4SwitcherConfiguration,
         PhpClassLoader $phpClassLoader,
         Psr4NamespaceToPathFactory $psr4NamespaceToPathFactory,
         Psr4Filter $psr4Filter
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->phpClassLoader = $phpClassLoader;
         $this->psr4SwitcherConfiguration = $psr4SwitcherConfiguration;
         $this->psr4NamespaceToPathFactory = $psr4NamespaceToPathFactory;
@@ -66,7 +57,6 @@ final class GeneratePsr4ToPathsCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check if application is PSR-4 ready');
 
         $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');

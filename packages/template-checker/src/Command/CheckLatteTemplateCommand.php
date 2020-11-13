@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\TemplateChecker\Analyzer\MissingClassConstantLatteAnalyzer;
 use Migrify\TemplateChecker\Analyzer\MissingClassesLatteAnalyzer;
 use Migrify\TemplateChecker\Analyzer\MissingClassStaticCallLatteAnalyzer;
 use Migrify\TemplateChecker\Finder\GenericFilesFinder;
 use Migrify\TemplateChecker\ValueObject\Option;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class CheckLatteTemplateCommand extends Command
+final class CheckLatteTemplateCommand extends AbstractMigrifyCommand
 {
     /**
      * @var GenericFilesFinder
@@ -36,11 +34,6 @@ final class CheckLatteTemplateCommand extends Command
     private $missingClassesLatteAnalyzer;
 
     /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
      * @var MissingClassStaticCallLatteAnalyzer
      */
     private $missingClassStaticCallLatteAnalyzer;
@@ -49,13 +42,11 @@ final class CheckLatteTemplateCommand extends Command
         GenericFilesFinder $genericFilesFinder,
         MissingClassConstantLatteAnalyzer $missingClassConstantLatteAnalyzer,
         MissingClassesLatteAnalyzer $missingClassesLatteAnalyzer,
-        MissingClassStaticCallLatteAnalyzer $missingClassStaticCallLatteAnalyzer,
-        SymfonyStyle $symfonyStyle
+        MissingClassStaticCallLatteAnalyzer $missingClassStaticCallLatteAnalyzer
     ) {
         $this->genericFilesFinder = $genericFilesFinder;
         $this->missingClassConstantLatteAnalyzer = $missingClassConstantLatteAnalyzer;
         $this->missingClassesLatteAnalyzer = $missingClassesLatteAnalyzer;
-        $this->symfonyStyle = $symfonyStyle;
         $this->missingClassStaticCallLatteAnalyzer = $missingClassStaticCallLatteAnalyzer;
 
         parent::__construct();
@@ -63,7 +54,6 @@ final class CheckLatteTemplateCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(
             Option::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,

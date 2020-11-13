@@ -4,31 +4,23 @@ declare(strict_types=1);
 
 namespace Migrify\Psr4Switcher\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\Psr4Switcher\Finder\MultipleClassInOneFileFinder;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class FindMultiClassesCommand extends Command
+final class FindMultiClassesCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var MultipleClassInOneFileFinder
      */
     private $multipleClassInOneFileFinder;
 
-    public function __construct(SymfonyStyle $symfonyStyle, MultipleClassInOneFileFinder $multipleClassInOneFileFinder)
+    public function __construct(MultipleClassInOneFileFinder $multipleClassInOneFileFinder)
     {
-        $this->symfonyStyle = $symfonyStyle;
         $this->multipleClassInOneFileFinder = $multipleClassInOneFileFinder;
 
         parent::__construct();
@@ -36,7 +28,6 @@ final class FindMultiClassesCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Find multiple classes in one file');
         $this->addArgument(
             MigrifyOption::SOURCES,

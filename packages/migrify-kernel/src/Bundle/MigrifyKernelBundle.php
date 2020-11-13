@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Migrify\MigrifyKernel\Bundle;
 
+use Migrify\MigrifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass;
 use Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
@@ -15,6 +16,7 @@ final class MigrifyKernelBundle extends Bundle
     public function build(ContainerBuilder $containerBuilder): void
     {
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
+        $containerBuilder->addCompilerPass(new PrepareConsoleApplicationCompilerPass());
     }
 
     protected function createContainerExtension(): ?ExtensionInterface

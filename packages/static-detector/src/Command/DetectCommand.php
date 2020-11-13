@@ -4,37 +4,24 @@ declare(strict_types=1);
 
 namespace Migrify\StaticDetector\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\Output\StaticReportReporter;
 use Migrify\StaticDetector\StaticScanner;
 use Migrify\StaticDetector\ValueObject\Option;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class DetectCommand extends Command
+final class DetectCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
     /**
      * @var Finder
      */
@@ -66,8 +53,6 @@ final class DetectCommand extends Command
     private $parameterProvider;
 
     public function __construct(
-        SymfonyStyle $symfonyStyle,
-        SmartFileSystem $smartFileSystem,
         Finder $finder,
         FinderSanitizer $finderSanitizer,
         StaticScanner $staticScanner,
@@ -75,22 +60,18 @@ final class DetectCommand extends Command
         StaticReportReporter $staticReportReporter,
         ParameterProvider $parameterProvider
     ) {
-        $this->symfonyStyle = $symfonyStyle;
-        $this->smartFileSystem = $smartFileSystem;
         $this->finder = $finder;
         $this->finderSanitizer = $finderSanitizer;
         $this->staticScanner = $staticScanner;
         $this->staticNodeCollector = $staticNodeCollector;
         $this->staticReportReporter = $staticReportReporter;
+        $this->parameterProvider = $parameterProvider;
 
         parent::__construct();
-
-        $this->parameterProvider = $parameterProvider;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(
             MigrifyOption::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,

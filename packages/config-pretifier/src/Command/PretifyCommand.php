@@ -6,48 +6,29 @@ namespace Migrify\ConfigPretifier\Command;
 
 use Migrify\ConfigPretifier\Pretifier\NeonConfigPretifier;
 use Migrify\ConfigPretifier\ValueObject\Option;
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\Exception\NotImplementedYetException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\Finder\SmartFinder;
 
-final class PretifyCommand extends Command
+final class PretifyCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var NeonConfigPretifier
      */
     private $neonConfigPretifier;
 
-    /**
-     * @var SmartFinder
-     */
-    private $smartFinder;
-
-    public function __construct(
-        SymfonyStyle $symfonyStyle,
-        SmartFinder $smartFinder,
-        NeonConfigPretifier $neonConfigPretifier
-    ) {
+    public function __construct(NeonConfigPretifier $neonConfigPretifier)
+    {
         parent::__construct();
 
-        $this->symfonyStyle = $symfonyStyle;
-        $this->smartFinder = $smartFinder;
         $this->neonConfigPretifier = $neonConfigPretifier;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Pretify NEON/YAML syntax in provided files');
         $this->addArgument(
             Option::SOURCES,

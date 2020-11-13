@@ -4,33 +4,25 @@ declare(strict_types=1);
 
 namespace Migrify\Psr4Switcher\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\Psr4Switcher\RobotLoader\PhpClassLoader;
 use Nette\Utils\Strings;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class CheckFileClassNameCommand extends Command
+final class CheckFileClassNameCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var PhpClassLoader
      */
     private $phpClassLoader;
 
-    public function __construct(SymfonyStyle $symfonyStyle, PhpClassLoader $phpClassLoader)
+    public function __construct(PhpClassLoader $phpClassLoader)
     {
-        $this->symfonyStyle = $symfonyStyle;
         $this->phpClassLoader = $phpClassLoader;
 
         parent::__construct();
@@ -38,7 +30,6 @@ final class CheckFileClassNameCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check if short file name is same as class name');
 
         $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Path to source');

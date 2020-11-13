@@ -8,22 +8,15 @@ use Migrify\ClassPresence\Finder\FileFinder;
 use Migrify\ClassPresence\Regex\NonExistingClassConstantExtractor;
 use Migrify\ClassPresence\Regex\NonExistingClassExtractor;
 use Migrify\ClassPresence\ValueObject\StaticCheckedFileSuffix;
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class CheckCommand extends Command
+final class CheckCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var NonExistingClassExtractor
      */
@@ -40,23 +33,19 @@ final class CheckCommand extends Command
     private $fileFinder;
 
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         FileFinder $fileFinder,
         NonExistingClassExtractor $nonExistingClassExtractor,
         NonExistingClassConstantExtractor $nonExistingClassConstantExtractor
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->nonExistingClassExtractor = $nonExistingClassExtractor;
         $this->nonExistingClassConstantExtractor = $nonExistingClassConstantExtractor;
+        $this->fileFinder = $fileFinder;
 
         parent::__construct();
-
-        $this->fileFinder = $fileFinder;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Check configs for existing classes');
         $this->addArgument(
             MigrifyOption::SOURCES,
