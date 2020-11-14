@@ -4,25 +4,18 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\TemplateChecker\Finder\GenericFilesFinder;
 use Migrify\TemplateChecker\Template\RenderMethodTemplateExtractor;
 use Migrify\TemplateChecker\Template\TemplatePathsResolver;
 use Migrify\TemplateChecker\ValueObject\Option;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 
-final class CheckTwigRenderCommand extends Command
+final class CheckTwigRenderCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var TemplatePathsResolver
      */
@@ -39,12 +32,10 @@ final class CheckTwigRenderCommand extends Command
     private $genericFilesFinder;
 
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         TemplatePathsResolver $possibleTemplatePathsResolver,
         GenericFilesFinder $genericFilesFinder,
         RenderMethodTemplateExtractor $renderMethodTemplateExtractor
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->possibleTemplatePathsResolver = $possibleTemplatePathsResolver;
         $this->renderMethodTemplateExtractor = $renderMethodTemplateExtractor;
         $this->genericFilesFinder = $genericFilesFinder;
@@ -54,7 +45,6 @@ final class CheckTwigRenderCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription('Validate template paths in $this->render(...)');
         $this->addArgument(
             Option::SOURCES,

@@ -4,58 +4,36 @@ declare(strict_types=1);
 
 namespace Migrify\TravisToGithubActions\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\TravisToGithubActions\TravisToGithubActionsConverter;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class ConvertCommand extends Command
+final class ConvertCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
     /**
      * @var TravisToGithubActionsConverter
      */
     private $travisToGithubActionsConverter;
 
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
-    /**
-     * @var FileSystemGuard
-     */
-    private $fileSystemGuard;
-
     public function __construct(
         TravisToGithubActionsConverter $travisToGithubActionsConverter,
-        SymfonyStyle $symfonyStyle,
-        SmartFileSystem $smartFileSystem,
         FileSystemGuard $fileSystemGuard
     ) {
         parent::__construct();
 
-        $this->symfonyStyle = $symfonyStyle;
         $this->travisToGithubActionsConverter = $travisToGithubActionsConverter;
-        $this->smartFileSystem = $smartFileSystem;
+
         $this->fileSystemGuard = $fileSystemGuard;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED, 'Directory or file to convert');
         $this->setDescription('Converts Neon syntax to Yaml');
     }

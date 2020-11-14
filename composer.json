@@ -25,6 +25,7 @@
         "symfony/yaml": "^4.4|^5.1",
         "symplify/autowire-array-parameter": "^8.3.46",
         "symplify/composer-json-manipulator": "^8.3.46",
+        "symplify/console-color-diff": "^8.3.46",
         "symplify/package-builder": "^8.3.46",
         "symplify/smart-file-system": "^8.3.46"
     },
@@ -73,6 +74,7 @@
             "Migrify\\MigrifyKernel\\": "packages/migrify-kernel/src",
             "Migrify\\NeonToYaml\\": "packages/neon-to-yaml/src",
             "Migrify\\PHPMDDecomposer\\": "packages/phpmd-decomposer/src",
+            "Migrify\\PHPUnitUpgrader\\": "packages/phpunit-upgrader/src",
             "Migrify\\PhpConfigPrinter\\": "packages/php-config-printer/src",
             "Migrify\\Psr4Switcher\\": "packages/psr4-switcher/src",
             "Migrify\\SnifferFixerToECS\\": "packages/sniffer-fixer-to-ecs/src",
@@ -84,6 +86,10 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php",
+            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php"
+        ],
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigFeatureBumper\\Tests\\": "packages/config-feature-bumper/tests",
@@ -97,6 +103,7 @@
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\PHPMDDecomposer\\Tests\\": "packages/phpmd-decomposer/tests",
+            "Migrify\\PHPUnitUpgrader\\Tests\\": "packages/phpunit-upgrader/tests",
             "Migrify\\PhpConfigPrinter\\Tests\\": "packages/php-config-printer/tests",
             "Migrify\\Psr4Switcher\\Tests\\": "packages/psr4-switcher/tests",
             "Migrify\\SnifferFixerToECS\\Tests\\": "packages/sniffer-fixer-to-ecs/tests",
@@ -105,11 +112,7 @@
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
-        },
-        "files": [
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php",
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php"
-        ]
+        }
     },
     "replace": {
         "migrify/class-presence": "0.3.45",
@@ -123,6 +126,7 @@
         "migrify/neon-to-yaml": "0.3.45",
         "migrify/php-config-printer": "0.3.45",
         "migrify/phpmd-decomposer": "0.3.45",
+        "migrify/phpunit-upgrader": "self.version",
         "migrify/psr4-switcher": "0.3.45",
         "migrify/sniffer-fixer-to-ecs": "0.3.45",
         "migrify/static-detector": "0.3.45",
@@ -150,5 +154,7 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

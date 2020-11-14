@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace Migrify\TemplateChecker\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\TemplateChecker\Finder\GenericFilesFinder;
 use Migrify\TemplateChecker\LatteStaticCallAnalyzer;
 use Migrify\TemplateChecker\PhpParser\LatteFilterProviderGenerator;
 use Migrify\TemplateChecker\StaticCallWithFilterReplacer;
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
 use Migrify\TemplateChecker\ValueObject\Option;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class ExtractLatteStaticCallToFilterCommand extends Command
+final class ExtractLatteStaticCallToFilterCommand extends AbstractMigrifyCommand
 {
     /**
      * @var ClassMethodName[]
@@ -48,38 +45,22 @@ final class ExtractLatteStaticCallToFilterCommand extends Command
      */
     private $genericFilesFinder;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
     public function __construct(
         GenericFilesFinder $genericFilesFinder,
-        SymfonyStyle $symfonyStyle,
         LatteFilterProviderGenerator $latteFilterProviderGenerator,
         LatteStaticCallAnalyzer $latteStaticCallAnalyzer,
-        StaticCallWithFilterReplacer $staticCallWithFilterReplacer,
-        SmartFileSystem $smartFileSystem
+        StaticCallWithFilterReplacer $staticCallWithFilterReplacer
     ) {
         $this->genericFilesFinder = $genericFilesFinder;
-        $this->symfonyStyle = $symfonyStyle;
         $this->latteFilterProviderGenerator = $latteFilterProviderGenerator;
         $this->latteStaticCallAnalyzer = $latteStaticCallAnalyzer;
         $this->staticCallWithFilterReplacer = $staticCallWithFilterReplacer;
-        $this->smartFileSystem = $smartFileSystem;
 
         parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
-
         $this->addArgument(
             Option::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,

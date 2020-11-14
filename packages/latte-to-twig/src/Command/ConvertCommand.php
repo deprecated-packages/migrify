@@ -6,18 +6,15 @@ namespace Migrify\LatteToTwig\Command;
 
 use Migrify\LatteToTwig\Finder\LatteAndTwigFinder;
 use Migrify\LatteToTwig\LatteToTwigConverter;
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Nette\Utils\Strings;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class ConvertCommand extends Command
+final class ConvertCommand extends AbstractMigrifyCommand
 {
     /**
      * @var LatteToTwigConverter
@@ -25,37 +22,20 @@ final class ConvertCommand extends Command
     private $latteToTwigConverter;
 
     /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
      * @var LatteAndTwigFinder
      */
     private $latteAndTwigFinder;
 
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
-    public function __construct(
-        LatteToTwigConverter $latteToTwigConverter,
-        SymfonyStyle $symfonyStyle,
-        LatteAndTwigFinder $latteAndTwigFinder,
-        SmartFileSystem $smartFileSystem
-    ) {
+    public function __construct(LatteToTwigConverter $latteToTwigConverter, LatteAndTwigFinder $latteAndTwigFinder)
+    {
         $this->latteToTwigConverter = $latteToTwigConverter;
-        $this->symfonyStyle = $symfonyStyle;
         $this->latteAndTwigFinder = $latteAndTwigFinder;
-        $this->smartFileSystem = $smartFileSystem;
 
         parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED, 'Directory or file to convert');
         $this->setDescription('Converts Latte syntax to Twig');
     }

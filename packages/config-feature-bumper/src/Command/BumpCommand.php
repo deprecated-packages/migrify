@@ -6,20 +6,16 @@ namespace Migrify\ConfigFeatureBumper\Command;
 
 use Migrify\ConfigFeatureBumper\ValueObject\Option;
 use Migrify\ConfigFeatureBumper\Yaml\ExplicitToAutodiscoveryConverter;
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Nette\Utils\Strings;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Yaml\Yaml;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\Finder\SmartFinder;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class BumpCommand extends Command
+final class BumpCommand extends AbstractMigrifyCommand
 {
     /**
      * @var string
@@ -36,38 +32,15 @@ final class BumpCommand extends Command
      */
     private $explicitToAutodiscoveryConverter;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-
-    /**
-     * @var SmartFinder
-     */
-    private $smartFinder;
-
-    public function __construct(
-        ExplicitToAutodiscoveryConverter $explicitToAutodiscoveryConverter,
-        SymfonyStyle $symfonyStyle,
-        SmartFinder $smartFinder,
-        SmartFileSystem $smartFileSystem
-    ) {
+    public function __construct(ExplicitToAutodiscoveryConverter $explicitToAutodiscoveryConverter)
+    {
         parent::__construct();
 
         $this->explicitToAutodiscoveryConverter = $explicitToAutodiscoveryConverter;
-        $this->symfonyStyle = $symfonyStyle;
-        $this->smartFileSystem = $smartFileSystem;
-        $this->smartFinder = $smartFinder;
     }
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->setDescription(
             'Convert "(services|config).(yml|yaml)" from pre-Symfony 3.3 format to modern format using autodiscovery, autowire and autoconfigure'
         );

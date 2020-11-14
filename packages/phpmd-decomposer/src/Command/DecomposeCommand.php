@@ -4,43 +4,25 @@ declare(strict_types=1);
 
 namespace Migrify\PHPMDDecomposer\Command;
 
+use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Migrify\PHPMDDecomposer\PHPMDDecomposer;
 use Migrify\PHPMDDecomposer\Printer\PHPStanPrinter;
 use Migrify\PHPMDDecomposer\ValueObject\DecomposedFileConfigs;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 
-final class DecomposeCommand extends Command
+final class DecomposeCommand extends AbstractMigrifyCommand
 {
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
-     * @var FileSystemGuard
-     */
-    private $fileSystemGuard;
-
     /**
      * @var PHPMDDecomposer
      */
     private $phpmdDecomposer;
-
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
 
     /**
      * @var PHPStanPrinter
@@ -48,16 +30,13 @@ final class DecomposeCommand extends Command
     private $phpStanPrinter;
 
     public function __construct(
-        SymfonyStyle $symfonyStyle,
         FileSystemGuard $fileSystemGuard,
         PHPMDDecomposer $phpmdDecomposer,
-        SmartFileSystem $smartFileSystem,
         PHPStanPrinter $phpStanPrinter
     ) {
-        $this->symfonyStyle = $symfonyStyle;
         $this->fileSystemGuard = $fileSystemGuard;
         $this->phpmdDecomposer = $phpmdDecomposer;
-        $this->smartFileSystem = $smartFileSystem;
+
         $this->phpStanPrinter = $phpStanPrinter;
 
         parent::__construct();
@@ -65,7 +44,6 @@ final class DecomposeCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
         $this->addArgument(MigrifyOption::SOURCES, InputArgument::REQUIRED, 'File path to phpmd.xml to convert');
         $this->setDescription('Converts phpmd.xml to phpstan.neon, ecs.php and rector.php');
     }
