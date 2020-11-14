@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - master
+    release: null
 
 jobs:
     monorepo_split_packages:
