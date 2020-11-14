@@ -38,14 +38,6 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            # see https://github.community/t/how-to-get-just-the-tag-name/16241/7?u=tomasvotruba
-            -
-                id: current_tag
-                run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-
-            -
-                run: echo "Found tag '${{ steps.current_tag.outputs.version }}'"
-
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
                 uses: TomasVotruba/github-action-monorepo-split@master
@@ -56,4 +48,3 @@ jobs:
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
-                    tag: ${{ steps.current_tag.outputs.version }}
