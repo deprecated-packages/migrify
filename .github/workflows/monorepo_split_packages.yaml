@@ -4,7 +4,6 @@ on:
     push:
         branches:
             - master
-    release: null
 
 jobs:
     monorepo_split_packages:
@@ -39,7 +38,13 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            -   run: echo ${{ github.event.release.tag_name }}
+
+            -
+                id: get_version
+                uses: battila7/get-version-action@v2
+
+            - run: echo ${{ steps.get_version.outputs.version }}
+            - run: echo ${{ steps.get_version.outputs.version-without-v }}
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
