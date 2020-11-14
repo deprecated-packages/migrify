@@ -47,7 +47,7 @@ jobs:
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
-            -   run: echo "TAG=${{ steps.previoustag.outputs.tag }}" >> $GITHUB_ENV
+            -   run: echo "TAG=${{ steps.previous_tag.outputs.tag }}" >> $GITHUB_ENV
 
             -   run: echo "$TAG"
 
