@@ -24,7 +24,7 @@ jobs:
                 with:
                     php-version: 7.2
                     coverage: pcov
-                    tools: composer:v1
+                    tools: composer:v2
 
             -   run: composer install --no-progress
             -   run : |
