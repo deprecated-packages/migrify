@@ -38,13 +38,9 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            # https://github.com/WyriHaximus/github-action-get-previous-tag
             -
-                id: latest_tag
-                uses: WyriHaximus/github-action-get-previous-tag@master
-
-            -
-                run: echo "Latest tag ${{ steps.latest_tag.outputs.tag }}"
+                id: current_tag
+                run: echo ::set-output name=version::$(echo $GITHUB_REF | cut -d / -f 3)
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
@@ -56,4 +52,4 @@ jobs:
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
-                    tag: ${{ steps.latest_tag.outputs.tag }}
+                    tag: ${{ steps.current_tag.outputs.version }}
