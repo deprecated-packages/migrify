@@ -37,15 +37,19 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v2
+                # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
                 with:
                     fetch-depth: 0
 
+            # see https://github.com/WyriHaximus/github-action-get-previous-tag
             -
                 id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
 
-            -
-                run: echo ${{ steps.previoustag.outputs.tag }}
+            # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
+            -   run: echo "TAG=${{ steps.previoustag.outputs.tag }}" >> $GITHUB_ENV
+
+            -   run: echo "$TAG"
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
