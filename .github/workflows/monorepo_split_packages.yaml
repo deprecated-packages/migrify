@@ -38,13 +38,13 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            # see https://github.community/t/how-to-get-just-the-tag-name/16241/6#M1024
+            # see https://github.community/t/how-to-get-just-the-tag-name/16241/7?u=tomasvotruba
             -
                 id: current_tag
-                run: echo ::set-output name=version::$(echo $GITHUB_REF | cut -d / -f 3)
+                run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
 
             -
-                run: echo "Found tag ${{ steps.current_tag.outputs.version }}"
+                run: echo "Found tag '${{ steps.current_tag.outputs.version }}'"
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
