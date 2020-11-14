@@ -47,9 +47,8 @@ jobs:
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             # see https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
+            # this create $TAG environment value
             -   run: echo "TAG=${{ steps.previous_tag.outputs.tag }}" >> $GITHUB_ENV
-
-            -   run: echo "$TAG"
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
@@ -61,3 +60,4 @@ jobs:
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
+                    tag: "$TAG"
