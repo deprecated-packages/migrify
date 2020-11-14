@@ -23,6 +23,7 @@ jobs:
                     - neon-to-yaml
                     - php-config-printer
                     - phpmd-decomposer
+                    - phpunit-upgrader
                     - psr4-switcher
                     - sniffer-fixer-to-ecs
                     - static-detector
