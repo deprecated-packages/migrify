@@ -38,13 +38,12 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
+            -
+                id: previous_tag
+                uses: "WyriHaximus/github-action-get-previous-tag@master"
 
             -
-                id: get_version
-                uses: battila7/get-version-action@v2
-
-            - run: echo ${{ steps.get_version.outputs.version }}
-            - run: echo ${{ steps.get_version.outputs.version-without-v }}
+                run: echo ${{ steps.previoustag.outputs.tag }}
 
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
