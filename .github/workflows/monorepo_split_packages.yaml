@@ -43,6 +43,9 @@ jobs:
                 id: current_tag
                 run: echo ::set-output name=version::$(echo $GITHUB_REF | cut -d / -f 3)
 
+            -
+                run: echo "Found tag ${{ steps.current_tag.outputs.version }}"
+
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
                 uses: TomasVotruba/github-action-monorepo-split@master
