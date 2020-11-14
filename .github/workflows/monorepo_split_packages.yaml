@@ -50,7 +50,7 @@ jobs:
 
             -
                 # Uses an action in the root directory
-                uses: ./
+                uses: TomasVotruba/github-action-monorepo-split@master
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
