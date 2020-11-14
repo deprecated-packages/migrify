@@ -3,9 +3,9 @@
 name: Sonar
 
 on:
-    push:
-        branches:
-            - master
+    schedule:
+        # https://crontab.guru/once-a-day
+        -   cron: "0 0 * * *"
 
 jobs:
     sonar_cloud:
