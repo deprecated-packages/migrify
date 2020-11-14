@@ -56,9 +56,9 @@ jobs:
                 uses: TomasVotruba/github-action-monorepo-split@master
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                    TAG: $TAG
                 with:
                     package-directory: 'packages/${{ matrix.package_name }}'
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
-                    tag: $TAG
