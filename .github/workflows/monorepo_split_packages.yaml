@@ -13,24 +13,25 @@ jobs:
             fail-fast: false
             matrix:
                 package_name:
-                    - class-presence
-                    - config-feature-bumper
-                    - config-pretifier
-                    - config-transformer
-                    - diff-data-miner
-                    - easy-ci
-                    - latte-to-twig
-                    - migrify-kernel
-                    - neon-to-yaml
-                    - php-config-printer
-                    - phpmd-decomposer
-                    - psr4-switcher
-                    - sniffer-fixer-to-ecs
-                    - static-detector
-                    - symfony-route-usage
-                    - template-checker
-                    - travis-to-github-actions
-                    - vendor-patches
+                    - brand-new
+#                    - class-presence
+#                    - config-feature-bumper
+#                    - config-pretifier
+#                    - config-transformer
+#                    - diff-data-miner
+#                    - easy-ci
+#                    - latte-to-twig
+#                    - migrify-kernel
+#                    - neon-to-yaml
+#                    - php-config-printer
+#                    - phpmd-decomposer
+#                    - psr4-switcher
+#                    - sniffer-fixer-to-ecs
+#                    - static-detector
+#                    - symfony-route-usage
+#                    - template-checker
+#                    - travis-to-github-actions
+#                    - vendor-patches
 
         name: Monorepo Split of ${{ matrix.package_name }}
 
@@ -44,6 +45,6 @@ jobs:
                     API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
                 with:
                     package-directory: 'packages/${{ matrix.package_name }}'
-                    destination-github-username: 'migrify'
-                    destination-repository-name: '${{ matrix.package_name }}'
+                    split-repository-organization: 'migrify'
+                    split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
