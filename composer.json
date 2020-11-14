@@ -23,11 +23,11 @@
         "symfony/finder": "^4.4|^5.1",
         "symfony/http-kernel": "^4.4|^5.1",
         "symfony/yaml": "^4.4|^5.1",
-        "symplify/autowire-array-parameter": "^8.3.46",
-        "symplify/composer-json-manipulator": "^8.3.46",
-        "symplify/console-color-diff": "^8.3.46",
-        "symplify/package-builder": "^8.3.46",
-        "symplify/smart-file-system": "^8.3.46"
+        "symplify/autowire-array-parameter": "^8.3.46|^9.0",
+        "symplify/composer-json-manipulator": "^8.3.46|^9.0",
+        "symplify/console-color-diff": "^8.3.46|^9.0",
+        "symplify/package-builder": "^8.3.46|^9.0",
+        "symplify/smart-file-system": "^8.3.46|^9.0"
     },
     "require-dev": {
         "composer/composer": "^1.10",
@@ -49,11 +49,11 @@
         "symfony/routing": "^4.4|^5.1",
         "symfony/security-bundle": "^4.4|^5.1",
         "symfony/security-core": "^4.4|^5.1",
-        "symplify/changelog-linker": "^8.3.46",
-        "symplify/easy-coding-standard": "^8.3.46",
-        "symplify/easy-testing": "^8.3.46",
-        "symplify/monorepo-builder": "^8.3.46",
-        "symplify/phpstan-extensions": "^8.3.46",
+        "symplify/changelog-linker": "^8.3.46|^9.0",
+        "symplify/easy-coding-standard": "^8.3.46|^9.0",
+        "symplify/easy-testing": "^8.3.46|^9.0",
+        "symplify/monorepo-builder": "^8.3.46|^9.0",
+        "symplify/phpstan-extensions": "^8.3.46|^9.0",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
