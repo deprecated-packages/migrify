@@ -38,6 +38,8 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
+            -   run: echo ${{ github.event.release.tag_name }}
+
             # https://github.com/TomasVotruba/github-action-monorepo-split
             -
                 uses: TomasVotruba/github-action-monorepo-split@master
