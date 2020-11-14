@@ -36,7 +36,8 @@ jobs:
         name: Monorepo Split of ${{ matrix.package_name }}
 
         steps:
-            -   uses: actions/checkout@v2
+            -
+                uses: actions/checkout@v2
                 # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
                 with:
                     fetch-depth: 0
@@ -60,4 +61,4 @@ jobs:
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
-                    tag: "$TAG"
+                    tag: $TAG
