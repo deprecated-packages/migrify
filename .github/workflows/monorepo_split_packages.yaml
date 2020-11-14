@@ -37,14 +37,13 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
 
-            # https://github.com/cpina/github-action-push-to-another-repository
+            # https://github.com/TomasVotruba/github-action-monorepo-split
             -
-                uses: cpina/github-action-push-to-another-repository@master
+                uses: TomasVotruba/github-action-monorepo-split@master
                 env:
                     API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    source-directory: 'packages/${{ matrix.package_name }}'
+                    package-directory: 'packages/${{ matrix.package_name }}'
                     destination-github-username: 'migrify'
                     destination-repository-name: '${{ matrix.package_name }}'
                     user-email: tomas@getrector.org
-                    target-branch: master
