@@ -15,7 +15,7 @@ use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class SetUpTearDownVoidCommand extends AbstractMigrifyCommand
+final class VoidsCommand extends AbstractMigrifyCommand
 {
     /**
      * @var SetUpTearDownVoidFileInfoDecorator

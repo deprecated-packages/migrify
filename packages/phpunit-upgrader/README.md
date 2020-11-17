@@ -28,7 +28,7 @@ TypeError: Argument 2 passed to PHPUnit\Framework\Assert::assertContains() must 
 ### 2. Add `void` to `setUp()` and `tearDown()` methods
 
 ```bash
-vendor/bin/phpunit-upgrader set-up-tear-down-void /tests
+vendor/bin/phpunit-upgrader voids /tests
 ```
 
 <br>
