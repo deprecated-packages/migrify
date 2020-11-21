@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-use Migrify\MigrifyKernel\Console\ConsoleApplicationFactory;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ComposerJsonManipulator\ComposerJsonFactory;
+use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
+use Symplify\ComposerJsonManipulator\Json\JsonCleaner;
+use Symplify\ComposerJsonManipulator\Json\JsonInliner;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
@@ -14,6 +16,7 @@ use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
+use Symplify\SymplifyKernel\Console\ConsoleApplicationFactory;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -24,7 +27,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    // console application with commands
+    // console
+    $services->set(JsonInliner::class);
+    $services->set(JsonCleaner::class);
+    $services->set(JsonFileManager::class);
+    $services->set(ComposerJsonFactory::class);
     $services->set(ConsoleApplicationFactory::class);
 
     // symfony style

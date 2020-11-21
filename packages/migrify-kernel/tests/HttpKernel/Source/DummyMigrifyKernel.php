@@ -9,7 +9,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 final class DummyMigrifyKernel extends AbstractMigrifyKernel
 {
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
     }
 }
