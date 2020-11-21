@@ -12,6 +12,7 @@ use Symplify\EasyTesting\DataProvider\StaticFixtureUpdater;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Symplify\SmartFileSystem\SmartFileSystem;
 
 final class FixerToECSConverterTest extends AbstractKernelTestCase
 {
@@ -20,10 +21,16 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
      */
     private $fixerToECSConverter;
 
+    /**
+     * @var SmartFileSystem
+     */
+    private $smartFileSystem;
+
     protected function setUp(): void
     {
         $this->bootKernel(SnifferFixerToECSKernel::class);
         $this->fixerToECSConverter = self::$container->get(FixerToECSConverter::class);
+        $this->smartFileSystem = self::$container->get(SmartFileSystem::class);
     }
 
     /**
@@ -31,6 +38,9 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
      */
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
+        // add local "packages" directory, to make config run happy
+        $this->smartFileSystem->mkdir(StaticFixtureSplitter::getTemporaryPath() . '/packages');
+
         $inputAndExpectedFileInfo = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
         );

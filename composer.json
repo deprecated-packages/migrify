@@ -27,7 +27,8 @@
         "symplify/composer-json-manipulator": "dev-master",
         "symplify/console-color-diff": "dev-master",
         "symplify/package-builder": "dev-master",
-        "symplify/smart-file-system": "dev-master"
+        "symplify/smart-file-system": "dev-master",
+        "symplify/symplify-kernel": "dev-master"
     },
     "require-dev": {
         "composer/composer": "^1.10",

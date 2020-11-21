@@ -1,12 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS\RobotLoader;
 
-
 use Nette\Loaders\RobotLoader;
 
-final class FixerClassLoader
+final class FixerClassProvider
 {
     /**
      * @var string[]
@@ -23,7 +23,7 @@ final class FixerClassLoader
         }
 
         $robotLoader = new RobotLoader();
-        $robotLoader->addDirectory(__DIR__ . '/../../../vendor/friendsofphp/php-cs-fixer/src');
+        $robotLoader->addDirectory(__DIR__ . '/../../../../vendor/friendsofphp/php-cs-fixer/src');
 
         $robotLoader->acceptFiles = ['*Fixer.php'];
         $robotLoader->rebuild();
@@ -32,5 +32,4 @@ final class FixerClassLoader
 
         return $this->fixerClasses;
     }
-
 }
