@@ -80,3 +80,6 @@ parameters:
             paths:
                 - packages/symfony-route-usage/tests/EntityRepository/RouteVisitRepositoryTest.php # 24
                 - packages/symfony-route-usage/tests/Routing/DeadRoutesProviderTest.php # 23
+        -
+            message: '#Constant string value need to only have small letters, _, \-, \. and numbers#'
+            path: packages/class-presence/tests/Regex/NonExistingClassConstantExtractor/Source/ClassWithConstants.php
