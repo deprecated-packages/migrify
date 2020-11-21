@@ -39,6 +39,8 @@ final class NonExistingClassConstantExtractorTest extends AbstractKernelTestCase
         yield [__DIR__ . '/Fixture/template/non_existing.latte', 1];
         yield [__DIR__ . '/Fixture/template/non_existing.twig', 1];
 
+        yield [__DIR__ . '/Fixture/template/existing_with_number.latte', 0];
+        yield [__DIR__ . '/Fixture/template/existing_with_lowercase.latte', 0];
         yield [__DIR__ . '/Fixture/template/existing.latte', 0];
         yield [__DIR__ . '/Fixture/template/existing.twig', 0];
     }
