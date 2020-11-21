@@ -7,4 +7,4 @@
 </ruleset>
 -----
 rules:
-    - Symplify\CodingStandard\Rules\NoDefaultParameterValueRule
+    - Symplify\PHPStanRules\Rules\NoDefaultParameterValueRule

@@ -14,4 +14,4 @@ parameters:
         - app/*.php
 
 rules:
-    - Symplify\CodingStandard\Rules\NoDefaultParameterValueRule
+    - Symplify\PHPStanRules\Rules\NoDefaultParameterValueRule

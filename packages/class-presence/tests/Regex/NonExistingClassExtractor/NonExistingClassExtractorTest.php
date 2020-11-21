@@ -7,7 +7,7 @@ namespace Migrify\ClassPresence\Tests\Regex\NonExistingClassExtractor;
 use Iterator;
 use Migrify\ClassPresence\HttpKernel\ClassPresenceKernel;
 use Migrify\ClassPresence\Regex\NonExistingClassExtractor;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class NonExistingClassExtractorTest extends AbstractKernelTestCase

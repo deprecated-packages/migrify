@@ -15,4 +15,4 @@ parameters:
         max_property_count: 20
 
 rules:
-    - Symplify\CodingStandard\Rules\TooManyFieldsRule
+    - Symplify\PHPStanRules\Rules\TooManyFieldsRule

@@ -6,8 +6,8 @@ namespace Migrify\PHPMDDecomposer\Blueprint;
 
 use Migrify\PHPMDDecomposer\ValueObject\Config\MatchToPHPStanConfig;
 use Migrify\PHPMDDecomposer\ValueObject\Config\PHPStanConfig;
-use Symplify\CodingStandard\ObjectCalisthenics\Rules\NoElseAndElseIfRule;
-use Symplify\CodingStandard\Rules\NoDefaultParameterValueRule;
+use Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoElseAndElseIfRule;
+use Symplify\PHPStanRules\Rules\NoDefaultParameterValueRule;
 
 final class PHPMDToPHPStanBluerprint
 {
@@ -54,7 +54,7 @@ final class PHPMDToPHPStanBluerprint
 
         // how to covert paraemters
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig('rulesets/cleancode.xml/StaticAccess', new PHPStanConfig(
-            ['Symplify\CodingStandard\Rules\NoStaticCallRule'],
+            ['Symplify\PHPStanRules\Rules\NoStaticCallRule'],
             [],
             [],
             [
@@ -75,12 +75,12 @@ final class PHPMDToPHPStanBluerprint
         // https://github.com/symplify/coding-standard/blob/master/docs/phpstan_rules.md
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig(
             'rulesets/naming.xml/BooleanGetMethodName',
-            new PHPStanConfig(['Symplify\CodingStandard\Rules\BoolishClassMethodPrefixRule'])
+            new PHPStanConfig(['Symplify\PHPStanRules\Rules\BoolishClassMethodPrefixRule'])
         );
 
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig(
             'rulesets/naming.xml/LongVariable',
-            new PHPStanConfig(['Symplify\CodingStandard\Rules\TooLongVariableRule'])
+            new PHPStanConfig(['Symplify\PHPStanRules\Rules\TooLongVariableRule'])
         );
 
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig(
@@ -90,11 +90,11 @@ final class PHPMDToPHPStanBluerprint
 
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig(
             'rulesets/naming.xml/ConstantNamingConventions',
-            new PHPStanConfig(['Symplify\CodingStandard\Rules\UppercaseConstantRule'])
+            new PHPStanConfig(['Symplify\PHPStanRules\Rules\UppercaseConstantRule'])
         );
 
         $this->matchesToPHPStanConfigs[] = new MatchToPHPStanConfig('rulesets/codesize.xml/TooManyFields', new PHPStanConfig(
-            ['Symplify\CodingStandard\Rules\TooManyFieldsRule'],
+            ['Symplify\PHPStanRules\Rules\TooManyFieldsRule'],
             [],
             [],
             [

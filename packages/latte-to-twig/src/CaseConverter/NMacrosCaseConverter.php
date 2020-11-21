@@ -23,12 +23,12 @@ final class NMacrosCaseConverter implements CaseConverterInterface
     /**
      * @var string
      */
-    private const OPEN_TAG_START = 'openTagStart';
+    private const OPEN_TAG_START = 'open_tag_start';
 
     /**
      * @var string
      */
-    private const OPEN_TAG_END = 'openTagEnd';
+    private const OPEN_TAG_END = 'open_tag_end';
 
     /**
      * @var string
@@ -38,7 +38,7 @@ final class NMacrosCaseConverter implements CaseConverterInterface
     /**
      * @var string
      */
-    private const CLOSE_TAG = 'closeTag';
+    private const CLOSE_TAG = 'close_tag';
 
     public function getPriority(): int
     {
@@ -122,6 +122,6 @@ final class NMacrosCaseConverter implements CaseConverterInterface
 
     private function createPattern(string $macro): string
     {
-        return '#(?<openTagStart><(?<tag>\w+)[^<]*?) n:' . $macro . '="(?<expression>.*?)"(?<openTagEnd>.*?>)(?<inner>.*?)(?<closeTag><\/\2>)#sm';
+        return '#(?<' . self::OPEN_TAG_START . '><(?<tag>\w+)[^<]*?) n:' . $macro . '="(?<expression>.*?)"(?<' . self::OPEN_TAG_END . '>.*?>)(?<inner>.*?)(?<' . self::CLOSE_TAG . '><\/\2>)#sm';
     }
 }

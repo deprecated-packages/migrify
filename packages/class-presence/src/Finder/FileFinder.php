@@ -30,8 +30,8 @@ final class FileFinder
      */
     public function findInDirectories(array $directories): array
     {
-        $finder = (new Finder())
-            ->in($directories)
+        $finder = new Finder();
+        $finder = $finder->in($directories)
             ->files()
             ->notPath('vendor')
             ->notPath('tests');

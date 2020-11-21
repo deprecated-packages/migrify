@@ -3,11 +3,10 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\ChangelogLinker\ValueObject\Option;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
-
-    $parameters->set('authors_to_ignore', ['TomasVotruba']);
-
-    $parameters->set('package_aliases', ['SRU' => 'Symfony Route Usage']);
+    $parameters->set(Option::AUTHORS_TO_IGNORE, ['TomasVotruba']);
+    $parameters->set(Option::PACKAGE_ALIASES, ['SRU' => 'Symfony Route Usage']);
 };

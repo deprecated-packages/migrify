@@ -15,7 +15,7 @@ final class VariableCaseConverter implements CaseConverterInterface
      * Matches:
      * ->someMethodCall()
      */
-    private const PATTERN_METHOD_CALL = '->([\w\-\(\)]+)';
+    private const METHOD_CALL_REGEX = '->([\w\-\(\)]+)';
 
     /**
      * @var string
@@ -23,7 +23,7 @@ final class VariableCaseConverter implements CaseConverterInterface
      * Matches:
      * ['someValue']
      */
-    private const PATTERN_ARRAY_ACCESS = '\[\'([\w\-]+)\'\]';
+    private const ARRAY_ACCESS_REGEX = '\[\'([\w\-]+)\'\]';
 
     public function getPriority(): int
     {
@@ -41,17 +41,17 @@ final class VariableCaseConverter implements CaseConverterInterface
 
         // {$post->getId()} =>
         // {{ post.getId() }}
-        $content = Strings::replace($content, '#{\$([\w-]+)' . self::PATTERN_METHOD_CALL . '(.*?)}#', '{{ $1.$2$3 }}');
+        $content = Strings::replace($content, '#{\$([\w-]+)' . self::METHOD_CALL_REGEX . '(.*?)}#', '{{ $1.$2$3 }}');
 
         // {$post['relativeUrl']} =>
         // {{ post.relativeUrl }}
-        $content = Strings::replace($content, '#{\$([\w-]+)' . self::PATTERN_ARRAY_ACCESS . '(.*?)}#', '{{ $1.$2$3 }}');
+        $content = Strings::replace($content, '#{\$([\w-]+)' . self::ARRAY_ACCESS_REGEX . '(.*?)}#', '{{ $1.$2$3 }}');
 
         // {    $post['relativeUrl']    } =>
         // {    post.relativeUrl    }
         $content = Strings::replace(
             $content,
-            '#{(.*?)\$?([\w-]+)' . self::PATTERN_ARRAY_ACCESS . '(.*?)}#',
+            '#{(.*?)\$?([\w-]+)' . self::ARRAY_ACCESS_REGEX . '(.*?)}#',
             '{$1$2.$3$4$5}'
         );
 
@@ -74,7 +74,7 @@ final class VariableCaseConverter implements CaseConverterInterface
         // {... variable.someMethodCall() ...}
         $content = Strings::replace(
             $content,
-            '#{%(.*?)\$([\w-]+)' . self::PATTERN_METHOD_CALL . '(.*?)%}#',
+            '#{%(.*?)\$([\w-]+)' . self::METHOD_CALL_REGEX . '(.*?)%}#',
             '{%$1$2.$3$4%}'
         );
 
@@ -84,7 +84,7 @@ final class VariableCaseConverter implements CaseConverterInterface
             $content,
             '#{(.*?)}#',
             function (array $match): string {
-                $match[1] = Strings::replace($match[1], '#' . self::PATTERN_ARRAY_ACCESS . '#', '.$1');
+                $match[1] = Strings::replace($match[1], '#' . self::ARRAY_ACCESS_REGEX . '#', '.$1');
 
                 return '{' . $match[1] . '}';
             }

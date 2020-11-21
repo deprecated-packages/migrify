@@ -16,4 +16,4 @@ parameters:
             - Mockery
 
 rules:
-    - Symplify\CodingStandard\Rules\NoStaticCallRule
+    - Symplify\PHPStanRules\Rules\NoStaticCallRule

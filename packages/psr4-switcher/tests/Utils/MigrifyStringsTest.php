@@ -7,7 +7,7 @@ namespace Migrify\Psr4Switcher\Tests\Utils;
 use Iterator;
 use Migrify\Psr4Switcher\HttpKernel\Psr4SwitcherKernel;
 use Migrify\Psr4Switcher\Utils\MigrifyStrings;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
 final class MigrifyStringsTest extends AbstractKernelTestCase
 {

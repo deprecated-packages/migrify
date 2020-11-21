@@ -10,7 +10,7 @@ use Migrify\PHPUnitUpgrader\HttpKernel\PHPUnitUpgraderKernel;
 use Migrify\PHPUnitUpgrader\ValueObject\FilePathWithContent;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class AssertContainsInfoDecoratorTest extends AbstractKernelTestCase

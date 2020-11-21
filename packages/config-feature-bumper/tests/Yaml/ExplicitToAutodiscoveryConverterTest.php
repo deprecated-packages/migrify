@@ -8,7 +8,7 @@ use Migrify\ConfigFeatureBumper\HttpKernel\ConfigFeatureBumperKernel;
 use Migrify\ConfigFeatureBumper\Yaml\ExplicitToAutodiscoveryConverter;
 use Symfony\Component\Yaml\Yaml;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class ExplicitToAutodiscoveryConverterTest extends AbstractKernelTestCase

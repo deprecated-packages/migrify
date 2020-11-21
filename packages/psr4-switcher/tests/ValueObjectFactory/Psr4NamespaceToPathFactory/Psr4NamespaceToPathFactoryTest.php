@@ -9,7 +9,7 @@ use Migrify\Psr4Switcher\Configuration\Psr4SwitcherConfiguration;
 use Migrify\Psr4Switcher\HttpKernel\Psr4SwitcherKernel;
 use Migrify\Psr4Switcher\ValueObject\Psr4NamespaceToPath;
 use Migrify\Psr4Switcher\ValueObjectFactory\Psr4NamespaceToPathFactory;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
 final class Psr4NamespaceToPathFactoryTest extends AbstractKernelTestCase
 {

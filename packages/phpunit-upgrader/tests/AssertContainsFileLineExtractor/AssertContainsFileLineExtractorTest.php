@@ -6,7 +6,7 @@ namespace Migrify\PHPUnitUpgrader\Tests\AssertContainsFileLineExtractor;
 
 use Migrify\PHPUnitUpgrader\AssertContainsFileLineExtractor;
 use Migrify\PHPUnitUpgrader\HttpKernel\PHPUnitUpgraderKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class AssertContainsFileLineExtractorTest extends AbstractKernelTestCase

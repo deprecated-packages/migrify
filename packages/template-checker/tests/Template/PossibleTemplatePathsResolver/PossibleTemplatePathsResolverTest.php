@@ -6,7 +6,7 @@ namespace Migrify\TemplateChecker\Tests\Template\PossibleTemplatePathsResolver;
 
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 use Migrify\TemplateChecker\Template\TemplatePathsResolver;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
 final class PossibleTemplatePathsResolverTest extends AbstractKernelTestCase
 {

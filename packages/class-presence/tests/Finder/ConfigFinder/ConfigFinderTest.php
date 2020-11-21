@@ -6,7 +6,7 @@ namespace Migrify\ClassPresence\Tests\Finder\ConfigFinder;
 
 use Migrify\ClassPresence\Finder\FileFinder;
 use Migrify\ClassPresence\HttpKernel\ClassPresenceKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
 final class ConfigFinderTest extends AbstractKernelTestCase
 {

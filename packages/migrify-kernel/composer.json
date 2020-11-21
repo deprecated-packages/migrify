@@ -7,9 +7,9 @@
         "symfony/console": "^4.4|^5.1",
         "symfony/dependency-injection": "^4.4|^5.1",
         "symfony/http-kernel": "^4.4|^5.1",
-        "symplify/package-builder": "^8.3.46|^9.0",
-        "symplify/smart-file-system": "^8.3.46|^9.0",
-        "symplify/autowire-array-parameter": "^8.3.46|^9.0"
+        "symplify/package-builder": "dev-master",
+        "symplify/smart-file-system": "dev-master",
+        "symplify/autowire-array-parameter": "dev-master"
     },
     "require-dev": {
         "tracy/tracy": "^2.7"

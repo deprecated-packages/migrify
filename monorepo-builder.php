@@ -19,10 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'require' => ['tracy/tracy' => '*', 'phpunit/phpunit' => '*']
     ]);
 
-    $parameters->set(Option::DIRECTORIES_TO_REPOSITORIES, [
-        'packages/*' => 'git@github.com:migrify/*.git',
-    ]);
-
     $services = $containerConfigurator->services();
 
     $services->set(SetCurrentMutualDependenciesReleaseWorker::class);
