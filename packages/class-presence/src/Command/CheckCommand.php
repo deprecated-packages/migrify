@@ -46,7 +46,7 @@ final class CheckCommand extends AbstractMigrifyCommand
 
     protected function configure(): void
     {
-        $this->setDescription('Check configs for existing classes');
+        $this->setDescription('Check configs and template for existing classes and class constants');
         $this->addArgument(
             MigrifyOption::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
@@ -59,6 +59,9 @@ final class CheckCommand extends AbstractMigrifyCommand
         /** @var string[] $source */
         $source = (array) $input->getArgument(MigrifyOption::SOURCES);
         $fileInfos = $this->fileFinder->findInDirectories($source);
+
+        $message = sprintf('Checking %d files', count($fileInfos));
+        $this->symfonyStyle->note($message);
 
         $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromFileInfos($fileInfos);
         if ($nonExistingClassesByFile === []) {
@@ -90,6 +93,10 @@ final class CheckCommand extends AbstractMigrifyCommand
         array $nonExistingClassConstantsByFile
     ): int {
         foreach ($nonExistingClassesByFile as $file => $nonExistingClasses) {
+            if ($nonExistingClasses === []) {
+                continue;
+            }
+
             $message = sprintf('File "%s" contains non-existing classes', $file);
             $this->symfonyStyle->title($message);
             $this->symfonyStyle->listing($nonExistingClasses);
@@ -97,6 +104,10 @@ final class CheckCommand extends AbstractMigrifyCommand
         }
 
         foreach ($nonExistingClassConstantsByFile as $file => $nonExistingClassConstants) {
+            if ($nonExistingClassConstants === []) {
+                continue;
+            }
+
             $message = sprintf('File "%s" contains non-existing class constants', $file);
             $this->symfonyStyle->title($message);
             $this->symfonyStyle->listing($nonExistingClassConstants);

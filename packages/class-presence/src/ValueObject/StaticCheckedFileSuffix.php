@@ -9,7 +9,7 @@ final class StaticCheckedFileSuffix
     /**
      * @var string[]
      */
-    public const SUFFIXES = ['yml', 'yaml', 'twig', 'latte', 'neon'];
+    public const SUFFIXES = ['yml', 'yaml', 'twig', 'latte', 'neon', 'php'];
 
     /**
      * @return string[]
