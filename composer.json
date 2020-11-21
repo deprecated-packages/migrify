@@ -52,9 +52,9 @@
         "symplify/changelog-linker": "dev-master",
         "symplify/easy-coding-standard": "dev-master",
         "symplify/easy-testing": "dev-master",
-        "symplify/phpstan-rules": "dev-master",
         "symplify/monorepo-builder": "dev-master",
         "symplify/phpstan-extensions": "dev-master",
+        "symplify/phpstan-rules": "dev-master",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
@@ -102,6 +102,7 @@
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\EasyCI\\Tests\\": "packages/easy-ci/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
+            "Migrify\\MigrifyKernel\\Tests\\": "packages/migrify-kernel/tests",
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\PHPMDDecomposer\\Tests\\": "packages/phpmd-decomposer/tests",
             "Migrify\\PHPUnitUpgrader\\Tests\\": "packages/phpunit-upgrader/tests",

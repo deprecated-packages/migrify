@@ -19,6 +19,11 @@
             "Migrify\\MigrifyKernel\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Migrify\\MigrifyKernel\\Tests\\": "tests"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
