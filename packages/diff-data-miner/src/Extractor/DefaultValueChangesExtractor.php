@@ -8,6 +8,9 @@ use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
+/**
+ * @see \Migrify\DiffDataMiner\Tests\Extractor\DefaultValueChangesExtractor\DefaultValueChangesExtractorTest
+ */
 final class DefaultValueChangesExtractor
 {
     /**
