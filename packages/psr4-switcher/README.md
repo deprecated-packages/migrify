@@ -12,13 +12,18 @@ composer require migrify/psr4-switcher --dev
 
 ## Usage
 
-```bash
-vendor/bin/psr4-switcher check # composer.json by default, if other, provide as arguments
-```
+Does short file name matches the class name? 
 
 ```bash
-vendor/bin/psr4-switcher switch
+vendor/bin/psr4-switcher check-file-class-name src
 ```
+
+What files have 2 and more classes?
+
+```bash
+vendor/bin/psr4-switcher find-multi-classes tests
+```
+
 
 ## Report Issues
 
