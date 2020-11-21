@@ -44,8 +44,7 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
         );
 
         $this->assertSame(
-            $inputAndExpectedFileInfo->getExpectedFileInfo()
-                ->getContents(),
+            $inputAndExpectedFileInfo->getExpectedFileContent(),
             $convertedContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()
         );

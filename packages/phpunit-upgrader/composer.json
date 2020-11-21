@@ -12,6 +12,7 @@
         "symfony/dependency-injection": "^4.4|^5.1",
         "symfony/console": "^4.4|^5.1",
         "symfony/http-kernel": "^4.4|^5.1",
+        "migrify/migrify-kernel": "^0.5",
         "symplify/console-color-diff": "dev-master",
         "symplify/package-builder": "dev-master",
         "symplify/smart-file-system": "dev-master"
