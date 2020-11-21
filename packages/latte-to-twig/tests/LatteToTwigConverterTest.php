@@ -9,7 +9,7 @@ use Migrify\LatteToTwig\HttpKernel\LatteToTwigKernel;
 use Migrify\LatteToTwig\LatteToTwigConverter;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class LatteToTwigConverterTest extends AbstractKernelTestCase

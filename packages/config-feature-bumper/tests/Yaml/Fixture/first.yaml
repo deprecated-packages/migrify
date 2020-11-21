@@ -13,3 +13,5 @@ services:
         class: Markdown
     Migrify\ConfigFeatureBumper\:
         resource: "../Source"
+        exclude: '../Source/{Contract}'
+

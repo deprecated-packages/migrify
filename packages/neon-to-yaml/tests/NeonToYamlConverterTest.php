@@ -10,7 +10,7 @@ use Migrify\NeonToYaml\HttpKernel\NeonToYamlKernel;
 use Migrify\NeonToYaml\NeonToYamlConverter;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class NeonToYamlConverterTest extends AbstractKernelTestCase

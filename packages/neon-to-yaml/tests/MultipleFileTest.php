@@ -7,7 +7,7 @@ namespace Migrify\NeonToYaml\Tests;
 use Migrify\NeonToYaml\ArrayParameterCollector;
 use Migrify\NeonToYaml\HttpKernel\NeonToYamlKernel;
 use Migrify\NeonToYaml\NeonToYamlConverter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class MultipleFileTest extends AbstractKernelTestCase

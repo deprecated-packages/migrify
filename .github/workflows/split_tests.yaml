@@ -3,38 +3,55 @@ name: Split Tests
 on:
     pull_request: null
 
+env:
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: "dev-master"
+
 jobs:
-    split_testing:
+    provide_packages_json:
+        # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                    tools: composer:v2
+
+            -   run: composer install --no-progress --ansi
+
+            # get package json list
+            -
+                id: set-matrix
+                run: echo "::set-output name=matrix::$(packages/monorepo-builder/bin/monorepo-builder packages-json)"
+
+
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    split_tests:
+        needs: provide_packages_json
+
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix:
-                package_name:
-                    - class-presence
-                    - config-transformer
-                    - latte-to-twig
-                    - template-checker
-                    - vendor-patches
-                    # Github Actions buggy now
-#                    - easy-ci
-#                    - neon-to-yaml
-#                    - psr4-switcher
-#                    - symfony-route-usage
-
-        name: Split Tests of ${{ matrix.package_name }}
+            matrix: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
 
         steps:
             -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v1
+
+            -
+                uses: shivammathur/setup-php@v1
                 with:
                     php-version: 7.3
                     coverage: none
                     tools: composer:v2
 
             # only install monorepo-builder
-            -   run: |
-                    composer update --ansi
-                    vendor/bin/monorepo-builder localize-composer-paths --ansi
+            -   run: composer update --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package_name }}/composer.json --ansi
 
             -   run: |
                     cd packages/${{ matrix.package_name }}

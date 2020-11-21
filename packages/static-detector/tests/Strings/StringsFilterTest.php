@@ -7,7 +7,7 @@ namespace Migrify\StaticDetector\Tests\Strings;
 use Iterator;
 use Migrify\StaticDetector\HttpKernel\StaticDetectorKernel;
 use Migrify\StaticDetector\Strings\StringsFilter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 
 final class StringsFilterTest extends AbstractKernelTestCase
 {

@@ -9,7 +9,7 @@ use Migrify\StaticDetector\Collector\StaticNodeCollector;
 use Migrify\StaticDetector\HttpKernel\StaticDetectorKernel;
 use Migrify\StaticDetector\StaticScanner;
 use Migrify\StaticDetector\ValueObject\StaticReport;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class StaticScannerTest extends AbstractKernelTestCase

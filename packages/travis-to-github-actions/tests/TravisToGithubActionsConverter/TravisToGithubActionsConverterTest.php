@@ -9,7 +9,7 @@ use Migrify\TravisToGithubActions\HttpKernel\TravisToGithubActionsKernel;
 use Migrify\TravisToGithubActions\TravisToGithubActionsConverter;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class TravisToGithubActionsConverterTest extends AbstractKernelTestCase

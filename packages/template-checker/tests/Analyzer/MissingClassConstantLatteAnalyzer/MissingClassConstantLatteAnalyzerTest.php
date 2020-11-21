@@ -7,7 +7,7 @@ namespace Migrify\TemplateChecker\Tests\Analyzer\MissingClassConstantLatteAnalyz
 use Iterator;
 use Migrify\TemplateChecker\Analyzer\MissingClassConstantLatteAnalyzer;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class MissingClassConstantLatteAnalyzerTest extends AbstractKernelTestCase

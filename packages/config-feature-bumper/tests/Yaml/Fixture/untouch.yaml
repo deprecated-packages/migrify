@@ -8,3 +8,5 @@ services:
     Symfony\Component\Filesystem\Filesystem: null
     Migrify\ConfigFeatureBumper\Tests\:
         resource: ../Source
+        exclude: '../Source/{Contract}'
+

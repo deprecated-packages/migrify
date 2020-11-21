@@ -11,3 +11,4 @@ services:
         alias: 'Migrify\ConfigFeatureBumper\Tests\Yaml\Source\SomeClass'
     Migrify\ConfigFeatureBumper\:
         resource: '../Source'
+        exclude: '../Source/{Contract}'

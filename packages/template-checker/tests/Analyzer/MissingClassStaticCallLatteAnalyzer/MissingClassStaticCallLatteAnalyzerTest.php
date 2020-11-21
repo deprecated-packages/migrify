@@ -9,7 +9,7 @@ use Migrify\TemplateChecker\Analyzer\MissingClassStaticCallLatteAnalyzer;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class MissingClassStaticCallLatteAnalyzerTest extends AbstractKernelTestCase

@@ -1,22 +1,15 @@
 includes:
     - vendor/symplify/phpstan-extensions/config/config.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
-    - vendor/symplify/coding-standard/config/symplify-rules.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
+
+    - vendor/symplify/phpstan-rules/config/static-rules.neon
+    - vendor/symplify/phpstan-rules/config/services/services.neon
 
 parameters:
     paths:
         - packages
-        # bin files explicitly, because they don't have php suffix
-        - packages/easy-ci/bin/easy-ci
-        - packages/class-presence/bin/class-presence
-        - packages/config-transformer/bin/config-transformer
-        - packages/latte-to-twig/bin/latte-to-twig
-        - packages/neon-to-yaml/bin/neon-to-yaml
-        - packages/vendor-patches/bin/vendor-patches
-        - packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs
-        - packages/travis-to-github-actions/bin/travis-to-github-actions
 
     level: max
     checkGenericClassInNonGenericObjectType: false
@@ -38,148 +31,16 @@ parameters:
         - '#has no return typehint specified#'
 
         - '#Call to an undefined method Psr\\Container\\ContainerInterface\:\:getParameter\(\)#'
-        - '#Parameter \#1 \$error_handler of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
         - '#Cannot cast array<string\>\|bool\|string\|null to string#'
         - '#Cannot cast array<string\>\|bool\|string\|null to int#'
         - '#Variable \$methodCall might not be defined#'
         - '#Method Migrify\\PhpConfigPrinter\\NodeTraverser\\ImportFullyQualifiedNamesNodeTraverser\:\:createUses\(\) should return array<PhpParser\\Node\\Stmt\\Use_\> but returns array<int, PhpParser\\Node\>#'
         - '#Parameter \#5 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addOption\(\) expects (.*?), float given#'
-        - '#Cognitive complexity for "Migrify\\PhpConfigPrinter\\NodeFactory\\ContainerConfiguratorReturnClosureFactory\:\:createNodesFromCaseConverters\(\)" is \d+, keep it under 8#'
-
-        -
-             message: '#Array destruct is not allowed\. Use value object to pass data instead#'
-             paths:
-                 # 3rd party code
-                - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
-        -
-             message: '#Array with keys is not allowed\. Use value object to pass data instead#'
-             paths:
-                 - packages/vendor-patches/src/Composer/ComposerPatchesConfigurationUpdater.php
-                  # console output
-                 - packages/symfony-route-usage/src/Command/ShowRouteUsageCommand.php
-                 - packages/symfony-route-usage/src/Command/ShowDeadRoutesCommand.php
-                  # json
-                 - packages/psr4-switcher/src/Console/Command/GeneratePsr4ToPathsCommand.php
-
-                 - packages/neon-to-yaml/src/ConverterWorker/ServiceConverterWorker.php
-                 - packages/php-config-printer/src/Printer/SmartPhpConfigPrinter.php
-
-                  # yaml
-                 - packages/neon-to-yaml/src/NeonToYamlConverter.php
-                 - packages/config-transformer/src/Command/SwitchFormatCommand.php
-                 - packages/travis-to-github-actions/src/TravisToGithubActionsConverter.php
-
-        -
-             message: '#Use value object over return of values#'
-             paths:
-                 # suffixes
-                - packages/config-transformer/src/Configuration/Configuration.php
-                - packages/config-feature-bumper/src/Yaml/YamlServiceProcessor.php
-
-        -
-            message: '#Property with protected modifier is not allowed\. Use interface instead#'
-            paths:
-                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 26
-                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 31
-                - packages/config-transformer/tests/Converter/ConfigFormatConverter/AbstractConfigFormatConverterTest.php # 36
-
-        - '#Class with base "FileFinder" name is already used in "PHPStan\\File\\FileFinder", "Migrify\\ClassPresence\\Finder\\FileFinder"\. Use unique name to make classes easy to recognize#'
-
-        # tests
 
         # xml
-        -
-             message: '#Use default null value and nullable compare instead of isset on object#'
-             path: 'packages/sniffer-fixer-to-ecs/src/SnifferToECSConverter.php'
-
-        # yaml/neon
-        -
-            message: '#Array with keys is not allowed\. Use value object to pass data instead#'
-            paths:
-                 - 'packages/sniffer-fixer-to-ecs/src/FixerToECSConverter.php'
-                 - 'packages/psr4-switcher/src/Command/GeneratePsr4ToPathsCommand.php'
-                 - 'packages/phpmd-decomposer/src/Printer/PHPStanPrinter.php'
-                 # YAML
-                 - packages/travis-to-github-actions/src/TravisToGithubActionsConverter/TravisToGithubActionsConverter.php
-                 - packages/travis-to-github-actions/src/Printer/GithubActionsToYAMLPrinter.php
-
-        # resolve later
-        - '#Do not use static calls#'
-
-        -
-            message: '#Too many public elements on class \- 11\. Try narrow it down under 10#'
-            paths:
-                - 'packages/config-transformer/src/Configuration/Configuration.php'
-
-        # not null, assert above
-        -
-            message: '#Parameter \#2 \$actualString of method PHPUnit\\Framework\\Assert\:\:assertStringEqualsFile\(\) expects string, string\|null given#'
-            paths:
-                - packages/phpmd-decomposer/tests/PHPMDDecomposer/PHPMDDecomposerTest.php
-
-
-        # false positive
         - '#Parameter \#1 \$type of method PhpParser\\Builder\\FunctionLike\:\:setReturnType\(\) expects PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|string, PhpParser\\Node\\Identifier\|PhpParser\\Node\\Name\|PhpParser\\Node\\NullableType\|PhpParser\\Node\\UnionType given#'
 
-
-        # total mess
-        - '#Use local named constant instead of inline string for regex to explain meaning by constant name#'
-
-        -
-            message: '#Add regex101\.org link to that shows the regex in practise, so it will be easier to maintain in case of bug/extension in the future#'
-            paths:
-                # false positive
-                - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
-
-        -
-             message: '#Do not use scalar or array as constructor parameter\. Use ParameterProvider service instead#'
-             paths:
-                 - packages/config-transformer/src/DependencyInjection/Extension/AliasConfigurableExtension.php # 19
-                 - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 34
-                 - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 35
-                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 58
-                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 59
-                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 60
-                 - packages/symfony-route-usage/src/Entity/RouteVisit.php # 62
-
         - '#Parameter \#1 \$argument of class ReflectionClass constructor expects class\-string<T of object\>\|T of object, string given#'
-
-        - '#Parameter \#1 \$callback of function set_error_handler expects \(callable\(int, string, string, int, array\)\: bool\)\|null, Closure\(int, string\)\: void given#'
-
-        -
-             message: '#Assignment inside if is not allowed\. Use before if instead#'
-             paths:
-                 - packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php # 126
-                 - packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php # 139
-                 - packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php # 157
-                 - packages/config-transformer/src/DependencyInjection/Loader/IdAwareXmlFileLoader.php # 170
-
-        -
-            message: '#Method call argument on position 0 must use constant over value#'
-            paths:
-                - packages/php-config-printer/src/CaseConverter/ConfiguredServiceCaseConverter.php # 56
-                - packages/php-config-printer/src/CaseConverter/InstanceOfNestedCaseConverter.php # 58
-                - packages/php-config-printer/src/NodeFactory/ArgsNodeFactory.php # 220
-                - packages/php-config-printer/src/Printer/PhpParserPhpConfigPrinter.php # 84
-
-        -
-            message: '#Do not use factory/method call in constructor, put factory in config and get service with dependency injection#'
-            paths:
-                - packages/static-detector/src/ValueObject/StaticReport.php # 26
-                - packages/static-detector/src/ValueObject/StaticReport.php # 36
-                - packages/static-detector/src/ValueObject/StaticReport.php # 36
-                - packages/symfony-route-usage/src/Database/TableInitiator.php # 31
-                - packages/symfony-route-usage/src/EntityRepository/RouteVisitRepository.php # 32
-
-        -
-            message: '#Do not use setter on a service#'
-            paths:
-                - packages/config-transformer/src/Provider/YamlContentProvider.php # 17
-                - packages/easy-ci/src/HttpKernel/EasyCIKernel.php # 30
-                - packages/php-config-printer/src/HttpKernel/PhpConfigPrinterKernel.php # 40
-                - packages/php-config-printer/src/Provider/CurrentFilePathProvider.php # 14
-                - packages/static-detector/src/CurrentProvider/CurrentFileInfoProvider.php # 16
-                - packages/static-detector/src/HttpKernel/StaticDetectorKernel.php # 30
 
         # XML object, nothing we can do about it
         -
@@ -193,24 +54,23 @@ parameters:
             paths:
                 - packages/symfony-route-usage/tests/Helper/DatabaseLoaderHelper.php
 
-        # part of Finder api
-        -
-            message: '#Instead of "SplFileInfo" class/interface use "Symplify\\SmartFileSystem\\SmartFileInfo"#'
-            paths:
-                - packages/easy-ci/src/Finder/SrcTestsDirectoriesFinder.php
-
         - '#Parameter \#1 \$items of class PhpParser\\Node\\Expr\\Array_ constructor expects array<PhpParser\\Node\\Expr\\ArrayItem\|null\>, array<PhpParser\\Node\\Arg\> given#'
 
-        # false positive
+
+        -
+            message: '#Do not use factory/method call in constructor\. Put factory in config and get service with dependency injection#'
+            paths:
+                - packages/symfony-route-usage/src/Database/TableInitiator.php
+
         -
             message: '#Do not use scalar or array as constructor parameter\. Use ParameterProvider service instead#'
             paths:
-                - packages/migrify-kernel/src/Console/AbstractMigrifyConsoleApplication.php # 31
-                - packages/migrify-kernel/src/Console/AbstractMigrifyConsoleApplication.php # 31
-                - packages/migrify-kernel/src/Console/AutowiredConsoleApplication.php # 16
-                - packages/migrify-kernel/src/Console/AutowiredConsoleApplication.php # 16
+                - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 34
+                - packages/migrify-kernel/src/Bootstrap/KernelBootAndApplicationRun.php # 35
 
         -
-            message: '#Property with protected modifier is not allowed\. Use interface instead#'
+            message: '#Constant string value need to only have small letters, _, \-, \. and numbers#'
             paths:
-                - packages/migrify-kernel/src/Command/AbstractMigrifyCommand.php
+                - packages/diff-data-miner/src/Extractor/ClassChangesExtractor.php # 17
+                - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
+                - packages/template-checker/src/PhpParser/LatteFilterProviderGenerator.php # 31

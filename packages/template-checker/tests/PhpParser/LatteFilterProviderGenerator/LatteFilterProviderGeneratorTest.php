@@ -8,7 +8,7 @@ use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 use Migrify\TemplateChecker\PhpParser\LatteFilterProviderGenerator;
 use Migrify\TemplateChecker\Tests\PhpParser\LatteFilterProviderGenerator\Source\SomeHelper;
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class LatteFilterProviderGeneratorTest extends AbstractKernelTestCase

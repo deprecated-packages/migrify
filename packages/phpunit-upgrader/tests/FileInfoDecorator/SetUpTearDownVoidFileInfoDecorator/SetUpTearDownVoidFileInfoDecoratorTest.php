@@ -9,7 +9,7 @@ use Migrify\PHPUnitUpgrader\FileInfoDecorator\SetUpTearDownVoidFileInfoDecorator
 use Migrify\PHPUnitUpgrader\HttpKernel\PHPUnitUpgraderKernel;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class SetUpTearDownVoidFileInfoDecoratorTest extends AbstractKernelTestCase

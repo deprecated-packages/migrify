@@ -8,7 +8,7 @@ use Iterator;
 use Migrify\TemplateChecker\HttpKernel\TemplateCheckerKernel;
 use Migrify\TemplateChecker\LatteStaticCallAnalyzer;
 use Migrify\TemplateChecker\ValueObject\ClassMethodName;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class LatteStaticCallAnalyzerTest extends AbstractKernelTestCase

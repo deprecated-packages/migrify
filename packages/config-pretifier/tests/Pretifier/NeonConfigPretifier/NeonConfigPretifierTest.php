@@ -9,7 +9,7 @@ use Migrify\ConfigPretifier\HttpKernel\ConfigPretifierKernel;
 use Migrify\ConfigPretifier\Pretifier\NeonConfigPretifier;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class NeonConfigPretifierTest extends AbstractKernelTestCase
