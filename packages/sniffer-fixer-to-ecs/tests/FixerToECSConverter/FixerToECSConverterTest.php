@@ -39,7 +39,8 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
     public function test(SmartFileInfo $fixtureFileInfo): void
     {
         // add local "packages" directory, to make config run happy
-        $this->smartFileSystem->mkdir(StaticFixtureSplitter::getTemporaryPath() . '/packages');
+        $packagesDirectory = StaticFixtureSplitter::getTemporaryPath() . '/temporary-packages';
+        $this->smartFileSystem->dumpFile($packagesDirectory . '/some_file.txt', 'some content');
 
         $inputAndExpectedFileInfo = StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos(
             $fixtureFileInfo
@@ -53,7 +54,7 @@ final class FixerToECSConverterTest extends AbstractKernelTestCase
             $fixtureFileInfo
         );
 
-        $this->assertSame(
+        $this->assertStringMatchesFormat(
             $inputAndExpectedFileInfo->getExpectedFileContent(),
             $convertedContent,
             $fixtureFileInfo->getRelativeFilePathFromCwd()

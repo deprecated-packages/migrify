@@ -1,7 +1,7 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in('packages');
+    ->in(__DIR__ . '/temporary-packages');
 
 $config = PhpCsFixer\Config::create()
     ->setRules([
@@ -27,5 +27,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters = $containerConfigurator->parameters();
 
-    $parameters->set(Option::PATHS, ['packages']);
+    $parameters->set(Option::PATHS, ['%semporary-packages']);
 };
