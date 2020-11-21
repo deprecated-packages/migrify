@@ -45,7 +45,12 @@ final class NonExistingClassExtractor
     {
         $nonExistingClassesByFile = [];
         foreach ($fileInfos as $fileInfo) {
-            $nonExistingClassesByFile[$fileInfo->getRelativeFilePathFromCwd()] = $this->extractFromFileInfo($fileInfo);
+            $nonExistingClasses = $this->extractFromFileInfo($fileInfo);
+            if ($nonExistingClasses === []) {
+                continue;
+            }
+
+            $nonExistingClassesByFile[$fileInfo->getRelativeFilePathFromCwd()] = $nonExistingClasses;
         }
 
         return $nonExistingClassesByFile;

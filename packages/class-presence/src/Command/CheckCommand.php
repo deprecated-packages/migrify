@@ -58,27 +58,22 @@ final class CheckCommand extends AbstractMigrifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $message = sprintf('Checking "%s" suffixes', implode('", "', $this->suffixes->provide()));
-        $this->symfonyStyle->note($message);
-
         /** @var string[] $sources */
         $sources = (array) $input->getArgument(MigrifyOption::SOURCES);
         $fileInfos = $this->smartFinder->find($sources, $this->suffixes->provideRegex());
 
-        $message = sprintf('Found %d files', count($fileInfos));
+        $message = sprintf(
+            'Checking %d files with "%s" suffixes',
+            count($fileInfos),
+            implode('", "', $this->suffixes->provide())
+        );
         $this->symfonyStyle->note($message);
 
         $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromFileInfos($fileInfos);
-        if ($nonExistingClassesByFile === []) {
-            $this->symfonyStyle->success('All classes exist');
-        }
-
         $nonExistingClassConstantsByFile = $this->nonExistingClassConstantExtractor->extractFromFileInfos($fileInfos);
-        if ($nonExistingClassConstantsByFile === []) {
-            $this->symfonyStyle->success('All class constants exists');
-        }
 
         if ($nonExistingClassConstantsByFile === [] && $nonExistingClassesByFile === []) {
+            $this->symfonyStyle->success('All classes and class constants exists');
             return ShellCode::SUCCESS;
         }
 
@@ -93,26 +88,27 @@ final class CheckCommand extends AbstractMigrifyCommand
         array $nonExistingClassesByFile,
         array $nonExistingClassConstantsByFile
     ): int {
-        foreach ($nonExistingClassesByFile as $file => $nonExistingClasses) {
-            if ($nonExistingClasses === []) {
-                continue;
-            }
+        $i = 0;
 
-            $message = sprintf('File "%s" contains non-existing classes', $file);
-            $this->symfonyStyle->title($message);
-            $this->symfonyStyle->listing($nonExistingClasses);
+        foreach ($nonExistingClassesByFile as $file => $nonExistingClasses) {
+            $fileMssage = sprintf('<options=bold>%d) %s</>', ++$i, $file);
+            $this->symfonyStyle->writeln($fileMssage);
             $this->symfonyStyle->newLine();
+
+            foreach ($nonExistingClasses as $nonExistingClass) {
+                $errorMessage = sprintf('Class "%s" not found', $nonExistingClass);
+                $this->symfonyStyle->error($errorMessage);
+            }
         }
 
         foreach ($nonExistingClassConstantsByFile as $file => $nonExistingClassConstants) {
-            if ($nonExistingClassConstants === []) {
-                continue;
-            }
+            $fileMssage = sprintf('<options=bold>%d) %s</>', ++$i, $file);
+            $this->symfonyStyle->writeln($fileMssage);
 
-            $message = sprintf('File "%s" contains non-existing class constants', $file);
-            $this->symfonyStyle->title($message);
-            $this->symfonyStyle->listing($nonExistingClassConstants);
-            $this->symfonyStyle->newLine();
+            foreach ($nonExistingClassConstants as $nonExistingClassConstant) {
+                $errorMessage = sprintf('Class constant "%s" does not exist', $nonExistingClassConstant);
+                $this->symfonyStyle->error($errorMessage);
+            }
         }
 
         return ShellCode::ERROR;
