@@ -56,7 +56,6 @@ parameters:
 
         - '#Parameter \#1 \$items of class PhpParser\\Node\\Expr\\Array_ constructor expects array<PhpParser\\Node\\Expr\\ArrayItem\|null\>, array<PhpParser\\Node\\Arg\> given#'
 
-
         -
             message: '#Do not use factory/method call in constructor\. Put factory in config and get service with dependency injection#'
             paths:

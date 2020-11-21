@@ -6,33 +6,33 @@ on:
             - master
 
 jobs:
+    provide_packages_json:
+        # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                    tools: composer:v2
+
+            -   run: composer install --no-progress --ansi
+
+            # get package json list
+            -
+                id: set-matrix
+                run: echo "::set-output name=matrix::$(vendor/bin/monorepo-builder packages-json --names)"
+
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+
     monorepo_split_packages:
+        needs: provide_packages_json
         strategy:
             fail-fast: false
-            matrix:
-                package_name:
-                    # @todo replace with monorepo builder json in Symplify 9
-                    - class-presence
-                    - config-feature-bumper
-                    - config-pretifier
-                    - config-transformer
-                    - diff-data-miner
-                    - easy-ci
-                    - latte-to-twig
-                    - migrify-kernel
-                    - neon-to-yaml
-                    - php-config-printer
-                    - phpmd-decomposer
-                    - phpunit-upgrader
-                    - psr4-switcher
-                    - sniffer-fixer-to-ecs
-                    - static-detector
-                    - symfony-route-usage
-                    - template-checker
-                    - travis-to-github-actions
-                    - vendor-patches
-
-        name: Monorepo Split of ${{ matrix.package_name }}
+            matrix: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
 
         runs-on: ubuntu-latest
 
@@ -55,7 +55,7 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    package-directory: 'packages/${{ matrix.package_name }}'
+                    package-directory: packages/${{ matrix.package_name }}
                     split-repository-organization: 'migrify'
                     split-repository-name: '${{ matrix.package_name }}'
                     tag: ${{ steps.previous_tag.outputs.tag }}
