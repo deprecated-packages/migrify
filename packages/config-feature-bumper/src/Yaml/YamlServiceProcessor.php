@@ -6,10 +6,10 @@ namespace Migrify\ConfigFeatureBumper\Yaml;
 
 use Migrify\ConfigFeatureBumper\Utils\MigrifyArrays;
 use Migrify\ConfigFeatureBumper\ValueObject\ServiceConfig;
-use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
+use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 
 final class YamlServiceProcessor
 {

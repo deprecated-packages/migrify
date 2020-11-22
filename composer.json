@@ -27,6 +27,7 @@
         "symplify/composer-json-manipulator": "dev-master",
         "symplify/console-color-diff": "dev-master",
         "symplify/package-builder": "dev-master",
+        "symplify/php-config-printer": "dev-master",
         "symplify/smart-file-system": "dev-master",
         "symplify/symplify-kernel": "dev-master"
     },
@@ -87,10 +88,6 @@
         }
     },
     "autoload-dev": {
-        "files": [
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php",
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php"
-        ],
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigFeatureBumper\\Tests\\": "packages/config-feature-bumper/tests",
@@ -114,7 +111,10 @@
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
-        }
+        },
+        "files": [
+            "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php"
+        ]
     },
     "replace": {
         "migrify/class-presence": "0.4",

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS;
 
-use Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use SimpleXMLElement;
 use Symplify\EasyCodingStandard\Configuration\Option;
+use Symplify\PhpConfigPrinter\YamlToPhpConverter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**

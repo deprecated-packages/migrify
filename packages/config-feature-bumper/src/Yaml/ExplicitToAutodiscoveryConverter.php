@@ -7,9 +7,9 @@ namespace Migrify\ConfigFeatureBumper\Yaml;
 use Migrify\ConfigFeatureBumper\Exception\ClassLocationNotFoundException;
 use Migrify\ConfigFeatureBumper\Exception\ClassNotFoundException;
 use Migrify\ConfigFeatureBumper\ValueObject\ServiceConfig;
-use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
 use Nette\Utils\Strings;
 use ReflectionClass;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
 

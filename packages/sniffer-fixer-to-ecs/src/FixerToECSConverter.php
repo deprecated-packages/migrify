@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Migrify\SnifferFixerToECS;
 
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
-use Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use Migrify\SnifferFixerToECS\RobotLoader\FixerClassProvider;
 use Nette\Utils\Strings;
 use PhpCsFixer\Config;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use Symplify\PhpConfigPrinter\YamlToPhpConverter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Migrify\SnifferFixerToECS;
 
-use Migrify\PhpConfigPrinter\ValueObject\YamlKey;
 use Symplify\EasyCodingStandard\Configuration\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
+use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
 
 final class SymfonyConfigFormatFactory
 {
