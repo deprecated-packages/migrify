@@ -6,9 +6,9 @@ namespace Migrify\SnifferFixerToECS\HttpKernel;
 
 use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
 use Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
-use Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 
 final class SnifferFixerToECSKernel extends AbstractMigrifyKernel
 {

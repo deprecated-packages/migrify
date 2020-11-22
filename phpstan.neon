@@ -73,3 +73,13 @@ parameters:
                 - packages/diff-data-miner/src/Extractor/ClassChangesExtractor.php # 17
                 - packages/phpmd-decomposer/src/PHPMDDecomposer/PHPStanConfigFactory.php # 38
                 - packages/template-checker/src/PhpParser/LatteFilterProviderGenerator.php # 31
+
+        # kind of on purpose
+        -
+            message: '#Unreachable statement \- code above always terminates#'
+            paths:
+                - packages/symfony-route-usage/tests/EntityRepository/RouteVisitRepositoryTest.php # 24
+                - packages/symfony-route-usage/tests/Routing/DeadRoutesProviderTest.php # 23
+        -
+            message: '#Constant string value need to only have small letters, _, \-, \. and numbers#'
+            path: packages/class-presence/tests/Regex/NonExistingClassConstantExtractor/Source/ClassWithConstants.php

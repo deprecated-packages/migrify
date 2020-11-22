@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Migrify\SnifferFixerToECS;
 
 use Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
-use Migrify\PhpConfigPrinter\YamlToPhpConverter;
-use Nette\Loaders\RobotLoader;
+use Migrify\SnifferFixerToECS\RobotLoader\FixerClassProvider;
 use Nette\Utils\Strings;
 use PhpCsFixer\Config;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
+use Symplify\PhpConfigPrinter\YamlToPhpConverter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 /**
@@ -38,23 +38,25 @@ final class FixerToECSConverter
     private $symfonyConfigFormatFactory;
 
     /**
-     * @var string[]
-     */
-    private $fixerClasses = [];
-
-    /**
      * @var PrivatesAccessor
      */
     private $privatesAccessor;
 
+    /**
+     * @var FixerClassProvider
+     */
+    private $fixerClassesProvider;
+
     public function __construct(
         YamlToPhpConverter $yamlToPhpConverter,
         SymfonyConfigFormatFactory $symfonyConfigFormatFactory,
-        PrivatesAccessor $privatesAccessor
+        PrivatesAccessor $privatesAccessor,
+        FixerClassProvider $fixerClassesProvider
     ) {
         $this->yamlToPhpConverter = $yamlToPhpConverter;
         $this->symfonyConfigFormatFactory = $symfonyConfigFormatFactory;
         $this->privatesAccessor = $privatesAccessor;
+        $this->fixerClassesProvider = $fixerClassesProvider;
     }
 
     public function convertFile(SmartFileInfo $phpcsFileInfo): string
@@ -84,7 +86,7 @@ final class FixerToECSConverter
     {
         $fixerShortClassName = $this->resolveFixerShortClassName($ruleName);
 
-        foreach ($this->getCoreFixerClasses() as $coreFixerClass) {
+        foreach ($this->fixerClassesProvider->provide() as $coreFixerClass) {
             if (Strings::endsWith($coreFixerClass, '\\' . $fixerShortClassName)) {
                 return $coreFixerClass;
             }
@@ -92,26 +94,6 @@ final class FixerToECSConverter
 
         $message = sprintf('Fixer class for "%s" rule was not found', $ruleName);
         throw new ShouldNotHappenException($message);
-    }
-
-    /**
-     * @return string[]
-     */
-    private function getCoreFixerClasses(): array
-    {
-        if ($this->fixerClasses !== []) {
-            return $this->fixerClasses;
-        }
-
-        $robotLoader = new RobotLoader();
-        $robotLoader->addDirectory(__DIR__ . '/../../../vendor/friendsofphp/php-cs-fixer/src');
-
-        $robotLoader->acceptFiles = ['*Fixer.php'];
-        $robotLoader->rebuild();
-
-        $this->fixerClasses = array_keys($robotLoader->getIndexedClasses());
-
-        return $this->fixerClasses;
     }
 
     private function resolveFixerShortClassName(string $ruleName): string

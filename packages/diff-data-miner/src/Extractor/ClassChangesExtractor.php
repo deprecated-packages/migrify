@@ -8,10 +8,13 @@ use Migrify\DiffDataMiner\ValueObject\ClassBeforeAndClassAfter;
 use Nette\Utils\Strings;
 use Symplify\SmartFileSystem\SmartFileSystem;
 
+/**
+ * @see \Migrify\DiffDataMiner\Tests\Extractor\ClassChangesExtractor\ClassChangesExtractorTest
+ */
 final class ClassChangesExtractor
 {
     /**
-     * @todo modify
+     * @todo modify if needed
      * @var string
      */
     private const CLASS_NAME_PREFIX = 'Doctrine';

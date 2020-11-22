@@ -27,7 +27,9 @@
         "symplify/composer-json-manipulator": "dev-master",
         "symplify/console-color-diff": "dev-master",
         "symplify/package-builder": "dev-master",
-        "symplify/smart-file-system": "dev-master"
+        "symplify/php-config-printer": "dev-master",
+        "symplify/smart-file-system": "dev-master",
+        "symplify/symplify-kernel": "dev-master"
     },
     "require-dev": {
         "composer/composer": "^1.10",
@@ -43,7 +45,6 @@
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-symfony": "^0.12.6",
         "phpunit/phpunit": "^8.5|^9.0",
-        "rector/rector": "dev-master",
         "slevomat/coding-standard": "^6.3.11",
         "symfony/framework-bundle": "^4.4|^5.1",
         "symfony/routing": "^4.4|^5.1",
@@ -52,9 +53,9 @@
         "symplify/changelog-linker": "dev-master",
         "symplify/easy-coding-standard": "dev-master",
         "symplify/easy-testing": "dev-master",
-        "symplify/phpstan-rules": "dev-master",
         "symplify/monorepo-builder": "dev-master",
         "symplify/phpstan-extensions": "dev-master",
+        "symplify/phpstan-rules": "dev-master",
         "tracy/tracy": "^2.7"
     },
     "autoload": {
@@ -87,10 +88,6 @@
         }
     },
     "autoload-dev": {
-        "files": [
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php",
-            "packages/php-config-printer/tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php"
-        ],
         "psr-4": {
             "Migrify\\ClassPresence\\Tests\\": "packages/class-presence/tests",
             "Migrify\\ConfigFeatureBumper\\Tests\\": "packages/config-feature-bumper/tests",
@@ -102,6 +99,7 @@
             "Migrify\\DiffDataMiner\\Tests\\": "packages/diff-data-miner/tests",
             "Migrify\\EasyCI\\Tests\\": "packages/easy-ci/tests",
             "Migrify\\LatteToTwig\\Tests\\": "packages/latte-to-twig/tests",
+            "Migrify\\MigrifyKernel\\Tests\\": "packages/migrify-kernel/tests",
             "Migrify\\NeonToYaml\\Tests\\": "packages/neon-to-yaml/tests",
             "Migrify\\PHPMDDecomposer\\Tests\\": "packages/phpmd-decomposer/tests",
             "Migrify\\PHPUnitUpgrader\\Tests\\": "packages/phpunit-upgrader/tests",
@@ -113,7 +111,10 @@
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
             "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
             "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
-        }
+        },
+        "files": [
+            "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php"
+        ]
     },
     "replace": {
         "migrify/class-presence": "0.4",

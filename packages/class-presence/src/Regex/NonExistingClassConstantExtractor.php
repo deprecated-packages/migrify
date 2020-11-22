@@ -16,7 +16,7 @@ final class NonExistingClassConstantExtractor
      * @var string
      * @see https://regex101.com/r/Wrfff2/1
      */
-    private const CLASS_CONSTANT_NAME_REGEX = '#\b(?<class_constant_name>[A-Z](\w+\\\\(\\\\)?)+(\w+)::[A-Z_]+)#';
+    private const CLASS_CONSTANT_NAME_REGEX = '#\b(?<class_constant_name>[A-Z](\w+\\\\(\\\\)?)+(\w+)::[A-Z_0-9]+)#';
 
     /**
      * @return string[]

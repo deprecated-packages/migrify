@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Migrify\ClassPresence\Command;
 
-use Migrify\ClassPresence\Finder\FileFinder;
+use Migrify\ClassPresence\Configuration\Suffixes;
 use Migrify\ClassPresence\Regex\NonExistingClassConstantExtractor;
 use Migrify\ClassPresence\Regex\NonExistingClassExtractor;
-use Migrify\ClassPresence\ValueObject\StaticCheckedFileSuffix;
 use Migrify\MigrifyKernel\Command\AbstractMigrifyCommand;
 use Migrify\MigrifyKernel\ValueObject\MigrifyOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\ShellCode;
+use Symplify\SmartFileSystem\Finder\SmartFinder;
 
 final class CheckCommand extends AbstractMigrifyCommand
 {
@@ -28,53 +28,52 @@ final class CheckCommand extends AbstractMigrifyCommand
     private $nonExistingClassConstantExtractor;
 
     /**
-     * @var FileFinder
+     * @var Suffixes
      */
-    private $fileFinder;
+    private $suffixes;
 
     public function __construct(
-        FileFinder $fileFinder,
+        SmartFinder $smartFinder,
         NonExistingClassExtractor $nonExistingClassExtractor,
-        NonExistingClassConstantExtractor $nonExistingClassConstantExtractor
+        NonExistingClassConstantExtractor $nonExistingClassConstantExtractor,
+        Suffixes $suffixes
     ) {
+        $this->smartFinder = $smartFinder;
         $this->nonExistingClassExtractor = $nonExistingClassExtractor;
         $this->nonExistingClassConstantExtractor = $nonExistingClassConstantExtractor;
-        $this->fileFinder = $fileFinder;
+        $this->suffixes = $suffixes;
 
         parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->setDescription('Check configs for existing classes');
+        $this->setDescription('Check configs and template for existing classes and class constants');
         $this->addArgument(
             MigrifyOption::SOURCES,
             InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-            'Path to project'
+            'Path to directories or files to check'
         );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var string[] $source */
-        $source = (array) $input->getArgument(MigrifyOption::SOURCES);
-        $fileInfos = $this->fileFinder->findInDirectories($source);
+        /** @var string[] $sources */
+        $sources = (array) $input->getArgument(MigrifyOption::SOURCES);
+        $fileInfos = $this->smartFinder->find($sources, $this->suffixes->provideRegex());
+
+        $message = sprintf(
+            'Checking %d files with "%s" suffixes',
+            count($fileInfos),
+            implode('", "', $this->suffixes->provide())
+        );
+        $this->symfonyStyle->note($message);
 
         $nonExistingClassesByFile = $this->nonExistingClassExtractor->extractFromFileInfos($fileInfos);
-        if ($nonExistingClassesByFile === []) {
-            $suffixes = implode(', ', StaticCheckedFileSuffix::SUFFIXES);
-            $message = sprintf('All classes in all %s files exist', $suffixes);
-            $this->symfonyStyle->success($message);
-        }
-
         $nonExistingClassConstantsByFile = $this->nonExistingClassConstantExtractor->extractFromFileInfos($fileInfos);
-        if ($nonExistingClassConstantsByFile === []) {
-            $suffixes = implode(', ', StaticCheckedFileSuffix::SUFFIXES);
-            $message = sprintf('All class constants in all %s files exist', $suffixes);
-            $this->symfonyStyle->success($message);
-        }
 
         if ($nonExistingClassConstantsByFile === [] && $nonExistingClassesByFile === []) {
+            $this->symfonyStyle->success('All classes and class constants exists');
             return ShellCode::SUCCESS;
         }
 
@@ -89,18 +88,27 @@ final class CheckCommand extends AbstractMigrifyCommand
         array $nonExistingClassesByFile,
         array $nonExistingClassConstantsByFile
     ): int {
+        $i = 0;
+
         foreach ($nonExistingClassesByFile as $file => $nonExistingClasses) {
-            $message = sprintf('File "%s" contains non-existing classes', $file);
-            $this->symfonyStyle->title($message);
-            $this->symfonyStyle->listing($nonExistingClasses);
+            $fileMssage = sprintf('<options=bold>%d) %s</>', ++$i, $file);
+            $this->symfonyStyle->writeln($fileMssage);
             $this->symfonyStyle->newLine();
+
+            foreach ($nonExistingClasses as $nonExistingClass) {
+                $errorMessage = sprintf('Class "%s" not found', $nonExistingClass);
+                $this->symfonyStyle->error($errorMessage);
+            }
         }
 
         foreach ($nonExistingClassConstantsByFile as $file => $nonExistingClassConstants) {
-            $message = sprintf('File "%s" contains non-existing class constants', $file);
-            $this->symfonyStyle->title($message);
-            $this->symfonyStyle->listing($nonExistingClassConstants);
-            $this->symfonyStyle->newLine();
+            $fileMssage = sprintf('<options=bold>%d) %s</>', ++$i, $file);
+            $this->symfonyStyle->writeln($fileMssage);
+
+            foreach ($nonExistingClassConstants as $nonExistingClassConstant) {
+                $errorMessage = sprintf('Class constant "%s" does not exist', $nonExistingClassConstant);
+                $this->symfonyStyle->error($errorMessage);
+            }
         }
 
         return ShellCode::ERROR;

@@ -45,5 +45,9 @@ final class NonExistingClassExtractorTest extends AbstractKernelTestCase
         yield [__DIR__ . '/Fixture/template/file.latte', 2];
         yield [__DIR__ . '/Fixture/template/file_with_existing_class.latte', 0];
         yield [__DIR__ . '/Fixture/template/different_file.twig', 1];
+
+        // blade, laravel
+        yield [__DIR__ . '/Fixture/template/non_existing_in_blade_file.php', 3];
+        yield [__DIR__ . '/Fixture/template/existing_in_blade_file.php', 0];
     }
 }

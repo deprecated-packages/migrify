@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Migrify\PHPMDDecomposer\HttpKernel;
 
 use Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
-use Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 
 final class PHPMDDecomposerKernel extends Kernel
 {

@@ -8,7 +8,7 @@
         "nette/neon": "^3.0",
         "symfony/http-kernel": "^4.4|^5.1",
         "symplify/package-builder": "dev-master",
-        "migrify/php-config-printer": "^0.5",
+        "symplify/php-config-printer": "dev-master",
         "migrify/migrify-kernel": "^0.5"
     },
     "require-dev": {

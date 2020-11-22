@@ -12,9 +12,19 @@ composer require migrify/class-presence --dev
 
 ## Usage
 
+Check configs and templates for non-existing classes.
+
 ```bash
 vendor/bin/class-presence check src
 ```
+
+Supported:
+
+- TWIG
+- LATTE
+- YAML
+- NEON
+- PHP templates (e.g. Blade)
 
 ## Report Issues
 

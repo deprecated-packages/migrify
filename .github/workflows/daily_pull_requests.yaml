@@ -56,3 +56,4 @@ jobs:
                     branch: ${{ matrix.actions.branch }}
                     title: '[automated] ${{ matrix.actions.name }}'
                     delete-branch: true
+                    committer: "kaizen-ci <info@kaizen-ci.org>"

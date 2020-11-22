@@ -1,0 +1,22 @@
+Proxy objects in Doctrine ORM 3.0 will no longer implement `Doctrine\ORM\Proxy\Proxy` nor
+-`Doctrine\Common\Persistence\Proxy`: instead, they implement
++`Doctrine\Persistence\Proxy`: instead, they implement
+ `ProxyManager\Proxy\GhostObjectInterface`.
+
+
+---`Doctrine\Common\Persistence\Proxy`: instead, they implement
++++`Doctrine\Persistence\Proxy`: instead, they implement
+ `ProxyManager\Proxy\GhostObjectInterface`.
+
+
+ These related classes have been deprecated:
+@@ -435,15 +435,15 @@ above you must implement these new methods.
+
+ Metadata drivers have been rewritten to reuse code from Doctrine\Common. Anyone who is using the
+ `Doctrine\ORM\Mapping\Driver\Driver` interface should instead refer to
+-`Doctrine\Common\Persistence\Mapping\Driver\MappingDriver`. Same applies to
++`Doctrine\Persistence\Mapping\Driver\MappingDriver`. Same applies to
+ `Doctrine\ORM\Mapping\Driver\AbstractFileDriver`: you should now refer to
+-`Doctrine\Common\Persistence\Mapping\Driver\FileDriver`.
++`Doctrine\Persistence\Mapping\Driver\FileDriver`.
+asas
