@@ -24,7 +24,6 @@ jobs:
                     -
                         name: 'Binary Files'
                         run: |
-                            packages/easy-ci/bin/easy-ci --ansi
                             packages/class-presence/bin/class-presence --ansi
                             packages/config-transformer/bin/config-transformer --ansi
                             packages/static-detector/bin/static-detector --ansi
