@@ -27,7 +27,6 @@ jobs:
                             packages/class-presence/bin/class-presence --ansi
                             packages/config-transformer/bin/config-transformer --ansi
                             packages/static-detector/bin/static-detector --ansi
-                            packages/latte-to-twig/bin/latte-to-twig --ansi
                             packages/neon-to-yaml/bin/neon-to-yaml --ansi
                             packages/vendor-patches/bin/vendor-patches --ansi
                             packages/sniffer-fixer-to-ecs/bin/sniffer-fixer-to-ecs --ansi
