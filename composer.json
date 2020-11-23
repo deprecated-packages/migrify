@@ -107,8 +107,7 @@
             "Migrify\\StaticDetector\\Tests\\": "packages/static-detector/tests",
             "Migrify\\SymfonyRouteUsage\\Tests\\": "packages/symfony-route-usage/tests",
             "Migrify\\TemplateChecker\\Tests\\": "packages/template-checker/tests",
-            "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests",
-            "Migrify\\VendorPatches\\Tests\\": "packages/vendor-patches/tests"
+            "Migrify\\TravisToGithubActions\\Tests\\": "packages/travis-to-github-actions/tests"
         },
         "files": [
             "vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php"
@@ -120,7 +119,6 @@
         "migrify/config-pretifier": "0.4",
         "migrify/config-transformer": "0.4",
         "migrify/diff-data-miner": "0.4",
-        "migrify/easy-ci": "0.4",
         "migrify/migrify-kernel": "0.4",
         "migrify/neon-to-yaml": "0.4",
         "migrify/php-config-printer": "0.4",
@@ -128,11 +126,9 @@
         "migrify/phpunit-upgrader": "0.4",
         "migrify/psr4-switcher": "0.4",
         "migrify/sniffer-fixer-to-ecs": "0.4",
-        "migrify/static-detector": "0.4",
         "migrify/symfony-route-usage": "0.4",
         "migrify/template-checker": "0.4",
-        "migrify/travis-to-github-actions": "0.4",
-        "migrify/vendor-patches": "0.4"
+        "migrify/travis-to-github-actions": "0.4"
     },
     "scripts": {
         "check-cs": "vendor/bin/ecs check packages --ansi",
