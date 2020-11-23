@@ -13,7 +13,7 @@
         "symplify/autowire-array-parameter": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5|^9.0",
+        "phpunit/phpunit": "^8.5|^9.4",
         "tracy/tracy": "^2.7"
     },
     "autoload": {

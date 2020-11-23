@@ -44,7 +44,7 @@
         "phpstan/phpstan": "^0.12.38",
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-symfony": "^0.12.6",
-        "phpunit/phpunit": "^8.5|^9.0",
+        "phpunit/phpunit": "^8.5|^9.4",
         "slevomat/coding-standard": "^6.3.11",
         "symfony/framework-bundle": "^4.4|^5.1",
         "symfony/routing": "^4.4|^5.1",
