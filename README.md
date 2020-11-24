@@ -1,3 +1,5 @@
+# [Deprecated since 2020/11](https://github.com/symplify/symplify/issues/2530), packages were moved to [Symplify](https://github.com/symplify/symplify) monorepo
+
 # Migrify - Your Futuristic Toolkit for Permanent Legacy Code Removal
 
 [![SonarCube](https://img.shields.io/badge/SonarCube_Debt-%3C5%20hrs-brightgreen.svg?style=flat-square)](https://sonarcloud.io/dashboard?id=migrify_migrify)
