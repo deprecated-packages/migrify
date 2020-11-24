@@ -1,7 +1,0 @@
-am bool $pValue
-      */
--    public function setCalculationCacheEnabled($pValue = true)
-+    public function setCalculationCacheEnabled($pValue)
-     {
-         $this->calculationCacheEnabled = $pVal
- 
